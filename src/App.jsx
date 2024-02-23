@@ -9,7 +9,7 @@ function App() {
 	return (
 		<>
 			<Board
-				board={m.board}
+				board={m.board} click={(x, y) => m.firstClick(x, y)}
 			/>
 		</>
 	);

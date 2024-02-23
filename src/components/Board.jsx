@@ -1,6 +1,6 @@
 import React from "react";
 
-const Board = ({ board }) => {
+const Board = ({ board, click }) => {
 	console.log(board);
 	return (
 		<div>
@@ -12,6 +12,7 @@ const Board = ({ board }) => {
 							className={
 								"cell" + (cell.isRevealed ? " revealed" : "")
 							}
+							onClick={() => click(i, j)}
 						>
 							{!cell.isRevealed
 								? " "
