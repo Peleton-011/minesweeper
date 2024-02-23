@@ -1,34 +1,8 @@
 class minesweeper {
-	constructor({ height, width, mineCount }) {
-		this.height = height;
-		this.width = width;
-		this.mineCount = mineCount;
-		this.board = this.createBoard();
-	}
 
-	createBoard() {
-		const board = [];
-		for (let i = 0; i < this.height; i++) {
-			const row = [];
-			for (let j = 0; j < this.width; j++) {
-				row.push({
-					isMine: undefined,
-					isRevealed: true,
-					isFlagged: false,
-					content: undefined,
-				});
-			}
-			board.push(row);
-		}
-		return board;
-	}
 
-	firstClick(x, y) {
-		console.log("first click", x, ", ", y);
-		this.board[x][y].isMine = false;
-		this.fillBoard();
-		this.reveal(x, y);
-	}
+
+
 
 	fillBoard() {
 		for (let i = 0; i < this.mineCount; i++) {
