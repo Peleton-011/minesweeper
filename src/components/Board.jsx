@@ -7,7 +7,7 @@ const Board = ({ board }) => {
 				<div key={i} className="row">
 					{row.map((cell, j) => (
 						<button key={j} className="cell">
-							{cell}
+							{cell === "0" ? " " : cell}
 						</button>
 					))}
 				</div>
