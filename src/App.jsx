@@ -4,13 +4,19 @@ import Board from "./components/Board";
 import "./App.css";
 
 function App() {
-	const [count, setCount] = useState(0);
-    const m = new minesweeper({ height: 3, width: 3, mineCount: 3 });
+	const m = new minesweeper({ height: 3, width: 3, mineCount: 3 });
+	const [isFirstClick, setFirstClick] = useState(true);
+	const onClick = (x, y) => {
+		if (isFirstClick) {
+			m.firstClick(x, y);
+			setFirstClick(false);
+		} else {
+			m.reveal(x, y);
+		}
+	};
 	return (
 		<>
-			<Board
-				board={m.board} click={(x, y) => m.firstClick(x, y)}
-			/>
+			<Board board={m.board} click={onClick} />
 		</>
 	);
 }
