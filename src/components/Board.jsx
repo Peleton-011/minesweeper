@@ -6,8 +6,17 @@ const Board = ({ board }) => {
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (
-						<button key={j} className="cell">
-							{cell === "0" ? " " : cell}
+						<button
+							key={j}
+							className={
+								"cell" + (cell.isRevealed ? " revealed" : "")
+							}
+						>
+							{!cell.isRevealed
+								? " "
+								: cell.content === "0"
+								? " "
+								: cell}
 						</button>
 					))}
 				</div>
