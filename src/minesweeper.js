@@ -23,7 +23,37 @@ class minesweeper {
 		return board;
 	}
 
+	addMine(x, y) {
+		this.board[x][y].isMine = true;
+	}
 
+	reveal(x, y) {
+		this.board[x][y].isRevealed = true;
+
+        if (this.board[x][y].isMine) {
+            return;
+        }
+
+        if (this.board[x][y].content === 0) {
+            this.revealAdjacent(x, y);
+        }
+
+	}
+
+    revealAdjacent(x, y) {
+        this.reveal(x - 1, y - 1);
+        this.reveal(x - 1, y);
+        this.reveal(x - 1, y + 1);
+        this.reveal(x, y - 1);
+        this.reveal(x, y + 1);
+        this.reveal(x + 1, y - 1);
+        this.reveal(x + 1, y);
+        this.reveal(x + 1, y + 1);
+    }
+
+	flag(x, y) {
+		this.board[x][y].isFlagged = true;
+	}
 }
 
 export default minesweeper;
