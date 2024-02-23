@@ -16,7 +16,11 @@ const Board = ({ board, click }) => {
 						>
 							{!cell.isRevealed
 								? " "
-								: cell.content === "0"
+								: cell.isMine
+								? "💣"
+								: cell.isFlagged
+								? "🚩"
+								: cell.content == "0"
 								? " "
 								: cell.content}
 						</button>

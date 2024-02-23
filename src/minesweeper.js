@@ -13,8 +13,8 @@ class minesweeper {
 			for (let j = 0; j < this.width; j++) {
 				row.push({
 					isMine: undefined,
-					isRevealed: false,
-					isFlagged: undefined,
+					isRevealed: true,
+					isFlagged: false,
 					content: undefined,
 				});
 			}
@@ -35,13 +35,36 @@ class minesweeper {
 			const x = Math.floor(Math.random() * this.height);
 			const y = Math.floor(Math.random() * this.width);
 			if (this.board[x][y].isMine === undefined) {
-                console.log("adding mine", x, ", ", y);
+				console.log("adding mine", x, ", ", y);
 				this.addMine(x, y);
 			} else {
 				i--;
 			}
 		}
+
+		this.board = this.board.map((row, i) =>
+			row.map((cell, j) => ({
+				...cell,
+				content: this.countAdjacentMines(i, j),
+				isMine: cell.isMine === undefined ? false : cell.isMine,
+
+			}))
+		);
 	}
+
+    countAdjacentMines(x, y) {
+        let count = 0;
+        for (let i = x - 1; i <= x + 1; i++) {
+            for (let j = y - 1; j <= y + 1; j++) {
+                if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
+                    if (this.board[i][j].isMine) {
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
 
 	addMine(x, y) {
 		this.board[x][y].isMine = true;
