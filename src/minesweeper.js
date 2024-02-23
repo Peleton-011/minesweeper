@@ -13,9 +13,9 @@ class minesweeper {
 			for (let j = 0; j < this.width; j++) {
 				row.push({
 					isMine: false,
-					isRevealed: false,
+					isRevealed: true,
 					isFlagged: false,
-					content: undefined,
+					content: 7,
 				});
 			}
 			board.push(row);
@@ -23,7 +23,7 @@ class minesweeper {
 		return board;
 	}
 
-    
+
 }
 
 export default minesweeper;

@@ -1,6 +1,7 @@
 import React from "react";
 
 const Board = ({ board }) => {
+	console.log(board);
 	return (
 		<div>
 			{board.map((row, i) => (
@@ -16,7 +17,7 @@ const Board = ({ board }) => {
 								? " "
 								: cell.content === "0"
 								? " "
-								: cell}
+								: cell.content}
 						</button>
 					))}
 				</div>
