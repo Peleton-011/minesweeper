@@ -4,7 +4,8 @@ import Board from "./components/Board";
 import "./App.css";
 
 function App() {
-	const m = new minesweeper({ height: 9, width: 9, mineCount: 9 });
+	const [m, setM] = useState(new minesweeper({ height: 9, width: 9, mineCount: 9 }));
+
 	const [board, setBoard] = useState(m.board);
 
 	const updateBoard = () => {
