@@ -5,6 +5,7 @@ import "./App.css";
 
 function App() {
 	const [lives, setLives] = useState(3);
+    const [mineCount, setMineCount] = useState(9);
 	const [m, setM] = useState(
 		new minesweeper({
 			height: 9,
@@ -40,17 +41,19 @@ function App() {
     const flag = (x, y) => {
         console.log("flag", x, y);
         m.flag(x, y);
+        setMineCount(mineCount - 1);
         updateBoard();
     };
 
     const unflag = (x, y) => {
         m.unflag(x, y);
+        setMineCount(mineCount + 1);
         updateBoard();
     };
 
 	return (
 		<>
-			<Board board={board} reveal={reveal} flag={flag} unflag={unflag} lives={lives} />
+			<Board board={board} reveal={reveal} flag={flag} unflag={unflag} lives={lives} mineCount={mineCount} />
 		</>
 	);
 }
