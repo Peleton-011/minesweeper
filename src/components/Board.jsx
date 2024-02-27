@@ -1,9 +1,10 @@
 import React from "react";
 
-const Board = ({ board, click }) => {
+const Board = ({ board, click, lives }) => {
 	console.log(board);
 	return (
 		<div>
+            <h2>Lives: {lives}</h2>
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (

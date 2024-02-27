@@ -4,9 +4,11 @@ import Board from "./components/Board";
 import "./App.css";
 
 function App() {
+    const [lives, setLives] = useState(3);
 	const [m, setM] = useState(
-		new minesweeper({ height: 9, width: 9, mineCount: 9 })
+		new minesweeper({ height: 9, width: 9, mineCount: 9, lives: lives, setLives: setLives})
 	);
+
 
 	const [board, setBoard] = useState(m.board);
 
@@ -33,7 +35,7 @@ function App() {
 	};
 	return (
 		<>
-			<Board board={board} click={onClick} />
+			<Board board={board} click={onClick} lives={lives} />
 		</>
 	);
 }

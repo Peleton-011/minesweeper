@@ -1,9 +1,14 @@
 class minesweeper {
-	constructor({ height, width, mineCount }) {
+	constructor({ height, width, mineCount, lives, setLives }) {
 		this.height = height;
 		this.width = width;
 		this.mineCount = mineCount;
 		this.board = this.createBoard();
+		this.lives = lives;
+		this.clickMine = () => {
+			setLives(this.lives - 1);
+			this.lives = this.lives - 1;
+		};
 	}
 
 	createBoard() {
@@ -47,24 +52,23 @@ class minesweeper {
 				...cell,
 				content: this.countAdjacentMines(i, j),
 				isMine: cell.isMine === undefined ? false : cell.isMine,
-
 			}))
 		);
 	}
 
-    countAdjacentMines(x, y) {
-        let count = 0;
-        for (let i = x - 1; i <= x + 1; i++) {
-            for (let j = y - 1; j <= y + 1; j++) {
-                if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
-                    if (this.board[i][j].isMine) {
-                        count++;
-                    }
-                }
-            }
-        }
-        return count;
-    }
+	countAdjacentMines(x, y) {
+		let count = 0;
+		for (let i = x - 1; i <= x + 1; i++) {
+			for (let j = y - 1; j <= y + 1; j++) {
+				if (i >= 0 && j >= 0 && i < this.height && j < this.width) {
+					if (this.board[i][j].isMine) {
+						count++;
+					}
+				}
+			}
+		}
+		return count;
+	}
 
 	addMine(x, y) {
 		this.board[x][y].isMine = true;
@@ -76,6 +80,7 @@ class minesweeper {
 		}
 
 		if (this.board[x][y].isRevealed) {
+			console.warn("Already revealed");
 			return;
 		}
 
@@ -84,6 +89,7 @@ class minesweeper {
 		this.board[x][y].isRevealed = true;
 
 		if (this.board[x][y].isMine) {
+			this.clickMine();
 			return;
 		}
 
