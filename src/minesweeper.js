@@ -13,7 +13,7 @@ class minesweeper {
 			for (let j = 0; j < this.width; j++) {
 				row.push({
 					isMine: undefined,
-					isRevealed: true,
+					isRevealed: false,
 					isFlagged: false,
 					content: undefined,
 				});
