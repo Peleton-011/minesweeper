@@ -4,11 +4,16 @@ import Board from "./components/Board";
 import "./App.css";
 
 function App() {
-    const [lives, setLives] = useState(3);
+	const [lives, setLives] = useState(3);
 	const [m, setM] = useState(
-		new minesweeper({ height: 9, width: 9, mineCount: 9, lives: lives, setLives: setLives})
+		new minesweeper({
+			height: 9,
+			width: 9,
+			mineCount: 9,
+			lives: lives,
+			setLives: setLives,
+		})
 	);
-
 
 	const [board, setBoard] = useState(m.board);
 
@@ -21,21 +26,31 @@ function App() {
 	};
 
 	const [isFirstClick, setFirstClick] = useState(true);
-	const onClick = (x, y) => {
+	const reveal = (x, y) => {
 		if (isFirstClick) {
-			console.log("first click");
 			m.firstClick(x, y);
 			updateBoard();
 			setFirstClick(false);
 		} else {
-			console.log("not first click");
 			m.reveal(x, y);
 			updateBoard();
 		}
 	};
+
+    const flag = (x, y) => {
+        console.log("flag", x, y);
+        m.flag(x, y);
+        updateBoard();
+    };
+
+    const unflag = (x, y) => {
+        m.unflag(x, y);
+        updateBoard();
+    };
+
 	return (
 		<>
-			<Board board={board} click={onClick} lives={lives} />
+			<Board board={board} reveal={reveal} flag={flag} unflag={unflag} lives={lives} />
 		</>
 	);
 }

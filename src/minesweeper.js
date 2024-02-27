@@ -110,8 +110,18 @@ class minesweeper {
 	}
 
 	flag(x, y) {
+        if (this.board[x][y].isRevealed) {
+            return;
+        }
 		this.board[x][y].isFlagged = true;
 	}
+    
+    unflag(x, y) {
+        if (this.board[x][y].isRevealed) {
+            return;
+        }
+        this.board[x][y].isFlagged = false;
+    }
 }
 
 export default minesweeper;

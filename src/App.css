@@ -21,3 +21,8 @@
     background-color: red;
     color: white;
 }
+
+.cell.flagged {
+    /* background-color: red; */
+    color: white;
+}
