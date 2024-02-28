@@ -32,11 +32,7 @@ function App() {
 	}, [m.mineCount]);
 
 	const updateBoard = () => {
-		console.log("Class board");
-		console.log(m.board.map((row) => row.map((cell) => cell.isRevealed)));
 		setBoard(m.board.map((row) => row.map((cell) => cell)));
-		console.log("State board");
-		console.log(board.map((row) => row.map((cell) => cell.isRevealed)));
 	};
 
 	const [isFirstClick, setFirstClick] = useState(true);
@@ -64,15 +60,42 @@ function App() {
 		updateBoard();
 	};
 
+	const onRightClick = (e, cell) => {
+		e.preventDefault();
+		const f = cell.isRevealed
+			? () => {}
+			: cell.isFlagged
+			? () => unflag(i, j)
+			: () => flag(i, j);
+
+		f();
+	};
+
+	const onLeftClick = (i, j) => {
+		cell.isFlagged ? () => unflag(i, j) : () => reveal(i, j);
+	};
+
+	const getContent = (cell) => {
+		!cell.isRevealed
+			? cell.isFlagged
+				? "🚩"
+				: " "
+			: cell.isMine
+			? "💣"
+			: cell.content == "0"
+			? " "
+			: cell.content;
+	};
+
 	return (
 		<>
 			<Board
 				board={board}
-				reveal={reveal}
-				flag={flag}
-				unflag={unflag}
 				lives={lives}
 				mineCount={mineCount}
+				onLeftClick={onLeftClick}
+				onRightClick={onRightClick}
+				getContent={getContent}
 			/>
 		</>
 	);
