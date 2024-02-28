@@ -29,12 +29,8 @@ function App() {
 	}, [lives]);
 
 	useEffect(() => {
-		if (mineCount <= 0) {
-			const won = m.checkWin();
-			console.log(won);
-			if (won) {
-				alert("You won!");
-			}
+		if (mineCount <= 0 && m.checkWin() && lives > 0) {
+			alert("You won!");
 		}
 	}, [mineCount]);
 

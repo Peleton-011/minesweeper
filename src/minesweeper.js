@@ -127,7 +127,7 @@ class minesweeper {
 
 	checkWin() {
 		const checkCell = (cell) => {
-			if (cell.isRevealed && !cell.isFlagged && cell.isMine) {
+			if (!cell.isRevealed && !cell.isFlagged && cell.isMine) {
 				return false;
 			}
 
