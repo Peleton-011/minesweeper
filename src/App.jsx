@@ -12,27 +12,24 @@ function App() {
 			width: 3,
 			mineCount: mineCount,
 			lives: lives,
-			setLives: setLives,
-			setMineCount: (a) => {
-				console.log("setting mine count");
-				setMineCount(a);
-			},
 		})
 	);
 
 	const [board, setBoard] = useState(m.board);
 
 	useEffect(() => {
+		setLives(m.lives);
 		if (lives <= 0) {
 			alert("Game over");
 		}
-	}, [lives]);
+	}, [m.lives]);
 
 	useEffect(() => {
+		setMineCount(m.mineCount);
 		if (mineCount <= 0 && m.checkWin() && lives > 0) {
 			alert("You won!");
 		}
-	}, [mineCount]);
+	}, [m.mineCount]);
 
 	const updateBoard = () => {
 		console.log("Class board");

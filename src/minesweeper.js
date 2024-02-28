@@ -1,13 +1,11 @@
 class minesweeper {
-	constructor({ height, width, mineCount, lives, setLives, setMineCount }) {
+	constructor({ height, width, mineCount, lives }) {
 		this.height = height;
 		this.width = width;
 		this.mineCount = mineCount;
 		this.board = this.createBoard();
 		this.lives = lives;
 		this.clickMine = () => {
-			setLives(this.lives - 1);
-			setMineCount(this.mineCount - 1);
 			this.mineCount -= 1;
 			this.lives -= 1;
 		};
@@ -115,6 +113,7 @@ class minesweeper {
 		if (this.board[x][y].isRevealed) {
 			return;
 		}
+		this.mineCount -= 1;
 		this.board[x][y].isFlagged = true;
 	}
 
@@ -122,6 +121,7 @@ class minesweeper {
 		if (this.board[x][y].isRevealed) {
 			return;
 		}
+		this.mineCount += 1;
 		this.board[x][y].isFlagged = false;
 	}
 
