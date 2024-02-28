@@ -8,7 +8,6 @@ const Board = ({
 	onRightClick,
 	getContent,
 }) => {
-	console.log(board);
 	return (
 		<div>
 			<h2>
