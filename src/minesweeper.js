@@ -110,18 +110,33 @@ class minesweeper {
 	}
 
 	flag(x, y) {
-        if (this.board[x][y].isRevealed) {
-            return;
-        }
+		if (this.board[x][y].isRevealed) {
+			return;
+		}
 		this.board[x][y].isFlagged = true;
 	}
-    
-    unflag(x, y) {
-        if (this.board[x][y].isRevealed) {
-            return;
-        }
-        this.board[x][y].isFlagged = false;
-    }
+
+	unflag(x, y) {
+		if (this.board[x][y].isRevealed) {
+			return;
+		}
+		this.board[x][y].isFlagged = false;
+	}
+
+	checkWin() {
+		const checkCell = (cell) => {
+			if (cell.isRevealed && !cell.isFlagged && cell.isMine) {
+				return false;
+			}
+
+			if (cell.isFlagged && !cell.isMine) {
+				return false;
+			}
+
+			return true;
+		};
+		return this.board.every((row) => row.every(checkCell));
+	}
 }
 
 export default minesweeper;

@@ -1,22 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import minesweeper from "./minesweeper";
 import Board from "./components/Board";
 import "./App.css";
 
 function App() {
 	const [lives, setLives] = useState(3);
-    const [mineCount, setMineCount] = useState(9);
+    const [mineCount, setMineCount] = useState(3);
 	const [m, setM] = useState(
 		new minesweeper({
-			height: 9,
-			width: 9,
-			mineCount: 9,
+			height: 3,
+			width: 3,
+			mineCount: 3,
 			lives: lives,
 			setLives: setLives,
 		})
 	);
 
 	const [board, setBoard] = useState(m.board);
+
+    useEffect(() => {
+        if (lives <= 0) {
+            alert("Game over");
+        }
+    }, [lives]);
+
+    useEffect(() => {
+        if (mineCount <= 0 && m.checkWin()) {
+            alert("You won!");
+        }
+    }, [mineCount]);
 
 	const updateBoard = () => {
 		console.log("Class board");
