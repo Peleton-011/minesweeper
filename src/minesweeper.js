@@ -1,5 +1,5 @@
 class minesweeper {
-	constructor({ height, width, mineCount, lives, setLives }) {
+	constructor({ height, width, mineCount, lives, setLives, setMineCount }) {
 		this.height = height;
 		this.width = width;
 		this.mineCount = mineCount;
@@ -7,7 +7,9 @@ class minesweeper {
 		this.lives = lives;
 		this.clickMine = () => {
 			setLives(this.lives - 1);
-			this.lives = this.lives - 1;
+			setMineCount(this.mineCount - 1);
+			this.mineCount -= 1;
+			this.lives -= 1;
 		};
 	}
 
