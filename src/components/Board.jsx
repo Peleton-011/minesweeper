@@ -23,7 +23,7 @@ const Board = ({
 								(cell.isRevealed ? " revealed" : "") +
 								(cell.isFlagged ? " flagged" : "")
 							}
-							onClick={(e, i, j) => onLeftClick(i, j)}
+							onClick={(e, i, j) => onLeftClick(i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, cell)}
 						>
 							{getContent(cell)}
