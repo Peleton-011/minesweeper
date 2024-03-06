@@ -48,7 +48,6 @@ const Game = ({
 	useEffect(() => {
 		console.log("state");
 		fillBoard();
-		addMine(2, 2);
 		console.log(board);
 	}, []);
 
@@ -113,9 +112,7 @@ const Game = ({
 				});
 			})
 		);
-		console.log(board);
 		fillBoard();
-		console.log(board);
 		reveal(x, y);
 	};
 
@@ -130,18 +127,26 @@ const Game = ({
 		reveal(x + 1, y + 1);
 	};
 
+	const countMines = () => {
+		let count = 0;
+		board.forEach((row) => {
+			row.forEach((cell) => {
+				if (cell.isMine) {
+					count++;
+				}
+			});
+		});
+		return count;
+	};
+
 	const fillBoard = () => {
-		for (let i = 0; i < mineCount; i++) {
-			const x = Math.floor(Math.random() * height);
-			const y = Math.floor(Math.random() * width);
-			if (board[x][y].isMine === undefined) {
-				console.log("Add mine ", x, ", ", y);
-				console.log(i, "/", mineCount);
-				addMine(x, y);
-			} else {
-				i--;
-			}
-		}
+		console.log("Filling");
+
+		const mineList = getMineCoords(mineCount - countMines());
+
+		console.log(mineList);
+
+		addMines(mineList);
 
 		setBoard(
 			board.map((row, i) => {
@@ -162,19 +167,35 @@ const Game = ({
 		);
 	};
 
-	const addMine = (x, y) => {
-		setBoard(
-			board.map((r, i) => {
-				return r.map((c, j) => {
-					if (x === i && y === j) {
-						return { ...c, isMine: true };
-					}
-					return c;
-				});
-			})
-		);
+	const addMines = (coords) => {
+        if (coords.length < 1) {
+            return;
+        }
+		console.log("ADD MINE");
+
+		const newBoard = board.map((row) => row.map((cell) => cell));
+
+		coords.forEach(([x, y]) => (newBoard[x][y].isMine = true));
+
+		setBoard(newBoard);
 	};
 
+	const getMineCoords = (amount) => {
+        if (amount < 1) {
+            return [];
+        }
+		const mineArray = [];
+		for (let i = 0; i < amount; i++) {
+			const x = Math.floor(Math.random() * height);
+			const y = Math.floor(Math.random() * width);
+			if (board[x][y].isMine === undefined) {
+				mineArray.push([x, y]);
+			} else {
+				i--;
+			}
+		}
+		return mineArray;
+	};
 	const countAdjacentMines = (x, y) => {
 		let count = 0;
 		for (let i = x - 1; i <= x + 1; i++) {
@@ -257,6 +278,7 @@ const Game = ({
 
 	return (
 		<>
+			<button onClick={() => addMines([[0, 0]])}>Ass</button>
 			<Board
 				board={board}
 				lives={lives}
