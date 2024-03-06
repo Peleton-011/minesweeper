@@ -176,10 +176,10 @@ const Game = ({
 
 			if (
 				board[x][y].isMine === undefined &&
-				!(x === origin[0] && y === origin[1]) &&
+				!(Math.abs(x - origin[0]) < 3 && Math.abs(y - origin[1]) < 3) &&
 				!mineArray.find(([i, j]) => i === x && j === y)
 			) {
-                console.log(origin, [x, y])
+				console.log(origin, [x, y]);
 				mineArray.push([x, y]);
 			}
 		}
@@ -234,7 +234,7 @@ const Game = ({
 		setMineCount(mineCount + 1);
 	};
 
-	const onRightClick = (e, cell) => {
+	const onRightClick = (e, i, j, cell) => {
 		e.preventDefault();
 		const f = cell.isRevealed
 			? () => {}

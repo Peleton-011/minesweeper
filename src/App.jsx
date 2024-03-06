@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
 	return (
 		<div className="App">
-			<Game height={3} width={3} mineCount={3} lives={3}/>
+			<Game height={9} width={9} mineCount={18} lives={3}/>
 		</div>
 	);
 }
