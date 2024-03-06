@@ -21,7 +21,7 @@ const Game = ({
 			for (let j = 0; j < width; j++) {
 				row.push({
 					isMine: undefined,
-					isRevealed: true,
+					isRevealed: false,
 					isFlagged: false,
 					content: undefined,
 				});
@@ -68,6 +68,7 @@ const Game = ({
 
 	const [isFirstClick, setFirstClick] = useState(true);
 	const reveal = (x, y) => {
+		console.log("revealing");
 		if (x < 0 || y < 0 || x >= height || y >= width) {
 			return;
 		}
@@ -103,10 +104,10 @@ const Game = ({
 		setFirstClick(false);
 
 		fillBoard(x, y);
-		reveal(x, y);
 	};
 
 	const revealAdjacent = (x, y) => {
+		console.log("revealing adjacent");
 		reveal(x - 1, y - 1);
 		reveal(x - 1, y);
 		reveal(x - 1, y + 1);
@@ -130,23 +131,26 @@ const Game = ({
 	};
 
 	const fillBoard = (x, y) => {
+		console.log("Filling");
 		const mineList = getMineCoords(mineCount - countMines(), [x, y]);
 		addMines(mineList);
 
 		setBoard(
 			board.map((row, i) => {
 				return row.map((cell, j) => {
-					if (cell.isMine === undefined) {
-						return {
-							...cell,
-							content: countAdjacentMines(i, j),
-							isMine: false,
-						};
-					}
-					return {
+					const newCell = {
 						...cell,
 						content: countAdjacentMines(i, j),
 					};
+
+					if (Math.abs(x - i) < 2 && Math.abs(y - j) < 2) {
+						newCell.isRevealed = true;
+					}
+
+					if (cell.isMine === undefined) {
+						newCell.isMine = false;
+					}
+					return newCell;
 				});
 			})
 		);
@@ -176,14 +180,14 @@ const Game = ({
 
 			if (
 				board[x][y].isMine === undefined &&
-				!(Math.abs(x - origin[0]) < 3 && Math.abs(y - origin[1]) < 3) &&
+				!(Math.abs(x - origin[0]) < 2 && Math.abs(y - origin[1]) < 2) &&
 				!mineArray.find(([i, j]) => i === x && j === y)
 			) {
-				console.log(origin, [x, y]);
+				// console.log(origin, [x, y]);
 				mineArray.push([x, y]);
 			}
 		}
-		console.log(mineArray);
+		// console.log(mineArray);
 		return mineArray;
 	};
 	const countAdjacentMines = (x, y) => {

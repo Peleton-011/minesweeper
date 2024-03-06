@@ -26,7 +26,7 @@ const Board = ({
 							onClick={(e) => onLeftClick(i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, i, j, cell)}
 						>
-							{getContent(cell)}
+							{getContent(board[i][j])}
 						</button>
 					))}
 				</div>
