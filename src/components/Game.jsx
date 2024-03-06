@@ -45,11 +45,11 @@ const Game = ({
 		}
 	}, [mineCount]);
 
-	useEffect(() => {
-		console.log("state");
-		fillBoard();
-		console.log(board);
-	}, []);
+	// useEffect(() => {
+	// 	console.log("state");
+	// 	fillBoard();
+	// 	console.log(board);
+	// }, []);
 
 	const checkWin = () => {
 		const checkCell = (cell) => {
@@ -101,18 +101,8 @@ const Game = ({
 	const firstClick = (x, y) => {
 		console.log("First click");
 		setFirstClick(false);
-		console.log(board);
-		setBoard(
-			board.map((r, i) => {
-				return r.map((c, j) => {
-					if (x === i && y === j) {
-						return { ...c, isMine: false };
-					}
-					return c;
-				});
-			})
-		);
-		fillBoard();
+
+		fillBoard(x, y);
 		reveal(x, y);
 	};
 
@@ -139,13 +129,8 @@ const Game = ({
 		return count;
 	};
 
-	const fillBoard = () => {
-		console.log("Filling");
-
-		const mineList = getMineCoords(mineCount - countMines());
-
-		console.log(mineList);
-
+	const fillBoard = (x, y) => {
+		const mineList = getMineCoords(mineCount - countMines(), [x, y]);
 		addMines(mineList);
 
 		setBoard(
@@ -168,9 +153,9 @@ const Game = ({
 	};
 
 	const addMines = (coords) => {
-        if (coords.length < 1) {
-            return;
-        }
+		if (coords.length < 1) {
+			return;
+		}
 		console.log("ADD MINE");
 
 		const newBoard = board.map((row) => row.map((cell) => cell));
@@ -180,20 +165,25 @@ const Game = ({
 		setBoard(newBoard);
 	};
 
-	const getMineCoords = (amount) => {
-        if (amount < 1) {
-            return [];
-        }
+	const getMineCoords = (amount, origin) => {
+		if (amount < 1) {
+			return [];
+		}
 		const mineArray = [];
-		for (let i = 0; i < amount; i++) {
+		while (mineArray.length < amount) {
 			const x = Math.floor(Math.random() * height);
 			const y = Math.floor(Math.random() * width);
-			if (board[x][y].isMine === undefined) {
+
+			if (
+				board[x][y].isMine === undefined &&
+				!(x === origin[0] && y === origin[1]) &&
+				!mineArray.find(([i, j]) => i === x && j === y)
+			) {
+                console.log(origin, [x, y])
 				mineArray.push([x, y]);
-			} else {
-				i--;
 			}
 		}
+		console.log(mineArray);
 		return mineArray;
 	};
 	const countAdjacentMines = (x, y) => {
