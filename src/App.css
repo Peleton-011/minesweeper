@@ -1,26 +1,27 @@
 #root {
 	max-width: 1280px;
 	margin: 0 auto;
-	padding: 2rem;
+	padding: 2em;
 	text-align: center;
 }
 .row {
 	display: flex;
+    font-size: 20px;
 }
 
 .cell {
-	width: 3rem;
-	height: 3rem;
-	border: 1px solid #ddd; /* Light gray border */
+    padding: 0;
+	width: 1.5em;
+	height: 1.5em;
+	border: 1px solid #aaa; /* Light gray border */
 	background-color: #333;
 	border-radius: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 1.5rem;
 	font-weight: bold;
-	text-shadow: -2px 0 rgba(200 200 200 / 50%), 2px 0 rgba(200 200 200 / 50%),
-		0 -2px rgba(200 200 200 / 50%), 0 2px rgba(200 200 200 / 50%);
+	text-shadow: -2px 0 rgba(200 200 200 / 30%), 2px 0 rgba(200 200 200 / 30%),
+		0 -2px rgba(200 200 200 / 30%), 0 2px rgba(200 200 200 / 30%);
 	text-align: center;
 	user-select: none;
 }
