@@ -159,7 +159,7 @@ const Game = ({
 	};
 
 	const fillBoard = (x, y) => {
-		console.log("Filling");
+		// console.log("Filling");
 		const mineList = getMineCoords(mineCount - countMines(), [x, y]);
 		addMines(mineList);
 
@@ -179,7 +179,7 @@ const Game = ({
 
 		const initialZone = getRevealList(x, y, [], newBoard);
 
-		console.log(initialZone);
+		// console.log(initialZone);
 
 		initialZone.forEach(([x, y]) => {
 			newBoard[x][y].isRevealed = true;
@@ -237,7 +237,7 @@ const Game = ({
 	};
 
 	const flag = (x, y) => {
-		if (this.board[x][y].isRevealed) {
+		if (board[x][y].isRevealed) {
 			return;
 		}
 		setBoard(
@@ -254,7 +254,7 @@ const Game = ({
 	};
 
 	const unflag = (x, y) => {
-		if (this.board[x][y].isRevealed) {
+		if (board[x][y].isRevealed) {
 			return;
 		}
 		setBoard(
