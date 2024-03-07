@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { flushSync } from "react-dom";
 import Board from "./Board";
 
 const Game = ({
@@ -67,36 +68,75 @@ const Game = ({
 	};
 
 	const [isFirstClick, setFirstClick] = useState(true);
-	const reveal = (x, y) => {
-		console.log("revealing");
+
+	const revealAdjacent = (x, y, hist, board) => {
+		for (let i = -1; i <= 1; i++) {
+			for (let j = -1; j <= 1; j++) {
+				if (i === 0 && j === 0) {
+					continue;
+				}
+				if (
+					x + i < 0 ||
+					y + j < 0 ||
+					x + i >= height ||
+					y + j >= width
+				) {
+					continue;
+				}
+				getRevealList(x + i, y + j, hist, board);
+			}
+		}
+	};
+
+	const getRevealList = (x, y, hist = [], argBoard) => {
+		if (argBoard === undefined) {
+			argBoard = board;
+			// console.warn("argBoard is undefined");
+		}
+		console.log("checking ", x, ", ", y);
+		const isFirst = hist.length === 0;
 		if (x < 0 || y < 0 || x >= height || y >= width) {
-			return;
+			// console.warn("out of bounds");
+			return hist;
 		}
 
-		if (board[x][y].isRevealed) {
-			return;
+		if (argBoard[x][y].isRevealed) {
+			// console.warn("already revealed");
+			return hist;
 		}
 
-		setBoard(
-			board.map((r, i) =>
-				r.map((c, j) => {
-					if (x === i && y === j) {
-						return { ...c, isRevealed: true };
-					}
-					return c;
-				})
-			)
-		);
+		//Check if the coords are in the hist
+		if (hist.find((coord) => coord[0] === x && coord[1] === y)) {
+			// console.warn("already checked");
+			return hist;
+		}
 
-		if (board[x][y].isMine) {
+		if (argBoard[x][y].isMine) {
+			// console.log("Mine at " + x + ", " + y);
 			setMineCount(mineCount - 1);
 			setLives(lives - 1);
-			return;
+			hist.push([x, y]);
+			return hist;
 		}
 
-		if (board[x][y].content === 0) {
-			revealAdjacent(x, y);
+		if (argBoard[x][y].content === 0) {
+			// console.log("Zero at " + x + ", " + y);
+			hist.push([x, y]);
+			revealAdjacent(x, y, hist, argBoard);
 		}
+
+		// console.log("Unzero at " + x + ", " + y);
+		hist.push([x, y]);
+		return hist;
+	};
+
+	const batchReveal = (list) => {
+		const newBoard = board.map((row) => row.map((cell) => cell));
+
+		list.forEach(([x, y]) => {
+			newBoard[x][y].isRevealed = true;
+		});
+		setBoard(newBoard);
 	};
 
 	const firstClick = (x, y) => {
@@ -104,18 +144,6 @@ const Game = ({
 		setFirstClick(false);
 
 		fillBoard(x, y);
-	};
-
-	const revealAdjacent = (x, y) => {
-		console.log("revealing adjacent");
-		reveal(x - 1, y - 1);
-		reveal(x - 1, y);
-		reveal(x - 1, y + 1);
-		reveal(x, y - 1);
-		reveal(x, y + 1);
-		reveal(x + 1, y - 1);
-		reveal(x + 1, y);
-		reveal(x + 1, y + 1);
 	};
 
 	const countMines = () => {
@@ -135,25 +163,29 @@ const Game = ({
 		const mineList = getMineCoords(mineCount - countMines(), [x, y]);
 		addMines(mineList);
 
-		setBoard(
-			board.map((row, i) => {
-				return row.map((cell, j) => {
-					const newCell = {
-						...cell,
-						content: countAdjacentMines(i, j),
-					};
+		const newBoard = board.map((row, i) => {
+			return row.map((cell, j) => {
+				const newCell = {
+					...cell,
+					content: countAdjacentMines(i, j),
+				};
 
-					if (Math.abs(x - i) < 2 && Math.abs(y - j) < 2) {
-						newCell.isRevealed = true;
-					}
+				if (cell.isMine === undefined) {
+					newCell.isMine = false;
+				}
+				return newCell;
+			});
+		});
 
-					if (cell.isMine === undefined) {
-						newCell.isMine = false;
-					}
-					return newCell;
-				});
-			})
-		);
+		const initialZone = getRevealList(x, y, [], newBoard);
+
+		console.log(initialZone);
+
+		initialZone.forEach(([x, y]) => {
+			newBoard[x][y].isRevealed = true;
+		});
+
+		setBoard(newBoard);
 	};
 
 	const addMines = (coords) => {
@@ -255,9 +287,8 @@ const Game = ({
 			? unflag(i, j)
 			: isFirstClick
 			? firstClick(i, j)
-			: reveal(i, j);
+			: batchReveal(getRevealList(i, j));
 	};
-
 
 	return (
 		<>
