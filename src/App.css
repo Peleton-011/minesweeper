@@ -9,20 +9,65 @@
 }
 
 .cell {
-    width: 10px;
-    height: 10px;
-    border: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 3rem;
+	height: 3rem;
+	border: 1px solid #ddd; /* Light gray border */
+	background-color: #333;
+	border-radius: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-shadow: -2px 0 rgba(200 200 200 / 50%), 2px 0 rgba(200 200 200 / 50%),
+		0 -2px rgba(200 200 200 / 50%), 0 2px rgba(200 200 200 / 50%);
+	text-align: center;
+	user-select: none;
+}
+
+.cell:first-child,
+.cell:nth-child(odd) {
+	border-top: 2px solid #888; /* Darker gray for grid lines */
 }
 
 .cell.revealed {
-    background-color: red;
-    color: white;
+	background-color: #555;
+	color: white;
 }
 
 .cell.flagged {
-    /* background-color: red; */
-    color: white;
+	/* background-color: red; */
+	color: white;
+}
+
+.cell.one {
+	color: blue;
+}
+
+.cell.two {
+	color: green;
+}
+
+.cell.three {
+	color: red;
+}
+
+.cell.four {
+	color: darkblue;
+}
+
+.cell.five {
+	color: darkred;
+}
+
+.cell.six {
+	color: purple;
+}
+
+.cell.seven {
+	color: darkgreen;
+}
+
+.cell.eight {
+	color: black;
 }

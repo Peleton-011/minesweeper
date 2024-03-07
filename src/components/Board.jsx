@@ -1,6 +1,29 @@
 import React from "react";
 
 const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
+	const getNumberName = (number) => {
+		switch (number) {
+			case 1:
+				return "one";
+			case 2:
+				return "two";
+			case 3:
+				return "three";
+			case 4:
+				return "four";
+			case 5:
+				return "five";
+			case 6:
+				return "six";
+			case 7:
+				return "seven";
+			case 8:
+				return "eight";
+			default:
+				return "zero";
+		}
+	};
+
 	return (
 		<div>
 			<h2>
@@ -14,7 +37,10 @@ const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
 							className={
 								"cell" +
 								(cell.isRevealed ? " revealed" : "") +
-								(cell.isFlagged ? " flagged" : "")
+								(cell.isFlagged ? " flagged" : "") +
+								(typeof cell.content === "number"
+									? " " + getNumberName(cell.content)
+									: "")
 							}
 							onClick={(e) => onLeftClick(i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, i, j, cell)}
