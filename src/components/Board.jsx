@@ -1,13 +1,6 @@
 import React from "react";
 
-const Board = ({
-	board,
-	lives,
-	mineCount,
-	onLeftClick,
-	onRightClick,
-	getContent,
-}) => {
+const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
 	return (
 		<div>
 			<h2>
@@ -26,7 +19,15 @@ const Board = ({
 							onClick={(e) => onLeftClick(i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, i, j, cell)}
 						>
-							{getContent(board[i][j])}
+							{!board[i][j].isRevealed
+								? board[i][j].isFlagged
+									? "🚩"
+									: " "
+								: board[i][j].isMine
+								? "💣"
+								: board[i][j].content == "0"
+								? " "
+								: board[i][j].content}
 						</button>
 					))}
 				</div>

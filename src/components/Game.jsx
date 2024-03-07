@@ -258,17 +258,6 @@ const Game = ({
 			: reveal(i, j);
 	};
 
-	const getContent = (cell) => {
-		return !cell.isRevealed
-			? cell.isFlagged
-				? "🚩"
-				: " "
-			: cell.isMine
-			? "💣"
-			: cell.content == "0"
-			? " "
-			: cell.content;
-	};
 
 	return (
 		<>
@@ -279,7 +268,6 @@ const Game = ({
 				mineCount={mineCount}
 				onLeftClick={onLeftClick}
 				onRightClick={onRightClick}
-				getContent={getContent}
 			/>
 		</>
 	);
