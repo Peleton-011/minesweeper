@@ -105,7 +105,10 @@ const Game = ({
 			return hist;
 		}
 
-		if (argBoard[x][y].isRevealed || argBoard[x][y].isFlagged) {
+		if (
+			argBoard[x][y].isRevealed ||
+			(argBoard[x][y].isFlagged && argBoard[x][y].isMine)
+		) {
 			// console.warn("already revealed");
 			return hist;
 		}
@@ -158,7 +161,11 @@ const Game = ({
 				) {
 					continue;
 				}
-				if (board[x + i][y + j].isFlagged) {
+				if (
+					board[x + i][y + j].isFlagged ||
+					(board[x + i][y + j].isRevealed &&
+						board[x + i][y + j].isMine)
+				) {
 					countFlagged++;
 				}
 			}
