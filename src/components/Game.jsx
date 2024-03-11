@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { flushSync } from "react-dom";
 import Board from "./Board";
 
 const Game = ({
@@ -53,7 +52,7 @@ const Game = ({
 	// }, []);
 
 	const checkWin = () => {
-		const checkCell = (cell) => {
+		const checkCellBothWays = (cell) => {
 			if (!cell.isRevealed && !cell.isFlagged && cell.isMine) {
 				return false;
 			}
@@ -64,7 +63,10 @@ const Game = ({
 
 			return true;
 		};
-		return board.every((row) => row.every(checkCell));
+		const checkCellRevealed = (cell) => {
+			return cell.isRevealed || cell.isMine;
+		};
+		return board.every((row) => row.every(checkCellRevealed)) && lives > 0;
 	};
 
 	const [isFirstClick, setFirstClick] = useState(true);
