@@ -86,48 +86,85 @@ const Game = ({
 				getRevealList(x + i, y + j, hist, board);
 			}
 		}
+		return hist;
 	};
 
 	const getRevealList = (x, y, hist = [], argBoard) => {
 		if (argBoard === undefined) {
 			argBoard = board;
-			// console.warn("argBoard is undefined");
+			console.warn("argBoard is undefined");
 		}
-		console.log("checking ", x, ", ", y);
-		const isFirst = hist.length === 0;
 		if (x < 0 || y < 0 || x >= height || y >= width) {
-			// console.warn("out of bounds");
-			return hist;
-		}
-
-		if (argBoard[x][y].isRevealed) {
-			// console.warn("already revealed");
+			console.warn("out of bounds");
 			return hist;
 		}
 
 		//Check if the coords are in the hist
 		if (hist.find((coord) => coord[0] === x && coord[1] === y)) {
-			// console.warn("already checked");
+			console.warn("already checked");
+			return hist;
+		}
+
+		if (argBoard[x][y].isRevealed || argBoard[x][y].isFlagged) {
+			// console.warn("already revealed");
 			return hist;
 		}
 
 		if (argBoard[x][y].isMine) {
-			// console.log("Mine at " + x + ", " + y);
+			console.log("Mine at " + x + ", " + y);
 			setMineCount(mineCount - 1);
 			setLives(lives - 1);
 			hist.push([x, y]);
 			return hist;
 		}
 
+		hist.push([x, y]);
 		if (argBoard[x][y].content === 0) {
-			// console.log("Zero at " + x + ", " + y);
-			hist.push([x, y]);
+			console.log("Zero at " + x + ", " + y);
 			revealAdjacent(x, y, hist, argBoard);
 		}
 
 		// console.log("Unzero at " + x + ", " + y);
-		hist.push([x, y]);
 		return hist;
+	};
+
+	const chord = (x, y) => {
+		if (!isCellComplete(x, y)) {
+			return;
+		}
+		console.log("complete");
+		const toChord = revealAdjacent(x, y, [[x, y]]);
+		console.log(toChord);
+		batchReveal(toChord);
+	};
+
+	const isCellComplete = (x, y) => {
+		const count = board[x][y].content;
+		if (count === 0) {
+			console.log("Count zero at " + x + ", " + y);
+			return false;
+		}
+		let countFlagged = 0;
+		for (let i = -1; i <= 1; i++) {
+			for (let j = -1; j <= 1; j++) {
+				if (i === 0 && j === 0) {
+					continue;
+				}
+				if (
+					x + i < 0 ||
+					y + j < 0 ||
+					x + i >= height ||
+					y + j >= width
+				) {
+					continue;
+				}
+				if (board[x + i][y + j].isFlagged) {
+					countFlagged++;
+				}
+			}
+		}
+
+		return count === countFlagged;
 	};
 
 	const batchReveal = (list) => {
@@ -135,6 +172,10 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			newBoard[x][y].isRevealed = true;
+			// if (board[x][y].isMine === true) {
+			// 	setMineCount(mineCount - 1);
+			// 	setLives(lives - 1);
+			// }
 		});
 		setBoard(newBoard);
 	};
@@ -283,7 +324,9 @@ const Game = ({
 
 	const onLeftClick = (i, j, cell) => {
 		console.log("Left click");
-		cell.isFlagged
+		cell.isRevealed
+			? chord(i, j)
+			: cell.isFlagged
 			? unflag(i, j)
 			: isFirstClick
 			? firstClick(i, j)
