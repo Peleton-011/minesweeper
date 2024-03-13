@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import Board from "./Board";
 
 const Game = ({
-	config: { height, width, mineCount: argMineCount, lives: argLives },
+	config: {
+		height,
+		width,
+		mineCount: argMineCount,
+		lives: argLives,
+		onWin,
+		onLose,
+	},
 }) => {
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
@@ -29,12 +36,14 @@ const Game = ({
 
 	useEffect(() => {
 		if (lives <= 0) {
+			onLose();
 			alert("Game over");
 		}
 	}, [lives]);
 
 	useEffect(() => {
 		if (mineCount <= 0 && checkWin() && lives > 0) {
+			onWin();
 			alert("You won!");
 		}
 	}, [mineCount]);
