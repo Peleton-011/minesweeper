@@ -1,31 +1,48 @@
 .image-slider {
-    position: relative;
-    /* Styles for the main slider container */
-  }
-  
-  .slider-container > * {
-    /* Styles for the slides */
-    /* position: absolute; */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+	position: relative;
+	/* Styles for the main slider container */
+}
+
+.slide {
     opacity: 0;
     /* transform: translateX(-100%); */
-    transition: transform 0.5s ease-in-out; /* Define transition for smooth sliding */
-  }
+    transition: opacity 0.5s ease-in-out
+}
 
 .slide.active {
-  opacity: 1;
-  /* transform: translateX(0); */
+	opacity: 1;
+	/* transform: translateX(0); */
+}
+.slide-away-left {
+	animation: slideAwayLeft 0.5s forwards ease-in-out;
 }
 
-.slide.prev {
-  transform: translateX(-100%);
+.slide-in-right {
+	animation: slideAwayRight 0.5s reverse ease-in-out;
 }
 
-.slide.next {
-  transform: translateX(100%);
+.slide-away-right {
+	animation: slideAwayRight 0.5s forwards ease-in-out;
 }
 
-  
+.slide-in-left {
+	animation: slideAwayLeft 0.5s reverse ease-in-out;
+}
+
+@keyframes slideAwayRight {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
+@keyframes slideAwayLeft {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}

@@ -4,52 +4,22 @@ import "./Carousel.css";
 
 const Carousel = ({ pages }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
-    
+	const [isForward, setIsForward] = useState(undefined);
+
+	let slider;
+	let slides;
 
 	const nextSlide = () => {
 		setCurrentIndex((prevIndex) => (prevIndex + 1) % pages.length);
-		const slider = document.querySelector(".slider-container");
-		const slides = slider.querySelectorAll(".slide");
-		slides.forEach((slide, index) => {
-			//Remove classes
-			slide.classList.remove("active", "prev", "next");
-			if (index === currentIndex) {
-				slide.classList.add("active");
-			} else if (
-				index ===
-				(pages.length + currentIndex - 1) % pages.length
-			) {
-				slide.classList.add("prev", "active");
-			} else if (index === (currentIndex + 1) % pages.length) {
-				slide.classList.add("next");
-			} else {
-				slide.classList.remove("active");
-			}
-		});
+
+		setIsForward(true);
 	};
 
 	const prevSlide = () => {
 		setCurrentIndex(
 			(prevIndex) => (prevIndex - 1 + pages.length) % pages.length
 		);
-		const slider = document.querySelector(".slider-container");
-		const slides = slider.querySelectorAll(".slide");
-		slides.forEach((slide, index) => {
-			//Remove classes
-			slide.classList.remove("active", "prev", "next");
-			if (index === currentIndex) {
-				slide.classList.add("active");
-			} else if (
-				index ===
-				(pages.length + currentIndex - 1) % pages.length
-			) {
-				slide.classList.add("prev");
-			} else if (index === (currentIndex + 1) % pages.length) {
-				slide.classList.add("next", "active");
-			} else {
-				slide.classList.remove("active");
-			}
-		});
+		setIsForward(false);
 	};
 
 	//Auto slide
@@ -62,31 +32,35 @@ const Carousel = ({ pages }) => {
 
 	//Set classes upon index change
 	useEffect(() => {
-		//Select elements by key
-	}, [currentIndex]);
+		slider = document.querySelector(".slider-container");
+		slides = slider.querySelectorAll(".slide");
+	}, []);
+
+	const getSlideClass = (index) => {
+		if (isForward) {
+			return index === currentIndex
+				? "active slide-in-right"
+				: index === (currentIndex - 1 + pages.length) % pages.length
+				? "slide-away-left"
+				: "";
+		} else if (isForward === undefined) {
+			return index === currentIndex ? "active" : "";
+		} else {
+			return index === currentIndex
+				? "active slide-in-left"
+				: index === (currentIndex + 1 + pages.length) % pages.length
+				? "slide-away-right"
+				: "";
+		}
+	};
 
 	return (
 		<div className="image-slider">
-			<div
-				className={`slider-container ${
-					currentIndex === 0 ? "" : "slide-left"
-				}`}
-			>
+			<div className="slider-container">
 				{pages.map((page, index) => (
 					<div
 						key={index}
-						className={
-							"slide " +
-							(index === currentIndex
-								? "active"
-								: index ===
-								  (pages.length + currentIndex - 1) %
-										pages.length
-								? "prev"
-								: index === (currentIndex + 1) % pages.length
-								? "next"
-								: "")
-						}
+						className={"slide " + getSlideClass(index)}
 					>
 						{page}
 					</div>
