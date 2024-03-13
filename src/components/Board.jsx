@@ -26,9 +26,12 @@ const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
 
 	return (
 		<div>
-			<h2>
-				🚩: {mineCount} Lives: {lives}
-			</h2>
+			{mineCount && lives ? (
+				<h2>
+					🚩: {mineCount} Lives: {lives}
+				</h2>
+			) : null}
+
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (

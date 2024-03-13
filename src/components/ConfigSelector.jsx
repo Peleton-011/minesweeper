@@ -1,11 +1,43 @@
 import React from "react";
 import Carousel from "./Carousel";
+import DifficultyDisplay from "./DifficultyDisplay";
 
 const ConfigSelector = () => {
+	const standardDifficulties = [
+		{
+			height: 16,
+			width: 30,
+			mineCount: 99,
+			difName: "Hard",
+		},
+		{
+			height: 16,
+			width: 16,
+			mineCount: 40,
+			difName: "Medium",
+		},
+		{
+			height: 8,
+			width: 8,
+			mineCount: 10,
+			difName: "Easy",
+		},
+	];
+
 	return (
 		<div>
 			<h2>Config Selector</h2>
-			<Carousel pages={[<h1>One</h1>, <h2>Two</h2>, <h3>Three</h3>]} />
+			<Carousel
+				pages={standardDifficulties.map((dif, i) => {
+					return (
+						<DifficultyDisplay
+							key={i}
+							config={dif}
+							onSubmit={() => {}}
+						/>
+					);
+				})}
+			/>
 		</div>
 	);
 };

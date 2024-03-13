@@ -1,0 +1,54 @@
+import React from "react";
+import Board from "./Board";
+
+const DifficultyDisplay = ({
+	config: { height, width, mineCount, difName },
+	onSubmit,
+}) => {
+	const getBoard = () => {
+		return Array(height)
+			.fill()
+			.map(() => {
+				return Array(width)
+					.fill()
+					.map(() => {
+						return {
+							isMine: false,
+							isRevealed: false,
+							isFlagged: false,
+							content: 0,
+						};
+					});
+			});
+	};
+
+	return (
+		<div>
+			<Board
+				board={getBoard()}
+				onLeftClick={() => {}}
+				onRightClick={(e) => {
+					e.preventDefault();
+				}}
+			/>
+			<form onSubmit={onSubmit}>
+				<h3>{difName}</h3>
+				<p>
+					<span>{height + "x" + width + " tiles"}</span> |{" "}
+					<span>{mineCount + " mines"}</span>
+				</p>
+				<label htmlFor="isOneMistake">
+					<input
+						type="checkbox"
+						id="isOneMistake"
+						name="isOneMistake"
+					/>{" "}
+					One mistake
+				</label>
+				<button type="submit">Play</button>
+			</form>
+		</div>
+	);
+};
+
+export default DifficultyDisplay;
