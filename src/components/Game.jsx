@@ -3,16 +3,10 @@ import { useState, useEffect } from "react";
 import Board from "./Board";
 
 const Game = ({
-	height: argHeight,
-	width: argWidth,
-	mineCount: argMineCount,
-	lives: argLives,
+	config: { height, width, mineCount: argMineCount, lives: argLives },
 }) => {
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
-
-	const height = argHeight || 10;
-	const width = argWidth || 10;
 
 	const createBoard = (height, width) => {
 		const board = [];
