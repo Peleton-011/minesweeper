@@ -1,4 +1,5 @@
 import Game from "./components/Game";
+import ConfigSelector from "./components/ConfigSelector";
 import { useState } from "react";
 import "./App.css";
 
@@ -24,6 +25,7 @@ function App() {
 	};
 	return (
 		<div className="App">
+            <ConfigSelector />
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
 			<Game config={config} />
 		</div>
