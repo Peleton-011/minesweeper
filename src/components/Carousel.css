@@ -3,10 +3,69 @@
 	/* Styles for the main slider container */
 }
 
+.slider-container {
+	position: relative;
+	/* Styles for the slider container */
+}
+
+.prev.btn,
+.next.btn {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%) rotate(45deg);
+	z-index: 1;
+	width: 50px;
+	height: 50px;
+
+	background-color: transparent;
+	border-radius: 0;
+	cursor: pointer;
+	outline: none;
+	transition: transform 0.2s ease-in-out;
+}
+
+.next.btn {
+	right: 0;
+	border-right: 5px solid #fff;
+	border-top: 5px solid #fff;
+	border-left: none;
+	border-bottom: none;
+}
+
+.prev.btn {
+	left: 0;
+	border-bottom: 5px solid #fff;
+	border-left: 5px solid #fff;
+	border-right: none;
+	border-top: none;
+}
+
+.next.btn:hover,
+.prev.btn:hover {
+	transform: translateY(-50%) rotate(45deg) scale(1.2);
+}
+
+.next.btn:focus,
+.prev.btn:focus {
+	outline: none;
+}
+
+.next.btn.active,
+.prev.btn.active {
+	animation: click 0.5s linear forwards;
+}
+
 .slide {
-    opacity: 0;
-    /* transform: translateX(-100%); */
-    transition: opacity 0.5s ease-in-out
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	opacity: 0;
+	/* transform: translateX(-100%); */
+	transition: opacity 0.5s ease-in-out;
+}
+
+.slide > * {
+    transform: translateX(-50%) translateY(-50%)
 }
 
 .slide.active {
@@ -14,19 +73,19 @@
 	/* transform: translateX(0); */
 }
 .slide-away-left {
-	animation: slideAwayLeft 0.5s forwards ease-in-out;
+	animation: slideAwayLeft 1s forwards ease-in-out;
 }
 
 .slide-in-right {
-	animation: slideAwayRight 0.5s reverse ease-in-out;
+	animation: slideAwayRight 1s reverse ease-in-out;
 }
 
 .slide-away-right {
-	animation: slideAwayRight 0.5s forwards ease-in-out;
+	animation: slideAwayRight 1s forwards ease-in-out;
 }
 
 .slide-in-left {
-	animation: slideAwayLeft 0.5s reverse ease-in-out;
+	animation: slideAwayLeft 1s reverse ease-in-out;
 }
 
 @keyframes slideAwayRight {
@@ -34,7 +93,7 @@
 		transform: translateX(0);
 	}
 	100% {
-		transform: translateX(100%);
+		transform: translateX(200%);
 	}
 }
 
@@ -43,6 +102,21 @@
 		transform: translateX(0);
 	}
 	100% {
-		transform: translateX(-100%);
+		transform: translateX(-200%);
+	}
+}
+
+@keyframes click {
+	0% {
+		transform: translateY(-50%) rotate(45deg) scale(1.2);
+	}
+	50% {
+		transform: translateY(-50%) rotate(45deg) scale(0.8);
+	}
+	90% {
+		transform: translateY(-50%) rotate(45deg) scale(1.3);
+	}
+	100% {
+		transform: translateY(-50%) rotate(45deg) scale(1.2);
 	}
 }

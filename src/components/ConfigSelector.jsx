@@ -29,7 +29,8 @@ const ConfigSelector = () => {
 			<h2>Config Selector</h2>
 			<Carousel
 				pages={standardDifficulties.map((dif, i) => {
-					return (
+					return <div> {dif.difName} </div>; 
+                    (
 						<DifficultyDisplay
 							key={i}
 							config={dif}

@@ -25,9 +25,9 @@ function App() {
 	};
 	return (
 		<div className="App">
-            <ConfigSelector />
+			<ConfigSelector />
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			<Game config={config} />
+			{0 === 1 ? <Game config={config} /> : null}
 		</div>
 	);
 }

@@ -66,8 +66,8 @@ const Carousel = ({ pages }) => {
 					</div>
 				))}
 			</div>
-			<button onClick={prevSlide}>Previous</button>
-			<button onClick={nextSlide}>Next</button>
+			<button onClick={prevSlide} className={"prev btn "}></button>
+			<button onClick={nextSlide} className="next btn"></button>
 		</div>
 	);
 };
