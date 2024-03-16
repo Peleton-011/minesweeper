@@ -9,6 +9,23 @@ const Carousel = ({ pages }) => {
 	let slider;
 	let slides;
 
+	const [leftButtonAnimation, setLeftButtonAnimation] = useState(false);
+	const [rightButtonAnimation, setRightButtonAnimation] = useState(false);
+
+	const leftButtonToggle = () => {
+		setLeftButtonAnimation(true);
+		setTimeout(() => {
+			setLeftButtonAnimation(false);
+		}, 500); // 0.5 seconds
+	};
+
+	const rightButtonToggle = () => {
+		setRightButtonAnimation(true);
+		setTimeout(() => {
+			setRightButtonAnimation(false);
+		}, 500); // 0.5 seconds
+	};
+
 	const nextSlide = () => {
 		setCurrentIndex((prevIndex) => (prevIndex + 1) % pages.length);
 
@@ -66,8 +83,20 @@ const Carousel = ({ pages }) => {
 					</div>
 				))}
 			</div>
-			<button onClick={prevSlide} className={"prev btn "}></button>
-			<button onClick={nextSlide} className="next btn"></button>
+			<button
+				onClick={() => {
+					prevSlide();
+					leftButtonToggle();
+				}}
+				className={"prev btn " + (leftButtonAnimation ? "active" : "")}
+			></button>
+			<button
+				onClick={() => {
+					nextSlide();
+					rightButtonToggle();
+				}}
+				className={"next btn " + (rightButtonAnimation ? "active" : "")}
+			></button>
 		</div>
 	);
 };
