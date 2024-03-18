@@ -348,14 +348,20 @@ const Game = ({
 
 	return (
 		<>
-			<button onClick={() => addMines([[0, 0]])}>Ass</button>
 			<Board
 				board={board}
-				lives={lives}
-				mineCount={mineCount}
 				onLeftClick={onLeftClick}
 				onRightClick={onRightClick}
 			/>
+			<h2 className="stats">
+				<span>🚩: {mineCount}</span>{" "}
+				<span>
+					{new Array(argLives)
+						.fill("🖤")
+						.map((v, i) => (i < lives ? "❤️" : v))
+						.join("")}
+				</span>
+			</h2>
 		</>
 	);
 };

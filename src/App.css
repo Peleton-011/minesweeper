@@ -4,6 +4,12 @@
 	padding: 2em;
 	text-align: center;
 }
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+}
+
 .row {
 	display: flex;
     font-size: 20px;

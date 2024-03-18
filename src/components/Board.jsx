@@ -1,6 +1,6 @@
 import React from "react";
 
-const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
+const Board = ({ board, onLeftClick, onRightClick }) => {
 	const getNumberName = (number) => {
 		switch (number) {
 			case 1:
@@ -26,12 +26,6 @@ const Board = ({ board, lives, mineCount, onLeftClick, onRightClick }) => {
 
 	return (
 		<div>
-			{mineCount && lives ? (
-				<h2>
-					🚩: {mineCount} Lives: {lives}
-				</h2>
-			) : null}
-
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (
