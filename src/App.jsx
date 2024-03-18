@@ -14,20 +14,29 @@ function App() {
 		setIsGameOver(true);
 		setDidWin(true);
 	};
+	const [config, setConfig] = useState({});
 
-	const config = {
-		height: 16,
-		width: 30,
-		mineCount: 99,
-		lives: 3,
-		onLose,
-		onWin,
-	};
 	return (
 		<div className="App">
-			<ConfigSelector />
+			{Object.keys(config).length ? null : (
+				<ConfigSelector
+					setConfig={(config) =>
+						setConfig({
+							...{
+								height: 16,
+								width: 30,
+								mineCount: 99,
+								lives: 3,
+								onLose,
+								onWin,
+							},
+							...config,
+						})
+					}
+				/>
+			)}
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			{0 === 1 ? <Game config={config} /> : null}
+			{Object.keys(config).length ? <Game config={config} /> : null}
 		</div>
 	);
 }

@@ -65,11 +65,27 @@
 
 .slide {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translateX(-50%) translateY(-50%);
-	overflow: show;
-	/* transform: translateX(-100%); */
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-title {
+    text-align: center;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 10%;
+}
+
+
+.slide.active {
+    z-index: 1;
 }
 
 .slide.inactive {

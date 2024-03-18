@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./Carousel.css";
 
-const Carousel = ({ pages }) => {
+const Carousel = ({ pages, title }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [isForward, setIsForward] = useState(undefined);
 
@@ -61,7 +61,7 @@ const Carousel = ({ pages }) => {
 				? "slide-away-left"
 				: "inactive";
 		} else if (isForward === undefined) {
-			return index === currentIndex ? "active" : "";
+			return index === currentIndex ? "active" : "inactive";
 		} else {
 			return index === currentIndex
 				? "active slide-in-left"
@@ -73,6 +73,7 @@ const Carousel = ({ pages }) => {
 
 	return (
 		<div className="image-slider">
+            <h2 className="slider-title">{title}</h2>
 			<div className="slider-container">
 				{pages.map((page, index) => (
 					<div

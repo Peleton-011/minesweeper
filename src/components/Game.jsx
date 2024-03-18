@@ -16,6 +16,7 @@ const Game = ({
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
 	const createBoard = (height, width) => {
+		console.log(height, ", ", width);
 		const board = [];
 		for (let i = 0; i < height; i++) {
 			const row = [];

@@ -3,7 +3,7 @@ import Board from "./Board";
 
 const DifficultyDisplay = ({
 	config: { height, width, mineCount, difName },
-	onSubmit,
+	setConfig,
 }) => {
 	const getBoard = () => {
 		return Array(height)
@@ -30,10 +30,16 @@ const DifficultyDisplay = ({
 				onRightClick={(e) => {
 					e.preventDefault();
 				}}
-                style={{transform: "scale(0.5)", marginTop: "1em"}}
-                className="boardie"
+				style={{ transform: "scale(0.5)", marginTop: "1em" }}
+				className="boardie"
 			/>
-			<form onSubmit={onSubmit}>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					setConfig({ height, width, mineCount });
+					console.log(difName);
+				}}
+			>
 				<h3>{difName}</h3>
 				<p>
 					<span>{height + "x" + width + " tiles"}</span> |{" "}
