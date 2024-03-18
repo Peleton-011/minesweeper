@@ -28,16 +28,13 @@ const ConfigSelector = () => {
 		<div>
 			<h2>Config Selector</h2>
 			<Carousel
-				pages={standardDifficulties.map((dif, i) => {
-					return <div> {dif.difName} </div>; 
-                    (
-						<DifficultyDisplay
-							key={i}
-							config={dif}
-							onSubmit={() => {}}
-						/>
-					);
-				})}
+				pages={standardDifficulties.map((dif, i) => (
+					<DifficultyDisplay
+						key={i}
+						config={dif}
+						onSubmit={() => {}}
+					/>
+				))}
 			/>
 		</div>
 	);

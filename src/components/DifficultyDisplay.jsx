@@ -30,6 +30,8 @@ const DifficultyDisplay = ({
 				onRightClick={(e) => {
 					e.preventDefault();
 				}}
+                style={{transform: "scale(0.5)", marginTop: "1em"}}
+                className="boardie"
 			/>
 			<form onSubmit={onSubmit}>
 				<h3>{difName}</h3>

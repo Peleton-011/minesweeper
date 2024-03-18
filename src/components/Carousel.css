@@ -1,24 +1,15 @@
-.image-slider {
-	position: relative;
-	/* Styles for the main slider container */
-}
-
-.slider-container {
-	position: relative;
-	/* Styles for the slider container */
-}
-
 .prev.btn,
 .next.btn {
 	position: absolute;
-	top: 50%;
-	transform: translateY(-50%) rotate(45deg);
+	top: 0;
 	z-index: 1;
-	width: 50px;
-	height: 50px;
+
+	height: 100vh;
+	width: 25%;
 
 	background-color: transparent;
 	border-radius: 0;
+	border: none;
 	cursor: pointer;
 	outline: none;
 	transition: transform 0.2s ease-in-out;
@@ -26,32 +17,49 @@
 
 .next.btn {
 	right: 0;
+}
+
+.prev.btn {
+	left: 0;
+}
+
+.next.btn::after,
+.prev.btn::after {
+	display: inline-block;
+	transform: translateY(-50%) rotate(45deg);
+	content: "";
+	width: 50px;
+	height: 50px;
+}
+
+.next.btn::after {
 	border-right: 5px solid #fff;
 	border-top: 5px solid #fff;
 	border-left: none;
 	border-bottom: none;
 }
 
-.prev.btn {
-	left: 0;
+.prev.btn::after {
 	border-bottom: 5px solid #fff;
 	border-left: 5px solid #fff;
 	border-right: none;
 	border-top: none;
 }
 
-.next.btn:hover,
-.prev.btn:hover {
+.next.btn:hover::after,
+.prev.btn:hover::after {
 	transform: translateY(-50%) rotate(45deg) scale(1.2);
 }
 
 .next.btn:focus,
-.prev.btn:focus {
+.prev.btn:focus,
+.next.btn:hover,
+.prev.btn:hover {
 	outline: none;
 }
 
-.next.btn.active,
-.prev.btn.active {
+.next.btn.active::after,
+.prev.btn.active::after {
 	animation: click 0.5s linear forwards;
 }
 
@@ -59,50 +67,80 @@
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	opacity: 0;
+	transform: translateX(-50%) translateY(-50%);
+	overflow: show;
 	/* transform: translateX(-100%); */
-	transition: opacity 0.5s ease-in-out;
 }
 
-.slide > * {
-    transform: translateX(-50%) translateY(-50%)
+.slide.inactive {
+	display: none;
 }
 
-.slide.active {
-	opacity: 1;
-	/* transform: translateX(0); */
-}
-.slide-away-left {
-	animation: slideAwayLeft 0.5s forwards ease-in-out;
+.slide-away-left > * {
+	animation: slideAwayLeft 2s normal both ease-in-out;
 }
 
-.slide-in-right {
-	animation: slideAwayRight 0.5s reverse ease-in-out;
+.slide-in-right > * {
+	animation: slideInRight 2s normal both ease-in-out;
 }
 
-.slide-away-right {
-	animation: slideAwayRight 0.5s forwards ease-in-out;
+.slide-away-right > * {
+	animation: slideAwayRight 2s normal both ease-in-out;
 }
 
-.slide-in-left {
-	animation: slideAwayLeft 0.5s reverse ease-in-out;
+.slide-in-left > * {
+	animation: slideInLeft 2s normal both ease-in-out;
 }
 
 @keyframes slideAwayRight {
 	0% {
 		transform: translateX(0);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(100%);
+		opacity: 0;
 	}
 	100% {
-		transform: translateX(5em);
+		transform: translateX(100%);
+		opacity: 0;
 	}
 }
 
 @keyframes slideAwayLeft {
 	0% {
 		transform: translateX(0);
+		opacity: 1;
+	}
+	50% {
+		transform: translateX(-100%);
+		opacity: 0;
 	}
 	100% {
-		transform: translateX(-5em);
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+}
+
+@keyframes slideInRight {
+	0% {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideInLeft {
+	0% {
+		transform: translateX(-100%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0);
+		opacity: 1;
 	}
 }
 

@@ -59,7 +59,7 @@ const Carousel = ({ pages }) => {
 				? "active slide-in-right"
 				: index === (currentIndex - 1 + pages.length) % pages.length
 				? "slide-away-left"
-				: "";
+				: "inactive";
 		} else if (isForward === undefined) {
 			return index === currentIndex ? "active" : "";
 		} else {
@@ -67,7 +67,7 @@ const Carousel = ({ pages }) => {
 				? "active slide-in-left"
 				: index === (currentIndex + 1 + pages.length) % pages.length
 				? "slide-away-right"
-				: "";
+				: "inactive";
 		}
 	};
 
