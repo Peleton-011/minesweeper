@@ -141,9 +141,9 @@ const Game = ({
 		if (!isCellComplete(x, y)) {
 			return;
 		}
-		console.log("complete");
+		// console.log("complete");
 		const toChord = revealAdjacent(x, y, [[x, y]]);
-		console.log(toChord);
+		// console.log(toChord);
 		batchReveal(toChord);
 	};
 
@@ -185,6 +185,7 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			newBoard[x][y].isRevealed = true;
+            newBoard[x][y].isFlagged = false;
 			// if (board[x][y].isMine === true) {
 			// 	setMineCount(mineCount - 1);
 			// 	setLives(lives - 1);
