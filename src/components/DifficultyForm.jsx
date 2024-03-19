@@ -143,12 +143,12 @@ const DifficultyForm = ({
 					lives > 1 ? (
 						<>
 							<span>{lives + " lives"}</span>
-							<label htmlFor="lives">
+							<label htmlFor="isOneMistake">
 								{"One mistake "}
 								<input
 									type="checkbox"
-									id="lives"
-									name="lives"
+									id="isOneMistake"
+									name="isOneMistake"
 									onChange={(e) => {
 										setLivesInput(
 											e.target.checked ? 1 : lives
@@ -174,10 +174,6 @@ const DifficultyForm = ({
 					</label>
 				)}
 			</div>
-			<label htmlFor="isOneMistake">
-				<input type="checkbox" id="isOneMistake" name="isOneMistake" />{" "}
-				One mistake
-			</label>
 			<button type="submit">Play</button>
 		</form>
 	);
