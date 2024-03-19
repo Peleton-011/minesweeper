@@ -27,17 +27,16 @@ const ConfigSelector = ({ setConfig }) => {
 	return (
 		<div>
 			<Carousel
-                title="Select a difficulty"
-				pages={[
-					...standardDifficulties.map((dif, i) => (
+				title="Select a difficulty"
+				pages={[...standardDifficulties, { difName: "Custom" }].map(
+					(dif, i) => (
 						<DifficultyDisplay
 							key={i}
 							config={dif}
 							setConfig={setConfig}
 						/>
-					)),
-					<h2>Custom</h2>,
-				]}
+					)
+				)}
 			/>
 		</div>
 	);

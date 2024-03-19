@@ -16,13 +16,17 @@ const DifficultyForm = ({
 	setConfig,
 }) => {
 	//Bind the inputs
-	const [heightInput, setHeightInput] = useState(height);
-	const [widthInput, setWidthInput] = useState(width);
+	const [heightInput, setHeightInput] = useState(height || 16);
+	const [widthInput, setWidthInput] = useState(width || 30);
 	const [mineCountInput, setMineCountInput] = useState(mineCount);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		setConfig({ height: heightInput, width: widthInput, mineCount: mineCountInput });
+		setConfig({
+			height: heightInput,
+			width: widthInput,
+			mineCount: mineCountInput,
+		});
 	};
 	return (
 		<form onSubmit={onSubmit}>
@@ -54,6 +58,7 @@ const DifficultyForm = ({
 							/>
 						</label>
 						<label htmlFor="width">
+							<span>Width </span>
 							<input
 								type="number"
 								id="width"
