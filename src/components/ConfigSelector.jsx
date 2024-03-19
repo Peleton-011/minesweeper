@@ -8,18 +8,21 @@ const ConfigSelector = ({ setConfig }) => {
 			height: 8,
 			width: 8,
 			mineCount: 10,
+            lives: 3,
 			difName: "Easy",
 		},
 		{
 			height: 16,
 			width: 16,
 			mineCount: 40,
+            lives: 3,
 			difName: "Medium",
 		},
 		{
 			height: 16,
 			width: 30,
 			mineCount: 99,
+            lives: 3,
 			difName: "Hard",
 		},
 	];

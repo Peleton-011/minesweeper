@@ -20,12 +20,28 @@ const DifficultyForm = ({
 	const [widthInput, setWidthInput] = useState(width || 30);
 	const [mineCountInput, setMineCountInput] = useState(mineCount);
 
+	const [livesInput, setLivesInput] = useState(lives || 3);
+	const [noGuessModeInput, setNoGuessModeInput] = useState(
+		noGuessMode || false
+	);
+	const [autoSolveModeInput, setAutoSolveModeInput] = useState(
+		autoSolveMode || false
+	);
+
+	const [winStateCheckInput, setWinStateCheckInput] = useState(
+		["revealAll", "flagAll", "both"].find((x) => x === winStateCheck)
+			? winStateCheck
+			: "revealAll"
+	);
+	const [startZoneInput, setStartZoneInput] = useState(startZone || 3);
+
 	const onSubmit = (e) => {
 		e.preventDefault();
 		setConfig({
-			height: heightInput,
-			width: widthInput,
-			mineCount: mineCountInput,
+			height: Number(heightInput),
+			width: Number(widthInput),
+			mineCount: Number(mineCountInput),
+			lives: Number(livesInput),
 		});
 	};
 
@@ -121,6 +137,40 @@ const DifficultyForm = ({
 							(recommended:{" "}
 							{getRecommendedMines(heightInput, widthInput)})
 						</span>
+					</label>
+				)}
+				{lives ? (
+					lives > 1 ? (
+						<>
+							<span>{lives + " lives"}</span>
+							<label htmlFor="lives">
+								{"One mistake "}
+								<input
+									type="checkbox"
+									id="lives"
+									name="lives"
+									onChange={(e) => {
+										setLivesInput(
+											e.target.checked ? 1 : lives
+										);
+									}}
+								/>
+							</label>
+						</>
+					) : null
+				) : (
+					<label htmlFor="lives">
+						{"Lives "}
+						<input
+							type="number"
+							id="lives"
+							name="lives"
+							defaultValue={3}
+							min="1"
+							onChange={(e) => {
+								setLivesInput(e.target.value);
+							}}
+						/>{" "}
 					</label>
 				)}
 			</div>
