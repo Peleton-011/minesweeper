@@ -38,6 +38,12 @@ const DifficultyForm = ({
 		widthInputElement.disabled = e.target.checked;
 	};
 
+	const getRecommendedMines = (height, width) => {
+		return Math.floor(
+			(309 / 2080 + (height * width) / 8320) * width * height
+		);
+	};
+
 	return (
 		<form onSubmit={onSubmit}>
 			<h3>{difName}</h3>
@@ -92,7 +98,30 @@ const DifficultyForm = ({
 						</label>
 					</fieldset>
 				)}
-				<span>{mineCount + " mines"}</span>
+				{(height || width) && mineCount ? "  |  " : null}
+				{mineCount ? (
+					<span>{mineCount + " mines"}</span>
+				) : (
+					<label htmlFor="mineCount">
+						<span>Mines </span>
+						<input
+							type="number"
+							id="mineCount"
+							name="mineCount"
+							defaultValue={99}
+							min="1"
+							max={(heightInput - 1) * (widthInput - 1)}
+							onChange={(e) => {
+								setMineCountInput(e.target.value);
+							}}
+						/>
+						<span className="suggest">
+							{" "}
+							(recommended:{" "}
+							{getRecommendedMines(heightInput, widthInput)})
+						</span>
+					</label>
+				)}
 			</div>
 			<label htmlFor="isOneMistake">
 				<input type="checkbox" id="isOneMistake" name="isOneMistake" />{" "}
