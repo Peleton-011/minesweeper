@@ -1,11 +1,19 @@
 import Game from "./components/Game";
 import ConfigSelector from "./components/ConfigSelector";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
+import { enable as enableDarkMode } from "darkreader";
 
 function App() {
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [didWin, setDidWin] = useState(false);
+
+	useEffect(() => {
+		enableDarkMode({
+			brightness: 100,
+			contrast: 100,
+		});
+	}, []);
 
 	const onLose = () => {
 		setIsGameOver(true);
