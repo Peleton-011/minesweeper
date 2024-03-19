@@ -18,7 +18,7 @@ const DifficultyForm = ({
 	//Bind the inputs
 	const [heightInput, setHeightInput] = useState(height || 16);
 	const [widthInput, setWidthInput] = useState(width || 30);
-	const [mineCountInput, setMineCountInput] = useState(mineCount);
+	const [mineCountInput, setMineCountInput] = useState(mineCount || 99);
 
 	const [livesInput, setLivesInput] = useState(lives || 3);
 	const [noGuessModeInput, setNoGuessModeInput] = useState(
@@ -63,117 +63,156 @@ const DifficultyForm = ({
 	return (
 		<form onSubmit={onSubmit}>
 			<h3>{difName}</h3>
-			<div>
-				{height || width ? (
-					<span>
-						{height
-							? width
-								? height + " x " + width
-								: height + " x " + height
-							: width + " x " + width}{" "}
-						tiles
-					</span>
-				) : (
-					<fieldset>
-						<legend>Size</legend>
-						<label htmlFor="height">
-							<span>Height </span>
-							<input
-								type="number"
-								id="height"
-								name="height"
-								defaultValue={16}
-								min="1"
-								max="50"
-								onChange={(e) => {
-									setHeightInput(e.target.value);
-								}}
-							/>
-
-							<label htmlFor="isSquare">
-								<span>Square Board </span>
-								<input
-									type="checkbox"
-									name="isSquare"
-									onChange={onSquare}
-								/>
-							</label>
-						</label>
-						<label htmlFor="width">
-							<span>Width </span>
-							<input
-								type="number"
-								id="width"
-								name="width"
-								defaultValue={30}
-								min="8"
-								max="99"
-								onChange={(e) => {
-									setWidthInput(e.target.value);
-								}}
-							/>
-						</label>
-					</fieldset>
-				)}
-				{(height || width) && mineCount ? "  |  " : null}
-				{mineCount ? (
-					<span>{mineCount + " mines"}</span>
-				) : (
-					<label htmlFor="mineCount">
-						<span>Mines </span>
+			{height || width ? (
+				<span>
+					{height
+						? width
+							? height + " x " + width
+							: height + " x " + height
+						: width + " x " + width}{" "}
+					tiles
+				</span>
+			) : (
+				<fieldset>
+					<legend>Size</legend>
+					<label htmlFor="height">
+						<span>Height </span>
 						<input
 							type="number"
-							id="mineCount"
-							name="mineCount"
-							defaultValue={99}
+							id="height"
+							name="height"
+							defaultValue={16}
 							min="1"
-							max={(heightInput - 1) * (widthInput - 1)}
+							max="50"
 							onChange={(e) => {
-								setMineCountInput(e.target.value);
+								setHeightInput(e.target.value);
 							}}
 						/>
-						<span className="suggest">
-							{" "}
-							(recommended:{" "}
-							{getRecommendedMines(heightInput, widthInput)})
-						</span>
+
+						<label htmlFor="isSquare">
+							<span>Square Board </span>
+							<input
+								type="checkbox"
+								name="isSquare"
+								onChange={onSquare}
+							/>
+						</label>
 					</label>
-				)}
-				{lives ? (
-					lives > 1 ? (
-						<>
-							<span>{lives + " lives"}</span>
-							<label htmlFor="isOneMistake">
-								{"One mistake "}
-								<input
-									type="checkbox"
-									id="isOneMistake"
-									name="isOneMistake"
-									onChange={(e) => {
-										setLivesInput(
-											e.target.checked ? 1 : lives
-										);
-									}}
-								/>
-							</label>
-						</>
-					) : null
-				) : (
-					<label htmlFor="lives">
-						{"Lives "}
+					<label htmlFor="width">
+						<span>Width </span>
 						<input
 							type="number"
-							id="lives"
-							name="lives"
-							defaultValue={3}
-							min="1"
+							id="width"
+							name="width"
+							defaultValue={30}
+							min="8"
+							max="99"
 							onChange={(e) => {
-								setLivesInput(e.target.value);
+								setWidthInput(e.target.value);
 							}}
-						/>{" "}
+						/>
 					</label>
-				)}
-			</div>
+				</fieldset>
+			)}
+			{(height || width) && mineCount ? "  |  " : null}
+			{mineCount ? (
+				<span>{mineCount + " mines"}</span>
+			) : (
+				<label htmlFor="mineCount">
+					<span>Mines </span>
+					<input
+						type="number"
+						id="mineCount"
+						name="mineCount"
+						defaultValue={99}
+						min="1"
+						max={(heightInput - 1) * (widthInput - 1)}
+						onChange={(e) => {
+							setMineCountInput(e.target.value);
+						}}
+					/>
+					<span className="suggest">
+						{" "}
+						(recommended:{" "}
+						{getRecommendedMines(heightInput, widthInput)})
+					</span>
+				</label>
+			)}
+			{lives ? (
+				lives > 1 ? (
+					<>
+						<span>{lives + " lives"}</span>
+						<label htmlFor="isOneMistake">
+							{"One mistake "}
+							<input
+								type="checkbox"
+								id="isOneMistake"
+								name="isOneMistake"
+								onChange={(e) => {
+									setLivesInput(e.target.checked ? 1 : lives);
+								}}
+							/>
+						</label>
+					</>
+				) : null
+			) : (
+				<label htmlFor="lives">
+					{"Lives "}
+					<input
+						type="number"
+						id="lives"
+						name="lives"
+						defaultValue={3}
+						min="1"
+						onChange={(e) => {
+							setLivesInput(e.target.value);
+						}}
+					/>{" "}
+				</label>
+			)}
+			{noGuessMode === undefined ? (
+				<label htmlFor="noGuessMode">
+					{"No Guess Mode "}
+					<input
+						type="checkbox"
+						id="noGuessMode"
+						name="noGuessMode"
+						onChange={(e) => {
+							setNoGuessModeInput(e.target.checked);
+						}}
+					/>
+				</label>
+			) : null}
+			{autoSolveMode === undefined ? (
+				<label htmlFor="autoSolveMode">
+					{"Auto Solve "}
+					<input
+						type="checkbox"
+						id="autoSolveMode"
+						name="autoSolveMode"
+						onChange={(e) => {
+							setAutoSolveModeInput(e.target.checked);
+						}}
+					/>
+				</label>
+			) : null}
+			{winStateCheck === undefined ? (
+				<label htmlFor="winStateCheck">
+					{"Win State Check "}
+
+					<select
+						id="winStateCheck"
+						name="winStateCheck"
+						onChange={(e) => {
+							setWinStateCheckInput(e.target.value);
+						}}
+					>
+						<option value="revealAll">Check Empty Cells</option>
+						<option value="flagAll">Check Flagged Cells</option>
+						<option value="both">Check Both</option>
+					</select>
+				</label>
+			) : null}
 			<button type="submit">Play</button>
 		</form>
 	);
