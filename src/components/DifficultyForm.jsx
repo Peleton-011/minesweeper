@@ -51,10 +51,11 @@ const DifficultyForm = ({
 				{height || width ? (
 					<span>
 						{height
-							? height
-							: width + "x" + width
 							? width
-							: height + " tiles"}
+								? height + " x " + width
+								: height + " x " + height
+							: width + " x " + width}{" "}
+						tiles
 					</span>
 				) : (
 					<fieldset>
