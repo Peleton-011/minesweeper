@@ -1,15 +1,13 @@
 import React from "react";
 import Board from "./Board";
+import DifficultyForm from "./DifficultyForm";
 
-const DifficultyDisplay = ({
-	config: { height, width, mineCount, difName },
-	setConfig,
-}) => {
+const DifficultyDisplay = ({ config, setConfig }) => {
 	const getBoard = () => {
-		return Array(height)
+		return Array(config.height)
 			.fill()
 			.map(() => {
-				return Array(width)
+				return Array(config.width)
 					.fill()
 					.map(() => {
 						return {
@@ -20,6 +18,11 @@ const DifficultyDisplay = ({
 						};
 					});
 			});
+	};
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		setConfig({ height, width, mineCount });
 	};
 
 	return (
@@ -33,28 +36,7 @@ const DifficultyDisplay = ({
 				style={{ transform: "scale(0.5)", marginTop: "1em" }}
 				className="boardie"
 			/>
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					setConfig({ height, width, mineCount });
-					console.log(difName);
-				}}
-			>
-				<h3>{difName}</h3>
-				<p>
-					<span>{height + "x" + width + " tiles"}</span> |{" "}
-					<span>{mineCount + " mines"}</span>
-				</p>
-				<label htmlFor="isOneMistake">
-					<input
-						type="checkbox"
-						id="isOneMistake"
-						name="isOneMistake"
-					/>{" "}
-					One mistake
-				</label>
-				<button type="submit">Play</button>
-			</form>
+			<DifficultyForm config={{ ...config, onSubmit }} />
 		</div>
 	);
 };
