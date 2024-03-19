@@ -42,6 +42,10 @@ const DifficultyForm = ({
 			width: Number(widthInput),
 			mineCount: Number(mineCountInput),
 			lives: Number(livesInput),
+            noGuessMode: noGuessModeInput,
+            autoSolveMode: autoSolveModeInput,
+            winStateCheck: winStateCheckInput,
+            startZone: startZoneInput
 		});
 	};
 
@@ -211,6 +215,21 @@ const DifficultyForm = ({
 						<option value="flagAll">Check Flagged Cells</option>
 						<option value="both">Check Both</option>
 					</select>
+				</label>
+			) : null}
+			{startZone === undefined ? (
+				<label htmlFor="startZone">
+					{"Start Zone "}
+					<input
+						type="number"
+						id="startZone"
+						name="startZone"
+						min="1"
+						max={Math.min(heightInput, widthInput) - 1}
+						onChange={(e) => {
+							setStartZoneInput(e.target.value);
+						}}
+					/>
 				</label>
 			) : null}
 			<button type="submit">Play</button>
