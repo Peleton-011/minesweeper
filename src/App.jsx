@@ -20,7 +20,8 @@ function App() {
 		<div className="App">
 			{Object.keys(config).length ? null : (
 				<ConfigSelector
-					setConfig={(config) =>
+					setConfig={(config) => {
+						console.log(config);
 						setConfig({
 							...{
 								height: 16,
@@ -31,8 +32,8 @@ function App() {
 								onWin,
 							},
 							...config,
-						})
-					}
+						});
+					}}
 				/>
 			)}
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>

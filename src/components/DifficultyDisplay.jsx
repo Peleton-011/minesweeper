@@ -20,11 +20,6 @@ const DifficultyDisplay = ({ config, setConfig }) => {
 			});
 	};
 
-	const onSubmit = (e) => {
-		e.preventDefault();
-		setConfig({ height, width, mineCount });
-	};
-
 	return (
 		<div>
 			<Board
@@ -36,7 +31,7 @@ const DifficultyDisplay = ({ config, setConfig }) => {
 				style={{ transform: "scale(0.5)", marginTop: "1em" }}
 				className="boardie"
 			/>
-			<DifficultyForm config={{ ...config, onSubmit }} />
+			<DifficultyForm config={config} setConfig={setConfig} />
 		</div>
 	);
 };
