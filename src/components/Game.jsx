@@ -16,7 +16,7 @@ const Game = ({
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
 	const createBoard = (height, width) => {
-		console.log(height, ", ", width);
+		// console.log(height, ", ", width);
 		const board = [];
 		for (let i = 0; i < height; i++) {
 			const row = [];
@@ -41,19 +41,6 @@ const Game = ({
 			alert("Game over");
 		}
 	}, [lives]);
-
-	useEffect(() => {
-		if (mineCount <= 0 && checkWin() && lives > 0) {
-			onWin();
-			alert("You won!");
-		}
-	}, [mineCount]);
-
-	// useEffect(() => {
-	// 	console.log("state");
-	// 	fillBoard();
-	// 	console.log(board);
-	// }, []);
 
 	const checkWin = () => {
 		const checkCellBothWays = (cell) => {
@@ -98,16 +85,16 @@ const Game = ({
 	const getRevealList = (x, y, hist = [], argBoard) => {
 		if (argBoard === undefined) {
 			argBoard = board;
-			console.warn("argBoard is undefined");
+			// console.warn("argBoard is undefined");
 		}
 		if (x < 0 || y < 0 || x >= height || y >= width) {
-			console.warn("out of bounds");
+			// console.warn("out of bounds");
 			return hist;
 		}
 
 		//Check if the coords are in the hist
 		if (hist.find((coord) => coord[0] === x && coord[1] === y)) {
-			console.warn("already checked");
+			// console.warn("already checked");
 			return hist;
 		}
 
@@ -120,7 +107,7 @@ const Game = ({
 		}
 
 		if (argBoard[x][y].isMine) {
-			console.log("Mine at " + x + ", " + y);
+			// console.log("Mine at " + x + ", " + y);
 			setMineCount(mineCount - 1);
 			setLives(lives - 1);
 			hist.push([x, y]);
@@ -129,7 +116,7 @@ const Game = ({
 
 		hist.push([x, y]);
 		if (argBoard[x][y].content === 0) {
-			console.log("Zero at " + x + ", " + y);
+			// console.log("Zero at " + x + ", " + y);
 			revealAdjacent(x, y, hist, argBoard);
 		}
 
@@ -150,7 +137,7 @@ const Game = ({
 	const isCellComplete = (x, y) => {
 		const count = board[x][y].content;
 		if (count === 0) {
-			console.log("Count zero at " + x + ", " + y);
+			// console.log("Count zero at " + x + ", " + y);
 			return false;
 		}
 		let countFlagged = 0;
@@ -185,7 +172,7 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			newBoard[x][y].isRevealed = true;
-            newBoard[x][y].isFlagged = false;
+			newBoard[x][y].isFlagged = false;
 			// if (board[x][y].isMine === true) {
 			// 	setMineCount(mineCount - 1);
 			// 	setLives(lives - 1);
@@ -195,7 +182,7 @@ const Game = ({
 	};
 
 	const firstClick = (x, y) => {
-		console.log("First click");
+		// console.log("First click");
 		setFirstClick(false);
 
 		fillBoard(x, y);
@@ -247,7 +234,7 @@ const Game = ({
 		if (coords.length < 1) {
 			return;
 		}
-		console.log("ADD MINE");
+		// console.log("ADD MINE");
 
 		const newBoard = board.map((row) => row.map((cell) => cell));
 
@@ -337,7 +324,7 @@ const Game = ({
 	};
 
 	const onLeftClick = (i, j, cell) => {
-		console.log("Left click");
+		// console.log("Left click");
 		cell.isRevealed
 			? chord(i, j)
 			: cell.isFlagged
@@ -345,6 +332,11 @@ const Game = ({
 			: isFirstClick
 			? firstClick(i, j)
 			: batchReveal(getRevealList(i, j));
+
+		if (mineCount <= 0 && checkWin() && lives > 0) {
+			onWin();
+			alert("You won!");
+		}
 	};
 
 	return (
