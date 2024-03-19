@@ -28,6 +28,16 @@ const DifficultyForm = ({
 			mineCount: mineCountInput,
 		});
 	};
+
+	const onSquare = (e) => {
+		const widthInputElement = document.getElementById("width");
+		if (e.target.checked) {
+			widthInputElement.value = heightInput;
+			setWidthInput(heightInput);
+		}
+		widthInputElement.disabled = e.target.checked;
+	};
+
 	return (
 		<form onSubmit={onSubmit}>
 			<h3>{difName}</h3>
@@ -56,6 +66,15 @@ const DifficultyForm = ({
 									setHeightInput(e.target.value);
 								}}
 							/>
+
+							<label htmlFor="isSquare">
+								<span>Square Board </span>
+								<input
+									type="checkbox"
+									name="isSquare"
+									onChange={onSquare}
+								/>
+							</label>
 						</label>
 						<label htmlFor="width">
 							<span>Width </span>
