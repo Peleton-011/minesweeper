@@ -5,18 +5,22 @@
 	text-align: center;
 }
 
+button:hover {
+	border: none;
+}
+
 .stats {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .row {
 	display: flex;
-    font-size: 20px;
+	font-size: 20px;
 }
 
 .cell {
-    padding: 0;
+	padding: 0;
 	width: 1.5em;
 	height: 1.5em;
 	border: 1px solid #aaa; /* Light gray border */
@@ -79,14 +83,14 @@
 	color: black;
 }
 
-.slide > div  {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.slide > div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 @media only screen and (max-width: 767px) {
-    body {
-      font-size: 16px;
-    }
-  }
+	body {
+		font-size: 16px;
+	}
+}
