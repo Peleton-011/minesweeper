@@ -2,7 +2,7 @@ import React from "react";
 import Carousel from "./Carousel";
 import DifficultyDisplay from "./DifficultyDisplay";
 
-const ConfigSelector = ({ setConfig }) => {
+const ConfigSelector = ({ setConfig, setIsGameStarted }) => {
 	const baseDifficulty = {
 		winStateCheck: "revealAll",
 		startZone: 3,
@@ -50,6 +50,7 @@ const ConfigSelector = ({ setConfig }) => {
 						key={i}
 						config={dif}
 						setConfig={setConfig}
+                        setIsGameStarted={setIsGameStarted}
 					/>
 				))}
 			/>

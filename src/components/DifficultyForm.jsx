@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 const DifficultyForm = ({
@@ -14,6 +14,7 @@ const DifficultyForm = ({
 		difName,
 	},
 	setConfig,
+	setIsGameStarted,
 }) => {
 	//Bind the inputs
 	const [heightInput, setHeightInput] = useState(height || 16);
@@ -35,6 +36,27 @@ const DifficultyForm = ({
 	);
 	const [startZoneInput, setStartZoneInput] = useState(startZone || 3);
 
+	useEffect(() => {
+		setConfig({
+			height: Number(heightInput),
+			width: Number(widthInput),
+			mineCount: Number(mineCountInput),
+			lives: Number(livesInput),
+			noGuessMode: noGuessModeInput,
+			autoSolveMode: autoSolveModeInput,
+			winStateCheck: winStateCheckInput,
+			startZone: startZoneInput,
+		});
+	}, [
+		heightInput,
+		widthInput,
+		mineCountInput,
+		livesInput,
+		noGuessModeInput,
+		autoSolveModeInput,
+		winStateCheckInput,
+		startZoneInput,
+	]);
 	const onSubmit = (e) => {
 		e.preventDefault();
 		setConfig({
@@ -42,11 +64,12 @@ const DifficultyForm = ({
 			width: Number(widthInput),
 			mineCount: Number(mineCountInput),
 			lives: Number(livesInput),
-            noGuessMode: noGuessModeInput,
-            autoSolveMode: autoSolveModeInput,
-            winStateCheck: winStateCheckInput,
-            startZone: startZoneInput
+			noGuessMode: noGuessModeInput,
+			autoSolveMode: autoSolveModeInput,
+			winStateCheck: winStateCheckInput,
+			startZone: startZoneInput,
 		});
+		setIsGameStarted(true);
 	};
 
 	const onSquare = (e) => {

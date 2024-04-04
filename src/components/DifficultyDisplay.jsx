@@ -1,13 +1,14 @@
 import React from "react";
 import Board from "./Board";
 import DifficultyForm from "./DifficultyForm";
+import { useState } from "react";
 
-const DifficultyDisplay = ({ config, setConfig }) => {
-	const getBoard = () => {
-		return Array(config.height)
+const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
+	const getBoard = (h, w) => {
+		return Array(h)
 			.fill()
 			.map(() => {
-				return Array(config.width)
+				return Array(w)
 					.fill()
 					.map(() => {
 						return {
@@ -19,19 +20,36 @@ const DifficultyDisplay = ({ config, setConfig }) => {
 					});
 			});
 	};
+	const [board, setBoard] = useState(getBoard(config.height, config.width));
+
+	const onClickBoard = () => {
+		() => setIsGameStarted(true);
+		const activeSlide = document.querySelector(".slide.active");
+		//find form child
+		const form = activeSlide.children[0].children[1];
+
+		form.requestSubmit();
+	};
 
 	return (
 		<div>
 			<Board
-				board={getBoard()}
-				onLeftClick={() => {}}
+				board={board}
+				onLeftClick={onClickBoard}
 				onRightClick={(e) => {
 					e.preventDefault();
 				}}
 				style={{ transform: "scale(0.5)", marginTop: "1em" }}
 				className="boardie"
 			/>
-			<DifficultyForm config={config} setConfig={setConfig} />
+			<DifficultyForm
+				config={config}
+				setConfig={(args) => {
+					setConfig(args);
+					setBoard(getBoard(args.height, args.width));
+				}}
+				setIsGameStarted={setIsGameStarted}
+			/>
 		</div>
 	);
 };

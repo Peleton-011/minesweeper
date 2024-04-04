@@ -7,6 +7,7 @@ import { enable as enableDarkMode } from "darkreader";
 function App() {
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [didWin, setDidWin] = useState(false);
+    const [isGameStarted, setIsGameStarted] = useState(false);
 
 	useEffect(() => {
 		enableDarkMode({
@@ -26,7 +27,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{Object.keys(config).length ? null : (
+			{isGameStarted ? null : (
 				<ConfigSelector
 					setConfig={(config) => {
 						console.log(config);
@@ -42,10 +43,11 @@ function App() {
 							...config,
 						});
 					}}
+                    setIsGameStarted={setIsGameStarted}
 				/>
 			)}
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			{Object.keys(config).length ? <Game config={config} /> : null}
+			{isGameStarted ? <Game config={config} /> : null}
 		</div>
 	);
 }
