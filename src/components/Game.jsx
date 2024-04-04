@@ -239,7 +239,7 @@ const Game = ({
 		// console.log("First click");
 		setFirstClick(false);
 
-		const newBoard = fillBoard(x, y);
+		const newBoard = fillBoard(x, y, startZone);
 
 		if (autoSolveMode) {
 			setTimeout(() => {
@@ -262,9 +262,13 @@ const Game = ({
 		return count;
 	};
 
-	const fillBoard = (x, y) => {
+	const fillBoard = (x, y, startZone) => {
 		// console.log("Filling");
-		const mineList = getMineCoords(mineCount - countMines(), [x, y]);
+		const mineList = getMineCoords(
+			mineCount - countMines(),
+			[x, y],
+			startZone
+		);
 		addMines(mineList);
 
 		const newBoard = board.map((row, i) => {
@@ -305,10 +309,35 @@ const Game = ({
 		setBoard(newBoard);
 	};
 
-	const getMineCoords = (amount, origin) => {
+	const getStartingZone = ([x, y], size) => {
+		const startZoneList = [];
+		const basePosition = [
+			x - Math.floor(size / 2),
+			y - Math.floor(size / 2),
+		];
+		console.log([x, y], basePosition);
+		for (let i = 0; i < size; i++) {
+			for (let j = 0; j < size; j++) {
+				if (
+					basePosition[0] + i < 0 ||
+					basePosition[1] + j < 0 ||
+					basePosition[0] + i >= height ||
+					basePosition[1] + j >= width
+				) {
+					continue;
+				}
+				startZoneList.push([basePosition[0] + i, basePosition[1] + j]);
+			}
+		}
+		return startZoneList;
+	};
+
+	const getMineCoords = (amount, origin, startZone) => {
 		if (amount < 1) {
 			return [];
 		}
+		const startZoneList = getStartingZone(origin, startZone);
+		console.log(startZoneList);
 		const mineArray = [];
 		while (mineArray.length < amount) {
 			const x = Math.floor(Math.random() * height);
@@ -316,7 +345,7 @@ const Game = ({
 
 			if (
 				board[x][y].isMine === undefined &&
-				!(Math.abs(x - origin[0]) < 2 && Math.abs(y - origin[1]) < 2) &&
+				!startZoneList.find(([i, j]) => i === x && j === y) &&
 				!mineArray.find(([i, j]) => i === x && j === y)
 			) {
 				// console.log(origin, [x, y]);
