@@ -146,11 +146,9 @@ const Game = ({
 	};
 
 	const chord = (x, y) => {
-		if (!isCellComplete(x, y)) {
-			return;
-		}
-		// console.log("complete");
-		const toChord = revealAdjacent(x, y, [[x, y]]);
+		const toChord = isCellComplete(x, y)
+			? revealAdjacent(x, y, [[x, y]])
+			: [[x, y]];
 		// console.log(toChord);
 		return batchReveal(toChord);
 	};
