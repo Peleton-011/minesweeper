@@ -121,15 +121,14 @@ const DifficultyForm = ({
 							setHeightInput(e.target.value);
 						}}
 					/>
-
-					<label htmlFor="isSquare">
-						<span>Square Board </span>
-						<input
-							type="checkbox"
-							name="isSquare"
-							onChange={onSquare}
-						/>
-					</label>
+				</label>
+				<label htmlFor="isSquare">
+					<span>Square Board </span>
+					<input
+						type="checkbox"
+						name="isSquare"
+						onChange={onSquare}
+					/>
 				</label>
 				<label htmlFor="width">
 					<span>Width </span>
@@ -153,22 +152,24 @@ const DifficultyForm = ({
 		return (
 			<label htmlFor="mineCount">
 				<span>Mines </span>
-				<input
-					type="number"
-					id="mineCount"
-					name="mineCount"
-					defaultValue={99}
-					min="1"
-					max={(heightInput - 1) * (widthInput - 1)}
-					onChange={(e) => {
-						setMineCountInput(e.target.value);
-					}}
-				/>
-				<span className="suggest">
-					{" "}
-					(recommended: {getRecommendedMines(heightInput, widthInput)}
-					)
-				</span>
+				<div>
+					<input
+						type="number"
+						id="mineCount"
+						name="mineCount"
+						defaultValue={99}
+						min="1"
+						max={(heightInput - 1) * (widthInput - 1)}
+						onChange={(e) => {
+							setMineCountInput(e.target.value);
+						}}
+					/>
+					<span className="suggest">
+						{" "}
+						(recommended:{" "}
+						{getRecommendedMines(heightInput, widthInput)})
+					</span>
+				</div>
 			</label>
 		);
 	};
