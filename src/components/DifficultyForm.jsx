@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import "./DifficultyForm.css";
 
 const DifficultyForm = ({
 	config: {
@@ -87,83 +88,104 @@ const DifficultyForm = ({
 		);
 	};
 
+	const sizeDisplay = (height, width) => {
+		return (
+			<span>
+				{height
+					? width
+						? height + " x " + width
+						: height + " x " + height
+					: width + " x " + width}{" "}
+				tiles
+			</span>
+		);
+	};
+	const mineDisplay = (mineCount) => {
+		return <span>{mineCount + " mines"}</span>;
+	};
+
+	const sizeInput = () => {
+		return (
+			<fieldset>
+				<legend>Size</legend>
+				<label htmlFor="height">
+					<span>Height </span>
+					<input
+						type="number"
+						id="height"
+						name="height"
+						defaultValue={16}
+						min="1"
+						max="50"
+						onChange={(e) => {
+							setHeightInput(e.target.value);
+						}}
+					/>
+
+					<label htmlFor="isSquare">
+						<span>Square Board </span>
+						<input
+							type="checkbox"
+							name="isSquare"
+							onChange={onSquare}
+						/>
+					</label>
+				</label>
+				<label htmlFor="width">
+					<span>Width </span>
+					<input
+						type="number"
+						id="width"
+						name="width"
+						defaultValue={30}
+						min="8"
+						max="99"
+						onChange={(e) => {
+							setWidthInput(e.target.value);
+						}}
+					/>
+				</label>
+			</fieldset>
+		);
+	};
+
+	const mineInput = () => {
+		return (
+			<label htmlFor="mineCount">
+				<span>Mines </span>
+				<input
+					type="number"
+					id="mineCount"
+					name="mineCount"
+					defaultValue={99}
+					min="1"
+					max={(heightInput - 1) * (widthInput - 1)}
+					onChange={(e) => {
+						setMineCountInput(e.target.value);
+					}}
+				/>
+				<span className="suggest">
+					{" "}
+					(recommended: {getRecommendedMines(heightInput, widthInput)}
+					)
+				</span>
+			</label>
+		);
+	};
+
 	return (
 		<form onSubmit={onSubmit}>
 			<h3>{difName}</h3>
-			{height || width ? (
-				<span>
-					{height
-						? width
-							? height + " x " + width
-							: height + " x " + height
-						: width + " x " + width}{" "}
-					tiles
-				</span>
+			{(height || width) && mineCount ? (
+				<div>
+					{sizeDisplay(height, width)} | {mineDisplay(mineCount)}
+				</div>
+			) : height || width ? (
+				<>{...[sizeDisplay(height, width), mineInput()]}</>
+			) : mineCount ? (
+				<>{...[sizeInput(), mineDisplay(mineCount)]}</>
 			) : (
-				<fieldset>
-					<legend>Size</legend>
-					<label htmlFor="height">
-						<span>Height </span>
-						<input
-							type="number"
-							id="height"
-							name="height"
-							defaultValue={16}
-							min="1"
-							max="50"
-							onChange={(e) => {
-								setHeightInput(e.target.value);
-							}}
-						/>
-
-						<label htmlFor="isSquare">
-							<span>Square Board </span>
-							<input
-								type="checkbox"
-								name="isSquare"
-								onChange={onSquare}
-							/>
-						</label>
-					</label>
-					<label htmlFor="width">
-						<span>Width </span>
-						<input
-							type="number"
-							id="width"
-							name="width"
-							defaultValue={30}
-							min="8"
-							max="99"
-							onChange={(e) => {
-								setWidthInput(e.target.value);
-							}}
-						/>
-					</label>
-				</fieldset>
-			)}
-			{(height || width) && mineCount ? "  |  " : null}
-			{mineCount ? (
-				<span>{mineCount + " mines"}</span>
-			) : (
-				<label htmlFor="mineCount">
-					<span>Mines </span>
-					<input
-						type="number"
-						id="mineCount"
-						name="mineCount"
-						defaultValue={99}
-						min="1"
-						max={(heightInput - 1) * (widthInput - 1)}
-						onChange={(e) => {
-							setMineCountInput(e.target.value);
-						}}
-					/>
-					<span className="suggest">
-						{" "}
-						(recommended:{" "}
-						{getRecommendedMines(heightInput, widthInput)})
-					</span>
-				</label>
+				<>{...[sizeInput(), mineInput()]}</>
 			)}
 			{lives ? (
 				lives > 1 ? (
