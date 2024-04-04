@@ -386,36 +386,27 @@ const Game = ({
 		if (board[x][y].isRevealed) {
 			return;
 		}
-		setBoard(
-			board.map((r, i) =>
-				r.map((c, j) => {
-					if (x === i && y === j) {
-						return { ...c, isFlagged: true };
-					}
-					return c;
-				})
-			)
-		);
 		setMineCount(mineCount - 1);
-		return board;
+		return board.map((r, i) =>
+			r.map((c, j) => {
+				if (x === i && y === j) {
+					return { ...c, isFlagged: true };
+				}
+				return c;
+			})
+		);
 	};
 
 	const unflag = (x, y) => {
-		if (board[x][y].isRevealed) {
-			return;
-		}
-		setBoard(
-			board.map((r, i) =>
-				r.map((c, j) => {
-					if (x === i && y === j) {
-						return { ...c, isFlagged: false };
-					}
-					return c;
-				})
-			)
-		);
 		setMineCount(mineCount + 1);
-		return board;
+		return board.map((r, i) =>
+			r.map((c, j) => {
+				if (x === i && y === j) {
+					return { ...c, isFlagged: false };
+				}
+				return c;
+			})
+		);
 	};
 
 	const findIn2d = (array, check) => {
@@ -525,16 +516,15 @@ const Game = ({
 		}
 
 		//Normal behavior
-		const f = cell.isRevealed
-			? () => {}
+		const newBoard = cell.isRevealed
+			? board
 			: cell.isFlagged
-			? () => unflag(i, j)
-			: () => flag(i, j);
-
-		f();
+			? unflag(i, j)
+			: flag(i, j);
 		if (mineCount <= 0 && checkWin() && lives > 0) {
 			onWin();
 		}
+		setBoard(newBoard);
 	};
 
 	const onLeftClick = (i, j, cell) => {
