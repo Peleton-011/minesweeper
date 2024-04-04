@@ -10,6 +10,10 @@ const Game = ({
 		lives: argLives,
 		onWin,
 		onLose,
+		autoSolveMode,
+		noGuessMode,
+		winStateCheck,
+		startZone,
 	},
 }) => {
 	const [lives, setLives] = useState(argLives || 3);
@@ -131,7 +135,42 @@ const Game = ({
 		// console.log("complete");
 		const toChord = revealAdjacent(x, y, [[x, y]]);
 		// console.log(toChord);
-		batchReveal(toChord);
+		return batchReveal(toChord);
+	};
+
+	const isCellDetermined = (x, y) => {
+		const count = board[x][y].content - countAdjacentFlags(x, y);
+
+		// console.log(board);
+		if (count === 0) {
+			// console.log("Count zero at " + x + ", " + y);
+			return false;
+		}
+		let countEmpty = 0;
+		for (let i = -1; i <= 1; i++) {
+			for (let j = -1; j <= 1; j++) {
+				if (i === 0 && j === 0) {
+					continue;
+				}
+				if (
+					x + i < 0 ||
+					y + j < 0 ||
+					x + i >= height ||
+					y + j >= width
+				) {
+					continue;
+				}
+				if (
+					!board[x + i][y + j].isRevealed &&
+					!board[x + i][y + j].isFlagged
+				) {
+					countEmpty++;
+				}
+			}
+		}
+		// console.log("countEmpty: " + countEmpty);
+		// console.log("count: " + count);
+		return count === countEmpty;
 	};
 
 	const isCellComplete = (x, y) => {
@@ -178,14 +217,22 @@ const Game = ({
 			// 	setLives(lives - 1);
 			// }
 		});
-		setBoard(newBoard);
+		return newBoard;
 	};
 
 	const firstClick = (x, y) => {
 		// console.log("First click");
 		setFirstClick(false);
 
-		fillBoard(x, y);
+		const newBoard = fillBoard(x, y);
+
+		if (autoSolveMode) {
+			setTimeout(() => {
+				solveBoard(newBoard);
+			}, 500);
+		}
+
+		return newBoard;
 	};
 
 	const countMines = () => {
@@ -227,7 +274,7 @@ const Game = ({
 			newBoard[x][y].isRevealed = true;
 		});
 
-		setBoard(newBoard);
+		return newBoard;
 	};
 
 	const addMines = (coords) => {
@@ -277,6 +324,19 @@ const Game = ({
 		}
 		return count;
 	};
+	const countAdjacentFlags = (x, y) => {
+		let count = 0;
+		for (let i = x - 1; i <= x + 1; i++) {
+			for (let j = y - 1; j <= y + 1; j++) {
+				if (i >= 0 && j >= 0 && i < height && j < width) {
+					if (board[i][j].isFlagged) {
+						count++;
+					}
+				}
+			}
+		}
+		return count;
+	};
 
 	const flag = (x, y) => {
 		if (board[x][y].isRevealed) {
@@ -293,6 +353,7 @@ const Game = ({
 			)
 		);
 		setMineCount(mineCount - 1);
+		return board;
 	};
 
 	const unflag = (x, y) => {
@@ -310,10 +371,116 @@ const Game = ({
 			)
 		);
 		setMineCount(mineCount + 1);
+		return board;
+	};
+
+	const findIn2d = (array, check) => {
+		let found = { row: -1, column: -1 };
+
+		array.some((row, rowIndex) => {
+			const columnIndex = row.findIndex((item, columnIndex) => {
+				// console.log("Checking ", rowIndex, columnIndex);
+				return check(item, rowIndex, columnIndex);
+			});
+			if (columnIndex !== -1) {
+				console.log("Found ", rowIndex, columnIndex);
+				found.row = rowIndex;
+				found.column = columnIndex;
+				return true; // Stop iteration once item is found
+			}
+			return false;
+		});
+
+		if (found.row !== -1 && found.column !== -1) {
+			return found;
+		} else {
+			return null;
+		}
+	};
+
+	const flagSurrounding = (x, y) => {
+		for (let i = -1; i <= 1; i++) {
+			for (let j = -1; j <= 1; j++) {
+				if (i === 0 && j === 0) {
+					continue;
+				}
+				if (
+					x + i < 0 ||
+					y + j < 0 ||
+					x + i >= height ||
+					y + j >= width
+				) {
+					continue;
+				}
+				if (
+					!board[x + i][y + j].isRevealed &&
+					!board[x + i][y + j].isFlagged
+				) {
+					flag(x + i, y + j);
+				}
+			}
+		}
+	};
+
+	const solveRound = (board) => {
+		console.log(board);
+		// console.log(
+		// 	board.map((r, x) => r.map((c, y) => isCellDetermined(x, y)))
+		// );
+		console.log(findIn2d(board, (c, x, y) => isCellComplete(x, y)));
+		console.log(findIn2d(board, (c, x, y) => isCellDetermined(x, y)));
+		const nextComplete = findIn2d(board, (c, x, y) => isCellComplete(x, y));
+		const nextDetermined = findIn2d(board, (c, x, y) =>
+			isCellDetermined(x, y)
+		);
+
+		if (nextComplete) {
+			chord(nextComplete.row, nextComplete.column);
+		}
+
+		if (nextDetermined) {
+			flagSurrounding(nextDetermined.row, nextDetermined.column);
+		}
+	};
+
+	const countRevealed = () => {
+		let count = 0;
+		board.forEach((row) => {
+			row.forEach((cell) => {
+				if (cell.isRevealed || cell.isFlagged) {
+					count++;
+				}
+			});
+		});
+		return count;
+	};
+
+	const solveBoard = (board) => {
+		console.log("solving board");
+		// Function to update state with delay recursively
+		const updateBoardRecursively = (board) => {
+			// console.log("Inside recursive")
+			if (countRevealed() < height * width) {
+				// console.log("Recursive is checked")
+				setTimeout(() => {
+					const newBoard = solveRound(board);
+					updateBoardRecursively(newBoard); // Call recursively with incremented value
+				}, 500); // Delay of 1000 milliseconds (1 second)
+			}
+		};
+
+		updateBoardRecursively(board); // Start the recursive update
 	};
 
 	const onRightClick = (e, i, j, cell) => {
 		e.preventDefault();
+
+		//Automated behavior
+		if (autoSolveMode) {
+			return;
+		}
+
+		//Normal behavior
 		const f = cell.isRevealed
 			? () => {}
 			: cell.isFlagged
@@ -321,21 +488,29 @@ const Game = ({
 			: () => flag(i, j);
 
 		f();
+		if (mineCount <= 0 && checkWin() && lives > 0) {
+			onWin();
+		}
 	};
 
 	const onLeftClick = (i, j, cell) => {
 		// console.log("Left click");
-		cell.isRevealed
+		let newBoard;
+
+		newBoard = isFirstClick
+			? firstClick(i, j)
+			: autoSolveMode
+			? board
+			: cell.isRevealed
 			? chord(i, j)
 			: cell.isFlagged
 			? unflag(i, j)
-			: isFirstClick
-			? firstClick(i, j)
 			: batchReveal(getRevealList(i, j));
+
+		setBoard(newBoard);
 
 		if (mineCount <= 0 && checkWin() && lives > 0) {
 			onWin();
-			alert("You won!");
 		}
 	};
 
