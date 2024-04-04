@@ -42,7 +42,17 @@ const Game = ({
 	useEffect(() => {
 		if (lives <= 0) {
 			onLose();
-			alert("Game over");
+            setBoard(
+                board.map((row) => row.map((cell) => {
+                    if (cell.isMine && !cell.isFlagged) {
+                        return {
+                            ...cell,
+                            isRevealed: true
+                        }
+                    }
+                    return cell
+                }))
+            )
 		}
 	}, [lives]);
 
