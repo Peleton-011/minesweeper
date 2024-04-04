@@ -48,20 +48,37 @@ const Game = ({
 
 	const checkWin = () => {
 		const checkCellBothWays = (cell) => {
-			if (!cell.isRevealed && !cell.isFlagged && cell.isMine) {
-				return false;
-			}
-
-			if (cell.isFlagged && !cell.isMine) {
-				return false;
-			}
-
-			return true;
+			return (
+				(cell.isRevealed && !cell.isFlagged) ||
+				(cell.isFlagged && cell.isMine)
+			);
 		};
 		const checkCellRevealed = (cell) => {
 			return cell.isRevealed || cell.isMine;
 		};
-		return board.every((row) => row.every(checkCellRevealed)) && lives > 0;
+		const checkCellFlagged = (cell) => {
+			return (
+				(cell.isFlagged && cell.isMine) ||
+				(!cell.isFlagged && !cell.isMine)
+			);
+		};
+		let checkCell;
+		switch (winStateCheck) {
+			case "revealAll":
+				checkCell = checkCellRevealed;
+				break;
+			case "flagAll":
+				checkCell = checkCellFlagged;
+				break;
+			case "both":
+				checkCell = checkCellBothWays;
+				break;
+
+			default:
+				break;
+		}
+
+		return board.every((row) => row.every(checkCell)) && lives > 0;
 	};
 
 	const [isFirstClick, setFirstClick] = useState(true);
