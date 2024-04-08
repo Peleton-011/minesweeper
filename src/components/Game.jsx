@@ -42,17 +42,19 @@ const Game = ({
 	useEffect(() => {
 		if (lives <= 0) {
 			onLose();
-            setBoard(
-                board.map((row) => row.map((cell) => {
-                    if (cell.isMine && !cell.isFlagged) {
-                        return {
-                            ...cell,
-                            isRevealed: true
-                        }
-                    }
-                    return cell
-                }))
-            )
+			setBoard(
+				board.map((row) =>
+					row.map((cell) => {
+						if (cell.isMine && !cell.isFlagged) {
+							return {
+								...cell,
+								isRevealed: true,
+							};
+						}
+						return cell;
+					})
+				)
+			);
 		}
 	}, [lives]);
 
@@ -235,8 +237,12 @@ const Game = ({
 		const newBoard = board.map((row) => row.map((cell) => cell));
 
 		list.forEach(([x, y]) => {
+			if (newBoard[x][y].isFlagged) {
+				setMineCount(mineCount );
+				newBoard[x][y].isFlagged = false;
+			}
 			newBoard[x][y].isRevealed = true;
-			newBoard[x][y].isFlagged = false;
+
 			// if (board[x][y].isMine === true) {
 			// 	setMineCount(mineCount - 1);
 			// 	setLives(lives - 1);
