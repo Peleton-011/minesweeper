@@ -7,7 +7,8 @@ import { enable as enableDarkMode } from "darkreader";
 function App() {
 	const [isGameOver, setIsGameOver] = useState(false);
 	const [didWin, setDidWin] = useState(false);
-    const [isGameStarted, setIsGameStarted] = useState(false);
+	const [isGameStarted, setIsGameStarted] = useState(false);
+	const [key, setKey] = useState(0);
 
 	useEffect(() => {
 		enableDarkMode({
@@ -24,6 +25,16 @@ function App() {
 		setDidWin(true);
 	};
 	const [config, setConfig] = useState({});
+
+	const handleRestart = () => {
+		setKey(key + 1);
+        setIsGameOver(false)
+	};
+
+	const handleBackToMenu = () => {
+		setIsGameStarted(false);
+		setIsGameOver(false);
+	};
 
 	return (
 		<div className="App">
@@ -43,11 +54,18 @@ function App() {
 							...config,
 						});
 					}}
-                    setIsGameStarted={setIsGameStarted}
+					setIsGameStarted={setIsGameStarted}
 				/>
 			)}
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			{isGameStarted ? <Game config={config} /> : null}
+			{isGameStarted ? <Game config={config} key={key} /> : null}
+
+            {isGameOver && (
+				<div className="game-over-buttons">
+					<button onClick={handleRestart}>Play Again</button>
+					<button onClick={handleBackToMenu}>Back to Menu</button>
+				</div>
+			)}
 		</div>
 	);
 }

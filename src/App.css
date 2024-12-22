@@ -5,8 +5,15 @@
 	text-align: center;
 }
 
-button:hover {
+button:hover,
+button:focus,
+button {
 	border: none;
+    outline: none;
+}
+
+.game-over-buttons {
+    width: "100%" ; display: "flex"; gap: "1rem"
 }
 
 .stats {
