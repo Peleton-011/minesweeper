@@ -590,7 +590,7 @@ const Game = ({
 		<>
 			{deviceType === "mobile" ? (
 				<>
-					<TransformWrapper pinch={{ disabled: false }}>
+					<TransformWrapper>
 						<TransformComponent>
 							<Board
 								board={board}
