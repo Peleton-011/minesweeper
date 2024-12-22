@@ -1,6 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./Carousel.css";
+import { useSwipeable } from "react-swipeable";
+
+import useDeviceType from "../hooks/useDeviceType";
 
 const Carousel = ({ pages, title }) => {
 	const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,6 +14,13 @@ const Carousel = ({ pages, title }) => {
 
 	const [leftButtonAnimation, setLeftButtonAnimation] = useState(false);
 	const [rightButtonAnimation, setRightButtonAnimation] = useState(false);
+
+	const handlers = useSwipeable({
+		onSwipedLeft: () => nextSlide(),
+		onSwipedRight: () => prevSlide(),
+	});
+
+	const deviceType = useDeviceType();
 
 	const leftButtonToggle = () => {
 		setLeftButtonAnimation(true);
@@ -72,8 +82,8 @@ const Carousel = ({ pages, title }) => {
 	};
 
 	return (
-		<div className="image-slider">
-            <h2 className="slider-title">{title}</h2>
+		<div className="image-slider" {...handlers}>
+			<h2 className="slider-title">{title}</h2>
 			<div className="slider-container">
 				{pages.map((page, index) => (
 					<div
@@ -84,20 +94,28 @@ const Carousel = ({ pages, title }) => {
 					</div>
 				))}
 			</div>
-			<button
-				onClick={() => {
-					prevSlide();
-					leftButtonToggle();
-				}}
-				className={"prev btn " + (leftButtonAnimation ? "active" : "")}
-			></button>
-			<button
-				onClick={() => {
-					nextSlide();
-					rightButtonToggle();
-				}}
-				className={"next btn " + (rightButtonAnimation ? "active" : "")}
-			></button>
+			{deviceType === "desktop" && (
+				<>
+					<button
+						onClick={() => {
+							prevSlide();
+							leftButtonToggle();
+						}}
+						className={
+							"prev btn " + (leftButtonAnimation ? "active" : "")
+						}
+					></button>
+					<button
+						onClick={() => {
+							nextSlide();
+							rightButtonToggle();
+						}}
+						className={
+							"next btn " + (rightButtonAnimation ? "active" : "")
+						}
+					></button>
+				</>
+			)}
 		</div>
 	);
 };
