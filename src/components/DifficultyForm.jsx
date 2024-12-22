@@ -248,8 +248,7 @@ const DifficultyForm = ({
 			) : null}
 			{winStateCheck === undefined ? (
 				<label htmlFor="winStateCheck">
-					{"Win State Check "}
-
+					{"Win State"}
 					<select
 						id="winStateCheck"
 						name="winStateCheck"
@@ -257,9 +256,11 @@ const DifficultyForm = ({
 							setWinStateCheckInput(e.target.value);
 						}}
 					>
-						<option value="revealAll">Check Empty Cells</option>
-						<option value="flagAll">Check Flagged Cells</option>
-						<option value="both">Check Both</option>
+						<option value="revealAll">
+							All Empty Cells Revealed
+						</option>
+						<option value="flagAll">All Mines Flagged</option>
+						<option value="both">Both</option>
 					</select>
 				</label>
 			) : null}
