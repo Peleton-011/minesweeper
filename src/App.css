@@ -26,6 +26,12 @@ button {
 	justify-content: space-around;
 }
 
+.bottom-buttons {
+	position: fixed;
+	bottom: 1rem;
+	z-index: 10;
+}
+
 .bottom-buttons > button {
 	transition: none;
 	border: #888 5px solid;
