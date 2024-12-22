@@ -58,7 +58,7 @@ function App() {
 				/>
 			)}
 			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			{isGameStarted ? <Game config={config} key={key} /> : null}
+			{isGameStarted ? <Game config={config} key={key} isGameOver={isGameOver} /> : null}
 
             {isGameOver && (
 				<div className="game-over-buttons">

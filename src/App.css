@@ -26,6 +26,30 @@ button {
 	justify-content: space-around;
 }
 
+.bottom-buttons > button {
+	transition: none;
+	border: #888 5px solid;
+	background-color: #444;
+}
+
+.bottom-buttons > .active {
+	background-color: #555;
+	border: #888 5px solid !important;
+	text-shadow: 0px 4px 10px rgba(255, 255, 255, 0.7);
+}
+
+.bottom-buttons > button:first-child {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-right: none;
+}
+
+.bottom-buttons > button:last-child {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	border-left: none;
+}
+
 .stats {
 	width: 100%;
 	display: flex;

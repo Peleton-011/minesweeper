@@ -17,6 +17,7 @@ const Game = ({
 		winStateCheck,
 		startZone,
 	},
+	isGameOver,
 }) => {
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
@@ -543,9 +544,7 @@ const Game = ({
 			: cell.isFlagged
 			? unflag(i, j)
 			: flag(i, j);
-		if (mineCount <= 0 && checkWin() && lives > 0) {
-			onWin();
-		}
+
 		setBoard(newBoard);
 
 		if (checkWin()) {
@@ -553,7 +552,7 @@ const Game = ({
 		}
 	};
 
-	const handleReveal = (i, j, cell) => {
+	const handleReveal = (e, i, j, cell) => {
 		e.preventDefault();
 
 		// console.log("Left click");
@@ -577,10 +576,14 @@ const Game = ({
 	};
 
 	const onLeftClick = (e, i, j, cell) => {
-		isFlaggingMode ? handleFlag(e, i, j, cell) : handleReveal(i, j, cell);
+		isFlaggingMode
+			? handleFlag(e, i, j, cell)
+			: handleReveal(e, i, j, cell);
 	};
 	const onRightClick = (e, i, j, cell) => {
-		isFlaggingMode ? handleReveal(i, j, cell) : handleFlag(e, i, j, cell);
+		isFlaggingMode
+			? handleReveal(e, i, j, cell)
+			: handleFlag(e, i, j, cell);
 	};
 
 	return (
@@ -625,20 +628,22 @@ const Game = ({
 				</>
 			)}
 
-			<div className="bottom-buttons">
-				<button
-					className={isFlaggingMode ? "" : "active"}
-					onClick={() => setIsFlaggingMode(false)}
-				>
-					💣
-				</button>
-				<button
-					className={isFlaggingMode ? "active" : ""}
-					onClick={() => setIsFlaggingMode(true)}
-				>
-					🚩
-				</button>
-			</div>
+			{!isGameOver && (
+				<div className="bottom-buttons">
+					<button
+						className={isFlaggingMode ? "" : "active"}
+						onClick={() => setIsFlaggingMode(false)}
+					>
+						💣
+					</button>
+					<button
+						className={isFlaggingMode ? "active" : ""}
+						onClick={() => setIsFlaggingMode(true)}
+					>
+						🚩
+					</button>
+				</div>
+			)}
 		</>
 	);
 };
