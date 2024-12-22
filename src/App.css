@@ -30,6 +30,12 @@ button {
 	position: fixed;
 	bottom: 1rem;
 	z-index: 10;
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Adjust horizontal alignment */
+	max-width: 95%; /* Prevent overflowing the viewport horizontally */
+	box-sizing: border-box; /* Ensure padding is included in the size */
+	text-align: center; /* Center-align text */
+	overflow: hidden; /* Prevent content overflow */
 }
 
 .bottom-buttons > button {
@@ -144,13 +150,49 @@ button {
 	}
 
 	.App {
-		width: 100vw;
+		height: 100vh;
+		width: 100%;
+	}
+
+    .App > h1 {
+        z-index: 10;
+        position: fixed;
+        top: 0;
+        margin: 0;
+        left: 50%; /* Center horizontally */
+        transform: translateX(-50%); /* Adjust horizontal alignment */
+        max-width: 100%; /* Prevent overflowing the viewport horizontally */
+        box-sizing: border-box; /* Ensure padding is included in the size */
+        text-align: center; /* Center-align text */
+        overflow: hidden; /* Prevent content overflow */
+        width: 100%;
+        background-color: rgb(0, 0, 0, 0.5);
+        padding: 2rem 0;
+
+    }
+
+	.game-over-buttons {
+		position: fixed;
+		bottom: 1rem;
+		z-index: 10;
+		left: 50%; /* Center horizontally */
+		transform: translateX(-50%); /* Adjust horizontal alignment */
+		max-width: 95%; /* Prevent overflowing the viewport horizontally */
+		box-sizing: border-box; /* Ensure padding is included in the size */
+		text-align: center; /* Center-align text */
+		overflow: hidden; /* Prevent content overflow */
 	}
 
 	.stats {
 		position: fixed;
 		top: 10px;
 		z-index: 10;
+		left: 50%; /* Center horizontally */
+		transform: translateX(-50%); /* Adjust horizontal alignment */
+		max-width: 95%; /* Prevent overflowing the viewport horizontally */
+		box-sizing: border-box; /* Ensure padding is included in the size */
+		text-align: center; /* Center-align text */
+		overflow: hidden; /* Prevent content overflow */
 	}
 	.stats > * {
 		padding-left: 2rem;

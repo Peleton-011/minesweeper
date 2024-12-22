@@ -28,7 +28,7 @@ function App() {
 
 	const handleRestart = () => {
 		setKey(key + 1);
-        setIsGameOver(false)
+		setIsGameOver(false);
 	};
 
 	const handleBackToMenu = () => {
@@ -57,10 +57,12 @@ function App() {
 					setIsGameStarted={setIsGameStarted}
 				/>
 			)}
-			<h1>{isGameOver ? (didWin ? "You Win !" : "You Lose !") : " "}</h1>
-			{isGameStarted ? <Game config={config} key={key} isGameOver={isGameOver} /> : null}
+			{isGameOver && <h1>{didWin ? "You Win !" : "You Lose !"}</h1>}
+			{isGameStarted ? (
+				<Game config={config} key={key} isGameOver={isGameOver} />
+			) : null}
 
-            {isGameOver && (
+			{isGameOver && (
 				<div className="game-over-buttons">
 					<button onClick={handleRestart}>Play Again</button>
 					<button onClick={handleBackToMenu}>Back to Menu</button>
