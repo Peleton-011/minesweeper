@@ -10,7 +10,7 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-    width: max-content;
+	width: max-content;
 }
 
 button:hover,
@@ -27,9 +27,9 @@ button {
 }
 
 .stats {
-    width: 100%;
+	width: 100%;
 	display: flex;
-    justify-content: space-between;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -111,5 +111,24 @@ button {
 @media only screen and (max-width: 767px) {
 	body {
 		font-size: 16px;
+	}
+
+	.App {
+		width: 100vw;
+	}
+
+	.stats {
+		position: fixed;
+		top: 10px;
+		z-index: 10;
+	}
+    .stats > * {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+	.react-transform-wrapper {
+		width: 100vw !important;
+		height: 100vh !important;
+		overflow: visible !important;
 	}
 }

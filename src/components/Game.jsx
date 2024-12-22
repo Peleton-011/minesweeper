@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
 
 const Game = ({
@@ -18,6 +20,8 @@ const Game = ({
 }) => {
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
+
+	const deviceType = useDeviceType();
 
 	const createBoard = (height, width) => {
 		// console.log(height, ", ", width);
@@ -238,7 +242,7 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			if (newBoard[x][y].isFlagged) {
-				setMineCount(mineCount );
+				setMineCount(mineCount);
 				newBoard[x][y].isFlagged = false;
 			}
 			newBoard[x][y].isRevealed = true;
@@ -566,20 +570,45 @@ const Game = ({
 
 	return (
 		<>
-			<Board
-				board={board}
-				onLeftClick={onLeftClick}
-				onRightClick={onRightClick}
-			/>
-			<h2 className="stats">
-				<span>🚩: {mineCount}</span>{" "}
-				<span>
-					{new Array(argLives)
-						.fill("🖤")
-						.map((v, i) => (i < lives ? "❤️" : v))
-						.join("")}
-				</span>
-			</h2>
+			{deviceType === "mobile" ? (
+				<>
+					<TransformWrapper>
+						<TransformComponent>
+							<Board
+								board={board}
+								onLeftClick={onLeftClick}
+								onRightClick={onRightClick}
+							/>
+						</TransformComponent>
+					</TransformWrapper>
+					<h2 className="stats">
+						<span>🚩: {mineCount}</span>{" "}
+						<span>
+							{new Array(argLives)
+								.fill("🖤")
+								.map((v, i) => (i < lives ? "❤️" : v))
+								.join("")}
+						</span>
+					</h2>
+				</>
+			) : (
+				<>
+					<Board
+						board={board}
+						onLeftClick={onLeftClick}
+						onRightClick={onRightClick}
+					/>
+					<h2 className="stats">
+						<span>🚩: {mineCount}</span>{" "}
+						<span>
+							{new Array(argLives)
+								.fill("🖤")
+								.map((v, i) => (i < lives ? "❤️" : v))
+								.join("")}
+						</span>
+					</h2>
+				</>
+			)}
 		</>
 	);
 };
