@@ -588,45 +588,24 @@ const Game = ({
 
 	return (
 		<>
-			{deviceType === "mobile" ? (
-				<>
-					<TransformWrapper>
-						<TransformComponent>
-							<Board
-								board={board}
-								onLeftClick={onLeftClick}
-								onRightClick={onRightClick}
-							/>
-						</TransformComponent>
-					</TransformWrapper>
-					<h2 className="stats">
-						<span>🚩: {mineCount}</span>{" "}
-						<span>
-							{new Array(argLives)
-								.fill("🖤")
-								.map((v, i) => (i < lives ? "❤️" : v))
-								.join("")}
-						</span>
-					</h2>
-				</>
-			) : (
-				<>
+			<TransformWrapper>
+				<TransformComponent>
 					<Board
 						board={board}
 						onLeftClick={onLeftClick}
 						onRightClick={onRightClick}
 					/>
-					<h2 className="stats">
-						<span>🚩: {mineCount}</span>{" "}
-						<span>
-							{new Array(argLives)
-								.fill("🖤")
-								.map((v, i) => (i < lives ? "❤️" : v))
-								.join("")}
-						</span>
-					</h2>
-				</>
-			)}
+				</TransformComponent>
+			</TransformWrapper>
+			<h2 className="stats">
+				<span>🚩: {mineCount}</span>{" "}
+				<span>
+					{new Array(argLives)
+						.fill("🖤")
+						.map((v, i) => (i < lives ? "❤️" : v))
+						.join("")}
+				</span>
+			</h2>
 
 			{!isGameOver && (
 				<div className="bottom-buttons">
