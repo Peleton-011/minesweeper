@@ -122,13 +122,14 @@ button {
 		top: 10px;
 		z-index: 10;
 	}
-    .stats > * {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+	.stats > * {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
 	.react-transform-wrapper {
 		width: 100vw !important;
 		height: 100vh !important;
 		overflow: visible !important;
+		padding: 3rem !important;
 	}
 }
