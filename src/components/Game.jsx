@@ -65,6 +65,24 @@ const Game = ({
 		}
 	}, [lives]);
 
+	useEffect(() => {
+		if (deviceType === "mobile") {
+			const preventDefaultZoom = (e) => {
+				if (e.touches.length > 1) {
+					e.preventDefault(); // Prevent multi-touch gestures (pinch-zoom)
+				}
+			};
+
+			document.addEventListener("touchmove", preventDefaultZoom, {
+				passive: false,
+			});
+
+			return () => {
+				document.removeEventListener("touchmove", preventDefaultZoom);
+			};
+		}
+	}, [deviceType]);
+
 	const checkWin = () => {
 		const checkCellBothWays = (cell) => {
 			return (
