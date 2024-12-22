@@ -21,6 +21,8 @@ const Game = ({
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
+	const [isFlaggingMode, setIsFlaggingMode] = useState(false);
+
 	const deviceType = useDeviceType();
 
 	const createBoard = (height, width) => {
@@ -527,7 +529,7 @@ const Game = ({
 		updateBoardRecursively(board); // Start the recursive update
 	};
 
-	const onRightClick = (e, i, j, cell) => {
+	const handleFlag = (e, i, j, cell) => {
 		e.preventDefault();
 
 		//Automated behavior
@@ -545,9 +547,15 @@ const Game = ({
 			onWin();
 		}
 		setBoard(newBoard);
+
+		if (checkWin()) {
+			onWin();
+		}
 	};
 
-	const onLeftClick = (i, j, cell) => {
+	const handleReveal = (i, j, cell) => {
+		e.preventDefault();
+
 		// console.log("Left click");
 		let newBoard;
 
@@ -563,9 +571,16 @@ const Game = ({
 
 		setBoard(newBoard);
 
-		if (mineCount <= 0 && checkWin() && lives > 0) {
+		if (checkWin()) {
 			onWin();
 		}
+	};
+
+	const onLeftClick = (e, i, j, cell) => {
+		isFlaggingMode ? handleFlag(e, i, j, cell) : handleReveal(i, j, cell);
+	};
+	const onRightClick = (e, i, j, cell) => {
+		isFlaggingMode ? handleReveal(i, j, cell) : handleFlag(e, i, j, cell);
 	};
 
 	return (
@@ -609,6 +624,21 @@ const Game = ({
 					</h2>
 				</>
 			)}
+
+			<div className="bottom-buttons">
+				<button
+					className={isFlaggingMode ? "" : "active"}
+					onClick={() => setIsFlaggingMode(false)}
+				>
+					💣
+				</button>
+				<button
+					className={isFlaggingMode ? "active" : ""}
+					onClick={() => setIsFlaggingMode(true)}
+				>
+					🚩
+				</button>
+			</div>
 		</>
 	);
 };

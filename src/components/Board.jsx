@@ -39,7 +39,7 @@ const Board = ({ board, onLeftClick, onRightClick }) => {
 									? " " + getNumberName(cell.content)
 									: "")
 							}
-							onClick={(e) => onLeftClick(i, j, cell)}
+							onClick={(e) => onLeftClick(e, i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, i, j, cell)}
 						>
 							{!board[i][j].isRevealed
