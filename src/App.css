@@ -1,24 +1,36 @@
 #root {
 	max-width: 1280px;
 	margin: 0 auto;
-	padding: 2em;
 	text-align: center;
+}
+
+.App {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+    width: max-content;
 }
 
 button:hover,
 button:focus,
 button {
 	border: none;
-    outline: none;
+	outline: none;
 }
 
 .game-over-buttons {
-    width: "100%" ; display: "flex"; gap: "1rem"
+	width: 110%;
+	display: flex;
+	justify-content: space-around;
 }
 
 .stats {
+    width: 100%;
 	display: flex;
-	justify-content: space-between;
+    justify-content: space-between;
+	align-items: center;
 }
 
 .row {
