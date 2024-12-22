@@ -206,7 +206,7 @@ button {
 	.react-transform-wrapper {
 		width: 100% !important;
 		height: 100% !important;
-		overflow: visible !important;
+		overflow: hidden !important;
 		/* padding: 3rem !important; */
 	}
 }
