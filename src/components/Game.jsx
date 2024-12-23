@@ -586,6 +586,16 @@ const Game = ({
 			: handleFlag(e, i, j, cell);
 	};
 
+	const [isPinching, setIsPinching] = useState(false);
+
+	const onPinchStart = () => {
+		setIsPinching(true);
+	};
+
+	const onPinchEnd = () => {
+		setIsPinching(false);
+	};
+
 	return (
 		<>
 			<TransformWrapper
@@ -595,6 +605,8 @@ const Game = ({
 				pinch={{ disabled: false }}
 				pan={{ disabled: false }}
 				doubleClick={{ mode: "toggle", disabled: false }}
+				onPinchingStart={onPinchStart}
+				onPinchingStop={onPinchEnd}
 			>
 				<TransformComponent>
 					<Board
@@ -606,6 +618,7 @@ const Game = ({
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>🚩: {mineCount}</span>{" "}
+                {isPinching ? "👇" : "X👇"}
 				<span>
 					{new Array(argLives)
 						.fill("🖤")
