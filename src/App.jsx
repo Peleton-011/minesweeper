@@ -19,6 +19,7 @@ function App() {
 
 	const onLose = () => {
 		setIsGameOver(true);
+		setDidWin(false);
 	};
 	const onWin = () => {
 		setIsGameOver(true);

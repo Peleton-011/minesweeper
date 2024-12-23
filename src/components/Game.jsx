@@ -597,7 +597,7 @@ const Game = ({
 					/>
 				</TransformComponent>
 			</TransformWrapper>
-			<h2 className="stats">
+			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>🚩: {mineCount}</span>{" "}
 				<span>
 					{new Array(argLives)

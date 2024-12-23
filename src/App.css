@@ -10,7 +10,31 @@
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	width: max-content;
+}
+
+.App > h1 {
+	z-index: 10;
+	position: fixed;
+	top: 0;
+	margin: 0;
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Adjust horizontal alignment */
+	max-width: 100%; /* Prevent overflowing the viewport horizontally */
+	box-sizing: border-box; /* Ensure padding is included in the size */
+	text-align: center; /* Center-align text */
+	overflow: hidden; /* Prevent content overflow */
+	width: 100%;
+	padding: 15vh 0 10vh 0;
+}
+
+.react-transform-wrapper {
+	width: 100vw !important;
+	height: 100vh !important;
+	overflow: visible !important;
+	position: fixed !important;
+	top: 0;
+	left: 0;
+	/* padding: 3rem !important; */
 }
 
 button:hover,
@@ -21,9 +45,25 @@ button {
 }
 
 .game-over-buttons {
-	width: 110%;
+	width: 27.5vw;
 	display: flex;
 	justify-content: space-around;
+	position: fixed;
+	bottom: 20vh;
+	z-index: 10;
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Adjust horizontal alignment */
+	max-width: 95%; /* Prevent overflowing the viewport horizontally */
+	box-sizing: border-box; /* Ensure padding is included in the size */
+	text-align: center; /* Center-align text */
+	overflow: hidden; /* Prevent content overflow */
+}
+
+.game-over-buttons > button {
+	/* Add a shadow to the buttons */
+	text-shadow: 0px 4px 10px rgba(255, 255, 255, 0.7);
+	transition: none;
+	box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.7);
 }
 
 .bottom-buttons {
@@ -63,10 +103,19 @@ button {
 }
 
 .stats {
-	width: 100%;
+	width: 25vw;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	z-index: 10;
+	position: fixed;
+	top: 10px;
+	left: 50%; /* Center horizontally */
+	transform: translateX(-50%); /* Adjust horizontal alignment */
+}
+
+.stats.game-over {
+	visibility: hidden;
 }
 
 .row {
@@ -152,49 +201,25 @@ button {
 	.App {
 		height: 100vh;
 		width: 100vw;
-        position: fixed;
-        top: 0;
-        left: 0;
+		position: fixed;
+		top: 0;
+		left: 0;
 	}
 
 	.App > h1 {
-		z-index: 10;
-		position: fixed;
-		top: 0;
-		margin: 0;
-		left: 50%; /* Center horizontally */
-		transform: translateX(-50%); /* Adjust horizontal alignment */
-		max-width: 100%; /* Prevent overflowing the viewport horizontally */
-		box-sizing: border-box; /* Ensure padding is included in the size */
-		text-align: center; /* Center-align text */
-		overflow: hidden; /* Prevent content overflow */
-		width: 100%;
 		background-color: rgb(0, 0, 0, 0.5);
-		padding: 5rem 0 3rem 0;
+		padding: 5vh 0 3vh 0;
 	}
 
 	.game-over-buttons {
-		position: fixed;
-		bottom: 1rem;
-		z-index: 10;
-		left: 50%; /* Center horizontally */
-		transform: translateX(-50%); /* Adjust horizontal alignment */
-		max-width: 95%; /* Prevent overflowing the viewport horizontally */
-		box-sizing: border-box; /* Ensure padding is included in the size */
-		text-align: center; /* Center-align text */
-		overflow: hidden; /* Prevent content overflow */
+		bottom: 10vh;
+        width: 75vw;
 	}
-
 	.stats {
-		position: fixed;
-		top: 10px;
-		z-index: 10;
-		left: 50%; /* Center horizontally */
-		transform: translateX(-50%); /* Adjust horizontal alignment */
 		max-width: 100%; /* Prevent overflowing the viewport horizontally */
-        width: 100%;
-        padding: 1rem;
-        background-color: rgb(24, 26, 27, 0.5);
+		width: 100%;
+		padding: 1rem;
+		background-color: rgb(24, 26, 27, 0.5);
 		box-sizing: border-box; /* Ensure padding is included in the size */
 		text-align: center; /* Center-align text */
 		overflow: hidden; /* Prevent content overflow */
@@ -202,11 +227,5 @@ button {
 	.stats > * {
 		padding-left: 2rem;
 		padding-right: 2rem;
-	}
-	.react-transform-wrapper {
-		width: 100% !important;
-		height: 100% !important;
-		overflow: hidden !important;
-		/* padding: 3rem !important; */
 	}
 }
