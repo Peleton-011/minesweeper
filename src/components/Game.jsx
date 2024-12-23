@@ -540,7 +540,7 @@ const Game = ({
 
 		//Normal behavior
 		const newBoard = cell.isRevealed
-			? board
+			? chord(i, j)
 			: cell.isFlagged
 			? unflag(i, j)
 			: flag(i, j);
