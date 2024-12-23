@@ -588,7 +588,14 @@ const Game = ({
 
 	return (
 		<>
-			<TransformWrapper>
+			<TransformWrapper
+				centerOnInit={true}
+				initialScale={1}
+				wheel={{ disabled: false }}
+				pinch={{ disabled: false }}
+				pan={{ disabled: false }}
+				doubleClick={{ mode: "toggle", disabled: false }}
+			>
 				<TransformComponent>
 					<Board
 						board={board}
