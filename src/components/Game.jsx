@@ -637,6 +637,10 @@ const Game = ({
 				onPinchingStop={onPinchEnd}
                 onPanningStart={onPanStart}
                 onPanningStop={onPanEnd}
+                onZoomingStart={onZoomStart}
+                onZoomingStop={onZoomEnd}
+                onWheelingStart={onWheelStart}
+                onWheelingStop={onWheelEnd}
 			>
 				<TransformComponent>
 					<Board
