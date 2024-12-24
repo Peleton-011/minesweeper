@@ -589,6 +589,8 @@ const Game = ({
     // Testing thingies
 	const [isPinching, setIsPinching] = useState(false);
     const [isPanning, setIsPanning] = useState(false);
+    const [isZooming, setIsZooming] = useState(false);
+    const [isWheeling, setIsWheeling] = useState(false);
 
 	const onPinchStart = () => {
 		setIsPinching(true);
@@ -604,6 +606,22 @@ const Game = ({
 
     const onPanEnd = () => {
         setIsPanning(false);
+    };
+
+    const onZoomStart = () => { 
+        setIsZooming(true);
+    };
+
+    const onZoomEnd = () => {
+        setIsZooming(false);
+    };
+
+    const onWheelStart = () => {
+        setIsWheeling(true);
+    };
+
+    const onWheelEnd = () => {
+        setIsWheeling(false);
     };
 
 	return (
@@ -630,7 +648,7 @@ const Game = ({
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>🚩: {mineCount}</span>{" "}
-                {isPinching ? "👇" : "X👇"} || { isPanning ? "🍞" : "X🍞"}
+                {isPinching ? "👇" : "X👇"} || { isPanning ? "🍞" : "X🍞"} || {isZooming ? "🔎" : "X🔎"} || {isWheeling ? "🛞" : "X🛞"}
 				<span>
 					{new Array(argLives)
 						.fill("🖤")
