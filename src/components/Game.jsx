@@ -591,7 +591,6 @@ const Game = ({
 			<TransformWrapper
 				centerOnInit={true}
 				initialScale={1}
-				wheel={{ disabled: false }}
 				pinch={{ disabled: false }}
 				pan={{ disabled: false }}
 				doubleClick={{ mode: "toggle", disabled: false }}
