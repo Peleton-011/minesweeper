@@ -586,61 +586,14 @@ const Game = ({
 			: handleFlag(e, i, j, cell);
 	};
 
-    // Testing thingies
-	const [isPinching, setIsPinching] = useState(false);
-    const [isPanning, setIsPanning] = useState(false);
-    const [isZooming, setIsZooming] = useState(false);
-    const [isWheeling, setIsWheeling] = useState(false);
-
-	const onPinchStart = () => {
-		setIsPinching(true);
-	};
-
-	const onPinchEnd = () => {
-		setIsPinching(false);
-	};
-
-    const onPanStart = () => {
-        setIsPanning(true);
-    };
-
-    const onPanEnd = () => {
-        setIsPanning(false);
-    };
-
-    const onZoomStart = () => { 
-        setIsZooming(true);
-    };
-
-    const onZoomEnd = () => {
-        setIsZooming(false);
-    };
-
-    const onWheelStart = () => {
-        setIsWheeling(true);
-    };
-
-    const onWheelEnd = () => {
-        setIsWheeling(false);
-    };
-
 	return (
 		<>
 			<TransformWrapper
 				centerOnInit={true}
 				initialScale={1}
-				wheel={{ disabled: false }}
 				pinch={{ disabled: false }}
 				pan={{ disabled: false }}
 				doubleClick={{ mode: "toggle", disabled: false }}
-				onPinchingStart={onPinchStart}
-				onPinchingStop={onPinchEnd}
-                onPanningStart={onPanStart}
-                onPanningStop={onPanEnd}
-                onZoomingStart={onZoomStart}
-                onZoomingStop={onZoomEnd}
-                onWheelingStart={onWheelStart}
-                onWheelingStop={onWheelEnd}
 			>
 				<TransformComponent>
 					<Board
@@ -652,7 +605,6 @@ const Game = ({
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>🚩: {mineCount}</span>{" "}
-                {isPinching ? "👇" : "X👇"} || { isPanning ? "🍞" : "X🍞"} || {isZooming ? "🔎" : "X🔎"} || {isWheeling ? "🛞" : "X🛞"}
 				<span>
 					{new Array(argLives)
 						.fill("🖤")
