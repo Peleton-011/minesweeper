@@ -76,11 +76,12 @@ export function calculateAugmentedMatrix({
 	// Each active cell represents a row in the augmented matrix
 	activeCells.forEach((act, i) => {
 		augmentedMatrix.push([]);
+        const adjacentIcognitas = findAdjacentCells({ coords: [act.y, act.x], board }).filter((c) => !c.isRevealed)
 		// Each incognita is assigned a column in the augmented matrix, plus the extra column
 		incognitaCells.forEach((inc, j) => {
-			augmentedMatrix[i].push(
-				findAdjacentCells({ coords: [act.x, act.y], board }).includes(
-					inc
+            augmentedMatrix[i].push(
+				adjacentIcognitas.some(
+					(cell) => cell.x === inc.x && cell.y === inc.y
 				)
 					? 1
 					: 0
@@ -88,6 +89,7 @@ export function calculateAugmentedMatrix({
 		});
 		augmentedMatrix[i].push(act.content);
 	});
+	return augmentedMatrix;
 }
 
 /* (No longer needed) implementation of exclusively the custom algorithm for solving the eliminated matrices
