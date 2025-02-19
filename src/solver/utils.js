@@ -7,101 +7,83 @@
 }
 */
 
-export function getActiveNumberedCells(board) {
-	const activeCells = [];
+export function findAdjacentCells({ coords: [x, y], board }) {
 	const directions = [
 		[-1, -1],
-		[-1, 0],
-		[-1, 1],
 		[0, -1],
-		[0, 1],
 		[1, -1],
+		[-1, 0],
 		[1, 0],
+		[-1, 1],
+		[0, 1],
 		[1, 1],
 	];
 
-	for (let row = 0; row < board.length; row++) {
-		for (let col = 0; col < board[row].length; col++) {
-			const cell = board[row][col];
+	return directions
+		.map(([dx, dy]) => {
+			const newX = x + dx;
+			const newY = y + dy;
 
-			if (cell.isRevealed && !cell.isMine && cell.content > 0) {
-				for (const [dx, dy] of directions) {
-					const newRow = row + dx;
-					const newCol = col + dy;
+			if (
+				newX < 0 ||
+				newY < 0 ||
+				newX >= board.length ||
+				newY >= board[newX].length
+			) {
+				return null;
+			}
+			return board[newX][newY];
+		})
+		.filter((v) => v !== null);
+}
 
-					if (
-						newRow >= 0 &&
-						newRow < board.length &&
-						newCol >= 0 &&
-						newCol < board[row].length
-					) {
-						const adjacentCell = board[newRow][newCol];
-						if (
-							!adjacentCell.isRevealed &&
-							!adjacentCell.isFlagged
-						) {
-							activeCells.push({ row, col });
-							break;
-						}
-					}
+// conditionA and conditionB should be functions that take in a cell and return a boolean
+export function findPairedCells({ board, conditionA, conditionB }) {
+	const groupA = [];
+	const groupB = [];
+	for (let i = 0; i < board.length; i++) {
+		for (let j = 0; j < board[i].length; j++) {
+			const cell = board[i][j];
+			if (conditionA(cell)) {
+				const adjacent = findAdjacentCells({
+					coords: [i, j],
+					board,
+				}).filter(conditionB);
+				if (!adjacent.length) {
+					continue;
 				}
+				groupA.push(cell);
+				groupB.push(
+					// Filter the adjacent array to remove duplicates
+					...adjacent.filter((c, i) => adjacent.indexOf(c) === i)
+				);
 			}
 		}
 	}
-
-	return activeCells;
+	return { a: groupA, b: groupB };
 }
 
-export function assignMatrixColumns(activeCells) {
-	const columnMapping = new Map();
-	let columnIndex = 0;
-	activeCells.forEach(({ row, col }) => {
-		columnMapping.set(`${row},${col}`, columnIndex++);
-	});
-	return columnMapping;
-}
-
-export function createMatrix(board, activeCells, columnMapping) {
-	const matrix = [];
-	const directions = [
-		[-1, -1],
-		[-1, 0],
-		[-1, 1],
-		[0, -1],
-		[0, 1],
-		[1, -1],
-		[1, 0],
-		[1, 1],
-	];
-
-	activeCells.forEach(({ row, col }) => {
-		const rowVector = new Array(columnMapping.size).fill(0);
-		const cell = board[row][col];
-
-		directions.forEach(([dx, dy]) => {
-			const newRow = row + dx;
-			const newCol = col + dy;
-
-			if (
-				newRow >= 0 &&
-				newRow < board.length &&
-				newCol >= 0 &&
-				newCol < board[row].length
-			) {
-				const adjacentCell = board[newRow][newCol];
-				if (!adjacentCell.isRevealed && !adjacentCell.isFlagged) {
-					const column = columnMapping.get(`${newRow},${newCol}`);
-					if (column !== undefined) {
-						rowVector[column] = 1;
-					}
-				}
-			}
+export function calculateAugmentedMatrix({
+	activeCells,
+	incognitaCells,
+	board,
+}) {
+	const augmentedMatrix = [];
+	// Each active cell represents a row in the augmented matrix
+	activeCells.forEach((act, i) => {
+		augmentedMatrix.push([]);
+		// Each incognita is assigned a column in the augmented matrix, plus the extra column
+		incognitaCells.forEach((inc, j) => {
+			augmentedMatrix[i].push(
+				findAdjacentCells({ coords: [act.x, act.y], board }).includes(
+					inc
+				)
+					? 1
+					: 0
+			);
 		});
-
-		matrix.push(rowVector);
+		augmentedMatrix[i].push(act.content);
 	});
-
-	return matrix;
 }
 
 /* (No longer needed) implementation of exclusively the custom algorithm for solving the eliminated matrices
