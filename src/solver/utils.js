@@ -54,8 +54,12 @@ export function findPairedCells({ board, conditionA, conditionB }) {
 				}
 				groupA.push(cell);
 				groupB.push(
-					// Filter the adjacent array to remove duplicates
-					...adjacent.filter((c, i) => adjacent.indexOf(c) === i)
+					// Filter the adjacent array to remove duplicates by comparing coordinates
+					...adjacent.filter((adj) => {
+						return !groupB.find(
+							(c) => c.x === adj.x && c.y === adj.y
+						);
+					})
 				);
 			}
 		}
