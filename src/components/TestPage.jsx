@@ -38,47 +38,15 @@ function styleCell(y, x, styleProperty, value) {
 	}
 }
 
-const findMoves = (solution) => {
-	try {
-		const final = solveEliminatedMatrix(solution);
-        return final;
-		console.log("Final: ", final);
-	} catch (error) {
-		console.error("Error:", error.message);
-	}
-};
-
-const solver = (board) => {
-	const { a: active, b: incognita } = findPairedCells({
-		board,
-		conditionA: (cell) => cell.isRevealed && cell.content > 0,
-		conditionB: (cell) => !cell.isRevealed,
-	});
-	/*
-	a.forEach(({ x: col, y: row }) => {
-		styleCell(row, col, "background-color", "rgba(255, 0, 0, 0.5)");
-        });
-    */
-
-	console.log(active, incognita);
-
-	const augmentedMatrix = calculateAugmentedMatrix({
-		activeCells: active,
-		incognitaCells: incognita,
-		board,
-	});
-	console.log(augmentedMatrix);
-	// try {
-	//     const solution = gaussianElimination(augmentedMatrix);
-	//     console.log("Solution:", solution);
-	//     console.log("Verified:", verifySolution(augmentedMatrix, solution));
-	//     const final = solveEliminatedMatrix(solution);
-	//     console.log("Final: ", final);
-	// } catch (error) {
-	//     console.error("Error:", error.message);
-	// }
-
-	return augmentedMatrix;
+const findMoves = (matrixSolution, incognitas) => {
+	const { true: mineSolutions, false: safeSolutions } = separateMapValues(solveEliminatedMatrix(matrixSolution));
+    mineSolutions.forEach((mineSolution, index) => {
+        mineSolutions[index] = incognitas[mineSolution];
+    })
+    safeSolutions.forEach((safeSolution, index) => {
+        safeSolutions[index] = incognitas[safeSolution];
+    })
+    return { mineSolutions, safeSolutions };
 };
 
 function separateMapValues(inputMap) {
@@ -95,6 +63,9 @@ const TestPage = () => {
 	const [augmentedMatrix, setAugmentedMatrix] = React.useState([]);
 	const [eliminatedMatrix, setEliminatedMatrix] = React.useState([]);
 	const [nextMoves, setNextMoves] = React.useState([]);
+
+	const [incognitas, setIncognitas] = React.useState([]);
+	const [active, setActive] = React.useState([]);
 
 	const generatedBoard = [
 		[
@@ -196,6 +167,9 @@ const TestPage = () => {
 			conditionB: (cell) => !cell.isRevealed,
 		});
 
+		setActive(active);
+		setIncognitas(incognita);
+
 		setAugmentedMatrix(
 			calculateAugmentedMatrix({
 				activeCells: active,
@@ -219,7 +193,7 @@ const TestPage = () => {
 	}
 
 	function updateNextMoves() {
-		setNextMoves(separateMapValues(findMoves(eliminatedMatrix)));
+		setNextMoves(findMoves(eliminatedMatrix, incognitas));
 	}
 
 	// console.log(findMoves(generatedBoard));
@@ -228,6 +202,16 @@ const TestPage = () => {
 		<div>
 			<h1>Test Page</h1>
 			<Board board={generatedBoard} />
+			<h3>Active: </h3>
+			<div>
+				{active.map(({ x, y }) => "(" + x + ", " + y + ")").join("  ")}
+			</div>
+			<h3>Incognitas: </h3>
+			<div>
+				{incognitas
+					.map(({ x, y }) => "(" + x + ", " + y + ")")
+					.join("  ")}
+			</div>
 			<h3>Augmented Matrix</h3>
 			<MatrixDisplay matrix={augmentedMatrix} augmented />
 			<h3>Eliminated Matrix</h3>
