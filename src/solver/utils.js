@@ -76,10 +76,13 @@ export function calculateAugmentedMatrix({
 	// Each active cell represents a row in the augmented matrix
 	activeCells.forEach((act, i) => {
 		augmentedMatrix.push([]);
-        const adjacentIcognitas = findAdjacentCells({ coords: [act.y, act.x], board }).filter((c) => !c.isRevealed)
+		const adjacentIcognitas = findAdjacentCells({
+			coords: [act.y, act.x],
+			board,
+		}).filter((c) => !c.isRevealed);
 		// Each incognita is assigned a column in the augmented matrix, plus the extra column
 		incognitaCells.forEach((inc, j) => {
-            augmentedMatrix[i].push(
+			augmentedMatrix[i].push(
 				adjacentIcognitas.some(
 					(cell) => cell.x === inc.x && cell.y === inc.y
 				)
@@ -151,11 +154,17 @@ export function solveEliminatedMatrix(matrix) {
 		}
 
 		if (augmentedValue === minBound) {
-			negativeIndices.forEach((index) => solution.set(index, true));
-			positiveIndices.forEach((index) => solution.set(index, false));
+			if (!solution.has(false)) solution.set(false, []);
+			if (!solution.has(true)) solution.set(true, []);
+
+			negativeIndices.forEach((index) => solution.get(true).push(index));
+			positiveIndices.forEach((index) => solution.get(false).push(index));
 		} else if (augmentedValue === maxBound) {
-			negativeIndices.forEach((index) => solution.set(index, false));
-			positiveIndices.forEach((index) => solution.set(index, true));
+			if (!solution.has(false)) solution.set(false, []);
+			if (!solution.has(true)) solution.set(true, []);
+
+			negativeIndices.forEach((index) => solution.get(false).push(index));
+			positiveIndices.forEach((index) => solution.get(true).push(index));
 		}
 	}
 
