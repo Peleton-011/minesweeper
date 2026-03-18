@@ -118,6 +118,10 @@ button {
 	visibility: hidden;
 }
 
+.board {
+    padding: 6rem;
+}
+
 .row {
 	display: flex;
 	font-size: 20px;

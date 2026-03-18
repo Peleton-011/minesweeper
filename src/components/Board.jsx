@@ -25,7 +25,7 @@ const Board = ({ board, onLeftClick, onRightClick }) => {
 	};
 
 	return (
-		<div>
+		<div className="board">
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (
