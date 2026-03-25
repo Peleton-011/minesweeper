@@ -45,6 +45,19 @@ button {
 	outline: none;
 }
 
+.cell:focus {
+  outline: none;
+}
+
+.cell:focus-visible {
+  outline: none;
+}
+
+.cell {
+  -webkit-tap-highlight-color: transparent; /* removes mobile tap flash */
+}
+
+
 .game-over-buttons {
 	width: 27.5vw;
 	display: flex;
