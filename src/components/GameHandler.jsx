@@ -59,8 +59,8 @@ const Game = ({
 							};
 						}
 						return cell;
-					})
-				)
+					}),
+				),
 			);
 		}
 	}, [lives]);
@@ -290,7 +290,7 @@ const Game = ({
 		const mineList = getMineCoords(
 			mineCount - countMines(),
 			[x, y],
-			startZone
+			startZone,
 		);
 		addMines(mineList);
 
@@ -416,7 +416,7 @@ const Game = ({
 					return { ...c, isFlagged: true };
 				}
 				return c;
-			})
+			}),
 		);
 	};
 
@@ -428,7 +428,7 @@ const Game = ({
 					return { ...c, isFlagged: false };
 				}
 				return c;
-			})
+			}),
 		);
 	};
 
@@ -489,7 +489,7 @@ const Game = ({
 		console.log(findIn2d(board, (c, x, y) => isCellDetermined(x, y)));
 		const nextComplete = findIn2d(board, (c, x, y) => isCellComplete(x, y));
 		const nextDetermined = findIn2d(board, (c, x, y) =>
-			isCellDetermined(x, y)
+			isCellDetermined(x, y),
 		);
 
 		if (nextComplete) {
@@ -542,8 +542,8 @@ const Game = ({
 		const newBoard = cell.isRevealed
 			? chord(i, j)
 			: cell.isFlagged
-			? unflag(i, j)
-			: flag(i, j);
+				? unflag(i, j)
+				: flag(i, j);
 
 		setBoard(newBoard);
 
@@ -561,12 +561,12 @@ const Game = ({
 		newBoard = isFirstClick
 			? firstClick(i, j)
 			: autoSolveMode
-			? board
-			: cell.isRevealed
-			? chord(i, j)
-			: cell.isFlagged
-			? unflag(i, j)
-			: batchReveal(getRevealList(i, j));
+				? board
+				: cell.isRevealed
+					? chord(i, j)
+					: cell.isFlagged
+						? unflag(i, j)
+						: batchReveal(getRevealList(i, j));
 
 		setBoard(newBoard);
 
@@ -576,11 +576,15 @@ const Game = ({
 	};
 
 	const onLeftClick = (e, i, j, cell) => {
+		e.currentTarget.blur();
+
 		isFlaggingMode
 			? handleFlag(e, i, j, cell)
 			: handleReveal(e, i, j, cell);
 	};
 	const onRightClick = (e, i, j, cell) => {
+		e.currentTarget.blur();
+
 		isFlaggingMode
 			? handleReveal(e, i, j, cell)
 			: handleFlag(e, i, j, cell);
