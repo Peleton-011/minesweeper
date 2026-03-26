@@ -29,7 +29,14 @@ const Board = ({ board, onLeftClick, onRightClick }) => {
 			{board.map((row, i) => (
 				<div key={i} className="row">
 					{row.map((cell, j) => (
-						<button
+						<div
+							role="button"
+							tabIndex={0}
+							onKeyDown={(e) => {
+								if (e.key === "Enter" || e.key === " ") {
+									onLeftClick(e, i, j, cell);
+								}
+							}}
 							key={j}
 							className={
 								"cell" +
@@ -47,11 +54,11 @@ const Board = ({ board, onLeftClick, onRightClick }) => {
 									? "🚩"
 									: " "
 								: board[i][j].isMine
-								? "💣"
-								: board[i][j].content == "0"
-								? " "
-								: board[i][j].content}
-						</button>
+									? "💣"
+									: board[i][j].content == "0"
+										? " "
+										: board[i][j].content}
+						</div>
 					))}
 				</div>
 			))}
