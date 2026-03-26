@@ -37,27 +37,10 @@
 	/* padding: 3rem !important; */
 }
 
-button:hover,
-button:focus,
-button:active,
 button {
-	border: none;
 	outline: none;
+	border: none;
 }
-
-.cell:focus {
-  outline: none;
-}
-
-.cell:focus-visible {
-  outline: none;
-}
-
-.cell {
-  -webkit-tap-highlight-color: transparent; /* removes mobile tap flash */
-}
-
-
 .game-over-buttons {
 	width: 27.5vw;
 	display: flex;
@@ -133,7 +116,7 @@ button {
 }
 
 .board {
-    padding: 6rem;
+	padding: 6rem;
 }
 
 .row {
@@ -148,14 +131,29 @@ button {
 	border: 1px solid #aaa; /* Light gray border */
 	background-color: #333;
 	border-radius: 0px;
-	display: flex;
+	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	text-shadow: -2px 0 rgba(200 200 200 / 30%), 2px 0 rgba(200 200 200 / 30%),
-		0 -2px rgba(200 200 200 / 30%), 0 2px rgba(200 200 200 / 30%);
+	text-shadow:
+		-2px 0 rgba(200 200 200 / 30%),
+		2px 0 rgba(200 200 200 / 30%),
+		0 -2px rgba(200 200 200 / 30%),
+		0 2px rgba(200 200 200 / 30%);
 	text-align: center;
 	user-select: none;
+	cursor: pointer;
+
+	white-space: nowrap;
+	transition: all 0.15s ease;
+}
+
+.cell:hover {
+	background-color: #444;
+}
+
+.cell:focus {
+	box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
 }
 
 .cell:first-child,
@@ -166,6 +164,10 @@ button {
 .cell.revealed {
 	background-color: #555;
 	color: white;
+}
+
+.cell.revealed:hover {
+    background-color: #666;
 }
 
 .cell.flagged {
@@ -231,7 +233,7 @@ button {
 
 	.game-over-buttons {
 		bottom: 10vh;
-        width: 75vw;
+		width: 75vw;
 	}
 	.stats {
 		max-width: 100%; /* Prevent overflowing the viewport horizontally */
