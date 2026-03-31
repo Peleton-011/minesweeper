@@ -36,7 +36,7 @@ function Game() {
 			{isGameStarted ? null : (
 				<ConfigSelector
 					setConfig={(config) => {
-						console.log(config);
+						// console.log(config);
 						setConfig({
 							...{
 								height: 16,

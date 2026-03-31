@@ -24,6 +24,8 @@ const Game = ({
 
 	const [isFlaggingMode, setIsFlaggingMode] = useState(false);
 
+	const [hoveredCell, setHoveredCell] = useState(null);
+
 	const deviceType = useDeviceType();
 
 	const createBoard = (height, width) => {
@@ -575,20 +577,54 @@ const Game = ({
 		}
 	};
 
+	const onHover = (e, i, j, cell) => {
+		setHoveredCell([i, j, cell]);
+		console.log(hoveredCell);
+	};
+
+	const onKeyDown = (e) => {
+		const doesMatch =
+			e.code === "Enter" ||
+			e.code === "NumpadEnter" ||
+			e.code === "Space";
+
+		console.log(e.code);
+		console.log(doesMatch);
+		console.log(e.shiftKey);
+		if (
+			(doesMatch && !e.shiftKey && !isFlaggingMode) ||
+			(doesMatch && e.shiftKey && isFlaggingMode)
+		) {
+			onLeftClick(e, hoveredCell[0], hoveredCell[1], hoveredCell[2]);
+		} else if (
+			(doesMatch && e.shiftKey && !isFlaggingMode) ||
+			(doesMatch && !e.shiftKey && isFlaggingMode)
+		) {
+			onRightClick(e, hoveredCell[0], hoveredCell[1], hoveredCell[2]);
+		}
+	};
+
 	const onLeftClick = (e, i, j, cell) => {
-		e.currentTarget.blur();
+		// e.currentTarget.blur();
 
 		isFlaggingMode
 			? handleFlag(e, i, j, cell)
 			: handleReveal(e, i, j, cell);
 	};
+
 	const onRightClick = (e, i, j, cell) => {
-		e.currentTarget.blur();
+		// e.currentTarget.blur();
 
 		isFlaggingMode
 			? handleReveal(e, i, j, cell)
 			: handleFlag(e, i, j, cell);
 	};
+
+	useEffect(() => {
+		const handler = (e) => onKeyDown(e);
+		window.addEventListener("keydown", handler);
+		return () => window.removeEventListener("keydown", handler);
+	}, [hoveredCell, isFlaggingMode, board]);
 
 	return (
 		<>
@@ -604,6 +640,8 @@ const Game = ({
 						board={board}
 						onLeftClick={onLeftClick}
 						onRightClick={onRightClick}
+						onHover={onHover}
+						onKeyDown={onKeyDown}
 					/>
 				</TransformComponent>
 			</TransformWrapper>
