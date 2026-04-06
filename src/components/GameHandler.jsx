@@ -26,7 +26,37 @@ const Game = ({
 
 	const [hoveredCell, setHoveredCell] = useState(null);
 
+	const [playTime, setPlayTime] = useState(0);
+
+	const [isFirstClick, setFirstClick] = useState(true);
+
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (isFirstClick) return;
+
+		const interval = setInterval(() => {
+			setPlayTime((prev) => prev + 1);
+		}, 10);
+
+		return () => clearInterval(interval);
+	}, [isFirstClick]);
+
+	const getPlayTimeString = (time) => {
+		const centis = (time % 100).toString().padStart(2, "0");
+		const seconds = (Math.floor(time / 100) % 60)
+			.toString()
+			.padStart(2, "0");
+		const minutes = (Math.floor(time / (100 * 60)) % 60)
+			.toString()
+			.padStart(2, "0");
+		const hours = (Math.floor(time / (100 * 60 * 60)) % 24)
+			.toString()
+			.padStart(2, "0");
+
+		const string = `${time > 60 * 60 * 100 ? hours + "h " : ""}${time > 60 * 100 ? minutes + "' " : ""}${seconds},${centis}"`;
+		return string;
+	};
 
 	const createBoard = (height, width) => {
 		// console.log(height, ", ", width);
@@ -101,8 +131,6 @@ const Game = ({
 
 		return board.every((row) => row.every(checkCell)) && lives > 0;
 	};
-
-	const [isFirstClick, setFirstClick] = useState(true);
 
 	const revealAdjacent = (x, y, hist, board) => {
 		for (let i = -1; i <= 1; i++) {
@@ -647,6 +675,7 @@ const Game = ({
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>🚩: {mineCount}</span>{" "}
+				<span>{getPlayTimeString(playTime)}</span>
 				<span>
 					{new Array(argLives)
 						.fill("🖤")
