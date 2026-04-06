@@ -4,6 +4,31 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
 
+import { Preferences } from "@capacitor/preferences";
+
+const saveScore = async (newScore) => {
+	const { value } = await Preferences.get({ key: "leaderboard" });
+
+	let scores = value ? JSON.parse(value) : [];
+
+	scores.push(newScore);
+
+	//Sort times and keep teh best
+	scores.sort((a, b) => a.time - b.time);
+
+	scores = scores.slice(0, 10);
+
+	await Preferences.set({
+		key: "leaderboard",
+		value: JSON.stringify(scores),
+	});
+};
+
+const loadScores = async () => {
+	const { value } = await Preferences.get({ key: "leaderboard" });
+	return value ? JSON.parse(value) : [];
+};
+
 const Game = ({
 	config: {
 		height,
@@ -31,6 +56,20 @@ const Game = ({
 	const [isFirstClick, setFirstClick] = useState(true);
 
 	const deviceType = useDeviceType();
+
+	const saveData = () => {
+		const data = {
+			time: playTime,
+			date: new Date().toLocaleString(),
+		};
+		saveScore(data);
+	};
+	const loadData = () => {
+        loadScores().then((scores) => {
+            
+            console.log(scores);
+        })
+	};
 
 	useEffect(() => {
 		if (isFirstClick) return;
@@ -698,6 +737,8 @@ const Game = ({
 					>
 						🚩
 					</button>
+					<button onClick={saveData}>Save</button>
+					<button onClick={loadData}>Load</button>
 				</div>
 			)}
 		</>
