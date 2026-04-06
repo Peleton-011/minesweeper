@@ -340,7 +340,7 @@ const Game = ({
 			x - Math.floor(size / 2),
 			y - Math.floor(size / 2),
 		];
-		console.log([x, y], basePosition);
+		// console.log([x, y], basePosition);
 		for (let i = 0; i < size; i++) {
 			for (let j = 0; j < size; j++) {
 				if (
@@ -362,7 +362,7 @@ const Game = ({
 			return [];
 		}
 		const startZoneList = getStartingZone(origin, startZone);
-		console.log(startZoneList);
+		// console.log(startZoneList);
 		const mineArray = [];
 		while (mineArray.length < amount) {
 			const x = Math.floor(Math.random() * height);
@@ -579,7 +579,7 @@ const Game = ({
 
 	const onHover = (e, i, j, cell) => {
 		setHoveredCell([i, j, cell]);
-		console.log(hoveredCell);
+		// console.log(hoveredCell);
 	};
 
 	const onKeyDown = (e) => {
@@ -588,9 +588,9 @@ const Game = ({
 			e.code === "NumpadEnter" ||
 			e.code === "Space";
 
-		console.log(e.code);
-		console.log(doesMatch);
-		console.log(e.shiftKey);
+		// console.log(e.code);
+		// console.log(doesMatch);
+		// console.log(e.shiftKey);
 		if (
 			(doesMatch && !e.shiftKey && !isFlaggingMode) ||
 			(doesMatch && e.shiftKey && isFlaggingMode)
