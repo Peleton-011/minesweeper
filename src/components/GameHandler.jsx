@@ -3,31 +3,7 @@ import { useState, useEffect } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
-
-import { Preferences } from "@capacitor/preferences";
-
-const saveScore = async (newScore) => {
-	const { value } = await Preferences.get({ key: "leaderboard" });
-
-	let scores = value ? JSON.parse(value) : [];
-
-	scores.push(newScore);
-
-	//Sort times and keep teh best
-	scores.sort((a, b) => a.time - b.time);
-
-	// scores = scores.slice(0, 10);
-
-	await Preferences.set({
-		key: "leaderboard",
-		value: JSON.stringify(scores),
-	});
-};
-
-const loadScores = async () => {
-	const { value } = await Preferences.get({ key: "leaderboard" });
-	return value ? JSON.parse(value) : [];
-};
+import { addScore, fetchScores } from "../utils/leaderboard";
 
 const Game = ({
 	config: {
@@ -35,8 +11,8 @@ const Game = ({
 		width,
 		mineCount: argMineCount,
 		lives: argLives,
-		onWin,
-		onLose,
+		onWin: argOnWin,
+		onLose: argOnLose,
 		autoSolveMode,
 		noGuessMode,
 		winStateCheck,
@@ -58,20 +34,12 @@ const Game = ({
 
 	const deviceType = useDeviceType();
 
-	const saveData = () => {
-		const data = {
-			time: playTime * 10,
-			date: new Date().getTime(),
-            size: board.length * board[0].length,
-            mines: argMineCount,
-            lives: argLives
-		};
-		saveScore(data);
+	const onWin = () => {
+		argOnWin(playTime * 10);
 	};
-	const loadData = () => {
-		loadScores().then((scores) => {
-			console.log(scores);
-		});
+
+	const onLose = () => {
+		argOnLose(playTime * 10);
 	};
 
 	useEffect(() => {
@@ -742,8 +710,14 @@ const Game = ({
 					>
 						🚩
 					</button>
-					<button onClick={saveData}>Save</button>
-					<button onClick={loadData}>Load</button>
+					<button
+						onClick={() => addScore(playTime * 10, { width, height, mineCount: argMineCount, lives: argLives })}
+					>
+						Save
+					</button>
+					<button onClick={async () => console.log(await fetchScores())}>
+						Load
+					</button>
 				</div>
 			)}
 		</>
