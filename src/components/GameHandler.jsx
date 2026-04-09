@@ -36,12 +36,11 @@ const Game = ({
 	const deviceType = useDeviceType();
 
 	const onWin = () => {
-		argOnWin(playTime * 10);
-        console.log(playTime)
+		argOnWin(playTime);
 	};
 
 	const onLose = () => {
-		argOnLose(playTime * 10);
+		argOnLose(playTime);
 	};
 
 	useEffect(() => {
