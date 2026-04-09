@@ -18,13 +18,24 @@ const saveScore = async (newScore) => {
 	});
 };
 
-const loadScores = async () => {
+export const fetchScores = async () => {
 	const { value } = await Preferences.get({ key: "leaderboard" });
 	return value ? JSON.parse(value) : [];
 };
 
+export const deleteScore = async (id) => {
+    const { value } = await Preferences.get({ key: "leaderboard" });
+    const scores = value ? JSON.parse(value) : [];
+    const newScores = scores.filter((score) => score.id !== id);
+    await Preferences.set({
+        key: "leaderboard",
+        value: JSON.stringify(newScores),
+    });
+}
+
 export const addScore = (time, gameConfig) => {
 	const data = {
+        id: Date.now(),
 		time,
 		date: new Date().getTime(),
 		size: gameConfig.width * gameConfig.height,
@@ -33,8 +44,4 @@ export const addScore = (time, gameConfig) => {
 	};
 
 	saveScore(data);
-};
-
-export const fetchScores = async () => {
-	return await loadScores()
 };
