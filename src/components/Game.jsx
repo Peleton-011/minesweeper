@@ -2,6 +2,7 @@ import GameHandler from "./GameHandler";
 import ConfigSelector from "./ConfigSelector";
 import { useState, useEffect } from "react";
 import "./Game.css";
+import { getPlayTimeString } from "../utils/timeutils";
 
 function Game() {
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -57,12 +58,12 @@ function Game() {
 					setIsGameStarted={setIsGameStarted}
 				/>
 			)}
-			{isGameOver && <div className="gameover">
-
-                <h1>{didWin ? "You Win !" : "You Lose !"}</h1>
-                {didWin && <h2>{lastTime}</h2>}
-            </div>
-            }
+			{isGameOver && (
+				<div className="gameover">
+					<h1>{didWin ? "You Win !" : "You Lose !"}</h1>
+					{didWin && <h2>{getPlayTimeString(lastTime)}</h2>}
+				</div>
+			)}
 			{isGameStarted ? (
 				<GameHandler
 					config={config}
