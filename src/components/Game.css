@@ -2,6 +2,10 @@
 	max-width: 1280px;
 	margin: 0 auto;
 	text-align: center;
+
+    --dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
+    --light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
+    --highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
 }
 
 .App {
@@ -56,11 +60,20 @@ button {
 	overflow: hidden; /* Prevent content overflow */
 }
 
-.game-over-buttons > button {
-	/* Add a shadow to the buttons */
-	text-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
-	transition: none;
-	box-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
+button {
+    text-shadow: var(--dark-shadow);
+}
+
+button:hover {
+    text-shadow: var(--light-shadow);
+}
+
+button:active {
+    text-shadow: var(--highlight-shadow);
+}
+
+.game-over-buttons > button:hover {
+    box-shadow: var(--light-shadow);
 }
 
 .bottom-buttons {
@@ -80,11 +93,14 @@ button {
 	transition: none;
 	border: none;
     background-color: #555;
-    text-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
 }
 
 .bottom-buttons > .active {
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-shadow: var(--light-shadow);
+}
+
+.bottom-buttons > .active:hover {
+    text-shadow: var(--highlight-shadow);
 }
 
 .bottom-buttons > button::after {
@@ -153,11 +169,11 @@ button {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  text-shadow:
-    -2px 0 rgba(50 50 50 / 30%),
+  text-shadow: var(--dark-shadow);
+    /* -2px 0 rgba(50 50 50 / 30%),
     2px 0 rgba(50 50 50 / 30%),
     0 -2px rgba(50 50 50 / 30%),
-    0 2px rgba(50 50 50 / 30%);
+    0 2px rgba(50 50 50 / 30%); */
   text-align: center;
   user-select: none;
   cursor: pointer;
@@ -167,6 +183,7 @@ button {
 
 .cell:hover {
   background-color: #363a40;
+  text-shadow: var(--light-shadow);
 }
 
 .cell.revealed {
