@@ -1,8 +1,10 @@
 import { deleteScore } from "../utils/leaderboard";
+import { getDateString } from "../utils/timeutils";
+
 const Score = ({ score }) => {
 	return (
 		<div className="score">
-			<span className="date">{score.date}</span>
+			<span className="date">{getDateString(score.date)}</span>
 			<span className="time">{score.time}</span>
             <button onClick={() => deleteScore(score.id)}>X</button>
 		</div>
