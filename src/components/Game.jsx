@@ -3,6 +3,7 @@ import ConfigSelector from "./ConfigSelector";
 import { useState, useEffect } from "react";
 import "./Game.css";
 import { getPlayTimeString } from "../utils/timeutils";
+import { addScore, fetchScores } from "../utils/leaderboard";
 
 function Game() {
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -20,6 +21,7 @@ function Game() {
 		setIsGameOver(true);
 		setDidWin(true);
 		setLastTime(t);
+		addScore(t, config);
 	};
 	const [config, setConfig] = useState({});
 
