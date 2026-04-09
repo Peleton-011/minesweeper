@@ -695,14 +695,6 @@ const Game = ({
 					>
 						🚩
 					</button>
-					<button
-						onClick={() => addScore(playTime * 10, { width, height, mineCount: argMineCount, lives: argLives })}
-					>
-						Save
-					</button>
-					<button onClick={async () => console.log(await fetchScores())}>
-						Load
-					</button>
 				</div>
 			)}
 		</>
