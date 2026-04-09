@@ -1,6 +1,6 @@
 import React from "react";
 
-const Board = ({ board, onLeftClick, onRightClick, onHover }) => {
+const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 	const getNumberName = (number) => {
 		switch (number) {
 			case 1:
