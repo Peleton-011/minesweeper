@@ -1,7 +1,7 @@
 import Game from "./components/Game";
 import TestPage from "./components/TestPage";
+import LeaderBoard from "./components/LeaderBoard";
 // import { enable as enableDarkMode } from "darkreader";
-import { useEffect } from "react";
 import {
 	Route,
 	createBrowserRouter,
@@ -14,6 +14,7 @@ const router = createBrowserRouter(
 		<Route path="/">
 			<Route index element={<Game />} />
 			<Route path="test" element={<TestPage />} />
+            <Route path="scores" element={<LeaderBoard />} />
 		</Route>
 	)
 );
