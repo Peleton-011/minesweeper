@@ -4,6 +4,7 @@ import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
 import { addScore, fetchScores } from "../utils/leaderboard";
+import { getPlayTimeString } from "../utils/timeutils";
 
 const Game = ({
 	config: {
@@ -47,27 +48,11 @@ const Game = ({
 		if (isFirstClick) return;
 
 		const interval = setInterval(() => {
-			setPlayTime((prev) => prev + 1);
+			setPlayTime((prev) => prev + 10);
 		}, 10);
 
 		return () => clearInterval(interval);
 	}, [isFirstClick]);
-
-	const getPlayTimeString = (time) => {
-		const centis = (time % 100).toString().padStart(2, "0");
-		const seconds = (Math.floor(time / 100) % 60)
-			.toString()
-			.padStart(2, "0");
-		const minutes = (Math.floor(time / (100 * 60)) % 60)
-			.toString()
-			.padStart(2, "0");
-		const hours = (Math.floor(time / (100 * 60 * 60)) % 24)
-			.toString()
-			.padStart(2, "0");
-
-		const string = `${time > 60 * 60 * 100 ? hours + "h " : ""}${time > 60 * 100 ? minutes + "' " : ""}${seconds},${centis}"`;
-		return string;
-	};
 
 	const createBoard = (height, width) => {
 		// console.log(height, ", ", width);
