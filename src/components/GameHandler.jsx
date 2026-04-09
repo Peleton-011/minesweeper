@@ -671,7 +671,7 @@ const Game = ({
 				</TransformComponent>
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-				<span>🚩: {mineCount}</span>{" "}
+				<span>{mineCount} 🚩</span>{" "}
 				<span>{getPlayTimeString(playTime)}</span>
 				<span>
 					{new Array(argLives)
