@@ -16,7 +16,7 @@ const saveScore = async (newScore) => {
 	//Sort times and keep teh best
 	scores.sort((a, b) => a.time - b.time);
 
-	scores = scores.slice(0, 10);
+	// scores = scores.slice(0, 10);
 
 	await Preferences.set({
 		key: "leaderboard",
@@ -61,7 +61,10 @@ const Game = ({
 	const saveData = () => {
 		const data = {
 			time: playTime,
-			date: new Date().toLocaleString(),
+			date: new Date().getTime(),
+            size: board.length * board[0].length,
+            mines: argMineCount,
+            lives: argLives
 		};
 		saveScore(data);
 	};
