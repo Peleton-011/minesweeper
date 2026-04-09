@@ -16,7 +16,7 @@
 	height: 100vh;
 }
 
-.App > h1 {
+ .gameover {
 	z-index: 10;
 	position: fixed;
 	top: 0;
@@ -30,6 +30,11 @@
 	width: 100%;
 	padding: 15vh 0 10vh 0;
 }
+
+.gameover > h2 {
+    font-weight: normal;
+}
+
 
 .react-transform-wrapper {
 	width: 100vw !important;

@@ -8,16 +8,21 @@ function Game() {
 	const [didWin, setDidWin] = useState(false);
 	const [isGameStarted, setIsGameStarted] = useState(false);
 	const [key, setKey] = useState(0);
+	const [lastTime, setLastTime] = useState(0);
 
+	useEffect(() => {
+		console.log(lastTime);
+	}, [lastTime]);
 
-
-	const onLose = () => {
+	const onLose = (t) => {
 		setIsGameOver(true);
 		setDidWin(false);
+		setLastTime(t);
 	};
-	const onWin = () => {
+	const onWin = (t) => {
 		setIsGameOver(true);
 		setDidWin(true);
+		setLastTime(t);
 	};
 	const [config, setConfig] = useState({});
 
@@ -52,9 +57,18 @@ function Game() {
 					setIsGameStarted={setIsGameStarted}
 				/>
 			)}
-			{isGameOver && <h1>{didWin ? "You Win !" : "You Lose !"}</h1>}
+			{isGameOver && <div className="gameover">
+
+                <h1>{didWin ? "You Win !" : "You Lose !"}</h1>
+                {didWin && <h2>{lastTime}</h2>}
+            </div>
+            }
 			{isGameStarted ? (
-				<GameHandler config={config} key={key} isGameOver={isGameOver} />
+				<GameHandler
+					config={config}
+					key={key}
+					isGameOver={isGameOver}
+				/>
 			) : null}
 
 			{isGameOver && (

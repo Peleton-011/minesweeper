@@ -36,6 +36,7 @@ const Game = ({
 
 	const onWin = () => {
 		argOnWin(playTime * 10);
+        console.log(playTime)
 	};
 
 	const onLose = () => {
