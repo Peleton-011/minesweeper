@@ -36,6 +36,5 @@ export const addScore = (time, gameConfig) => {
 };
 
 export const fetchScores = async () => {
-    
 	return await loadScores()
 };
