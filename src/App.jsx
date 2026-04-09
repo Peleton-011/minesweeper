@@ -1,6 +1,6 @@
 import Game from "./components/Game";
 import TestPage from "./components/TestPage";
-import { enable as enableDarkMode } from "darkreader";
+// import { enable as enableDarkMode } from "darkreader";
 import { useEffect } from "react";
 import {
 	Route,
@@ -19,12 +19,12 @@ const router = createBrowserRouter(
 );
 
 function App({ routes }) {
-	useEffect(() => {
-		enableDarkMode({
-			brightness: 100,
-			contrast: 100,
-		});
-	}, []);
+	// useEffect(() => {
+	// 	enableDarkMode({
+	// 		brightness: 100,
+	// 		contrast: 100,
+	// 	});
+	// }, []);
 
 	return (
 		<>
