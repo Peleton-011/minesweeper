@@ -12,9 +12,13 @@ const LeaderBoard = () => {
 	return (
 		<div onClick={() => fetchScores().then(setScores)}>
 			<h1>Leaderboard</h1>
-			{scores.map((score) => (
-				<Score key={score.id} score={score} />
-			))}
+			<ol>
+				{scores.map((score) => (
+					<li key={score.id}>
+						<Score  score={score} />
+					</li>
+				))}
+			</ol>
 		</div>
 	);
 };
