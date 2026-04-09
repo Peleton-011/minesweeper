@@ -1,6 +1,6 @@
 import React from "react";
 
-const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
+const Board = ({ board, onLeftClick, onRightClick, onHover }) => {
 	const getNumberName = (number) => {
 		switch (number) {
 			case 1:
@@ -24,7 +24,7 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 		}
 	};
 
-    // console.log(onHover)
+	// console.log(onHover)
 
 	return (
 		<div className="board">
@@ -50,7 +50,8 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 							}
 							onClick={(e) => onLeftClick(e, i, j, cell)}
 							onContextMenu={(e) => onRightClick(e, i, j, cell)}
-                            onMouseEnter={(e) => onHover(e, i, j, cell)}
+							onMouseEnter={(e) => onHover(e, i, j, cell)}
+							onMouseLeave={(e) => onHover(e, i, j, null)}
 						>
 							{!board[i][j].isRevealed
 								? board[i][j].isFlagged

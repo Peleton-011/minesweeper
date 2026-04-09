@@ -48,6 +48,7 @@ const Game = ({
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
 	const [isFlaggingMode, setIsFlaggingMode] = useState(false);
+	const flaggingModeRef = React.useRef(isFlaggingMode);
 
 	const [hoveredCell, setHoveredCell] = useState(null);
 
@@ -65,10 +66,9 @@ const Game = ({
 		saveScore(data);
 	};
 	const loadData = () => {
-        loadScores().then((scores) => {
-            
-            console.log(scores);
-        })
+		loadScores().then((scores) => {
+			console.log(scores);
+		});
 	};
 
 	useEffect(() => {
@@ -650,6 +650,8 @@ const Game = ({
 	};
 
 	const onKeyDown = (e) => {
+		if (hoveredCell[2] == null) return;
+		const isFlaggingMode = flaggingModeRef.current;
 		const doesMatch =
 			e.code === "Enter" ||
 			e.code === "NumpadEnter" ||
