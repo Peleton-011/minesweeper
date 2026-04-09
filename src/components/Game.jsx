@@ -11,10 +11,6 @@ function Game() {
 	const [key, setKey] = useState(0);
 	const [lastTime, setLastTime] = useState(0);
 
-	useEffect(() => {
-		console.log(lastTime);
-	}, [lastTime]);
-
 	const onLose = (t) => {
 		setIsGameOver(true);
 		setDidWin(false);
