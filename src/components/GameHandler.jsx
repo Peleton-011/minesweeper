@@ -60,7 +60,7 @@ const Game = ({
 
 	const saveData = () => {
 		const data = {
-			time: playTime,
+			time: playTime * 10,
 			date: new Date().getTime(),
             size: board.length * board[0].length,
             mines: argMineCount,
