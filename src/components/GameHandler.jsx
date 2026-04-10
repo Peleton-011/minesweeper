@@ -558,7 +558,7 @@ const Game = ({
 	const handleFlag = (e, i, j) => {
 		e.preventDefault();
 
-        const cell = board[i][j]
+		const cell = board[i][j];
 
 		if (isFirstClick) return handleReveal(e, i, j);
 
@@ -584,7 +584,7 @@ const Game = ({
 	const handleReveal = (e, i, j) => {
 		e.preventDefault();
 
-        const cell = board[i][j];
+		const cell = board[i][j];
 
 		// console.log("Left click");
 		let newBoard;
@@ -611,14 +611,13 @@ const Game = ({
 		// console.log(hoveredCell);
 	};
 
-	const onKeyDown = (e) => {
+	const actionOnKeyDown = (e) => {
 		if (hoveredCell == null) return;
 		const isFlaggingMode = flaggingModeRef.current;
 		const doesMatchAction =
 			e.code === "Enter" ||
 			e.code === "NumpadEnter" ||
 			e.code === "Space";
-		const doesMatchSwitch = e.code === "KeyF";
 
 		// console.log(e.code);
 		// console.log(doesMatch);
@@ -633,29 +632,33 @@ const Game = ({
 			(doesMatchAction && !e.shiftKey && isFlaggingMode)
 		) {
 			onRightClick(e, ...hoveredCell);
-		} else if (doesMatchSwitch) {
-			setIsFlaggingMode(!isFlaggingMode);
+		}
+	};
+
+	const switchModeOnKeyDown = (e) => {
+		if (e.code === "KeyF" && !e.repeat) {
+			setIsFlaggingMode((prev) => !prev);
 		}
 	};
 
 	const onLeftClick = (e, i, j) => {
 		// e.currentTarget.blur();
 
-		isFlaggingMode
-			? handleFlag(e, i, j)
-			: handleReveal(e, i, j);
+		isFlaggingMode ? handleFlag(e, i, j) : handleReveal(e, i, j);
 	};
 
 	const onRightClick = (e, i, j) => {
 		// e.currentTarget.blur();
 
-		isFlaggingMode
-			? handleReveal(e, i, j)
-			: handleFlag(e, i, j);
+		isFlaggingMode ? handleReveal(e, i, j) : handleFlag(e, i, j);
 	};
 
 	useEffect(() => {
-		const handler = (e) => onKeyDown(e);
+		const handler = (e) => {
+			actionOnKeyDown(e);
+			switchModeOnKeyDown(e);
+		};
+        
 		window.addEventListener("keydown", handler);
 		return () => window.removeEventListener("keydown", handler);
 	}, [hoveredCell, isFlaggingMode, board]);
@@ -675,7 +678,6 @@ const Game = ({
 						onLeftClick={onLeftClick}
 						onRightClick={onRightClick}
 						onHover={onHover}
-						onKeyDown={onKeyDown}
 					/>
 				</TransformComponent>
 			</TransformWrapper>

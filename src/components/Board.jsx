@@ -34,11 +34,6 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 						<div
 							role="button"
 							tabIndex={0}
-							onKeyDown={(e) => {
-								if (e.key === "Enter" || e.key === " ") {
-									onLeftClick(e, i, j);
-								}
-							}}
 							key={j}
 							className={
 								"cell" +
