@@ -24,18 +24,19 @@ export const fetchScores = async () => {
 };
 
 export const deleteScore = async (id) => {
-    const { value } = await Preferences.get({ key: "leaderboard" });
-    const scores = value ? JSON.parse(value) : [];
-    const newScores = scores.filter((score) => score.id !== id);
-    await Preferences.set({
-        key: "leaderboard",
-        value: JSON.stringify(newScores),
-    });
-}
+	const { value } = await Preferences.get({ key: "leaderboard" });
+	const scores = value ? JSON.parse(value) : [];
+	const newScores = scores.filter((score) => score.id !== id);
+	await Preferences.set({
+		key: "leaderboard",
+		value: JSON.stringify(newScores),
+	});
+};
 
 export const addScore = (time, gameConfig) => {
+	console.log(gameConfig);
 	const data = {
-        id: Date.now(),
+		id: Date.now(),
 		time,
 		date: new Date().getTime(),
 		size: gameConfig.width * gameConfig.height,

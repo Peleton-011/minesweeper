@@ -14,8 +14,8 @@ const router = createHashRouter(
 	createRoutesFromElements(
 		<>
 			<Route path="/" element={<Game />} />
-			<Route path="test" element={<TestPage />} />
-			<Route path="scores" element={<LeaderBoard />} />
+			<Route path="/test" element={<TestPage />} />
+			<Route path="/scores/:width?/:height?/:mines?/:lives?" element={<LeaderBoard />} />
 		</>,
 	),
 );

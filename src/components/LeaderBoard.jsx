@@ -2,11 +2,25 @@ import { useEffect, useState } from "react";
 import { fetchScores } from "../utils/leaderboard";
 import Score from "./Score";
 
+import { useParams } from "react-router-dom";
+
 const LeaderBoard = () => {
+	const { width, height, mines, lives } = useParams();
 	const [scores, setScores] = useState([]);
 
 	useEffect(() => {
-		fetchScores().then(setScores);
+		fetchScores().then((scs) => {
+			let scores = scs;
+			if (width && height && mines && lives) {
+				scores = scores.filter((score) =>  (
+						score.size === width * height &&
+						score.mines === Number(mines) &&
+						score.lives === Number(lives)
+					));
+			}
+
+			return setScores(scores);
+		});
 	}, []);
 
 	return (
@@ -15,7 +29,7 @@ const LeaderBoard = () => {
 			<ol>
 				{scores.map((score) => (
 					<li key={score.id}>
-						<Score  score={score} />
+						<Score score={score} />
 					</li>
 				))}
 			</ol>

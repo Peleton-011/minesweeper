@@ -281,10 +281,16 @@ const DifficultyForm = ({
 				</label>
 			) : null}
 			<div className="buttons">
-				<button className="play" type="submit">Play</button>
+				<button className="play" type="submit">
+					Play
+				</button>
 				<div>
 					<button className="scores">
-						<Link to={`/scores`}>...</Link>
+						<Link
+							to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
+						>
+							...
+						</Link>
 					</button>
 				</div>
 			</div>

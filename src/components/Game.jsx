@@ -1,6 +1,6 @@
 import GameHandler from "./GameHandler";
 import ConfigSelector from "./ConfigSelector";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Game.css";
 import { getPlayTimeString } from "../utils/timeutils";
 import { addScore, fetchScores } from "../utils/leaderboard";
@@ -21,9 +21,15 @@ function Game() {
 		setIsGameOver(true);
 		setDidWin(true);
 		setLastTime(t);
-		addScore(t, config);
+		console.log(configRef.current);
+		addScore(t, configRef.current);
 	};
 	const [config, setConfig] = useState({});
+	const configRef = useRef(config);
+
+	useEffect(() => {
+		configRef.current = config;
+	}, [config]);
 
 	const handleRestart = () => {
 		setKey(key + 1);
