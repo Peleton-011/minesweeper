@@ -46,9 +46,27 @@ fieldset {
 	flex-direction: column;
 }
 
+form > .buttons,
 form > button {
 	margin-top: 1rem;
 	width: 100%;
+}
+
+.buttons {
+    display: flex;
+}
+
+.buttons > div {
+	width: min-content;
+}
+
+.play {
+    width: 100%;
+}
+
+.scores {
+	border-radius: 50%;
+	aspect-ratio: 1;
 }
 
 @media only screen and (max-width: 767px) {

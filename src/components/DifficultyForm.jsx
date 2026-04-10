@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import "./DifficultyForm.css";
+import { Link } from "react-router-dom";
 
 const DifficultyForm = ({
 	config: {
@@ -24,16 +25,16 @@ const DifficultyForm = ({
 
 	const [livesInput, setLivesInput] = useState(lives || 3);
 	const [noGuessModeInput, setNoGuessModeInput] = useState(
-		noGuessMode || false
+		noGuessMode || false,
 	);
 	const [autoSolveModeInput, setAutoSolveModeInput] = useState(
-		autoSolveMode || false
+		autoSolveMode || false,
 	);
 
 	const [winStateCheckInput, setWinStateCheckInput] = useState(
 		["revealAll", "flagAll", "both"].find((x) => x === winStateCheck)
 			? winStateCheck
-			: "revealAll"
+			: "revealAll",
 	);
 	const [startZoneInput, setStartZoneInput] = useState(startZone || 3);
 
@@ -84,7 +85,7 @@ const DifficultyForm = ({
 
 	const getRecommendedMines = (height, width) => {
 		return Math.floor(
-			(309 / 2080 + (height * width) / 8320) * width * height
+			(309 / 2080 + (height * width) / 8320) * width * height,
 		);
 	};
 
@@ -279,7 +280,14 @@ const DifficultyForm = ({
 					/>
 				</label>
 			) : null}
-			<button type="submit">Play</button>
+			<div className="buttons">
+				<button className="play" type="submit">Play</button>
+				<div>
+					<button className="scores">
+						<Link to={`/scores`}>...</Link>
+					</button>
+				</div>
+			</div>
 		</form>
 	);
 };
