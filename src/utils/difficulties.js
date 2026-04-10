@@ -32,10 +32,8 @@ export const standardDifficulties = [
 export const getDifficultyNameFromConfig = (config) => {
 	const mode = config.lives === 1 ? "Perfect" : "Arcade";
 	let difficulty = "";
-	console.log(config);
 	standardDifficulties.forEach((dif) => {
 		const size = dif.width * dif.height;
-		console.log(
 			size,
 			", ",
 			config.size,
