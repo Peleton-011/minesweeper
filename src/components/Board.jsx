@@ -36,7 +36,7 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 							tabIndex={0}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
-									onLeftClick(e, i, j, cell);
+									onLeftClick(e, i, j);
 								}
 							}}
 							key={j}
@@ -48,10 +48,10 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 									? " " + getNumberName(cell.content)
 									: "")
 							}
-							onClick={(e) => onLeftClick(e, i, j, cell)}
-							onContextMenu={(e) => onRightClick(e, i, j, cell)}
-							onMouseEnter={(e) => onHover(e, i, j, cell)}
-							onMouseLeave={(e) => onHover(e, i, j, null)}
+							onClick={(e) => onLeftClick(e, i, j)}
+							onContextMenu={(e) => onRightClick(e, i, j)}
+							onMouseEnter={(e) => onHover(e, [i, j])}
+							onMouseLeave={(e) => onHover(e, null)}
 						>
 							{!board[i][j].isRevealed
 								? board[i][j].isFlagged

@@ -555,10 +555,12 @@ const Game = ({
 		updateBoardRecursively(board); // Start the recursive update
 	};
 
-	const handleFlag = (e, i, j, cell) => {
+	const handleFlag = (e, i, j) => {
 		e.preventDefault();
 
-		if (isFirstClick) return handleReveal(e, i, j, cell);
+        const cell = board[i][j]
+
+		if (isFirstClick) return handleReveal(e, i, j);
 
 		//Automated behavior
 		if (autoSolveMode) {
@@ -579,8 +581,10 @@ const Game = ({
 		}
 	};
 
-	const handleReveal = (e, i, j, cell) => {
+	const handleReveal = (e, i, j) => {
 		e.preventDefault();
+
+        const cell = board[i][j];
 
 		// console.log("Left click");
 		let newBoard;
@@ -602,49 +606,52 @@ const Game = ({
 		}
 	};
 
-	const onHover = (e, i, j, cell) => {
-		setHoveredCell([i, j, cell]);
+	const onHover = (e, coords) => {
+		setHoveredCell(coords);
 		// console.log(hoveredCell);
 	};
 
 	const onKeyDown = (e) => {
-		if (hoveredCell[2] == null) return;
+		if (hoveredCell == null) return;
 		const isFlaggingMode = flaggingModeRef.current;
-		const doesMatch =
+		const doesMatchAction =
 			e.code === "Enter" ||
 			e.code === "NumpadEnter" ||
 			e.code === "Space";
+		const doesMatchSwitch = e.code === "KeyF";
 
 		// console.log(e.code);
 		// console.log(doesMatch);
 		// console.log(e.shiftKey);
 		if (
-			(doesMatch && !e.shiftKey && !isFlaggingMode) ||
-			(doesMatch && e.shiftKey && isFlaggingMode)
+			(doesMatchAction && !e.shiftKey && !isFlaggingMode) ||
+			(doesMatchAction && e.shiftKey && isFlaggingMode)
 		) {
-			onLeftClick(e, hoveredCell[0], hoveredCell[1], hoveredCell[2]);
+			onLeftClick(e, ...hoveredCell);
 		} else if (
-			(doesMatch && e.shiftKey && !isFlaggingMode) ||
-			(doesMatch && !e.shiftKey && isFlaggingMode)
+			(doesMatchAction && e.shiftKey && !isFlaggingMode) ||
+			(doesMatchAction && !e.shiftKey && isFlaggingMode)
 		) {
-			onRightClick(e, hoveredCell[0], hoveredCell[1], hoveredCell[2]);
+			onRightClick(e, ...hoveredCell);
+		} else if (doesMatchSwitch) {
+			setIsFlaggingMode(!isFlaggingMode);
 		}
 	};
 
-	const onLeftClick = (e, i, j, cell) => {
+	const onLeftClick = (e, i, j) => {
 		// e.currentTarget.blur();
 
 		isFlaggingMode
-			? handleFlag(e, i, j, cell)
-			: handleReveal(e, i, j, cell);
+			? handleFlag(e, i, j)
+			: handleReveal(e, i, j);
 	};
 
-	const onRightClick = (e, i, j, cell) => {
+	const onRightClick = (e, i, j) => {
 		// e.currentTarget.blur();
 
 		isFlaggingMode
-			? handleReveal(e, i, j, cell)
-			: handleFlag(e, i, j, cell);
+			? handleReveal(e, i, j)
+			: handleFlag(e, i, j);
 	};
 
 	useEffect(() => {
