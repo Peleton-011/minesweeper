@@ -1,16 +1,18 @@
-form {
+form.difficulty-form {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	width: 30rem;
 	padding: 1rem;
 	position: relative;
-    gap: .5rem
+	gap: 0.5rem;
+	margin-bottom: 3rem;
 }
 
-form > * {
+form.difficulty-form > * {
 	margin: 0;
 }
+
 label,
 fieldset {
 	width: 100%;
@@ -19,7 +21,7 @@ fieldset {
 	justify-content: space-between;
 }
 fieldset {
-    margin: .5rem -1rem;
+	margin: 0.5rem -1rem;
 }
 span.suggest {
 	visibility: hidden;
@@ -45,12 +47,12 @@ fieldset {
 }
 
 form > button {
-    margin-top: 1rem;
-    width: 100%;
+	margin-top: 1rem;
+	width: 100%;
 }
 
 @media only screen and (max-width: 767px) {
-    form {
-        width: 90vw;
-    }
-  }
+	form {
+		width: 90vw;
+	}
+}

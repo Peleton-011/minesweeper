@@ -175,7 +175,7 @@ const DifficultyForm = ({
 	};
 
 	return (
-		<form onSubmit={onSubmit}>
+		<form onSubmit={onSubmit} className="difficulty-form">
 			<h3>{difName}</h3>
 			{(height || width) && mineCount ? (
 				<div>
