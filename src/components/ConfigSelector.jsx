@@ -1,39 +1,9 @@
 import React from "react";
 import Carousel from "./Carousel";
 import DifficultyDisplay from "./DifficultyDisplay";
+import { standardDifficulties } from "../utils/difficulties";
 
 const ConfigSelector = ({ setConfig, setIsGameStarted }) => {
-	const baseDifficulty = {
-		winStateCheck: "revealAll",
-		startZone: 3,
-		lives: 3,
-		autoSolveMode: false,
-		noGuessMode: false,
-	};
-	const standardDifficulties = [
-		{
-            ...baseDifficulty,
-			height: 8,
-			width: 8,
-			mineCount: 10,
-			difName: "Easy",
-		},
-		{
-            ...baseDifficulty,
-			height: 16,
-			width: 16,
-			mineCount: 40,
-			difName: "Medium",
-		},
-		{
-            ...baseDifficulty,
-			height: 16,
-			width: 30,
-			mineCount: 99,
-			difName: "Hard",
-		},
-	];
-
 	return (
 		<div>
 			<Carousel
@@ -50,7 +20,7 @@ const ConfigSelector = ({ setConfig, setIsGameStarted }) => {
 						key={i}
 						config={dif}
 						setConfig={setConfig}
-                        setIsGameStarted={setIsGameStarted}
+						setIsGameStarted={setIsGameStarted}
 					/>
 				))}
 			/>
