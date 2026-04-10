@@ -34,14 +34,7 @@ export const getDifficultyNameFromConfig = (config) => {
 	let difficulty = "";
 	standardDifficulties.forEach((dif) => {
 		const size = dif.width * dif.height;
-			size,
-			", ",
-			config.size,
-			" - ",
-			dif.mineCount,
-			", ",
-			config.mines,
-		);
+
 		if (size === config.size && dif.mineCount === config.mines) {
 			difficulty += dif.difName;
 		}
