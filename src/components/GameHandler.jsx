@@ -558,6 +558,8 @@ const Game = ({
 	const handleFlag = (e, i, j, cell) => {
 		e.preventDefault();
 
+		if (isFirstClick) return handleReveal(e, i, j, cell);
+
 		//Automated behavior
 		if (autoSolveMode) {
 			return;
