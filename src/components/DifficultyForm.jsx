@@ -285,7 +285,10 @@ const DifficultyForm = ({
 					Play
 				</button>
 				<div>
-					<button className="scores">
+					<button
+						className="scores"
+						onClick={(e) => e.preventDefault()}
+					>
 						<Link
 							to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
 						>
