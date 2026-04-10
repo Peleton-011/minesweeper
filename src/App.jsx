@@ -7,16 +7,17 @@ import {
 	createBrowserRouter,
 	createRoutesFromElements,
 	RouterProvider,
+	createHashRouter,
 } from "react-router-dom";
 
-const router = createBrowserRouter(
+const router = createHashRouter(
 	createRoutesFromElements(
-		<Route path="/">
-			<Route index element={<Game />} />
+		<>
+			<Route path="/" element={<Game />} />
 			<Route path="test" element={<TestPage />} />
-            <Route path="scores" element={<LeaderBoard />} />
-		</Route>
-	)
+			<Route path="scores" element={<LeaderBoard />} />
+		</>,
+	),
 );
 
 function App({ routes }) {
