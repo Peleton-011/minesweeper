@@ -21,7 +21,7 @@ function Game() {
 		setIsGameOver(true);
 		setDidWin(true);
 		setLastTime(t);
-		console.log(configRef.current);
+		// console.log(configRef.current);
 		addScore(t, configRef.current);
 	};
 	const [config, setConfig] = useState({});

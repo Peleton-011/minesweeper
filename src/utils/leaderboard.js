@@ -34,7 +34,7 @@ export const deleteScore = async (id) => {
 };
 
 export const addScore = (time, gameConfig) => {
-	console.log(gameConfig);
+	// console.log(gameConfig);
 	const data = {
 		id: Date.now(),
 		time,
