@@ -32,6 +32,9 @@ export const standardDifficulties = [
 export const getDifficultyNameFromConfig = (config) => {
 	const mode = config.lives === 1 ? "Perfect" : "Arcade";
 	let difficulty = "";
+	// for (let [key, val] of Object.entries(config)) {
+	// 	console.log(key, typeof val);
+	// }
 	standardDifficulties.forEach((dif) => {
 		const size = dif.width * dif.height;
 
@@ -43,3 +46,30 @@ export const getDifficultyNameFromConfig = (config) => {
 	if (difficulty.length === 0) difficulty += "Custom";
 	return mode + " " + difficulty;
 };
+
+const basePlusCustom = [
+	...standardDifficulties,
+	{
+		...baseDifficulty,
+		height: 7,
+		width: 7,
+		// This will be the custom difficulty
+		difName: "Custom",
+	},
+];
+
+const baseCustomArcadePerfect = [];
+
+basePlusCustom.forEach((dif) => {
+    baseCustomArcadePerfect.push(dif);
+    baseCustomArcadePerfect.push({ ...dif, lives: 1 });
+});
+
+export const allDifficulties = baseCustomArcadePerfect.map((dif) => ({
+	...dif,
+	difName: getDifficultyNameFromConfig({
+		...dif,
+		size: dif.width * dif.height,
+		mines: dif.mineCount,
+	}),
+}));
