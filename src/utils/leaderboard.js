@@ -46,3 +46,12 @@ export const addScore = (time, gameConfig) => {
 
 	saveScore(data);
 };
+
+export const fetchScoresByConfig = async (config) => {
+    const scores = await fetchScores();
+
+    return scores.filter(
+        (score) => score.size === config.width * config.height &&
+            score.mines === config.mines &&
+            score.lives === config.lives);
+}
