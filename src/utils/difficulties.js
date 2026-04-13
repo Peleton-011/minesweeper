@@ -73,3 +73,29 @@ export const allDifficulties = baseCustomArcadePerfect.map((dif) => ({
 		mines: dif.mineCount,
 	}),
 }));
+
+export const getDifficultyFromConfig = (config) => {
+    const dif = allDifficulties.find((dif) => {
+        return (
+            dif.width === config.width &&
+            dif.height === config.height &&
+            dif.mineCount === config.mineCount &&
+            dif.lives === config.lives
+        );
+    });
+    return dif;
+};
+
+export const getNextDifficultyFromConfig = (config) => {
+    const all = allDifficulties;
+    const index = all.indexOf(getDifficultyFromConfig(config));
+    if (index === all.length - 1) return all[0];
+    return all[index + 1];
+}
+
+export const getPreviousDifficultyFromConfig = (config) => {
+    const all = allDifficulties;
+    const index = all.indexOf(getDifficultyFromConfig(config));
+    if (index === 0) return all[all.length - 1];
+    return all[index - 1];
+}
