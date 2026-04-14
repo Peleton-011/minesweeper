@@ -38,11 +38,9 @@ const LeaderBoardPage = () => {
 		<>
 			<div className="leaderboard-title">
 				<h2>{title}</h2>
-				<button>
 					<Link to="/" onClick={() => {console.log("Naviger")}}>
 						{"<--"}
 					</Link>
-				</button>
 			</div>
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />

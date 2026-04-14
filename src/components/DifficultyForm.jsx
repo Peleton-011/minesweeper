@@ -284,27 +284,23 @@ const DifficultyForm = ({
 				<button className="play" type="submit">
 					Play
 				</button>
-				<div>
-					<div className="scores-btn">
-						<Link
-							to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
-							onClick={(e) =>
-								e.preventDefault() &&
-								console.log(
-									widthInput +
-										"," +
-										heightInput +
-										"," +
-										mineCountInput +
-										"," +
-										livesInput,
-								)
-							}
-						>
-							...
-						</Link>
-					</div>
-				</div>
+				<Link
+					className="scores-btn"
+					to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
+					onClick={(e) => {
+							console.log(
+								widthInput +
+									"," +
+									heightInput +
+									"," +
+									mineCountInput +
+									"," +
+									livesInput,
+							);
+					}}
+				>
+					...
+				</Link>
 			</div>
 		</form>
 	);

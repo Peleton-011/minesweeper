@@ -60,6 +60,10 @@ form > button {
 	width: min-content;
 }
 
+.scores-btn {
+    padding: 0 1rem;
+}
+
 .play {
     width: 100%;
 }
