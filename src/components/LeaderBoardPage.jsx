@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import "./LeaderBoard.css";
 
 import { useParams } from "react-router-dom";
-import { getDifficultyNameFromConfig } from "../utils/difficulties";
+import {
+	getDifficultyNameFromConfig,
+	getNextDifficultyFromConfig,
+	getPreviousDifficultyFromConfig,
+} from "../utils/difficulties";
 import { Link } from "react-router-dom";
 import LeaderBoard from "./LeaderBoard";
 import { fetchScoresByConfig } from "../utils/leaderboard";
@@ -15,11 +19,15 @@ const LeaderBoardPage = () => {
 		width: Number(width),
 		height: Number(height),
 		mines: Number(mines),
+		mineCount: Number(mines),
 		lives: Number(lives),
 	};
 	const [scores, setScores] = useState([]);
 
 	const title = getDifficultyNameFromConfig({ ...config });
+
+	const nextDifficulty = getNextDifficultyFromConfig({ ...config });
+	const prevDifficulty = getPreviousDifficultyFromConfig({ ...config });
 
 	const fetchScores = () => {
 		fetchScoresByConfig(config).then((scs) => {
@@ -29,13 +37,39 @@ const LeaderBoardPage = () => {
 
 	useEffect(() => {
 		fetchScores();
-	}, []);
+	}, [width, height, mines, lives]);
 
 	return (
 		<>
-			<div className="leaderboard-title">
-				<h2>{title}</h2>
-				<Link to={`/${width}/${height}/${mines}/${lives}`}>{"<--"}</Link>
+			<div className="leaderboard-heading">
+				<Link
+					to={`/scores/${prevDifficulty.width}/${prevDifficulty.height}/${prevDifficulty.mineCount}/${prevDifficulty.lives}`}
+					onClick={() => {
+						// prevSlide();
+						// leftButtonToggle();
+					}}
+					className={
+						"prev btn " /*+ (leftButtonAnimation ? "active" : "")*/
+					}
+				></Link>
+
+				<div className="leaderboard-title">
+					<h2>{title}</h2>
+					<Link to={`/${width}/${height}/${mines}/${lives}`}>
+						{"<--"}
+					</Link>
+				</div>
+
+				<Link
+					to={`/scores/${nextDifficulty.width}/${nextDifficulty.height}/${nextDifficulty.mineCount}/${nextDifficulty.lives}`}
+					onClick={() => {
+						// nextSlide();
+						// rightButtonToggle();
+					}}
+					className={
+						"next btn " /*+ (rightButtonAnimation ? "active" : "")*/
+					}
+				></Link>
 			</div>
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
