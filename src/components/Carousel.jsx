@@ -5,8 +5,8 @@ import { useSwipeable } from "react-swipeable";
 
 import useDeviceType from "../hooks/useDeviceType";
 
-const Carousel = ({ pages, title }) => {
-	const [currentIndex, setCurrentIndex] = useState(0);
+const Carousel = ({ pages, title, startingIndex = 0 }) => {
+	const [currentIndex, setCurrentIndex] = useState(startingIndex);
 	const [isForward, setIsForward] = useState(undefined);
 
 	let slider;
@@ -44,7 +44,7 @@ const Carousel = ({ pages, title }) => {
 
 	const prevSlide = () => {
 		setCurrentIndex(
-			(prevIndex) => (prevIndex - 1 + pages.length) % pages.length
+			(prevIndex) => (prevIndex - 1 + pages.length) % pages.length,
 		);
 		setIsForward(false);
 	};
@@ -63,21 +63,25 @@ const Carousel = ({ pages, title }) => {
 		slides = slider.querySelectorAll(".slide");
 	}, []);
 
+	useEffect(() => {
+		setCurrentIndex(startingIndex);
+	}, [startingIndex]);
+
 	const getSlideClass = (index) => {
 		if (isForward) {
 			return index === currentIndex
 				? "active slide-in-right"
 				: index === (currentIndex - 1 + pages.length) % pages.length
-				? "slide-away-left"
-				: "inactive";
+					? "slide-away-left"
+					: "inactive";
 		} else if (isForward === undefined) {
 			return index === currentIndex ? "active" : "inactive";
 		} else {
 			return index === currentIndex
 				? "active slide-in-left"
 				: index === (currentIndex + 1 + pages.length) % pages.length
-				? "slide-away-right"
-				: "inactive";
+					? "slide-away-right"
+					: "inactive";
 		}
 	};
 
