@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import "./LeaderBoard.css";
+import "./LeaderBoardPage.css";
 
 import { useParams } from "react-router-dom";
 import {
@@ -40,7 +40,7 @@ const LeaderBoardPage = () => {
 	}, [width, height, mines, lives]);
 
 	return (
-		<>
+		<div className="leaderboard-wrapper">
 			<div className="leaderboard-heading">
 				<Link
 					to={`/scores/${prevDifficulty.width}/${prevDifficulty.height}/${prevDifficulty.mineCount}/${prevDifficulty.lives}`}
@@ -49,7 +49,7 @@ const LeaderBoardPage = () => {
 						// leftButtonToggle();
 					}}
 					className={
-						"prev btn " /*+ (leftButtonAnimation ? "active" : "")*/
+						"prev btn leaderboard" /*+ (leftButtonAnimation ? "active" : "")*/
 					}
 				></Link>
 
@@ -67,14 +67,14 @@ const LeaderBoardPage = () => {
 						// rightButtonToggle();
 					}}
 					className={
-						"next btn " /*+ (rightButtonAnimation ? "active" : "")*/
+						"next btn leaderboard" /*+ (rightButtonAnimation ? "active" : "")*/
 					}
 				></Link>
 			</div>
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
 			</div>
-		</>
+		</div>
 	);
 };
 
