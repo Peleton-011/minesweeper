@@ -39,3 +39,7 @@
 	width: 15px;
 	height: 15px;
 }
+
+.no-score {
+    color: #AAA;
+}

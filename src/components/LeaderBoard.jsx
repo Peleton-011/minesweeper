@@ -3,7 +3,7 @@ import Score from "./Score";
 const LeaderBoard = ({ scoreList }) => {
 	return (
 		<>
-			<ol>
+        {scoreList.length ? (<ol>
 				{scoreList &&
 					scoreList.map &&
 					scoreList.map((score) => (
@@ -11,7 +11,10 @@ const LeaderBoard = ({ scoreList }) => {
 							<Score score={score} />
 						</li>
 					))}
-			</ol>
+			</ol>) : (
+                <h3 className="no-score">no scores here! Yet...</h3>
+            )}
+			
 		</>
 	);
 };
