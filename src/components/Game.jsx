@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import "./Game.css";
 import { getPlayTimeString } from "../utils/timeutils";
 import { addScore, fetchScores } from "../utils/leaderboard";
+import { useParams } from "react-router-dom";
 
 function Game() {
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -11,6 +12,8 @@ function Game() {
 	const [isGameStarted, setIsGameStarted] = useState(false);
 	const [key, setKey] = useState(0);
 	const [lastTime, setLastTime] = useState(0);
+
+	const { width, height, mines, lives } = useParams();
 
 	const onLose = (t) => {
 		setIsGameOver(true);
@@ -24,6 +27,16 @@ function Game() {
 		// console.log(configRef.current);
 		addScore(t, configRef.current);
 	};
+
+	const baseConfig = {
+		height: 16,
+		width: 30,
+		mineCount: 99,
+		lives: 3,
+		onLose,
+		onWin,
+	};
+
 	const [config, setConfig] = useState({});
 	const configRef = useRef(config);
 
@@ -41,6 +54,18 @@ function Game() {
 		setIsGameOver(false);
 	};
 
+	useEffect(() => {
+		const initialConfig = {
+			size: Number(width) * Number(height),
+			width: Number(width),
+			height: Number(height),
+			mineCount: Number(mines),
+			lives: Number(lives),
+		};
+
+		setConfig(initialConfig);
+	}, []);
+
 	return (
 		<div className="App">
 			{isGameStarted ? null : (
@@ -48,18 +73,12 @@ function Game() {
 					setConfig={(config) => {
 						// console.log(config);
 						setConfig({
-							...{
-								height: 16,
-								width: 30,
-								mineCount: 99,
-								lives: 3,
-								onLose,
-								onWin,
-							},
+							...baseConfig,
 							...config,
 						});
 					}}
 					setIsGameStarted={setIsGameStarted}
+					initialConfig={config}
 				/>
 			)}
 			{isGameOver && (
