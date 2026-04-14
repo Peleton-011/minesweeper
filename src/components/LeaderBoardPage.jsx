@@ -35,7 +35,7 @@ const LeaderBoardPage = () => {
 		<>
 			<div className="leaderboard-title">
 				<h2>{title}</h2>
-				<Link to="/">{"<--"}</Link>
+				<Link to={`/${width}/${height}/${mines}/${lives}`}>{"<--"}</Link>
 			</div>
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
