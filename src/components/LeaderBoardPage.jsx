@@ -3,9 +3,7 @@ import { useEffect, useState } from "react";
 import "./LeaderBoard.css";
 
 import { useParams } from "react-router-dom";
-import {
-	getDifficultyNameFromConfig,
-} from "../utils/difficulties";
+import { getDifficultyNameFromConfig } from "../utils/difficulties";
 import { Link } from "react-router-dom";
 import LeaderBoard from "./LeaderBoard";
 import { fetchScoresByConfig } from "../utils/leaderboard";
@@ -26,7 +24,6 @@ const LeaderBoardPage = () => {
 	const fetchScores = () => {
 		fetchScoresByConfig(config).then((scs) => {
 			setScores(scs);
-			console.log(scs);
 		});
 	};
 
@@ -38,9 +35,7 @@ const LeaderBoardPage = () => {
 		<>
 			<div className="leaderboard-title">
 				<h2>{title}</h2>
-					<Link to="/" onClick={() => {console.log("Naviger")}}>
-						{"<--"}
-					</Link>
+				<Link to="/">{"<--"}</Link>
 			</div>
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
