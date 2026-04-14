@@ -13,7 +13,7 @@ import {
 const router = createHashRouter(
 	createRoutesFromElements(
 		<>
-			<Route path="/" element={<Game />} />
+			<Route path="/:width?/:height?/:mines?/:lives?" element={<Game />} />
 			<Route path="/test" element={<TestPage />} />
 			<Route path="/scores/:width?/:height?/:mines?/:lives?" element={<LeaderBoardPage />} />
 		</>,
