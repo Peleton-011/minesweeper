@@ -55,9 +55,6 @@ const LeaderBoardPage = () => {
 
 				<div className="leaderboard-title">
 					<h2>{title}</h2>
-					<Link to={`/${width}/${height}/${mines}/${lives}`}>
-						{"<--"}
-					</Link>
 				</div>
 
 				<Link
@@ -74,6 +71,7 @@ const LeaderBoardPage = () => {
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
 			</div>
+			<Link className="backhome-btn" to={`/${width}/${height}/${mines}/${lives}`}>{"<-- Go Back"}</Link>
 		</div>
 	);
 };
