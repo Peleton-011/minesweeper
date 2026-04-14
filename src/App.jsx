@@ -1,6 +1,6 @@
 import Game from "./components/Game";
 import TestPage from "./components/TestPage";
-import LeaderBoard from "./components/LeaderBoard";
+import LeaderBoardPage from "./components/LeaderBoardPage";
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,
@@ -15,7 +15,7 @@ const router = createHashRouter(
 		<>
 			<Route path="/" element={<Game />} />
 			<Route path="/test" element={<TestPage />} />
-			<Route path="/scores/:width?/:height?/:mines?/:lives?" element={<LeaderBoard />} />
+			<Route path="/scores/:width?/:height?/:mines?/:lives?" element={<LeaderBoardPage />} />
 		</>,
 	),
 );
