@@ -53,6 +53,7 @@ const basePlusCustom = [
 		...baseDifficulty,
 		height: 7,
 		width: 7,
+        mineCount: 23,
 		// This will be the custom difficulty
 		difName: "Custom",
 	},
