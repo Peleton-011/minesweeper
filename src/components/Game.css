@@ -66,19 +66,19 @@ button {
 }
 
 button {
-    text-shadow: var(--dark-shadow);
+    /* text-shadow: var(--dark-shadow); */
 }
 
 button:hover {
-    text-shadow: var(--light-shadow);
+    /* text-shadow: var(--light-shadow); */
 }
 
 button:active {
-    text-shadow: var(--highlight-shadow);
+    /* text-shadow: var(--highlight-shadow); */
 }
 
 .game-over-buttons > button:hover {
-    box-shadow: var(--light-shadow);
+    /* box-shadow: var(--light-shadow); */
 }
 
 .bottom-buttons {
@@ -101,11 +101,11 @@ button:active {
 }
 
 .bottom-buttons > .active {
-    text-shadow: var(--light-shadow);
+    /* text-shadow: var(--light-shadow); */
 }
 
 .bottom-buttons > .active:hover {
-    text-shadow: var(--highlight-shadow);
+    /* text-shadow: var(--highlight-shadow); */
 }
 
 .bottom-buttons > button::after {
@@ -174,7 +174,7 @@ button:active {
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  text-shadow: var(--dark-shadow);
+  /* text-shadow: var(--dark-shadow); */
     /* -2px 0 rgba(50 50 50 / 30%),
     2px 0 rgba(50 50 50 / 30%),
     0 -2px rgba(50 50 50 / 30%),
@@ -188,7 +188,7 @@ button:active {
 
 .cell:hover {
   background-color: #363a40;
-  text-shadow: var(--light-shadow);
+  /* text-shadow: var(--light-shadow); */
 }
 
 .cell.revealed {
