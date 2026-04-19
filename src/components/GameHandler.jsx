@@ -5,6 +5,7 @@ import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
 import { addScore, fetchScores } from "../utils/leaderboard";
 import { getPlayTimeString } from "../utils/timeutils";
+import { App } from "@capacitor/app";
 
 const Game = ({
 	config: {
@@ -35,23 +36,77 @@ const Game = ({
 
 	const deviceType = useDeviceType();
 
+	const startTimeRef = React.useRef(null);
+	const accumulatedRef = React.useRef(0);
+	const [displayTime, setDisplayTime] = useState(0);
+
+	const isFirstClickRef = React.useRef(isFirstClick);
+	const isGameOverRef = React.useRef(isGameOver);
+
+	// Keep them in sync
+	useEffect(() => {
+		isFirstClickRef.current = isFirstClick;
+	}, [isFirstClick]);
+	useEffect(() => {
+		isGameOverRef.current = isGameOver;
+	}, [isGameOver]);
+
 	const onWin = () => {
-		argOnWin(playTime);
+		argOnWin(getPlayTime());
 	};
 
 	const onLose = () => {
-		argOnLose(playTime);
+		argOnLose(getPlayTime());
 	};
 
+	const getPlayTime = () =>
+		accumulatedRef.current +
+		(startTimeRef.current ? Date.now() - startTimeRef.current : 0);
+
+	// Display ticker
 	useEffect(() => {
-		if (isFirstClick) return;
+		if (isFirstClick || isGameOver) return;
+
+		startTimeRef.current = Date.now();
 
 		const interval = setInterval(() => {
-			setPlayTime((prev) => prev + 10);
-		}, 10);
+			if (startTimeRef.current === null) return;
+			setDisplayTime(
+				accumulatedRef.current + (Date.now() - startTimeRef.current),
+			);
+		}, 100);
 
-		return () => clearInterval(interval);
-	}, [isFirstClick]);
+		return () => {
+			clearInterval(interval);
+			if (startTimeRef.current !== null) {
+				accumulatedRef.current += Date.now() - startTimeRef.current;
+				startTimeRef.current = null;
+			}
+		};
+	}, [isFirstClick, isGameOver]);
+
+	// Accumulate time pausing and resuming
+	useEffect(() => {
+		// console.log("add effect abc");
+		const handlePause = () => {
+			// console.log("paused");
+			if (startTimeRef.current === null) return;
+			accumulatedRef.current += Date.now() - startTimeRef.current;
+			startTimeRef.current = null;
+		};
+
+		const handleResume = () => {
+			// console.log("resumed");
+			if (startTimeRef.current !== null) return;
+			if (isFirstClickRef.current || isGameOverRef.current) return;
+			startTimeRef.current = Date.now();
+		};
+
+
+		document.addEventListener("blur", handlePause, true);
+		document.addEventListener("focus", handleResume, true);
+
+	}, []);
 
 	const createBoard = (height, width) => {
 		const board = [];
@@ -657,32 +712,32 @@ const Game = ({
 			actionOnKeyDown(e);
 			switchModeOnKeyDown(e);
 		};
-        
+
 		window.addEventListener("keydown", handler);
 		return () => window.removeEventListener("keydown", handler);
 	}, [hoveredCell, isFlaggingMode]);
 
 	return (
 		<>
-			<TransformWrapper
+			{/* <TransformWrapper
 				centerOnInit={true}
 				initialScale={1}
 				pinch={{ disabled: false }}
 				pan={{ disabled: false }}
 				doubleClick={{ mode: "toggle", disabled: false }}
 			>
-				<TransformComponent>
-					<Board
-						board={board}
-						onLeftClick={onLeftClick}
-						onRightClick={onRightClick}
-						onHover={onHover}
-					/>
-				</TransformComponent>
-			</TransformWrapper>
+				<TransformComponent> */}
+			<Board
+				board={board}
+				onLeftClick={onLeftClick}
+				onRightClick={onRightClick}
+				onHover={onHover}
+			/>
+			{/* </TransformComponent>
+			</TransformWrapper> */}
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>{mineCount} 🚩</span>{" "}
-				<span>{getPlayTimeString(playTime)}</span>
+				<span>{getPlayTimeString(getPlayTime())}</span>
 				<span>
 					{new Array(argLives)
 						.fill("🖤")
