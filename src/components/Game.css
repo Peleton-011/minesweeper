@@ -299,15 +299,14 @@ button:active {
 	.stats {
 		max-width: 100%; /* Prevent overflowing the viewport horizontally */
 		width: 100%;
-		padding: 1rem;
-		background-color: rgb(24, 26, 27, 0.5);
+		padding: 5vw;
+        margin: 0;
+		background-color: #24242470;
+        top: 0;
+
 		box-sizing: border-box; /* Ensure padding is included in the size */
 		text-align: center; /* Center-align text */
 		overflow: hidden; /* Prevent content overflow */
-	}
-	.stats > * {
-		padding-left: 2rem;
-		padding-right: 2rem;
 	}
 
     .cell {
