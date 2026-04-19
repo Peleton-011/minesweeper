@@ -660,7 +660,7 @@ const Game = ({
         
 		window.addEventListener("keydown", handler);
 		return () => window.removeEventListener("keydown", handler);
-	}, [hoveredCell, isFlaggingMode, board]);
+	}, [hoveredCell, isFlaggingMode]);
 
 	return (
 		<>
