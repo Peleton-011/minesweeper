@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
 import Board from "./Board";
-import { addScore, fetchScores } from "../utils/leaderboard";
-import { getPlayTimeString } from "../utils/timeutils";
+import { getTimeString } from "../utils/timeutils";
 import { App } from "@capacitor/app";
 import {
 	createBoard,
@@ -369,9 +368,9 @@ const Game = ({
 				</TransformComponent>
 			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-				<span>{mineCount} 🚩</span>{" "}
-				<span>{getPlayTimeString(getPlayTime())}</span>
-				<span>
+				<span className="minecount">{mineCount} 🚩</span>{" "}
+				<span className="playtime">{getTimeString(getPlayTime())}</span>
+				<span className="lives">
 					{new Array(argLives)
 						.fill("🖤")
 						.map((v, i) => (i < lives ? "❤️" : v))

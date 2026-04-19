@@ -1,6 +1,6 @@
-import Game from "./components/Game";
-import TestPage from "./components/TestPage";
-import LeaderBoardPage from "./components/LeaderBoardPage";
+import Game from "@/components/Game";
+import TestPage from "@/components/TestPage";
+import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,

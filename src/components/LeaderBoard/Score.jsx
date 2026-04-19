@@ -1,6 +1,6 @@
-import { deleteScore } from "../utils/leaderboard";
-import { getDateString, getTimeString } from "../utils/timeutils";
-import { getDifficultyNameFromConfig } from "../utils/difficulties";
+import { deleteScore } from "@/utils/leaderboard";
+import { getDateString, getTimeString } from "@/utils/timeutils";
+import { getDifficultyNameFromConfig } from "@/utils/difficulties";
 
 const Score = ({ score }) => {
 	return (

@@ -1,9 +1,9 @@
-import GameHandler from "./GameHandler";
-import ConfigSelector from "./ConfigSelector";
+import GameHandler from "@/components/GameHandler";
+import ConfigSelector from "@/components/Carousel/ConfigSelector";
 import { useState, useEffect, useRef } from "react";
-import "./Game.css";
-import { getPlayTimeString } from "../utils/timeutils";
-import { addScore, fetchScores } from "../utils/leaderboard";
+import "@/components/Game.css";
+import { getPlayTimeString } from "@/utils/timeutils";
+import { addScore, fetchScores } from "@/utils/leaderboard";
 import { useParams } from "react-router-dom";
 
 function Game() {

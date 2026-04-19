@@ -1,7 +1,7 @@
 import React from "react";
-import Carousel from "./Carousel";
-import DifficultyDisplay from "./DifficultyDisplay";
-import { standardDifficulties } from "../utils/difficulties";
+import Carousel from "@/components/Carousel/Carousel";
+import DifficultyDisplay from "@/components/Carousel/DifficultyDisplay";
+import { standardDifficulties } from "@/utils/difficulties";
 
 const ConfigSelector = ({ setConfig, setIsGameStarted, initialConfig }) => {
 	const difficulties = [

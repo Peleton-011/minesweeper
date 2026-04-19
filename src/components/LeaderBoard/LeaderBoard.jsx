@@ -1,4 +1,4 @@
-import Score from "./Score";
+import Score from "@/components/LeaderBoard/Score";
 
 const LeaderBoard = ({ scoreList }) => {
 	return (

@@ -1,9 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import "./Carousel.css";
+import "@/components/Carousel/Carousel.css";
 import { useSwipeable } from "react-swipeable";
 
-import useDeviceType from "../hooks/useDeviceType";
+import useDeviceType from "@/hooks/useDeviceType";
 
 const Carousel = ({ pages, title, startingIndex = 0 }) => {
 	const [currentIndex, setCurrentIndex] = useState(startingIndex);

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 
-import "./LeaderBoardPage.css";
+import "@/components/LeaderBoard/LeaderBoardPage.css";
 
 import { useParams } from "react-router-dom";
 import {
 	getDifficultyNameFromConfig,
 	getNextDifficultyFromConfig,
 	getPreviousDifficultyFromConfig,
-} from "../utils/difficulties";
+} from "@/utils/difficulties";
 import { Link } from "react-router-dom";
-import LeaderBoard from "./LeaderBoard";
-import { fetchScoresByConfig } from "../utils/leaderboard";
+import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
+import { fetchScoresByConfig } from "@/utils/leaderboard";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();

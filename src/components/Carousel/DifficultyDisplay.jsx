@@ -1,6 +1,6 @@
 import React from "react";
-import Board from "./Board";
-import DifficultyForm from "./DifficultyForm";
+import Board from "@/components/Board";
+import DifficultyForm from "@/components/Carousel/DifficultyForm";
 import { useState } from "react";
 
 const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
