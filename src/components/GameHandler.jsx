@@ -719,22 +719,22 @@ const Game = ({
 
 	return (
 		<>
-			{/* <TransformWrapper
+			<TransformWrapper
 				centerOnInit={true}
 				initialScale={1}
 				pinch={{ disabled: false }}
 				pan={{ disabled: false }}
 				doubleClick={{ mode: "toggle", disabled: false }}
 			>
-				<TransformComponent> */}
+				<TransformComponent>
 			<Board
 				board={board}
 				onLeftClick={onLeftClick}
 				onRightClick={onRightClick}
 				onHover={onHover}
 			/>
-			{/* </TransformComponent>
-			</TransformWrapper> */}
+			</TransformComponent>
+			</TransformWrapper>
 			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
 				<span>{mineCount} 🚩</span>{" "}
 				<span>{getPlayTimeString(getPlayTime())}</span>
