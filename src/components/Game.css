@@ -125,6 +125,7 @@ button:active {
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: inherit;
     background-color: var(--darkreader-background-ffffff, #181a1b);
     opacity: 40%;
 }
