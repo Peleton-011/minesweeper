@@ -67,6 +67,16 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 - **Leaderboard & Statistics**: Track and compare performance.
 - **Theming & Skins**: Customize visuals with different themes.
 
+## 📡 Deployment to mobile
+
+1. **Build the App**: Run `npm run build`.
+
+2. **Copy the Built Files**: `npx cap sync`
+
+3. **Run the App**: `npx cap open android`
+
+4. **Generate APK**: `build > generate bundles or apks > generate apks`, It will appear inside `android > app > build > outputs > apk > debug > app-debug.apk`
+
 ## 📝 License
 
 This project is open-source and available under the [MIT License](LICENSE).
