@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
-import Board from "./Board";
-import { getTimeString } from "../utils/timeutils";
+import Board from "@/components/Board";
+import Stats from "@/components/Stats";
 import { App } from "@capacitor/app";
 import {
 	createBoard,
@@ -38,20 +38,16 @@ const Game = ({
 
 	const [hoveredCell, setHoveredCell] = useState(null);
 
-	const [playTime, setPlayTime] = useState(0);
-
 	const [isFirstClick, setFirstClick] = useState(true);
 
 	const deviceType = useDeviceType();
 
 	const startTimeRef = React.useRef(null);
 	const accumulatedRef = React.useRef(0);
-	const [displayTime, setDisplayTime] = useState(0);
 
 	const isFirstClickRef = React.useRef(isFirstClick);
 	const isGameOverRef = React.useRef(isGameOver);
 
-	// Keep them in sync
 	useEffect(() => {
 		isFirstClickRef.current = isFirstClick;
 	}, [isFirstClick]);
@@ -70,28 +66,6 @@ const Game = ({
 	const getPlayTime = () =>
 		accumulatedRef.current +
 		(startTimeRef.current ? Date.now() - startTimeRef.current : 0);
-
-	// Display ticker
-	useEffect(() => {
-		if (isFirstClick || isGameOver) return;
-
-		startTimeRef.current = Date.now();
-
-		const interval = setInterval(() => {
-			if (startTimeRef.current === null) return;
-			setDisplayTime(
-				accumulatedRef.current + (Date.now() - startTimeRef.current),
-			);
-		}, 100);
-
-		return () => {
-			clearInterval(interval);
-			if (startTimeRef.current !== null) {
-				accumulatedRef.current += Date.now() - startTimeRef.current;
-				startTimeRef.current = null;
-			}
-		};
-	}, [isFirstClick, isGameOver]);
 
 	// Accumulate time pausing and resuming
 	useEffect(() => {
@@ -367,16 +341,15 @@ const Game = ({
 					/>
 				</TransformComponent>
 			</TransformWrapper>
-			<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-				<span className="minecount">{mineCount} 🚩</span>{" "}
-				<span className="playtime">{getTimeString(getPlayTime())}</span>
-				<span className="lives">
-					{new Array(argLives)
-						.fill("🖤")
-						.map((v, i) => (i < lives ? "❤️" : v))
-						.join("")}
-				</span>
-			</h2>
+			<Stats
+				start={startTimeRef}
+				accumulated={accumulatedRef}
+				isFirstClick={isFirstClick}
+				isGameOver={isGameOver}
+				lives={lives}
+				argLives={argLives}
+				mineCount={mineCount}
+			/>
 
 			{!isGameOver && (
 				<div className="bottom-buttons">
