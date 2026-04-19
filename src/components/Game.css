@@ -3,9 +3,9 @@
 	margin: 0 auto;
 	text-align: center;
 
-    --dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
-    --light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
-    --highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
+	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
+	--light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
+	--highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
 }
 
 .App {
@@ -16,7 +16,7 @@
 	height: 100vh;
 }
 
- .gameover {
+.gameover {
 	z-index: 10;
 	position: fixed;
 	top: 0;
@@ -32,9 +32,8 @@
 }
 
 .gameover > h2 {
-    font-weight: normal;
+	font-weight: normal;
 }
-
 
 .react-transform-wrapper {
 	width: 100vw !important;
@@ -66,19 +65,19 @@ button {
 }
 
 button {
-    text-shadow: var(--dark-shadow);
+	text-shadow: var(--dark-shadow);
 }
 
 button:hover {
-    text-shadow: var(--light-shadow);
+	text-shadow: var(--light-shadow);
 }
 
 button:active {
-    text-shadow: var(--highlight-shadow);
+	text-shadow: var(--highlight-shadow);
 }
 
 .game-over-buttons > button:hover {
-    box-shadow: var(--light-shadow);
+	box-shadow: var(--light-shadow);
 }
 
 .bottom-buttons {
@@ -97,30 +96,30 @@ button:active {
 	position: relative;
 	transition: none;
 	border: none;
-    background-color: #555;
+	background-color: #555;
 }
 
 .bottom-buttons > .active {
-    text-shadow: var(--light-shadow);
+	text-shadow: var(--light-shadow);
 }
 
 .bottom-buttons > .active:hover {
-    text-shadow: var(--highlight-shadow);
+	text-shadow: var(--highlight-shadow);
 }
 
 .bottom-buttons > button::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--darkreader-background-ffffff, #181a1b);
-    opacity: 40%;
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: var(--darkreader-background-ffffff, #181a1b);
+	opacity: 40%;
 }
 
 .bottom-buttons > .active::after {
-    background-color: rgba(0, 0, 0, 0) !important;
+	background-color: rgba(0, 0, 0, 0) !important;
 }
 
 .bottom-buttons > button:first-child {
@@ -153,6 +152,7 @@ button:active {
 
 .board {
 	padding: 6rem;
+	display: grid;
 }
 
 .row {
@@ -161,49 +161,48 @@ button:active {
 }
 
 .cell {
-  padding: 0;
-  width: 1.5em;
-  height: 1.5em;
-  background-color: #2e3035;
-  border-top: 2px solid #4a4e54;
-  border-left: 2px solid #4a4e54;
-  border-right: 2px solid #1a1c1f;
-  border-bottom: 2px solid #1a1c1f;
-  border-radius: 0px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  text-shadow: var(--dark-shadow);
-    /* -2px 0 rgba(50 50 50 / 30%),
+	padding: 0;
+	width: 1.5em;
+	height: 1.5em;
+	background-color: #2e3035;
+	border-top: 2px solid #4a4e54;
+	border-left: 2px solid #4a4e54;
+	border-right: 2px solid #1a1c1f;
+	border-bottom: 2px solid #1a1c1f;
+	border-radius: 0px;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: bold;
+	text-shadow: var(--dark-shadow);
+	/* -2px 0 rgba(50 50 50 / 30%),
     2px 0 rgba(50 50 50 / 30%),
     0 -2px rgba(50 50 50 / 30%),
     0 2px rgba(50 50 50 / 30%); */
-  text-align: center;
-  user-select: none;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.15s ease;
+	text-align: center;
+	user-select: none;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: all 0.15s ease;
 }
 
 .cell:hover {
-  background-color: #363a40;
-  text-shadow: var(--light-shadow);
+	background-color: #363a40;
+	text-shadow: var(--light-shadow);
 }
 
 .cell.revealed {
-  background-color: #3a3d42;
-  color: white;
-  border-top: 2px solid #252729;    
-  border-left: 2px solid #252729;
-  border-right: 2px solid #3e4146;
-  border-bottom: 2px solid #3e4146;
+	background-color: #3a3d42;
+	color: white;
+	border-top: 2px solid #252729;
+	border-left: 2px solid #252729;
+	border-right: 2px solid #3e4146;
+	border-bottom: 2px solid #3e4146;
 }
 
 .cell.revealed:hover {
-  background-color: #424750;
+	background-color: #424750;
 }
-
 
 .cell.flagged {
 	/* background-color: red; */
@@ -249,14 +248,14 @@ button:active {
 }
 
 .score {
-    width: 25rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: 25rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .time {
-    margin-right: 1rem;
+	margin-right: 1rem;
 }
 
 @media only screen and (max-width: 767px) {
@@ -295,9 +294,9 @@ button:active {
 		padding-right: 2rem;
 	}
 
-    .cell {
+	.cell {
 		background-color: #333 !important;
-    }
+	}
 
 	.cell.revealed {
 		background-color: #444 !important;
