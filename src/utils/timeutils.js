@@ -1,6 +1,6 @@
 export const getPlayTimeString = (time) => {
 	//
-	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 2);
+	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 1);
 	const seconds = (Math.floor(time / 1000) % 60).toString().padStart(2, "0");
 	const minutes = (Math.floor(time / (1000 * 60)) % 60)
 		.toString()
@@ -63,14 +63,9 @@ export const getDateString = (time) => {
 };
 
 export const getTimeString = (time) => {
-	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 2);
+	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 1);
 	const seconds = (Math.floor(time / 1000) % 60).toString();
-	const minutes = (Math.floor(time / (1000 * 60)) % 60)
-		.toString()
-		;
-	const hours = (Math.floor(time / (1000 * 60 * 60)) % 24)
-		.toString()
-		;
-
+	const minutes = (Math.floor(time / (1000 * 60)) % 60).toString();
+	const hours = (Math.floor(time / (1000 * 60 * 60)) % 24).toString();
 	return `${time > 60 * 60 * 1000 ? hours + "H " : ""}${time > 60 * 1000 ? minutes + "M " : ""}${seconds},${centis}S`;
 };
