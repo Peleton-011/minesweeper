@@ -2,8 +2,9 @@ form.difficulty-form {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	max-width: min(100vw, 30rem);
+	width: min(100vw, 30rem);
 	padding: 1rem;
+    box-sizing: border-box;
 	position: relative;
 	gap: 0.5rem;
 	margin-bottom: 3rem;
