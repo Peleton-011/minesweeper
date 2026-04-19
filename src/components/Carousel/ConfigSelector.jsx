@@ -3,7 +3,7 @@ import Carousel from "@/components/Carousel/Carousel";
 import DifficultyDisplay from "@/components/Carousel/DifficultyDisplay";
 import { standardDifficulties } from "@/utils/difficulties";
 
-const ConfigSelector = ({ setConfig, setIsGameStarted, initialConfig }) => {
+const ConfigSelector = ({ initialConfig }) => {
 	const difficulties = [
 		...standardDifficulties,
 		{
@@ -30,8 +30,6 @@ const ConfigSelector = ({ setConfig, setIsGameStarted, initialConfig }) => {
 					<DifficultyDisplay
 						key={i}
 						config={dif}
-						setConfig={setConfig}
-						setIsGameStarted={setIsGameStarted}
 					/>
 				))}
 				startingIndex={initialConfigIndex}

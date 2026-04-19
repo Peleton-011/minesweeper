@@ -4,7 +4,7 @@ import DifficultyForm from "@/components/Carousel/DifficultyForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
+const DifficultyDisplay = ({ config }) => {
 	const getBoard = (h, w) => {
 		return Array(h)
 			.fill()
@@ -24,7 +24,6 @@ const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
 	const [board, setBoard] = useState(getBoard(config.height, config.width));
 
 	const onClickBoard = () => {
-		() => setIsGameStarted(true);
 		const activeSlide = document.querySelector(".slide.active");
 		//find form child
 		const form = activeSlide.children[0].children[1];
@@ -50,10 +49,8 @@ const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
 			<DifficultyForm
 				config={config}
 				setConfig={(args) => {
-					setConfig(args);
 					setBoard(getBoard(args.height, args.width));
 				}}
-				setIsGameStarted={setIsGameStarted}
 			/>
 		</div>
 	);
