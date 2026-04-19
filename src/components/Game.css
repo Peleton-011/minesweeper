@@ -183,7 +183,7 @@ button:active {
   user-select: none;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.15s ease;
+  transition: background-color 0.15s ease;
 }
 
 .cell:hover {
