@@ -117,6 +117,7 @@ const Game = ({
 
 	const [board, setBoard] = useState(() => createBoard(height, width));
 
+	// If the game is over, show the whole board
 	useEffect(() => {
 		if (lives <= 0) {
 			onLose();
@@ -208,20 +209,6 @@ const Game = ({
 		}
 
 		return newBoard;
-	};
-
-	const countAdjacentFlags = (x, y) => {
-		let count = 0;
-		for (let i = x - 1; i <= x + 1; i++) {
-			for (let j = y - 1; j <= y + 1; j++) {
-				if (i >= 0 && j >= 0 && i < height && j < width) {
-					if (board[i][j].isFlagged) {
-						count++;
-					}
-				}
-			}
-		}
-		return count;
 	};
 
 	const flag = (x, y) => {
@@ -357,7 +344,7 @@ const Game = ({
 
 		window.addEventListener("keydown", handler);
 		return () => window.removeEventListener("keydown", handler);
-	}, [hoveredCell, isFlaggingMode]);
+	}, [hoveredCell, isFlaggingMode, board]);
 
 	return (
 		<>
