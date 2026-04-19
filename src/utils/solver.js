@@ -118,3 +118,17 @@ const isCellDetermined = (x, y) => {
 	// console.log("count: " + count);
 	return count === countEmpty;
 };
+
+	const countAdjacentFlags = (x, y) => {
+		let count = 0;
+		for (let i = x - 1; i <= x + 1; i++) {
+			for (let j = y - 1; j <= y + 1; j++) {
+				if (i >= 0 && j >= 0 && i < height && j < width) {
+					if (board[i][j].isFlagged) {
+						count++;
+					}
+				}
+			}
+		}
+		return count;
+	};
