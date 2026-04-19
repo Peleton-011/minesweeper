@@ -214,6 +214,10 @@ button:active {
   background-color: #424750;
 }
 
+.cell.revealed.mine {
+    background-color: #3a3d4270;
+}
+
 
 .cell.flagged {
 	/* background-color: red; */

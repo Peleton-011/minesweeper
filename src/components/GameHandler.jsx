@@ -352,8 +352,12 @@ const Game = ({
 				centerOnInit={true}
 				initialScale={1}
 				pinch={{ disabled: false }}
-				pan={{ disabled: false }}
-				doubleClick={{ mode: "toggle", disabled: false }}
+				pan={{
+					disabled: false,
+					allowRightClickPan: false,
+					allowLeftClickPan: false,
+				}}
+				doubleClick={{ mode: "toggle", disabled: true }}
 			>
 				<TransformComponent>
 					<Board

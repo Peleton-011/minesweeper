@@ -39,6 +39,7 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 								"cell clickable" +
 								(cell.isRevealed ? " revealed" : "") +
 								(cell.isFlagged ? " flagged" : "") +
+                                (cell.isMine ? " mine" : "") +
 								(typeof cell.content === "number"
 									? " " + getNumberName(cell.content)
 									: "")
