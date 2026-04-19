@@ -15,8 +15,6 @@ const DifficultyForm = ({
 		startZone,
 		difName,
 	},
-	setConfig,
-	setIsGameStarted,
 }) => {
 	//Bind the inputs
 	const [heightInput, setHeightInput] = useState(height || 16);
@@ -37,42 +35,6 @@ const DifficultyForm = ({
 			: "revealAll",
 	);
 	const [startZoneInput, setStartZoneInput] = useState(startZone || 3);
-
-	useEffect(() => {
-		setConfig({
-			height: Number(heightInput),
-			width: Number(widthInput),
-			mineCount: Number(mineCountInput),
-			lives: Number(livesInput),
-			noGuessMode: noGuessModeInput,
-			autoSolveMode: autoSolveModeInput,
-			winStateCheck: winStateCheckInput,
-			startZone: startZoneInput,
-		});
-	}, [
-		heightInput,
-		widthInput,
-		mineCountInput,
-		livesInput,
-		noGuessModeInput,
-		autoSolveModeInput,
-		winStateCheckInput,
-		startZoneInput,
-	]);
-	const onSubmit = (e) => {
-		e.preventDefault();
-		setConfig({
-			height: Number(heightInput),
-			width: Number(widthInput),
-			mineCount: Number(mineCountInput),
-			lives: Number(livesInput),
-			noGuessMode: noGuessModeInput,
-			autoSolveMode: autoSolveModeInput,
-			winStateCheck: winStateCheckInput,
-			startZone: startZoneInput,
-		});
-		setIsGameStarted(true);
-	};
 
 	const onSquare = (e) => {
 		const widthInputElement = document.getElementById("width");
@@ -176,7 +138,7 @@ const DifficultyForm = ({
 	};
 
 	return (
-		<form onSubmit={onSubmit} className="difficulty-form">
+		<form className="difficulty-form">
 			<h3>{difName}</h3>
 			{(height || width) && mineCount ? (
 				<div>
@@ -281,22 +243,25 @@ const DifficultyForm = ({
 				</label>
 			) : null}
 			<div className="buttons">
-				<button className="play" type="submit">
+				<Link
+					className="play"
+					to={`/game/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}/${noGuessModeInput}/${autoSolveModeInput}/${winStateCheckInput}/${startZoneInput}`}
+				>
 					Play
-				</button>
+				</Link>
 				<Link
 					className="scores-btn"
 					to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
 					onClick={(e) => {
-							console.log(
-								widthInput +
-									"," +
-									heightInput +
-									"," +
-									mineCountInput +
-									"," +
-									livesInput,
-							);
+						console.log(
+							widthInput +
+								"," +
+								heightInput +
+								"," +
+								mineCountInput +
+								"," +
+								livesInput,
+						);
 					}}
 				>
 					...

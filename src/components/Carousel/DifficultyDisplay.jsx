@@ -2,6 +2,7 @@ import React from "react";
 import Board from "@/components/Board";
 import DifficultyForm from "@/components/Carousel/DifficultyForm";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
 	const getBoard = (h, w) => {
@@ -33,15 +34,19 @@ const DifficultyDisplay = ({ config, setConfig, setIsGameStarted }) => {
 
 	return (
 		<div>
-			<Board
-				board={board}
-				onLeftClick={onClickBoard}
-				onRightClick={(e) => {
-					e.preventDefault();
-				}}
-				style={{ transform: "scale(0.5)", marginTop: "1em" }}
-				className="boardie"
-			/>
+			<Link
+				to={`/game/${config.height}/${config.width}/${config.mineCount}/${config.lives}`}
+			>
+				<Board
+					board={board}
+					onLeftClick={onClickBoard}
+					onRightClick={(e) => {
+						e.preventDefault();
+					}}
+					style={{ transform: "scale(0.5)", marginTop: "1em" }}
+					className="boardie"
+				/>
+			</Link>
 			<DifficultyForm
 				config={config}
 				setConfig={(args) => {
