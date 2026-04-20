@@ -1,4 +1,4 @@
-import Game from "@/components/Game";
+import SelectorPage from "@/components/SelectorPage";
 import GamePage from "@/components/GamePage";
 import TestPage from "@/components/TestPage";
 import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
@@ -16,7 +16,7 @@ const router = createHashRouter(
 		<>
 			<Route
 				path="/:width?/:height?/:mines?/:lives?/:noGuessMode?/:autoSolveMode?/:winStateCheck?/:startZone?"
-				element={<Game />}
+				element={<SelectorPage />}
 			/>
 			<Route
 				path="/game/:width/:height/:mines/:lives/:noGuessMode?/:autoSolveMode?/:winStateCheck?/:startZone?"
