@@ -244,13 +244,13 @@ const DifficultyForm = ({
 			) : null}
 			<div className="buttons">
 				<Link
-					className="play"
+					className="play button"
 					to={`/game/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}/${noGuessModeInput}/${autoSolveModeInput}/${winStateCheckInput}/${startZoneInput}`}
 				>
 					Play
 				</Link>
 				<Link
-					className="scores-btn"
+					className="scores-btn button"
 					to={`/scores/${widthInput}/${heightInput}/${mineCountInput}/${livesInput}`}
 					onClick={(e) => {
 						console.log(

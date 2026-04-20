@@ -67,7 +67,7 @@ function Game() {
 			{isGameOver && (
 				<div className="game-over-buttons">
 					<button onClick={handleRestart}>Play Again</button>
-					<Link to={`/${width}/${height}/${mines}/${lives}`}>
+					<Link className="button" to={`/${width}/${height}/${mines}/${lives}`}>
 						Back to Menu
 					</Link>
 				</div>

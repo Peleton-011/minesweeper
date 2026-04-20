@@ -34,7 +34,7 @@ const Stats = ({
 
 	return (
 		<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-			<Link to="/">{"<--"}</Link>
+			<Link className="button" to="/">{"<--"}</Link>
 			<span className="middle">
 				<span className="minecount">{mineCount} 🚩</span>{" "}
 				<span className="playtime">
