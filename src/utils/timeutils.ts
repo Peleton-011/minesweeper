@@ -1,4 +1,5 @@
-export const getPlayTimeString = (time) => {
+
+export const getPlayTimeString = (time: number): string => {
 	//
 	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 1);
 	const seconds = (Math.floor(time / 1000) % 60).toString().padStart(2, "0");
@@ -13,7 +14,7 @@ export const getPlayTimeString = (time) => {
 	return string;
 };
 
-export const getDateString = (time) => {
+export const getDateString = (time: number): string => {
 	const date = new Date(time);
 	const day = date.getDate().toString();
 	let month;
@@ -62,7 +63,7 @@ export const getDateString = (time) => {
 	return `${day} ${month.toLowerCase()}. ${year}`;
 };
 
-export const getTimeString = (time) => {
+export const getTimeString = (time: number): string => {
 	const centis = (time % 1000).toString().padStart(2, "0").slice(0, 1);
 	const seconds = (Math.floor(time / 1000) % 60).toString();
 	const minutes = (Math.floor(time / (1000 * 60)) % 60).toString();
