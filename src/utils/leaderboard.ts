@@ -1,12 +1,12 @@
 import { Preferences } from "@capacitor/preferences";
 import { Difficulty } from "@/utils/difficulties";
 
-export interface Score {
+export type Score = {
 	id: number;
 	time: number;
 	date: number;
 	size: number;
-	mines: number;
+	mineCount: number;
 	lives: number;
 }
 
@@ -50,14 +50,14 @@ export const addScore = (time: number, difficulty: Difficulty): void => {
 		time,
 		date: new Date().getTime(),
 		size: difficulty.width * difficulty.height,
-		mines: difficulty.mineCount,
+		mineCount: difficulty.mineCount,
 		lives: difficulty.lives,
 	};
 
 	saveScore(data);
 };
 
-export const fetchScoresByConfig = async (
+export const fetchScoresByDifficulty = async (
 	difficulty: Difficulty,
 ): Promise<Score[]> => {
 	const scores = await fetchScores();
@@ -65,7 +65,7 @@ export const fetchScoresByConfig = async (
 	return scores.filter(
 		(score) =>
 			score.size === difficulty.width * difficulty.height &&
-			score.mines === difficulty.mines &&
+			score.mineCount === difficulty.mineCount &&
 			score.lives === difficulty.lives,
 	);
 };

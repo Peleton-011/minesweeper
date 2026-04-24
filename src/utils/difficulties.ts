@@ -1,3 +1,15 @@
+export type Difficulty = {
+    height: number;
+    width: number;
+    mineCount: number;
+    lives: number;
+    difName?: string;
+    autoSolveMode?: boolean;
+    noGuessMode?: boolean;
+    winStateCheck?: string;
+    startZone?: number;
+}
+
 export const baseDifficulty = {
 	winStateCheck: "revealAll",
 	startZone: 3,
