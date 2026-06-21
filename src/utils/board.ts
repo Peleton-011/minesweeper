@@ -1,21 +1,31 @@
-export const createBoard = (height, width) => {
-	const board = [];
-	for (let i = 0; i < height; i++) {
-		const row = [];
-		for (let j = 0; j < width; j++) {
-			row.push({
+export type Cell = {
+    isMine?: boolean;
+    isRevealed?: boolean;
+    isFlagged?: boolean;
+    content?: boolean;
+}
+export type Board = Cell[][];
+
+const emptyCell: Cell = {
 				isMine: undefined,
 				isRevealed: false,
 				isFlagged: false,
 				content: undefined,
-			});
+			};
+
+export const createBoard = (height: number, width: number): Board => {
+	const board: Board = [];
+	for (let i = 0; i < height; i++) {
+		const row = [];
+		for (let j = 0; j < width; j++) {
+			row.push({...emptyCell});
 		}
 		board.push(row);
 	}
 	return board;
 };
 
-export const checkWin = (board, winStateCheck, lives) => {
+export const checkWin = (board: Board, winStateCheck, lives) => {
 	const checkCellBothWays = (cell) => {
 		return (
 			(cell.isRevealed && !cell.isFlagged) ||
