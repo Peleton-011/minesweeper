@@ -1,6 +1,6 @@
 import { deleteScore } from "@/utils/leaderboard";
 import { getDateString, getTimeString } from "@/utils/timeutils";
-import { getDifficultyNameFromConfig } from "@/utils/difficulties";
+import { getDifficultyName } from "@/utils/difficulties";
 
 const Score = ({ score }) => {
 	return (
@@ -9,7 +9,7 @@ const Score = ({ score }) => {
 				<span className="date">{getDateString(score.date)}</span>
 			</div>
             <div className="middle">
-                {getDifficultyNameFromConfig(score)}
+                {getDifficultyName(score)}
             </div>
 			<div className="right">
 				<span className="time">{getTimeString(score.time)}</span>

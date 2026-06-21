@@ -4,13 +4,13 @@ import "@/components/LeaderBoard/LeaderBoardPage.css";
 
 import { useParams } from "react-router-dom";
 import {
-	getDifficultyNameFromConfig,
+	getDifficultyName,
 	getNextDifficultyFromConfig,
 	getPreviousDifficultyFromConfig,
 } from "@/utils/difficulties";
 import { Link } from "react-router-dom";
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
-import { fetchScoresByConfig } from "@/utils/leaderboard";
+import { fetchScoresByDifficulty } from "@/utils/leaderboard";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -24,13 +24,13 @@ const LeaderBoardPage = () => {
 	};
 	const [scores, setScores] = useState([]);
 
-	const title = getDifficultyNameFromConfig({ ...config });
+	const title = getDifficultyName({ ...config });
 
 	const nextDifficulty = getNextDifficultyFromConfig({ ...config });
 	const prevDifficulty = getPreviousDifficultyFromConfig({ ...config });
 
 	const fetchScores = () => {
-		fetchScoresByConfig(config).then((scs) => {
+		fetchScoresByDifficulty(config).then((scs) => {
 			setScores(scs);
 		});
 	};

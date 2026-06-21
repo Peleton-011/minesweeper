@@ -1,5 +1,5 @@
 import { Preferences } from "@capacitor/preferences";
-import { Difficulty } from "@/utils/difficulties";
+import type { Difficulty } from "./difficulties.ts";
 
 export type Score = {
 	id: number;
