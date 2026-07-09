@@ -67,6 +67,10 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 		setCurrentIndex(startingIndex);
 	}, [startingIndex]);
 
+   	useEffect(() => {
+		window.scrollTo(0, document.documentElement.scrollHeight);
+	}, [currentIndex]);
+
 	const getSlideClass = (index) => {
 		if (isForward) {
 			return index === currentIndex
@@ -84,6 +88,7 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 					: "inactive";
 		}
 	};
+
 
 	return (
 		<div className="image-slider" {...handlers}>

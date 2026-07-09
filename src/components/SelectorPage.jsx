@@ -17,10 +17,6 @@ function SelectorPage() {
 		lives: Number(lives),
 	};
 
-	useEffect(() => {
-		window.scrollTo(0, document.documentElement.scrollHeight);
-	}, []);
-
 	return (
 		<>
 			<ConfigSelector initialConfig={config} />
