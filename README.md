@@ -77,6 +77,12 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 
 4. **Generate APK**: `build > generate bundles or apks > generate apks`, It will appear inside `android > app > build > outputs > apk > debug > app-debug.apk`
 
+## AdMob
+
+1. /android/app/src/main/res/values/strings.xml -> Add your AdMob App ID
+
+2. /android/app/src/main/AndroidManifest.xml -> Make sure there's a reference (meta) to the strings xml
+
 ## 📝 License
 
 This project is open-source and available under the [MIT License](LICENSE).

@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import "@/components/Game.css";
 import { getPlayTimeString } from "@/utils/timeutils";
 import { addScore, fetchScores } from "@/utils/leaderboard";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 function SelectorPage() {
 
@@ -23,6 +23,7 @@ function SelectorPage() {
 			<ConfigSelector
 				initialConfig={config}
 			/>
+            <Link to="/test" style={{position: "fixed", bottom: "10px", zIndex: 10}}> Test</Link>
 		</>
 	);
 }

@@ -1,6 +1,6 @@
 import SelectorPage from "@/components/SelectorPage";
 import GamePage from "@/components/GamePage";
-import TestPage from "@/components/TestPage";
+import TestPage from "@/components/TestPage.tsx";
 import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
 // import { enable as enableDarkMode } from "darkreader";
 import {

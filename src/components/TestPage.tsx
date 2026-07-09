@@ -16,6 +16,37 @@ import { boardGenerator } from "../solver/boardGenerator.js";
 
 import Board from "./Board.jsx";
 
+import {initialize} from "../utils/ads.ts";
+
+// vv Ad Shit
+
+import {
+  AdMob,
+  type AdOptions,
+  type AdLoadInfo,
+  InterstitialAdPluginEvents,
+} from '@capacitor-community/admob';
+
+initialize();
+
+export async function interstitial(): Promise<void> {
+  AdMob.addListener(InterstitialAdPluginEvents.Loaded, (info: AdLoadInfo) => {
+    // Subscribe prepared interstitial
+  });
+
+  const options: AdOptions = {
+    adId: "ca-app-pub-1919299121157918/6971137020",
+    // adId: 'ca-app-pub-3940256099942544/1033173712',
+    isTesting: true
+    // npa: true
+    // immersiveMode: true
+  };
+  await AdMob.prepareInterstitial(options);
+  await AdMob.showInterstitial();
+}
+
+// ^^ Ad Shit
+
 function styleCell(y, x, styleProperty, value) {
 	const rows = document.querySelectorAll(".row");
 	const height = rows.length;
@@ -201,6 +232,7 @@ const TestPage = () => {
 	return (
 		<div>
 			<h1>Test Page</h1>
+            <button onClick={interstitial}>Show Interstitial Ad</button>
 			<Board board={generatedBoard} />
 			<h3>Active: </h3>
 			<div>

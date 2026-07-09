@@ -56,6 +56,7 @@ const Game = ({
 	}, [isGameOver]);
 
 	const onWin = () => {
+        
 		argOnWin(getPlayTime());
 	};
 
