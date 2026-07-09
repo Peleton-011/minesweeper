@@ -23,7 +23,7 @@ function SelectorPage() {
 			<ConfigSelector
 				initialConfig={config}
 			/>
-            <Link to="/test" style={{position: "fixed", bottom: "10px", zIndex: 10}}> Test</Link>
+            {/* <Link to="/test" style={{position: "fixed", bottom: "10px", zIndex: 10}}> Test</Link> */}
 		</>
 	);
 }
