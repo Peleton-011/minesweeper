@@ -62,12 +62,12 @@ export const getDifficultyName = (difficulty: Difficulty) => {
 	return mode + " " + difficultyName;
 };
 
-const basePlusCustom = [
+export const baseDifficultiesPlusCustom = [
 	...standardDifficulties,
 	{
 		...baseDifficulty,
-		height: 7,
-		width: 7,
+		height: 16,
+		width: 30,
 		mineCount: 23,
 		// This will be the custom difficulty
 		difName: "Custom",
@@ -76,7 +76,7 @@ const basePlusCustom = [
 
 const baseCustomArcadePerfect = [];
 
-basePlusCustom.forEach((dif) => {
+baseDifficultiesPlusCustom.forEach((dif) => {
 	baseCustomArcadePerfect.push(dif);
 	baseCustomArcadePerfect.push({ ...dif, lives: 1 });
 });

@@ -39,7 +39,7 @@ const DifficultyDisplay = ({ config }) => {
 				/>
 			</Link>
 			<DifficultyForm
-				config={config}
+				config={config.difName === "Custom" ? {difName: "Custom"} : config }
 				setConfig={(args) => {
 					setBoard(getBoard(args.height, args.width));
 				}}
