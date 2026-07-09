@@ -19,7 +19,6 @@ function SelectorPage() {
 
 	useEffect(() => {
 		window.scrollTo(0, document.documentElement.scrollHeight);
-        console.log("SelectorPage mounted, scrolling to bottom");
 	}, []);
 
 	return (
