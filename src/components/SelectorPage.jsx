@@ -7,7 +7,6 @@ import { addScore, fetchScores } from "@/utils/leaderboard";
 import { useParams, Link } from "react-router-dom";
 
 function SelectorPage() {
-
 	const { width, height, mines, lives } = useParams();
 
 	const config = {
@@ -18,12 +17,15 @@ function SelectorPage() {
 		lives: Number(lives),
 	};
 
+	useEffect(() => {
+		window.scrollTo(0, document.documentElement.scrollHeight);
+        console.log("SelectorPage mounted, scrolling to bottom");
+	}, []);
+
 	return (
 		<>
-			<ConfigSelector
-				initialConfig={config}
-			/>
-            {/* <Link to="/test" style={{position: "fixed", bottom: "10px", zIndex: 10}}> Test</Link> */}
+			<ConfigSelector initialConfig={config} />
+			{/* <Link to="/test" style={{position: "fixed", bottom: "10px", zIndex: 10}}> Test</Link> */}
 		</>
 	);
 }
