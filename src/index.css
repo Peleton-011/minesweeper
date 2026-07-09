@@ -48,6 +48,15 @@ button, .button {
   color: rgba(255, 255, 255, 0.87);
 }
 
+.stealth-button {
+    background-color: transparent;
+    transition: background-color 0.25s;
+}
+
+.stealth-button:hover {
+    background-color: #1a1a1a;
+}
+
 /* button:hover {
   border-color: #646cff;
 } */
