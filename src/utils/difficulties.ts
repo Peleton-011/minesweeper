@@ -20,6 +20,19 @@ export const baseDifficulty = {
 	autoSolveMode: false,
 	noGuessMode: false,
 };
+
+const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+
+export const bigSizeDifficulty = {
+    height: 16,
+    width: 30
+}
+
+if (isPortrait) {
+    bigSizeDifficulty.height = 30;
+    bigSizeDifficulty.width = 16;
+}
+
 export const standardDifficulties: Difficulty[] = [
 	{
 		...baseDifficulty,
@@ -37,8 +50,7 @@ export const standardDifficulties: Difficulty[] = [
 	},
 	{
 		...baseDifficulty,
-		height: 16,
-		width: 30,
+		...bigSizeDifficulty,
 		mineCount: 99,
 		difName: "Hard",
 	},
@@ -66,8 +78,7 @@ export const baseDifficultiesPlusCustom = [
 	...standardDifficulties,
 	{
 		...baseDifficulty,
-		height: 16,
-		width: 30,
+        ...bigSizeDifficulty,
 		mineCount: 23,
 		// This will be the custom difficulty
 		difName: "Custom",
@@ -115,3 +126,4 @@ export const getPreviousDifficultyFromConfig = (config: any) => {
 	if (index === 0) return all[all.length - 1];
 	return all[index - 1];
 };
+
