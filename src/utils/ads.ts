@@ -56,6 +56,16 @@ export async function interstitial(id: string): Promise<void> {
 	await AdMob.showInterstitial();
 }
 
+export async function loadGameOverInterstitial(): Promise<void> {
+    	const options: AdOptions = {
+		adId: "ca-app-pub-1919299121157918/6971137020",
+		// adId: 'ca-app-pub-3940256099942544/1033173712',
+		// npa: true
+		// immersiveMode: true
+	};
+    await AdMob.prepareInterstitial(options);
+}
+
 export async function gameOverInterstitial(): Promise<void> {
     await interstitial("ca-app-pub-1919299121157918/6971137020");
 }

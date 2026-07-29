@@ -4,6 +4,11 @@ import "@/components/Game.css";
 import { getPlayTimeString } from "@/utils/timeutils";
 import { addScore, fetchScores } from "@/utils/leaderboard";
 import { useParams, Link } from "react-router-dom";
+import {initialize, gameOverInterstitial, loadGameOverInterstitial} from "../utils/ads.ts";
+
+initialize();
+
+loadGameOverInterstitial();
 
 function Game() {
 	const [isGameOver, setIsGameOver] = useState(false);
@@ -26,12 +31,13 @@ function Game() {
 		setIsGameOver(true);
 		setDidWin(false);
 		setLastTime(t);
+        gameOverInterstitial();
 	};
 	const onWin = (t) => {
 		setIsGameOver(true);
 		setDidWin(true);
 		setLastTime(t);
-		// console.log(configRef.current);
+        gameOverInterstitial();
 		addScore(t, config);
 	};
 
