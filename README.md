@@ -77,6 +77,17 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 
 4. **Generate APK**: `build > generate bundles or apks > generate apks`, It will appear inside `android > app > build > outputs > apk > debug > app-debug.apk`
 
+## Icon and splash
+
+1. Place icon at /assets/icon.png|jpg being 1024x1024px at least (this assets directory is at the root level of the project). You can place a dark icon at /assets/icon-dark.png|jpg
+
+2. If the assets plugin is not installed run `npm install @capacitor/assets`
+
+3. Run `npx @capacitor/assets generate`. Useful flags could be --splashBackgroundColor (default: #ffffff) and --splashBackgroundColorDark (default: #111111), these set the splash background. Example: `npx @capacitor/assets generate --splashBackgroundColor '#EFE6CF' --splashBackgroundColorDark '#EFE6CF'`
+
+More info at [the capacitor-assets repo.](https://github.com/ionic-team/capacitor-assets)
+
+
 ## AdMob
 
 1. /android/app/src/main/res/values/strings.xml -> Add your AdMob App ID
