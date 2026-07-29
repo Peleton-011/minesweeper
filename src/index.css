@@ -5,9 +5,23 @@
 
 	/* Colors */
 
-	--background: #242424;
+    --background: #2C3448;
+    --cream: #EFE6CF;
+	--text: #6D7D98;
+	--highlight: #2C3448;
+    --cell-background: #2e3035;
+
+	/* Old
+    --background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
-	--highlight: #1a1a1a;
+	--highlight: #1a1a1a; */
+
+    /* Bevel */
+
+    --bevel-top: 2px solid #4a4e54;
+    --bevel-left: 2px solid #4a4e54;
+    --bevel-right: 2px solid #1a1c1f;
+    --bevel-bottom: 2px solid #1a1c1f;
 
 	/* Shadows */
 
@@ -22,6 +36,25 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+
+.bevel {
+    border-top: var(--bevel-top);
+    border-left: var(--bevel-left);
+    border-right: var(--bevel-right);
+    border-bottom: var(--bevel-bottom);
+    
+    box-shadow: var(--dark-shadow);
+}
+
+.bevel-wide {
+    border-top: var(--bevel-top);
+    border-left: var(--bevel-left);
+    border-right: var(--bevel-right);
+    border-bottom: var(--bevel-bottom);
+
+    box-shadow: var(--dark-shadow);
+    border-width: 3px;
 }
 
 a {

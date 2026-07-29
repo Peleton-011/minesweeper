@@ -92,7 +92,7 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 
 	return (
 		<div className="image-slider" {...handlers}>
-			<h2 className="slider-title">{title}</h2>
+			<h2 className="slider-title bevel">{title}</h2>
 			<div className="slider-container">
 				{pages.map((page, index) => (
 					<div

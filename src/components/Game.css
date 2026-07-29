@@ -171,11 +171,7 @@ button:active {
   padding: 0;
   width: 1.5em;
   height: 1.5em;
-  background-color: #2e3035;
-  border-top: 2px solid #4a4e54;
-  border-left: 2px solid #4a4e54;
-  border-right: 2px solid #1a1c1f;
-  border-bottom: 2px solid #1a1c1f;
+  background-color: var(--cell-background);
   border-radius: 0px;
   display: inline-flex;
   justify-content: center;
