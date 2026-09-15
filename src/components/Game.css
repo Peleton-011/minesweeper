@@ -190,12 +190,12 @@ button:active {
 }
 
 .cell:hover {
-  background-color: #363a40;
+  background-color: var(--cell-background-hover);
   /* text-shadow: var(--light-shadow); */
 }
 
 .cell.revealed {
-  background-color: #3a3d42;
+  background-color: var(--cell-background-revealed);
   color: white;
   border-top: 2px solid #252729;    
   border-left: 2px solid #252729;
@@ -204,11 +204,11 @@ button:active {
 }
 
 .cell.revealed:hover {
-  background-color: #424750;
+  background-color: var(--cell-background-revealed-hover);
 }
 
 .cell.revealed.mine {
-    background-color: #3a3d4270;
+    background-color: var(--cell-background-revealed-mine);
 }
 
 

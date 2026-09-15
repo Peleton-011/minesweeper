@@ -83,7 +83,7 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 
 2. If the assets plugin is not installed run `npm install @capacitor/assets`
 
-3. Run `npx @capacitor/assets generate`. Useful flags could be --splashBackgroundColor (default: #ffffff) and --splashBackgroundColorDark (default: #111111), these set the splash background. Example: `npx @capacitor/assets generate --splashBackgroundColor '#EFE6CF' --splashBackgroundColorDark '#EFE6CF'`
+3. Run `npx @capacitor/assets generate`. Useful flags could be --splashBackgroundColor (default: #ffffff) and --splashBackgroundColorDark (default: #111111), these set the splash background. Example: `npx @capacitor/assets generate --splashBackgroundColor '#EFE6CF' --splashBackgroundColorDark '#EFE6CF'` or `npx @capacitor/assets generate --logoSplashScale '0.0' --splashBackgroundColor '#111111' --splashBackgroundColorDark '#111111'`
 
 More info at [the capacitor-assets repo.](https://github.com/ionic-team/capacitor-assets)
 

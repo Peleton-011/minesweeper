@@ -9,12 +9,22 @@
     --cream: #EFE6CF;
 	--text: #6D7D98;
 	--highlight: #2C3448;
-    --cell-background: #2e3035;
+    --cell-background: #EFE6CF;
+    --cell-background-hover: #D9D2C4;
+    --cell-background-revealed: #6D7D98;
+    --cell-background-revealed-hover: #6D7D98;
+    --cell-background-revealed-mine: #6D7D98;
 
 	/* Old
     --background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
-	--highlight: #1a1a1a; */
+	--highlight: #1a1a1a; 
+    --cell-background: #2e3035;
+    --cell-background-hover: #363a40;
+    --cell-background-revealed: #3a3d42;
+    --cell-background-revealed-hover: #424750;
+    --cell-background-revealed-mine: #3a3d4270;
+    */
 
     /* Bevel */
 
