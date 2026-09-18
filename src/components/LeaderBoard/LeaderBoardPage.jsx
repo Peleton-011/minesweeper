@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "@/components/LeaderBoard/LeaderBoardPage.css";
+import { LuArrowLeft as ArrowLeft} from "@react-icons/lucide";
 
 import { useParams } from "react-router-dom";
 import {
@@ -71,7 +72,7 @@ const LeaderBoardPage = () => {
 			<div onClick={() => fetchScores()}>
 				<LeaderBoard scoreList={scores} />
 			</div>
-			<Link className="button" to={`/${width}/${height}/${mines}/${lives}`}>&#x1F850;{" Go Back"}</Link>
+			<Link className="button" to={`/${width}/${height}/${mines}/${lives}`}><ArrowLeft />{" Go Back"}</Link>
 		</div>
 	);
 };

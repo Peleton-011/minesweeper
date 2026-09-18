@@ -1,6 +1,7 @@
 import { getTimeString } from "../utils/timeutils";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { LuArrowLeft as ArrowLeft} from "@react-icons/lucide";
 
 const Stats = ({
 	start,
@@ -34,7 +35,7 @@ const Stats = ({
 
 	return (
 		<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-			<Link className="button stealth-button" to="/">&#x1F850;</Link>
+			<Link className="button stealth-button flex flex-col" to="/"><ArrowLeft/></Link>
 			<span className="middle">
 				<span className="minecount">{mineCount} 🚩</span>{" "}
 				<span className="playtime">
