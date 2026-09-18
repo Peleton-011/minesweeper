@@ -68,7 +68,8 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 	}, [startingIndex]);
 
    	useEffect(() => {
-		window.scrollTo(0, document.documentElement.scrollHeight);
+        const slide =document.querySelector(".slide.active");
+		window.scrollTo(0, slide.scrollHeight);
 	}, [currentIndex]);
 
 	const getSlideClass = (index) => {
