@@ -44,7 +44,7 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 
 	const prevSlide = () => {
 		setCurrentIndex(
-			(prevIndex) => (prevIndex - 1 + pages.length) % pages.length,
+			(prevIndex) => (prevIndex - 1 + pages.length) % pages.length
 		);
 		setIsForward(false);
 	};
@@ -67,9 +67,9 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 		setCurrentIndex(startingIndex);
 	}, [startingIndex]);
 
-   	useEffect(() => {
-        const slide =document.querySelector(".slide.active");
-		window.scrollTo(0, slide.scrollHeight);
+	useEffect(() => {
+		const slide = document.querySelector(".slide.active");
+		slide.scrollTo(0, slide.scrollHeight);
 	}, [currentIndex]);
 
 	const getSlideClass = (index) => {
@@ -77,19 +77,18 @@ const Carousel = ({ pages, title, startingIndex = 0 }) => {
 			return index === currentIndex
 				? "active slide-in-right"
 				: index === (currentIndex - 1 + pages.length) % pages.length
-					? "slide-away-left"
-					: "inactive";
+				? "slide-away-left"
+				: "inactive";
 		} else if (isForward === undefined) {
 			return index === currentIndex ? "active" : "inactive";
 		} else {
 			return index === currentIndex
 				? "active slide-in-left"
 				: index === (currentIndex + 1 + pages.length) % pages.length
-					? "slide-away-right"
-					: "inactive";
+				? "slide-away-right"
+				: "inactive";
 		}
 	};
-
 
 	return (
 		<div className="image-slider" {...handlers}>
