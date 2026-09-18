@@ -7,11 +7,12 @@ import {
 	type AdLoadInfo,
 	InterstitialAdPluginEvents,
 } from "@capacitor-community/admob";
+import { Capacitor } from "@capacitor/core";
 
 export async function initialize(): Promise<void> {
-	await AdMob.initialize();
+	await AdMob.initialize({initializeForTesting: Capacitor.DEBUG});
 
-	const [trackingInfo, consentInfo] = await Promise.all([
+	let [trackingInfo, consentInfo] = await Promise.all([
 		AdMob.trackingAuthorizationStatus(),
 		AdMob.requestConsentInfo(),
 	]);
@@ -33,7 +34,7 @@ export async function initialize(): Promise<void> {
 
 	const authorizationStatus = await AdMob.trackingAuthorizationStatus();
 	if (
-		authorizationStatus.status === "authorized" &&
+		// authorizationStatus.status === "authorized" &&
 		consentInfo.isConsentFormAvailable &&
 		consentInfo.status === AdmobConsentStatus.REQUIRED
 	) {
@@ -51,21 +52,22 @@ export async function interstitial(id: string): Promise<void> {
 		// adId: 'ca-app-pub-3940256099942544/1033173712',
 		// npa: true
 		// immersiveMode: true
+        isTesting: Capacitor.DEBUG,
 	};
 	await AdMob.prepareInterstitial(options);
 	await AdMob.showInterstitial();
 }
 
 export async function loadGameOverInterstitial(): Promise<void> {
-    	const options: AdOptions = {
+	const options: AdOptions = {
 		adId: "ca-app-pub-1919299121157918/6971137020",
 		// adId: 'ca-app-pub-3940256099942544/1033173712',
 		// npa: true
 		// immersiveMode: true
 	};
-    await AdMob.prepareInterstitial(options);
+	await AdMob.prepareInterstitial(options);
 }
 
 export async function gameOverInterstitial(): Promise<void> {
-    await interstitial("ca-app-pub-1919299121157918/6971137020");
+	await interstitial("ca-app-pub-1919299121157918/6971137020");
 }
