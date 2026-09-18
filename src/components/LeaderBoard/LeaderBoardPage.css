@@ -18,7 +18,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 20rem;
+	width: min(20rem, 100vw);
 }
 
 .leaderboard-title > h2 {
@@ -42,4 +42,25 @@
 
 .no-score {
 	color: #aaa;
+}
+
+.score {
+    width: min(25rem, 80vw);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time {
+    font-style: italic;
+    font-weight: bold;
+}
+
+.left {
+    margin-left: 1rem;
+}
+
+.right {
+    margin-right: 1rem;
+
 }
