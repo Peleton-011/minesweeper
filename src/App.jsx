@@ -50,6 +50,7 @@ function App({ routes }) {
 
         const newSize = Math.floor((screenWidth / boardWidth) / 1.2); 
         root.style.setProperty("--cell-size", `${newSize}px`);
+        root.style.setProperty("--cell-text-size", `${newSize * 0.8}px`);
     }
     
 
