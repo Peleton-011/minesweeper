@@ -3,6 +3,8 @@
 	line-height: 1.5;
 	font-weight: 400;
 
+    --cell-size: 1.5em;
+
 	/* Colors */
 
 	--background: #242424;

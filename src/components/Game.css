@@ -169,8 +169,9 @@ button:active {
 
 .cell {
   padding: 0;
-  width: 1.5em;
-  height: 1.5em;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  font-size: var(--cell-size);
   background-color: #2e3035;
   border-top: 2px solid #4a4e54;
   border-left: 2px solid #4a4e54;
