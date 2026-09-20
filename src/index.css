@@ -4,7 +4,7 @@
 	font-weight: 400;
 
     --cell-size: 1.5em;
-    --cell-text-size: 20px
+    --cell-text-size: 20px;
 
 	/* Colors */
 
@@ -42,6 +42,7 @@ body {
 	place-items: center;
 	min-width: 320px;
 	min-height: 100vh;
+    background-color: var(--background);
 }
 
 h1 {
@@ -80,7 +81,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 } */
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
 		background-color: #ffffff;
@@ -91,4 +92,4 @@ button:focus-visible {
 	button {
 		background-color: #f9f9f9;
 	}
-}
+} */
