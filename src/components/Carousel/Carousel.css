@@ -60,17 +60,18 @@
 
 .next.btn.active::after,
 .prev.btn.active::after {
-	animation: click 0.5s linear forwards;
+    animation: click 0.5s linear forwards;
 }
 
 .slide {
-	position: absolute;
+    position: absolute;
 	top: 0;
 	left: 0;
 	width: 100vw;
 	height: 100vh;
 	overflow-x: hidden;
 	overflow-y: scroll;
+    scrollbar-width: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
