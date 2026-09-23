@@ -1,6 +1,6 @@
 .prev.btn,
 .next.btn {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	z-index: 1;
 
@@ -64,7 +64,7 @@
 }
 
 .slide {
-    position: absolute;
+    position: fixed;
 	top: 0;
 	left: 0;
 	width: 100vw;
@@ -82,7 +82,7 @@
 	padding: 0.5rem 0;
 	width: 100vw;
 	text-align: center;
-	position: absolute;
+	position: fixed;
 	z-index: 6;
 	/* text-shadow: #333 2px 2px 5px; */
 	transform: translateX(-50%);
