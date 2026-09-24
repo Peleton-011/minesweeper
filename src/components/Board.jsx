@@ -49,13 +49,7 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 							onMouseEnter={(e) => onHover(e, [i, j])}
 							onMouseLeave={(e) => onHover(e, null)}
 						>
-							{!board[i][j].isRevealed
-								? board[i][j].isFlagged
-									? "🚩"
-									: " "
-								: board[i][j].isMine
-								? "💣"
-								: " "}
+							
 						</div>
 					))}
 				</div>

@@ -68,6 +68,12 @@ const Game = ({
 		accumulatedRef.current +
 		(startTimeRef.current ? Date.now() - startTimeRef.current : 0);
 
+    // Update the life counts for the css
+    useEffect(() => {
+        document.documentElement.style.setProperty("--full-heart-count", lives);
+        document.documentElement.style.setProperty("--empty-heart-count", argLives - lives);
+    }, [lives])
+
 	// Accumulate time pausing and resuming
 	useEffect(() => {
 		// console.log("add effect abc");
@@ -356,16 +362,16 @@ const Game = ({
 			{!isGameOver && (
 				<div className="bottom-buttons">
 					<button
-						className={isFlaggingMode ? "" : "active"}
+						className={"bomb " + (isFlaggingMode ? "" : "active")}
 						onClick={() => setIsFlaggingMode(false)}
 					>
-						💣
+						{" "}
 					</button>
 					<button
-						className={isFlaggingMode ? "active" : ""}
+						className={"flag " + (isFlaggingMode ? "active" : "")}
 						onClick={() => setIsFlaggingMode(true)}
 					>
-						🚩
+						{" "}
 					</button>
 				</div>
 			)}

@@ -148,6 +148,14 @@ button:active {
 	border-left: none;
 }
 
+.bomb::before {
+    content: var(--bomb-icon);
+}
+
+.flag::before {
+    content: var(--flag-icon);
+}
+
 .stats {
 	width: 38vw;
 	display: flex;
@@ -158,6 +166,13 @@ button:active {
 	top: 10px;
 	left: 50%; /* Center horizontally */
 	transform: translateX(-50%); /* Adjust horizontal alignment */
+}
+
+.lives > .full-heart::before {
+    content: var(--full-heart-icon);
+}
+.lives > .empty-heart::before {
+    content: var(--empty-heart-icon);
 }
 
 .stats.game-over {
@@ -218,17 +233,6 @@ button:active {
   background-color: #424750;
 }
 
-.cell.revealed.mine {
-    background-color: #3a3d4270;
-}
-
-
-.cell.flagged {
-	/* background-color: red; */
-	color: white;
-}
-
-
 .cell.one.revealed::after {
     content: "1";
     color: blue;
@@ -268,6 +272,24 @@ button:active {
     content: "8";
 	color: black;
 }
+
+.cell.revealed.mine {
+    background-color: #3a3d4270;
+}
+.cell.revealed.mine::after {
+    content: var(--bomb-icon);
+}
+
+.cell.flagged {
+	/* background-color: red; */
+	color: white;
+}
+
+.cell.flagged::after {
+    content: var(--flag-icon);
+}
+
+
 
 .slide > div {
 	display: flex;

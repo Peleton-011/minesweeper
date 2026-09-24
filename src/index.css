@@ -17,6 +17,15 @@
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
 	--light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
 	--highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
+
+    --bomb-icon: "💣";
+    --flag-icon: "🚩";
+    --full-heart-icon: "❤️";
+    --empty-heart-icon: "🖤";
+
+    --full-heart-count: 0;
+    --empty-heart-count: 0;
+
 	color-scheme: light dark;
 	color: var(--text);
 	background-color: var(--background);

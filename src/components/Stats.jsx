@@ -1,7 +1,7 @@
 import { getTimeString } from "../utils/timeutils";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { LuArrowLeft as ArrowLeft} from "@react-icons/lucide";
+import { LuArrowLeft as ArrowLeft } from "@react-icons/lucide";
 
 const Stats = ({
 	start,
@@ -35,22 +35,29 @@ const Stats = ({
 
 	return (
 		<h2 className={"stats " + (isGameOver ? "game-over" : "")}>
-			<Link className="button stealth-button flex flex-col" to="/"><ArrowLeft/></Link>
+			<Link className="button stealth-button flex flex-col" to="/">
+				<ArrowLeft />
+			</Link>
 			<span className="middle">
-				<span className="minecount">{mineCount} 🚩</span>{" "}
+				<span className="minecount">
+					{mineCount} <span className="flag"></span>
+				</span>{" "}
 				<span className="playtime">
 					{getTimeString(
-						displayTime,
+						displayTime
 						// accumulated.current +
 						// (start.current ? Date.now() - start.current : 0),
 					)}
 				</span>
 			</span>
 			<span className="lives">
-				{new Array(argLives)
-					.fill("🖤")
-					.map((v, i) => (i < lives ? "❤️" : v))
-					.join("")}
+				{new Array(argLives).fill("").map((v, i) => {
+					if (i < lives) {
+						return <span key={i} className="full-heart"></span>;
+					} else {
+						return <span key={i} className="empty-heart"></span>;
+					}
+				})}
 			</span>
 		</h2>
 	);
