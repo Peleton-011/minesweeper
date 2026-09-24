@@ -89,7 +89,7 @@ const Game = ({
 		document.addEventListener("focus", handleResume, true);
 	}, []);
 
-	const [board, setBoard] = useState(() => createBoard(height, width));
+	const [board, setBoard] = useState(() => createBoard(width, height));
 
 	// If the game is over, show the whole board
 	useEffect(() => {
@@ -331,7 +331,7 @@ const Game = ({
 					allowRightClickPan: false,
 					allowLeftClickPan: false,
 				}}
-				doubleClick={{ mode: "toggle", disabled: true }}
+				doubleClick={{ mode: "toggle", /*disabled: true*/ }}
 			>
 				<TransformComponent>
 					<Board
