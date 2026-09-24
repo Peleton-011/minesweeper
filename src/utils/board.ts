@@ -13,11 +13,11 @@ const emptyCell: Cell = {
 				content: undefined,
 			};
 
-export const createBoard = (width: number, height: number): Board => {
+export const createBoard = (height: number, width: number): Board => {
 	const board: Board = [];
-	for (let i = 0; i < width; i++) {
+	for (let i = 0; i < height; i++) {
 		const row = [];
-		for (let j = 0; j < height; j++) {
+		for (let j = 0; j < width; j++) {
 			row.push({...emptyCell});
 		}
 		board.push(row);

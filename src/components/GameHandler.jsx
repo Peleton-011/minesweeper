@@ -89,7 +89,7 @@ const Game = ({
 		document.addEventListener("focus", handleResume, true);
 	}, []);
 
-	const [board, setBoard] = useState(() => createBoard(width, height));
+	const [board, setBoard] = useState(() => createBoard(height, width));
 
 	// If the game is over, show the whole board
 	useEffect(() => {
@@ -146,6 +146,7 @@ const Game = ({
 				) {
 					countFlagged++;
 				}
+
 			}
 		}
 

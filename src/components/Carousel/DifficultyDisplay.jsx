@@ -26,7 +26,7 @@ const DifficultyDisplay = ({ config }) => {
 	return (
 		<div>
 			<Link
-				to={`/game/${config.height}/${config.width}/${config.mineCount}/${config.lives}/${config.noGuessMode}/${config.autoSolveMode}/${config.winStateCheck}/${config.startZone}`}
+				to={`/game/${config.width}/${config.height}/${config.mineCount}/${config.lives}/${config.noGuessMode}/${config.autoSolveMode}/${config.winStateCheck}/${config.startZone}`}
 			>
 				<Board
 					board={board}
