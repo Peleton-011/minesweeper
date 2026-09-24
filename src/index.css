@@ -54,12 +54,20 @@
     --alt-bevel-left: var(--alt-bevel-width-left) solid var(--alt-bevel-color-left);
     --alt-bevel-right: var(--alt-bevel-width-right) solid var(--alt-bevel-color-right);
     --alt-bevel-bottom: var(--alt-bevel-width-bottom) solid var(--alt-bevel-color-bottom);
-	/* Shadows */
+	
+    /* Buttons */
+
+    --button-radius: 0.5em;
+    --button-border: none;
+    --button-padding: 0.6em 1.2em;
+
+    /* Shadows */
 
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
 	--light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
 	--highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
 
+    /* Icons */
     --bomb-icon: "💣";
     --flag-icon: "🚩";
     --full-heart-icon: "❤️";
@@ -135,9 +143,9 @@ h1 {
 
 button,
 .button {
-	border-radius: 8px;
-	/* border: 1px solid transparent; */
-	padding: 0.6em 1.2em;
+	border-radius: var(--button-radius);
+	border: var(--button-border);
+	padding: var(--button-padding);
 	font-size: 1em;
 	font-weight: 500;
 	font-family: inherit;
