@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Retro Board</title>
+
+<style>
+:root{
+
+    --frame:#d8ccb8;
+    --frame-light:#f2e8db;
+    --frame-dark:#8d7860;
+
+    --cell:#d9ccb7;
+    --cell-light:#f3e9dc;
+    --cell-dark:#8e775e;
+
+    --revealed:#d4c7b2;
+
+    --shadow:rgba(0,0,0,.18);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+    height:100vh;
+
+    display:grid;
+    place-items:center;
+
+    background:#7d666a;
+    font-family:Georgia, serif;
+}
+
+.board{
+
+    background:var(--frame);
+
+    padding:22px;
+
+    border-radius:6px;
+
+    box-shadow:
+
+        inset 2px 2px 0 rgba(255,255,255,.55),
+
+        inset -4px -4px 0 rgba(80,60,40,.28),
+
+        0 18px 50px rgba(0,0,0,.25);
+
+}
+
+.grid{
+
+    display:grid;
+    grid-template-columns:repeat(10,56px);
+    gap:4px;
+
+    background:#a3917b;
+
+    padding:8px;
+
+    box-shadow:
+        inset 0 5px 8px rgba(0,0,0,.22),
+        inset 0 1px 0 rgba(255,255,255,.18);
+}
+
+.cell{
+
+    width:56px;
+    height:56px;
+
+    background:var(--cell);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    border-radius:3px;
+
+    position:relative;
+
+    box-shadow:
+
+        inset 1px 1px 0 rgba(255,255,255,.55),
+
+        inset -2px -2px 0 rgba(120,100,80,.22),
+
+        0 3px 4px rgba(0,0,0,.22);
+
+}
+
+.cell::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            transparent 40%
+        );
+
+    pointer-events:none;
+}
+
+.revealed{
+
+    background:var(--revealed);
+
+    box-shadow:
+
+        inset 0 3px 7px rgba(0,0,0,.16),
+
+        inset 0 1px 0 rgba(255,255,255,.12);
+
+}
+
+.number{
+
+    font-size:34px;
+
+    font-weight:600;
+
+    text-shadow:
+        0 1px 0 rgba(255,255,255,.35),
+        0 2px 2px rgba(0,0,0,.12);
+}
+
+.n1{color:#4f78aa;}
+.n2{color:#668551;}
+.n3{color:#a85d57;}
+.n4{color:#6e5f9d;}
+.n5{color:#81634d;}
+
+.flag{
+
+    color:#b04d4d;
+    font-size:30px;
+
+    transform:translateY(-2px);
+}
+
+.mine{
+
+    width:26px;
+    height:26px;
+
+    border-radius:50%;
+
+    background:
+
+        radial-gradient(circle at 35% 35%,
+        #555,
+        #222 60%,
+        #111);
+
+    box-shadow:
+
+        inset 1px 1px 2px rgba(255,255,255,.25),
+
+        0 2px 4px rgba(0,0,0,.4);
+
+    position:relative;
+}
+
+.mine:before,
+.mine:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:34px;
+    height:2px;
+
+    background:#111;
+
+    transform:translate(-50%,-50%);
+}
+
+.mine:after{
+
+    transform:
+        translate(-50%,-50%)
+        rotate(90deg);
+}
+
+.mine i{
+
+    position:absolute;
+
+    inset:-4px;
+
+    border-radius:50%;
+
+    border:2px dashed #222;
+}
+</style>
+</head>
+<body>
+
+<div class="board">
+
+<div class="grid">
+
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n2">2</span></div>
+<div class="cell"><span class="flag">⚑</span></div>
+
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"></div>
+
+<div class="cell"></div>
+<div class="cell"><span class="flag">⚑</span></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell"></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell"></div>
+<div class="cell"></div>
+<div class="cell"><span class="flag">⚑</span></div>
+<div class="cell"></div>
+
+<div class="cell"></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n2">2</span></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell"><span class="flag">⚑</span></div>
+
+<div class="cell"></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n2">2</span></div>
+<div class="cell revealed"><span class="number n3">3</span></div>
+<div class="cell"></div>
+
+<div class="cell"></div>
+<div class="cell revealed"><span class="number n4">4</span></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n2">2</span></div>
+<div class="cell revealed"><span class="number n3">3</span></div>
+
+<div class="cell revealed">
+<div class="mine"><i></i></div>
+</div>
+
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n1">1</span></div>
+<div class="cell revealed"><span class="number n5">5</span></div>
+
+</div>
+
+</div>
+
+</body>
+</html>

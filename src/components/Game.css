@@ -193,7 +193,7 @@ button:active {
   width: var(--cell-size);
   height: var(--cell-size);
   font-size: var(--cell-text-size);
-  background-color: #2e3035;
+  background-color: var(--cell-background);
   border-top: 2px solid #4a4e54;
   border-left: 2px solid #4a4e54;
   border-right: 2px solid #1a1c1f;

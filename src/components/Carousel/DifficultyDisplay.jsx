@@ -24,7 +24,7 @@ const DifficultyDisplay = ({ config }) => {
 	const [board, setBoard] = useState(getBoard(config.height, config.width));
 
 	return (
-		<div>
+		<div className="difficulty-display">
 			<Link
 				to={`/game/${config.width}/${config.height}/${config.mineCount}/${config.lives}/${config.noGuessMode}/${config.autoSolveMode}/${config.winStateCheck}/${config.startZone}`}
 			>
