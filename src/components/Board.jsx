@@ -36,8 +36,8 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 							tabIndex={0}
 							key={j}
 							className={
-								"cell clickable bevel" +
-								(cell.isRevealed ? " revealed" : "") +
+								"cell clickable" +
+								(cell.isRevealed ? " revealed alt-bevel" : " bevel") +
 								(cell.isFlagged ? " flagged" : "") +
 								(cell.isMine ? " mine" : "") +
 								(typeof cell.content === "number"

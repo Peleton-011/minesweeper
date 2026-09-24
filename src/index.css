@@ -4,7 +4,7 @@
 	font-weight: 400;
 
     --cell-size: 1.5em;
-    --cell-text-size: 20px;
+    --cell-text-size: 1.25em;
 
 	/* New Colors */
 
@@ -14,21 +14,46 @@
 	--text: #6D7D98;
 	--highlight: #2C3448;
 	*/
-    
+
     /* Old */
     
     --cell-background: #2e3035;
+    --alt-cell-background: #3a3d42;
     --background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a; 
 
     /* Bevel */
 
-    --bevel-top: 2px solid #4a4e54;
-    --bevel-left: 2px solid #4a4e54;
-    --bevel-right: 2px solid #1a1c1f;
-    --bevel-bottom: 2px solid #1a1c1f;
+    --bevel-width-top: 0.125em;
+    --bevel-width-left: 0.125em;
+    --bevel-width-right: 0.125em;
+    --bevel-width-bottom: 0.125em;
 
+    --bevel-color-top: #4a4e54;
+    --bevel-color-left: #4a4e54;
+    --bevel-color-right: #1a1c1f;
+    --bevel-color-bottom: #1a1c1f;
+
+    --bevel-top: var(--bevel-width-top) solid var(--bevel-color-top);
+    --bevel-left: var(--bevel-width-left) solid var(--bevel-color-left);
+    --bevel-right: var(--bevel-width-right) solid var(--bevel-color-right);
+    --bevel-bottom: var(--bevel-width-bottom) solid var(--bevel-color-bottom);
+
+    --alt-bevel-width-top: 0.125em;
+    --alt-bevel-width-left: 0.125em;
+    --alt-bevel-width-right: 0.125em;
+    --alt-bevel-width-bottom: 0.125em;
+
+    --alt-bevel-color-top: #252729;
+    --alt-bevel-color-left: #252729;
+    --alt-bevel-color-right: #3e4146;
+    --alt-bevel-color-bottom: #3e4146;
+
+    --alt-bevel-top: var(--alt-bevel-width-top) solid var(--alt-bevel-color-top);
+    --alt-bevel-left: var(--alt-bevel-width-left) solid var(--alt-bevel-color-left);
+    --alt-bevel-right: var(--alt-bevel-width-right) solid var(--alt-bevel-color-right);
+    --alt-bevel-bottom: var(--alt-bevel-width-bottom) solid var(--alt-bevel-color-bottom);
 	/* Shadows */
 
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
@@ -59,7 +84,16 @@
     border-right: var(--bevel-right);
     border-bottom: var(--bevel-bottom);
     
-    box-shadow: var(--dark-shadow);
+    /* box-shadow: var(--dark-shadow); */
+}
+
+.alt-bevel {
+    border-top: var(--alt-bevel-top);
+    border-left: var(--alt-bevel-left);
+    border-right: var(--alt-bevel-right);
+    border-bottom: var(--alt-bevel-bottom);
+    
+    /* box-shadow: var(--dark-shadow); */
 }
 
 .bevel-wide {
