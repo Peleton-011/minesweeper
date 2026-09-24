@@ -200,6 +200,7 @@ button:active {
   border-bottom: 2px solid #1a1c1f;
   border-radius: 0px;
   display: inline-flex;
+  box-sizing: border-box;
   justify-content: center;
   align-items: center;
   font-weight: bold;
