@@ -21,9 +21,11 @@ fieldset {
 	display: flex;
 	justify-content: space-between;
 }
+
 fieldset {
-	margin: 0.5rem -1rem;
+	margin: 0.5rem -1rem !important;
 }
+
 span.suggest {
 	visibility: hidden;
 	position: fixed;
