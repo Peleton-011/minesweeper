@@ -228,35 +228,44 @@ button:active {
 	color: white;
 }
 
-.cell.one {
-	color: blue;
+
+.cell.one.revealed::after {
+    content: "1";
+    color: blue;
 }
 
-.cell.two {
+.cell.two.revealed::after {
+    content: "2";
 	color: green;
 }
 
-.cell.three {
+.cell.three.revealed::after {
+    content: "3";
 	color: red;
 }
 
-.cell.four {
+.cell.four.revealed::after {
+    content: "4";
 	color: darkblue;
 }
 
-.cell.five {
+.cell.five.revealed::after {
+    content: "5";
 	color: darkred;
 }
 
-.cell.six {
+.cell.six.revealed::after {
+    content: "6";
 	color: purple;
 }
 
-.cell.seven {
+.cell.seven.revealed::after {
+    content: "7";
 	color: darkgreen;
 }
 
-.cell.eight {
+.cell.eight.revealed::after {
+    content: "8";
 	color: black;
 }
 

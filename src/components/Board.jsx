@@ -39,7 +39,7 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 								"cell clickable" +
 								(cell.isRevealed ? " revealed" : "") +
 								(cell.isFlagged ? " flagged" : "") +
-                                (cell.isMine ? " mine" : "") +
+								(cell.isMine ? " mine" : "") +
 								(typeof cell.content === "number"
 									? " " + getNumberName(cell.content)
 									: "")
@@ -54,10 +54,8 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 									? "🚩"
 									: " "
 								: board[i][j].isMine
-									? "💣"
-									: board[i][j].content == "0"
-										? " "
-										: board[i][j].content}
+								? "💣"
+								: " "}
 						</div>
 					))}
 				</div>
