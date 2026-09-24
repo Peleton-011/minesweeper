@@ -17,8 +17,6 @@
 
     /* Old */
     
-    --cell-background: #2e3035;
-    --alt-cell-background: #3a3d42;
     --background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a; 
@@ -66,6 +64,57 @@
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
 	--light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
 	--highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
+
+    /* Cells */
+    --cell-background: #2e3035;
+    --alt-cell-background: #3a3d42;
+
+    --cell-hover-background: #363a40;
+    --cell-revealed-hover-background: #424750;
+
+    --cell-revealed-color: white;
+
+    --t-1: "1";
+    --t-2: "2";
+    --t-3: "3";
+    --t-4: "4";
+    --t-5: "5";
+    --t-6: "6";
+    --t-7: "7";
+    --t-8: "8";
+
+    /* Idk
+    --c-1: darkblue;
+    --c-2: #007700;
+    --c-3: maroon;
+    --c-4: teal;
+    --c-5: darkgreen;
+    --c-6: purple;
+    --c-7: black;
+    --c-8: #707070;
+    */
+
+    /* Original minesweeper
+    --c-1: #0000f7;
+    --c-2: #007700;
+    --c-3: #ec0000;
+    --c-4: navy;
+    --c-5: maroon;
+    --c-6: teal;
+    --c-7: black;
+    --c-8: #707070;
+    */
+
+    /* Old */
+    --c-1: blue;
+    --c-2: green;
+    --c-3: red;
+    --c-4: darkblue;
+    --c-5: darkred;
+    --c-6: purple;
+    --c-7: darkgreen;
+    --c-8: black;
+    
 
     /* Icons */
     --bomb-icon: "💣";

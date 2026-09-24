@@ -210,57 +210,57 @@ button:active {
 }
 
 .cell:hover {
-  background-color: #363a40;
+  background-color: var(--cell-hover-background);
   /* text-shadow: var(--light-shadow); */
 }
 
 .cell.revealed {
   background-color: var(--alt-cell-background);
-  color: white;
+  color: var(--cell-revealed-color);
 }
 
 .cell.revealed:hover {
-  background-color: #424750;
+  background-color: var(--cell-revealed-hover-background);
 }
 
 .cell.one.revealed::after {
-    content: "1";
-    color: blue;
+    content: var(--t-1);
+    color: var(--c-1);
 }
 
 .cell.two.revealed::after {
-    content: "2";
-	color: green;
+    content: var(--t-2);
+	color: var(--c-2);
 }
 
 .cell.three.revealed::after {
-    content: "3";
-	color: red;
+    content: var(--t-3);
+	color: var(--c-3);
 }
 
 .cell.four.revealed::after {
-    content: "4";
-	color: darkblue;
+    content: var(--t-4);
+	color: var(--c-4);
 }
 
 .cell.five.revealed::after {
-    content: "5";
-	color: darkred;
+    content: var(--t-5);
+	color: var(--c-5);
 }
 
 .cell.six.revealed::after {
-    content: "6";
-	color: purple;
+    content: var(--t-6);
+	color: var(--c-6);
 }
 
 .cell.seven.revealed::after {
-    content: "7";
-	color: darkgreen;
+    content: var(--t-7);
+	color: var(--c-7);
 }
 
 .cell.eight.revealed::after {
-    content: "8";
-	color: black;
+    content: var(--t-8);
+	color: var(--c-8);
 }
 
 .cell.revealed.mine {
