@@ -51,12 +51,15 @@ const Stats = ({
 				</span>
 			</span>
 			<span className="lives">
-				{new Array(argLives).fill("").map((v, i) => {
-					if (i < lives) {
-						return <span key={i} className="full-heart"></span>;
-					} else {
-						return <span key={i} className="empty-heart"></span>;
-					}
+				{Array.from({ length: argLives }).map((_, i) => {
+					return (
+						<span
+							key={i}
+							className={
+								(i < lives ? "full" : "empty") + "-heart"
+							}
+						></span>
+					);
 				})}
 			</span>
 		</h2>
