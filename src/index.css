@@ -138,10 +138,15 @@
     
 
     /* Icons */
-    --bomb-icon: "💣";
+    --bomb-icon: "";
     --flag-icon: "🚩";
     --full-heart-icon: "❤️";
     --empty-heart-icon: "🖤";
+
+    --bomb-icon-img: url("/SeaMine.png");
+    --flag-icon-img: "";
+    --full-heart-icon-img: "";
+    --empty-heart-icon-img: "";
 
     --full-heart-count: 0;
     --empty-heart-count: 0;

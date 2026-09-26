@@ -138,6 +138,14 @@ button:active {
 	border-left: none;
 }
 
+.bomb {
+    background-image: var(--bomb-icon-img);
+}
+
+.flag {
+    background-image: var(--flag-icon-img);
+}
+
 .bomb::before {
     content: var(--bomb-icon);
 }
