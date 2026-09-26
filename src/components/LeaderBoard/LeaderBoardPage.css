@@ -41,7 +41,7 @@
 }
 
 .no-score {
-	color: #aaa;
+	color: var(--no-score-color);
 }
 
 .score {

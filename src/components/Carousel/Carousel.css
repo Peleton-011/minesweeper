@@ -8,7 +8,6 @@
 	width: 25%;
 
 	background-color: transparent;
-	border-radius: 0;
 	border: none;
 	cursor: pointer;
 	outline: none;
@@ -28,20 +27,21 @@
 	display: inline-block;
 	transform: translateY(-50%) rotate(45deg);
 	content: "";
-	width: 50px;
-	height: 50px;
+	width: var(--carousel-arrow-size);
+	height: var(--carousel-arrow-size);
+    border-radius: var(--carousel-buttons-border-radius);
 }
 
 .next.btn::after {
-	border-right: 5px solid #fff;
-	border-top: 5px solid #fff;
+	border-right: var(--carousel-arrow-width) solid var(--carousel-arrow-color);
+	border-top: var(--carousel-arrow-width) solid var(--carousel-arrow-color);
 	border-left: none;
 	border-bottom: none;
 }
 
 .prev.btn::after {
-	border-bottom: 5px solid #fff;
-	border-left: 5px solid #fff;
+	border-bottom: var(--carousel-arrow-width) solid var(--carousel-arrow-color);
+	border-left: var(--carousel-arrow-width) solid var(--carousel-arrow-color);
 	border-right: none;
 	border-top: none;
 }
@@ -60,7 +60,7 @@
 
 .next.btn.active::after,
 .prev.btn.active::after {
-    animation: click 0.5s linear forwards;
+    animation: click var(--click-animation-time) var(--click-animation-timing) forwards;
 }
 
 .slide {
@@ -78,9 +78,9 @@
 }
 
 .slider-title {
-	background-color: #1a1a1a;
-	padding: 0.5rem 0;
-	width: 100vw;
+	background-color: var(--transparent-background);
+	padding: var(--game-over-card-padding);
+	width: var(--game-over-card-padding);
 	text-align: center;
 	position: fixed;
 	z-index: 6;
@@ -99,19 +99,19 @@
 }
 
 .slide-away-left > * {
-	animation: slideAwayLeft 2s normal both ease-in-out;
+	animation: slideAwayLeft var(--slide-animation-time) normal both var(--slide-animation-timing);
 }
 
 .slide-in-right > * {
-	animation: slideInRight 2s normal both ease-in-out;
+	animation: slideInRight var(--slide-animation-time) normal both var(--slide-animation-timing);
 }
 
 .slide-away-right > * {
-	animation: slideAwayRight 2s normal both ease-in-out;
+	animation: slideAwayRight var(--slide-animation-time) normal both var(--slide-animation-timing);
 }
 
 .slide-in-left > * {
-	animation: slideInLeft 2s normal both ease-in-out;
+	animation: slideInLeft var(--slide-animation-time) normal both var(--slide-animation-timing);
 }
 
 @keyframes slideAwayRight {
