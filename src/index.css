@@ -20,6 +20,29 @@
     --background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a; 
+    --transparent-background: #1a1a1aa0;
+
+    /* Game Over Title */
+
+    --game-over-card-width: 100vw;
+    --game-over-card-padding: 0.5rem 0;
+
+    /* Buttons */
+
+    --button-radius: 0.5em;
+    --button-border: none;
+    --button-padding: 0.6em 1.2em;
+
+    /* Bottom Buttons */
+    --bottom-button-background: #555;
+    --bottom-button-inactive-overlay: #181a1b;
+    --bottom-button-active-overlay: transparent;
+
+    --bottom-button-first-border-radius: var(--button-radius) 0 0 var(--button-radius);
+    --bottom-button-last-border-radius: 0 var(--button-radius) var(--button-radius) 0;
+
+    /* Board */
+    --board-font-size: 20px;
 
     /* Bevel */
 
@@ -53,12 +76,6 @@
     --alt-bevel-right: var(--alt-bevel-width-right) solid var(--alt-bevel-color-right);
     --alt-bevel-bottom: var(--alt-bevel-width-bottom) solid var(--alt-bevel-color-bottom);
 	
-    /* Buttons */
-
-    --button-radius: 0.5em;
-    --button-border: none;
-    --button-padding: 0.6em 1.2em;
-
     /* Shadows */
 
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
@@ -71,8 +88,12 @@
 
     --cell-hover-background: #363a40;
     --cell-revealed-hover-background: #424750;
+    --cell-revealed-mine-background: #3a3d4270;
 
     --cell-revealed-color: white;
+    --cell-flagged-color: white;
+
+    --cell-border-radius: 0px;
 
     --t-1: "1";
     --t-2: "2";
@@ -124,6 +145,10 @@
 
     --full-heart-count: 0;
     --empty-heart-count: 0;
+
+    /* Mobile */
+    --mobile-font-size: 16px;
+
 
 	color-scheme: light dark;
 	color: var(--text);

@@ -25,9 +25,9 @@
 	text-align: center; /* Center-align text */
 	overflow: hidden; /* Prevent content overflow */
 
-	background-color: #1a1a1aa0;
-	padding: 0.5rem 0;
-	width: 100vw;
+	background-color: var(--transparent-background);
+	padding: var(--game-over-card-padding);
+	width: var(--game-over-card-width);
 	position: fixed;
 	/* text-shadow: #333 2px 2px 5px; */
 	transform: translateX(-50%);
@@ -101,7 +101,7 @@ button:active {
 	position: relative;
 	transition: none;
 	border: none;
-    background-color: #555;
+    background-color: var(--bottom-button-background);
 }
 
 .bottom-buttons > .active {
@@ -120,23 +120,21 @@ button:active {
     width: 100%;
     height: 100%;
     border-radius: inherit;
-    background-color: var(--darkreader-background-ffffff, #181a1b);
+    background-color: var(--bottom-button-inactive-overlay);
     opacity: 40%;
 }
 
 .bottom-buttons > .active::after {
-    background-color: rgba(0, 0, 0, 0) !important;
+    background-color: var(--bottom-button-active-overlay);
 } 
 
 .bottom-buttons > button:first-child {
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+	border-radius: var(--bottom-button-first-border-radius);
 	border-right: none;
 }
 
 .bottom-buttons > button:last-child {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+	border-radius: var(--bottom-button-last-border-radius);
 	border-left: none;
 }
 
@@ -178,11 +176,12 @@ button:active {
 
 .board {
 	padding: 6rem;
+    font-size: var(--board-font-size);
 }
 
 .row {
 	display: flex;
-	font-size: 20px;
+    font-size: inherit;
 }
 
 .cell {
@@ -191,7 +190,7 @@ button:active {
   height: var(--cell-size);
   font-size: var(--cell-text-size);
   background-color: var(--cell-background);
-  border-radius: 0px;
+  border-radius: var(--cell-border-radius);
   display: inline-flex;
   box-sizing: border-box;
   justify-content: center;
@@ -264,7 +263,7 @@ button:active {
 }
 
 .cell.revealed.mine {
-    background-color: #3a3d4270;
+    background-color: var(--cell-revealed-mine-background);
 }
 .cell.revealed.mine::after {
     content: var(--bomb-icon);
@@ -272,7 +271,7 @@ button:active {
 
 .cell.flagged {
 	/* background-color: red; */
-	color: white;
+	color: var(--cell-flagged-color);
 }
 
 .cell.flagged::after {
@@ -289,7 +288,7 @@ button:active {
 
 @media only screen and (max-width: 767px) {
 	body {
-		font-size: 16px;
+		font-size: var(--mobile-font-size);
 	}
 
 	.game-over-buttons {
