@@ -80,7 +80,7 @@
 .slider-title {
 	background-color: var(--transparent-background);
 	padding: var(--game-over-card-padding);
-	width: var(--game-over-card-padding);
+	width: var(--game-over-card-width);
 	text-align: center;
 	position: fixed;
 	z-index: 6;
