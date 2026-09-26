@@ -2,6 +2,7 @@ import SelectorPage from "@/components/SelectorPage";
 import GamePage from "@/components/GamePage";
 import TestPage from "@/components/TestPage.tsx";
 import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
+import StylesPage from "./components/Styles/StylesPage";
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,
@@ -29,6 +30,7 @@ const router = createHashRouter(
 				path="/scores/:width?/:height?/:mines?/:lives?"
 				element={<LeaderBoardPage />}
 			/>
+            <Route path="/styles" element={<StylesPage />} />
 		</>,
 	),
 );
