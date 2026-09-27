@@ -18,7 +18,7 @@ const Icon = ({iconUrl = "", iconChar = ""}) => {
     if (iconUrl[0] === '"') {
         iconUrl = iconUrl.substring(1, iconUrl.length - 1);
     } else if (iconUrl.substring(0, 4) === "url(") {
-        iconUrl = iconUrl.substring(5, iconUrl.length - 2);
+        iconUrl = iconUrl.substring(4, iconUrl.length - 1);
     }
 
     if (iconChar[0] === '"') {
