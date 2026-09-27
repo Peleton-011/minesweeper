@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty } from "@/utils/leaderboard";
 
-const Bomb = () => {
+const Icon = () => {
 	
 
 	return (
@@ -22,4 +22,4 @@ const Bomb = () => {
 	);
 };
 
-export default Bomb;
+export default Icon;
