@@ -1,4 +1,6 @@
 import React from "react";
+import FlagIcon from "../Icons/FlagIcon.jsx";
+import MineIcon from "../Icons/MineIcon.jsx";
 
 const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 	const getNumberName = (number) => {
@@ -49,7 +51,20 @@ const Board = ({ board, onLeftClick, onRightClick, onHover = () => {} }) => {
 							onMouseEnter={(e) => onHover(e, [i, j])}
 							onMouseLeave={(e) => onHover(e, null)}
 						>
-							
+							{
+                                cell.isFlagged ? (
+                                    <FlagIcon />
+                                ) : 
+                                cell.isRevealed ? (
+                                    cell.isMine ? (
+                                        <MineIcon />
+                                    ) : (
+                                        ""
+                                    )
+                                ) : (
+                                    ""
+                                )
+                            }
 						</div>
 					))}
 				</div>

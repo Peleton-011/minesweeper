@@ -2,6 +2,9 @@ import { getTimeString } from "../utils/timeutils";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LuArrowLeft as ArrowLeft } from "@react-icons/lucide";
+import FullHeartIcon from "../Icons/FullHeartIcon.jsx";
+import EmptyHeartIcon from "../Icons/EmptyHeartIcon.jsx";
+import FlagIcon from "../Icons/FlagIcon.jsx";
 
 const Stats = ({
 	start,
@@ -40,7 +43,7 @@ const Stats = ({
 			</Link>
 			<span className="middle">
 				<span className="minecount">
-					{mineCount} <span className="flag"></span>
+					{mineCount} <FlagIcon />
 				</span>{" "}
 				<span className="playtime">
 					{getTimeString(
@@ -52,13 +55,10 @@ const Stats = ({
 			</span>
 			<span className="lives">
 				{Array.from({ length: argLives }).map((_, i) => {
-					return (
-						<span
-							key={i}
-							className={
-								(i < lives ? "full" : "empty") + "-heart"
-							}
-						></span>
+					return i < lives ? (
+						<FullHeartIcon key={i} />
+					) : (
+						<EmptyHeartIcon key={i} />
 					);
 				})}
 			</span>

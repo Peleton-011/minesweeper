@@ -14,6 +14,8 @@ import {
 } from "../utils/board";
 
 import { solveBoard } from "../utils/solver";
+import MineIcon from "../Icons/MineIcon.jsx";
+import FlagIcon from "../Icons/FlagIcon.jsx";
 
 const Game = ({
 	config: {
@@ -56,7 +58,6 @@ const Game = ({
 	}, [isGameOver]);
 
 	const onWin = () => {
-        
 		argOnWin(getPlayTime());
 	};
 
@@ -68,11 +69,14 @@ const Game = ({
 		accumulatedRef.current +
 		(startTimeRef.current ? Date.now() - startTimeRef.current : 0);
 
-    // Update the life counts for the css
-    useEffect(() => {
-        document.documentElement.style.setProperty("--full-heart-count", lives);
-        document.documentElement.style.setProperty("--empty-heart-count", argLives - lives);
-    }, [lives])
+	// Update the life counts for the css
+	useEffect(() => {
+		document.documentElement.style.setProperty("--full-heart-count", lives);
+		document.documentElement.style.setProperty(
+			"--empty-heart-count",
+			argLives - lives
+		);
+	}, [lives]);
 
 	// Accumulate time pausing and resuming
 	useEffect(() => {
@@ -111,8 +115,8 @@ const Game = ({
 							};
 						}
 						return cell;
-					}),
-				),
+					})
+				)
 			);
 		}
 	}, [lives]);
@@ -152,7 +156,6 @@ const Game = ({
 				) {
 					countFlagged++;
 				}
-
 			}
 		}
 
@@ -203,7 +206,7 @@ const Game = ({
 					return { ...c, isFlagged: true };
 				}
 				return c;
-			}),
+			})
 		);
 	};
 
@@ -215,7 +218,7 @@ const Game = ({
 					return { ...c, isFlagged: false };
 				}
 				return c;
-			}),
+			})
 		);
 	};
 
@@ -235,8 +238,8 @@ const Game = ({
 		const newBoard = cell.isRevealed
 			? chord(i, j)
 			: cell.isFlagged
-				? unflag(i, j)
-				: flag(i, j);
+			? unflag(i, j)
+			: flag(i, j);
 
 		setBoard(newBoard);
 
@@ -256,12 +259,12 @@ const Game = ({
 		newBoard = isFirstClick
 			? firstClick(i, j)
 			: autoSolveMode
-				? board
-				: cell.isRevealed
-					? chord(i, j)
-					: cell.isFlagged
-						? unflag(i, j)
-						: batchReveal(getRevealList(i, j, [], board));
+			? board
+			: cell.isRevealed
+			? chord(i, j)
+			: cell.isFlagged
+			? unflag(i, j)
+			: batchReveal(getRevealList(i, j, [], board));
 
 		setBoard(newBoard);
 
@@ -338,7 +341,7 @@ const Game = ({
 					allowRightClickPan: false,
 					allowLeftClickPan: false,
 				}}
-				doubleClick={{ mode: "toggle", /*disabled: true*/ }}
+				doubleClick={{ mode: "toggle" /*disabled: true*/ }}
 			>
 				<TransformComponent>
 					<Board
@@ -362,16 +365,16 @@ const Game = ({
 			{!isGameOver && (
 				<div className="bottom-buttons">
 					<button
-						className={"bomb " + (isFlaggingMode ? "" : "active")}
+						className={isFlaggingMode ? "" : "active"}
 						onClick={() => setIsFlaggingMode(false)}
 					>
-						{" "}
+						<MineIcon />
 					</button>
 					<button
-						className={"flag " + (isFlaggingMode ? "active" : "")}
+						className={isFlaggingMode ? "active" : ""}
 						onClick={() => setIsFlaggingMode(true)}
 					>
-						{" "}
+						<FlagIcon />
 					</button>
 				</div>
 			)}

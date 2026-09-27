@@ -44,7 +44,7 @@ const LeaderBoardPage = () => {
 		const ctx = canvas.getContext("2d");
 		ctx.drawImage(bitmap, 0, 0, width, height);
 
-		return canvas.toDataURL("image/jpeg", 0.8);
+		return canvas.toDataURL("image/png", 0.8);
 	}
 
 	onload = function () {
@@ -78,7 +78,7 @@ const LeaderBoardPage = () => {
 						id="userIcon"
 						alt="Your icon"
 						style={{
-							width: "var(--cell-size)",
+							// width: "var(--cell-size)",
 							aspectRatio: 1,
 							objectFit: "cover",
 						}}

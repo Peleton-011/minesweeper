@@ -14,7 +14,7 @@
   opacity: 0.85;
 }
 
- .gameover {
+.gameover {
 	z-index: 10;
 	top: 0;
 	margin: 0;
@@ -136,22 +136,6 @@ button:active {
 .bottom-buttons > button:last-child {
 	border-radius: var(--bottom-button-last-border-radius);
 	border-left: none;
-}
-
-.bomb {
-    background-image: var(--bomb-icon-img);
-}
-
-.flag {
-    background-image: var(--flag-icon-img);
-}
-
-.bomb::before {
-    content: var(--bomb-icon);
-}
-
-.flag::before {
-    content: var(--flag-icon);
 }
 
 .stats {
