@@ -79,6 +79,8 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 
 4. **Generate APK**: `build > generate bundles or apks > generate apks`, It will appear inside `android > app > build > outputs > apk > debug > app-debug.apk`
 
+5. **Change version**: `android/build.gradle (:app)` -> Update `versionCode` and `versionName`
+
 ## Icon and splash
 
 1. Place icon at /assets/icon.png|jpg being 1024x1024px at least (this assets directory is at the root level of the project). You can place a dark icon at /assets/icon-dark.png|jpg
