@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { useControls, TransformComponent } from "react-zoom-pan-pinch";
 import useDeviceType from "../hooks/useDeviceType";
 import Board from "@/components/Board";
 import Stats from "@/components/Stats";
@@ -48,6 +48,8 @@ const Game = ({
 	const isFirstClickRef = React.useRef(isFirstClick);
 	const isGameOverRef = React.useRef(isGameOver);
 
+	const zppControls = useControls();
+
 	useEffect(() => {
 		isFirstClickRef.current = isFirstClick;
 	}, [isFirstClick]);
@@ -56,7 +58,6 @@ const Game = ({
 	}, [isGameOver]);
 
 	const onWin = () => {
-        
 		argOnWin(getPlayTime());
 	};
 
@@ -68,11 +69,14 @@ const Game = ({
 		accumulatedRef.current +
 		(startTimeRef.current ? Date.now() - startTimeRef.current : 0);
 
-    // Update the life counts for the css
-    useEffect(() => {
-        document.documentElement.style.setProperty("--full-heart-count", lives);
-        document.documentElement.style.setProperty("--empty-heart-count", argLives - lives);
-    }, [lives])
+	// Update the life counts for the css
+	useEffect(() => {
+		document.documentElement.style.setProperty("--full-heart-count", lives);
+		document.documentElement.style.setProperty(
+			"--empty-heart-count",
+			argLives - lives
+		);
+	}, [lives]);
 
 	// Accumulate time pausing and resuming
 	useEffect(() => {
@@ -111,8 +115,8 @@ const Game = ({
 							};
 						}
 						return cell;
-					}),
-				),
+					})
+				)
 			);
 		}
 	}, [lives]);
@@ -152,7 +156,6 @@ const Game = ({
 				) {
 					countFlagged++;
 				}
-
 			}
 		}
 
@@ -181,6 +184,9 @@ const Game = ({
 		// console.log("First click");
 		setFirstClick(false);
 
+        // 1.5 is a magic number but it works
+        zppControls.zoomIn(1.5)
+
 		const newBoard = fillBoard(x, y, startZone, board, mineCount);
 
 		if (autoSolveMode) {
@@ -203,7 +209,7 @@ const Game = ({
 					return { ...c, isFlagged: true };
 				}
 				return c;
-			}),
+			})
 		);
 	};
 
@@ -215,7 +221,7 @@ const Game = ({
 					return { ...c, isFlagged: false };
 				}
 				return c;
-			}),
+			})
 		);
 	};
 
@@ -235,8 +241,8 @@ const Game = ({
 		const newBoard = cell.isRevealed
 			? chord(i, j)
 			: cell.isFlagged
-				? unflag(i, j)
-				: flag(i, j);
+			? unflag(i, j)
+			: flag(i, j);
 
 		setBoard(newBoard);
 
@@ -256,12 +262,12 @@ const Game = ({
 		newBoard = isFirstClick
 			? firstClick(i, j)
 			: autoSolveMode
-				? board
-				: cell.isRevealed
-					? chord(i, j)
-					: cell.isFlagged
-						? unflag(i, j)
-						: batchReveal(getRevealList(i, j, [], board));
+			? board
+			: cell.isRevealed
+			? chord(i, j)
+			: cell.isFlagged
+			? unflag(i, j)
+			: batchReveal(getRevealList(i, j, [], board));
 
 		setBoard(newBoard);
 
@@ -329,26 +335,15 @@ const Game = ({
 
 	return (
 		<>
-			<TransformWrapper
-				centerOnInit={true}
-				initialScale={1}
-				pinch={{ disabled: false }}
-				pan={{
-					disabled: false,
-					allowRightClickPan: false,
-					allowLeftClickPan: false,
-				}}
-				doubleClick={{ mode: "toggle", disabled: true}}
-			>
-				<TransformComponent>
-					<Board
-						board={board}
-						onLeftClick={onLeftClick}
-						onRightClick={onRightClick}
-						onHover={onHover}
-					/>
-				</TransformComponent>
-			</TransformWrapper>
+			<TransformComponent >
+				<Board
+					board={board}
+					onLeftClick={onLeftClick}
+					onRightClick={onRightClick}
+					onHover={onHover}
+				/>
+			</TransformComponent>
+
 			<Stats
 				start={startTimeRef}
 				accumulated={accumulatedRef}

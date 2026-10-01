@@ -3,8 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import "@/components/Game.css";
 import { getPlayTimeString } from "@/utils/timeutils";
 import { addScore, fetchScores } from "@/utils/leaderboard";
+import { TransformWrapper} from "react-zoom-pan-pinch";
 import { useParams, Link } from "react-router-dom";
-import {initialize, gameOverInterstitial, loadGameOverInterstitial} from "../utils/ads.ts";
+import {
+	initialize,
+	gameOverInterstitial,
+	loadGameOverInterstitial,
+} from "../utils/ads.ts";
 
 initialize();
 
@@ -31,13 +36,13 @@ function Game() {
 		setIsGameOver(true);
 		setDidWin(false);
 		setLastTime(t);
-        gameOverInterstitial();
+		gameOverInterstitial();
 	};
 	const onWin = (t) => {
 		setIsGameOver(true);
 		setDidWin(true);
 		setLastTime(t);
-        gameOverInterstitial();
+		gameOverInterstitial();
 		addScore(t, config);
 	};
 
@@ -68,12 +73,31 @@ function Game() {
 					{didWin && <h2>{getPlayTimeString(lastTime)}</h2>}
 				</div>
 			)}
-			<GameHandler config={config} key={key} isGameOver={isGameOver} />
+			<TransformWrapper
+				centerOnInit={true}
+				initialScale={1}
+				pinch={{ disabled: false }}
+				pan={{
+					disabled: false,
+					allowRightClickPan: false,
+					allowLeftClickPan: false,
+				}}
+				doubleClick={{ mode: "toggle", disabled: true }}
+			>
+					<GameHandler
+						config={config}
+						key={key}
+						isGameOver={isGameOver}
+					/>
+			</TransformWrapper>
 
 			{isGameOver && (
 				<div className="game-over-buttons">
 					<button onClick={handleRestart}>Play Again</button>
-					<Link className="button" to={`/${width}/${height}/${mines}/${lives}`}>
+					<Link
+						className="button"
+						to={`/${width}/${height}/${mines}/${lives}`}
+					>
 						Back to Menu
 					</Link>
 				</div>
