@@ -338,7 +338,7 @@ const Game = ({
 					allowRightClickPan: false,
 					allowLeftClickPan: false,
 				}}
-				doubleClick={{ mode: "toggle", /*disabled: true*/ }}
+				doubleClick={{ mode: "toggle", disabled: true}}
 			>
 				<TransformComponent>
 					<Board
