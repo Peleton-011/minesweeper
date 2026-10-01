@@ -185,8 +185,8 @@ const Game = ({
 		setFirstClick(false);
 
 		if (deviceType === "mobile") {
-			// 1.5 is a magic number but it works
-			zppControls.zoomIn(1.5);
+			// 1 is a magic number but it works
+			zppControls.zoomIn(1);
 		}
 
 		const newBoard = fillBoard(x, y, startZone, board, mineCount);
