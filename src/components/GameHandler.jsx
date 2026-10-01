@@ -184,8 +184,10 @@ const Game = ({
 		// console.log("First click");
 		setFirstClick(false);
 
-        // 1.5 is a magic number but it works
-        zppControls.zoomIn(1.5)
+		if (deviceType === "mobile") {
+			// 1.5 is a magic number but it works
+			zppControls.zoomIn(1.5);
+		}
 
 		const newBoard = fillBoard(x, y, startZone, board, mineCount);
 
@@ -335,7 +337,7 @@ const Game = ({
 
 	return (
 		<>
-			<TransformComponent >
+			<TransformComponent>
 				<Board
 					board={board}
 					onLeftClick={onLeftClick}
