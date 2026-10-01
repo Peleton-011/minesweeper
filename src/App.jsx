@@ -11,6 +11,7 @@ import {
 	createHashRouter,
 } from "react-router-dom";
 import { bigSizeDifficulty } from "./utils/difficulties.ts";
+import { getCellSize } from "./utils/scaling";
 import useDeviceType from "@/hooks/useDeviceType";
 
 const router = createHashRouter(
@@ -45,12 +46,10 @@ function App({ routes }) {
     
     if (deviceType === "mobile") {
         // Calculate right size for the board
-        const screenWidth = window.innerWidth;
-        const boardWidth = Math.min(bigSizeDifficulty.width, bigSizeDifficulty.height);
-
-        const newSize = Math.floor((screenWidth / boardWidth) / 1.2); 
-        root.style.setProperty("--cell-size", `${newSize}px`);
-        root.style.setProperty("--cell-text-size", `${newSize * 0.8}px`);
+        const cellSize = getCellSize(bigSizeDifficulty.width, bigSizeDifficulty.height);
+        
+        root.style.setProperty("--cell-size", `${cellSize}px`);
+        root.style.setProperty("--cell-text-size", `${cellSize * 0.8}px`);
     }
     
 
