@@ -3,108 +3,113 @@
 	line-height: 1.5;
 	font-weight: 400;
 
-    --cell-size: 1.5em;
-    --cell-text-size: 1.25em;
+	--cell-size: 1.5em;
+	--cell-text-size: 1.25em;
 
 	/* New Colors */
 
-    /*
+	/*
     --background: #2C3448;
     --cream: #EFE6CF;
 	--text: #6D7D98;
 	--highlight: #2C3448;
 	*/
 
-    /* Old */
-    
-    --background: #242424;
+	/* Old */
+
+	--background: #242424;
 	--text: rgba(255, 255, 255, 0.87);
-	--highlight: #1a1a1a; 
-    --transparent-background: #1a1a1aa0;
+	--highlight: #1a1a1a;
+	--transparent-background: #1a1a1aa0;
 
-    /* Game Over Title and Carousel title */
+	/* Game Over Title and Carousel title */
 
-    --game-over-card-width: 100vw;
-    --game-over-card-padding: 0.5rem 0;
+	--game-over-card-width: 100vw;
+	--game-over-card-padding: 0.5rem 0;
 
-    /* Buttons */
+	/* Buttons */
 
-    --button-radius: 0.5em;
-    --button-border: none;
-    --button-padding: 0.6em 1.2em;
+	--button-radius: 0.5em;
+	--button-border: none;
+	--button-padding: 0.6em 1.2em;
 
-    /* Bottom Buttons */
-    --bottom-button-background: #555;
-    --bottom-button-inactive-overlay: #181a1b;
-    --bottom-button-active-overlay: transparent;
+	/* Bottom Buttons */
+	--bottom-button-background: #555;
+	--bottom-button-inactive-overlay: #181a1b;
+	--bottom-button-active-overlay: transparent;
 
-    --bottom-button-first-border-radius: var(--button-radius) 0 0 var(--button-radius);
-    --bottom-button-last-border-radius: 0 var(--button-radius) var(--button-radius) 0;
+	--bottom-button-first-border-radius: var(--button-radius) 0 0
+		var(--button-radius);
+	--bottom-button-last-border-radius: 0 var(--button-radius)
+		var(--button-radius) 0;
 
-    /* Board */
-    --board-font-size: 20px;
+	/* Board */
+	--board-font-size: 20px;
 
-    /* Bevel */
+	/* Bevel */
 
-    --bevel-width-top: 0.125em;
-    --bevel-width-left: 0.125em;
-    --bevel-width-right: 0.125em;
-    --bevel-width-bottom: 0.125em;
+	--bevel-width-top: 0.125em;
+	--bevel-width-left: 0.125em;
+	--bevel-width-right: 0.125em;
+	--bevel-width-bottom: 0.125em;
 
-    --bevel-color-top: #4a4e54;
-    --bevel-color-left: #4a4e54;
-    --bevel-color-right: #1a1c1f;
-    --bevel-color-bottom: #1a1c1f;
+	--bevel-color-top: #4a4e54;
+	--bevel-color-left: #4a4e54;
+	--bevel-color-right: #1a1c1f;
+	--bevel-color-bottom: #1a1c1f;
 
-    --bevel-top: var(--bevel-width-top) solid var(--bevel-color-top);
-    --bevel-left: var(--bevel-width-left) solid var(--bevel-color-left);
-    --bevel-right: var(--bevel-width-right) solid var(--bevel-color-right);
-    --bevel-bottom: var(--bevel-width-bottom) solid var(--bevel-color-bottom);
+	--bevel-top: var(--bevel-width-top) solid var(--bevel-color-top);
+	--bevel-left: var(--bevel-width-left) solid var(--bevel-color-left);
+	--bevel-right: var(--bevel-width-right) solid var(--bevel-color-right);
+	--bevel-bottom: var(--bevel-width-bottom) solid var(--bevel-color-bottom);
 
-    --alt-bevel-width-top: 0.125em;
-    --alt-bevel-width-left: 0.125em;
-    --alt-bevel-width-right: 0.125em;
-    --alt-bevel-width-bottom: 0.125em;
+	--alt-bevel-width-top: 0.125em;
+	--alt-bevel-width-left: 0.125em;
+	--alt-bevel-width-right: 0.125em;
+	--alt-bevel-width-bottom: 0.125em;
 
-    --alt-bevel-color-top: #252729;
-    --alt-bevel-color-left: #252729;
-    --alt-bevel-color-right: #3e4146;
-    --alt-bevel-color-bottom: #3e4146;
+	--alt-bevel-color-top: #252729;
+	--alt-bevel-color-left: #252729;
+	--alt-bevel-color-right: #3e4146;
+	--alt-bevel-color-bottom: #3e4146;
 
-    --alt-bevel-top: var(--alt-bevel-width-top) solid var(--alt-bevel-color-top);
-    --alt-bevel-left: var(--alt-bevel-width-left) solid var(--alt-bevel-color-left);
-    --alt-bevel-right: var(--alt-bevel-width-right) solid var(--alt-bevel-color-right);
-    --alt-bevel-bottom: var(--alt-bevel-width-bottom) solid var(--alt-bevel-color-bottom);
-	
-    /* Shadows */
+	--alt-bevel-top: var(--alt-bevel-width-top) solid var(--alt-bevel-color-top);
+	--alt-bevel-left: var(--alt-bevel-width-left) solid
+		var(--alt-bevel-color-left);
+	--alt-bevel-right: var(--alt-bevel-width-right) solid
+		var(--alt-bevel-color-right);
+	--alt-bevel-bottom: var(--alt-bevel-width-bottom) solid
+		var(--alt-bevel-color-bottom);
+
+	/* Shadows */
 
 	--dark-shadow: 0px 4px 10px rgba(50, 50, 50, 0.7);
 	--light-shadow: 0px 4px 10px rgba(200, 200, 200, 0.3);
 	--highlight-shadow: 0px 4px 10px rgba(200, 200, 200, 0.5);
 
-    /* Cells */
-    --cell-background: #2e3035;
-    --alt-cell-background: #3a3d42;
+	/* Cells */
+	--cell-background: #2e3035;
+	--alt-cell-background: #3a3d42;
 
-    --cell-hover-background: #363a40;
-    --cell-revealed-hover-background: #424750;
-    --cell-revealed-mine-background: #3a3d4270;
+	--cell-hover-background: #363a40;
+	--cell-revealed-hover-background: #424750;
+	--cell-revealed-mine-background: #3a3d4270;
 
-    --cell-revealed-color: white;
-    --cell-flagged-color: white;
+	--cell-revealed-color: white;
+	--cell-flagged-color: white;
 
-    --cell-border-radius: 0px;
+	--cell-border-radius: 0px;
 
-    --t-1: "1";
-    --t-2: "2";
-    --t-3: "3";
-    --t-4: "4";
-    --t-5: "5";
-    --t-6: "6";
-    --t-7: "7";
-    --t-8: "8";
+	--t-1: "1";
+	--t-2: "2";
+	--t-3: "3";
+	--t-4: "4";
+	--t-5: "5";
+	--t-6: "6";
+	--t-7: "7";
+	--t-8: "8";
 
-    /* Idk
+	/* Idk
     --c-1: darkblue;
     --c-2: #007700;
     --c-3: maroon;
@@ -115,7 +120,7 @@
     --c-8: #707070;
     */
 
-    /* Original minesweeper
+	/* Original minesweeper
     --c-1: #0000f7;
     --c-2: #007700;
     --c-3: #ec0000;
@@ -126,53 +131,51 @@
     --c-8: #707070;
     */
 
-    /* Old */
-    --c-1: blue;
-    --c-2: green;
-    --c-3: red;
-    --c-4: darkblue;
-    --c-5: darkred;
-    --c-6: purple;
-    --c-7: darkgreen;
-    --c-8: black;
-    
+	/* Old */
+	--c-1: blue;
+	--c-2: green;
+	--c-3: red;
+	--c-4: darkblue;
+	--c-5: darkred;
+	--c-6: purple;
+	--c-7: darkgreen;
+	--c-8: black;
 
-    /* Icons */
-    --bomb-icon: "💣";
-    --flag-icon: "🚩";
-    --full-heart-icon: "❤️";
-    --empty-heart-icon: "🖤";
+	/* Icons */
+	--bomb-icon: "💣";
+	--flag-icon: "🚩";
+	--full-heart-icon: "❤️";
+	--empty-heart-icon: "🖤";
 
-    --full-heart-count: 0;
-    --empty-heart-count: 0;
+	--full-heart-count: 0;
+	--empty-heart-count: 0;
 
-    /* Leaderboard */
-    --no-score-color: #aaa;
+	/* Leaderboard */
+	--no-score-color: #aaa;
 
-    /* Form Suggest */
-    --suggest-color: #aaa;
-    --suggest-background: #1a1a1aa0;
+	/* Form Suggest */
+	--suggest-color: #aaa;
+	--suggest-background: #1a1a1aa0;
 
-    --suggest-padding: 5px;
-    --suggest-border: none;
-    --suggest-border-radius: 5px;
+	--suggest-padding: 5px;
+	--suggest-border: none;
+	--suggest-border-radius: 5px;
 
-    /* Carousel */
-    --carousel-buttons-border-radius: 0; 
-    --carousel-arrow-size: 50px;
-    --carousel-arrow-color: white;
-    --carousel-arrow-width: 5px;
+	/* Carousel */
+	--carousel-buttons-border-radius: 0;
+	--carousel-arrow-size: 50px;
+	--carousel-arrow-color: white;
+	--carousel-arrow-width: 5px;
 
-    --click-animation-time: 0.5s;
-    --click-animation-timing: linear;
+	--click-animation-time: 0.5s;
+	--click-animation-timing: linear;
 
-    --slide-animation-time: 2s;
-    --slide-animation-timing: ease-in-out;
-    /* ^^ Probar con ease?? */
+	--slide-animation-time: 2s;
+	--slide-animation-timing: ease-in-out;
+	/* ^^ Probar con ease?? */
 
-    /* Mobile */
-    --mobile-font-size: 16px;
-
+	/* Mobile */
+	--mobile-font-size: 16px;
 
 	color-scheme: light dark;
 	color: var(--text);
@@ -185,37 +188,45 @@
 }
 
 .bevel {
-    border-top: var(--bevel-top);
-    border-left: var(--bevel-left);
-    border-right: var(--bevel-right);
-    border-bottom: var(--bevel-bottom);
-    
-    /* box-shadow: var(--dark-shadow); */
+	border-top: var(--bevel-top);
+	border-left: var(--bevel-left);
+	border-right: var(--bevel-right);
+	border-bottom: var(--bevel-bottom);
+
+	/* box-shadow: var(--dark-shadow); */
 }
 
 .alt-bevel {
-    border-top: var(--alt-bevel-top);
-    border-left: var(--alt-bevel-left);
-    border-right: var(--alt-bevel-right);
-    border-bottom: var(--alt-bevel-bottom);
-    
-    /* box-shadow: var(--dark-shadow); */
+	border-top: var(--alt-bevel-top);
+	border-left: var(--alt-bevel-left);
+	border-right: var(--alt-bevel-right);
+	border-bottom: var(--alt-bevel-bottom);
+
+	/* box-shadow: var(--dark-shadow); */
 }
 
 .bevel-wide {
-    border-top: var(--bevel-top);
-    border-left: var(--bevel-left);
-    border-right: var(--bevel-right);
-    border-bottom: var(--bevel-bottom);
+	border-top: var(--bevel-top);
+	border-left: var(--bevel-left);
+	border-right: var(--bevel-right);
+	border-bottom: var(--bevel-bottom);
 
-    box-shadow: var(--dark-shadow);
-    border-width: 3px;
+	box-shadow: var(--dark-shadow);
+	border-width: 3px;
 }
 
 a {
 	font-weight: 500;
 	/* color: #646cff; */
 	text-decoration: inherit;
+	text-wrap: nowrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+span > a, p > a {
+    display: inline;
 }
 /* a:hover {
   color: #535bf2;
@@ -227,11 +238,11 @@ body {
 	place-items: center;
 	width: 110vw;
 	height: 110vh;
-    position: fixed;
-    top: -5vh;
-    left: -5vw;
-    padding: 5vh 5vw;
-    background-color: var(--background);
+	position: fixed;
+	top: -5vh;
+	left: -5vw;
+	padding: 5vh 5vw;
+	background-color: var(--background);
 }
 
 h1 {
@@ -253,6 +264,18 @@ button,
 	color: var(--text);
 }
 
+.buttons > button,
+.buttons > .button {
+	width: 100%;
+}
+
+.buttons > div,
+.buttons > a,
+.button.small,
+button.small {
+	width: min-content;
+}
+
 .stealth-button {
 	background-color: transparent;
 	transition: background-color 0.25s;
@@ -262,6 +285,38 @@ button,
 	background-color: var(--highlight);
 }
 
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: min(100vw, 30rem);
+	padding: 1rem;
+	box-sizing: border-box;
+	position: relative;
+	gap: 0.5rem;
+	margin-bottom: 3rem;
+}
+
+form > * {
+	margin: 0;
+}
+
+form.auth-form {
+	width: min(100vw, 30rem);
+}
+
+form.auth-form > fieldset > * {
+	margin: 1rem;
+	margin-top: 0;
+}
+
+form.auth-form .buttons {
+	margin-top: 3rem;
+}
+
+.subtle {
+	color: var(--suggest-color);
+}
 /* button:hover {
   border-color: #646cff;
 } */

@@ -24,6 +24,7 @@ fieldset {
 
 fieldset {
 	margin: 0.5rem -1rem !important;
+    padding: 0 2rem 0 1rem !important;
 }
 
 span.suggest {
@@ -66,6 +67,7 @@ form > button {
 
 .scores-btn {
 	padding: 0 1rem;
+	width: min-content !important;
 }
 
 .play {
