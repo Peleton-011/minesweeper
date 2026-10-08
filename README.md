@@ -102,7 +102,7 @@ More info at [the capacitor-assets repo.](https://github.com/ionic-team/capacito
 This project is open-source and available under the [MIT License](LICENSE).
 
 ---
-Testing link: `https://play.google.com/apps/test/RQcNgXO4fho/ahAO29uNTXY2s6zMY03r8pXJRnWl5IQki8D67Injb2NXdDxBMj5aYY3RLvE5JM-RVDtH83Vwv3fTGuL10YmrVLph9O`
+- Testing link: `https://play.google.com/apps/test/RQcNgXO4fho/ahAO29uNTXY2s6zMY03r8pXJRnWl5IQki8D67Injb2NXdDxBMj5aYY3RLvE5JM-RVDtH83Vwv3fTGuL10YmrVLph9O`
 ---
 
 Enjoy the game and happy sweeping! 🚩💣
