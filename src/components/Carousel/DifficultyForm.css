@@ -56,10 +56,10 @@ form > button {
 	margin-top: 1rem;
 	width: 100%;
 }
-.scores-btn {
+/* .scores-btn {
 	padding: 0 1rem;
 	width: min-content !important;
-}
+} */
 .buttons {
 	display: flex;
 }
