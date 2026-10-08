@@ -22,7 +22,7 @@ import { useSupabase } from "../../context/SupabaseContext.jsx";
 
 const LeaderBoardPage = () => {
 	const [user, setUser] = useState({});
-    const [authenticated, setAuthenticated] = useState(false);
+	const [authenticated, setAuthenticated] = useState(false);
 
 	const supabase = useSupabase();
 
@@ -31,11 +31,11 @@ const LeaderBoardPage = () => {
 			// console.log(session);
 			// console.log(user)
 			if (data.session) {
-				setUser(session.user);
-                setAuthenticated(true);
+				setUser(data.session.user);
+				setAuthenticated(true);
 			} else {
 				setUser(null);
-                setAuthenticated(false);
+				setAuthenticated(false);
 			}
 		});
 	}
@@ -44,48 +44,44 @@ const LeaderBoardPage = () => {
 		fetchUser();
 	}, []);
 
-
-
 	return (
 		<div className="leaderboard-wrapper">
-			<div className="leaderboard-heading">
-				<div className="leaderboard-title">
-					<h2>Settings</h2>
+			<div className="leaderboard-wrapper">
+				<div className="leaderboard-heading">
+					<div className="leaderboard-title">
+						<h2>Settings</h2>
+					</div>
 				</div>
-			</div>
-			<div>
-				<ul>
-					{authenticated && (
-						<li>
-							<Link to="/profile">
-								<EditUser /> Profile
-							</Link>
-						</li>
-					)}
-					{authenticated && (
-						<li>
-							<div onClick={() => supabase.auth.signOut() && fetchUser()}>
-								<Link to="/settings">
-									<LogOut /> Logout
-								</Link>
-							</div>
-						</li>
-					)}
-					{!authenticated && (
-						<li>
-							<Link to="/login">
-								<LogIn /> Login
-							</Link>
-						</li>
-					)}
-					{!authenticated && (
-						<li>
-							<Link to="/register">
-								<SignUp /> Register
-							</Link>
-						</li>
-					)}
-				</ul>
+				{authenticated && (
+					<Link to="/profile" className="button stealth-button">
+						<EditUser /> Profile
+					</Link>
+				)}
+				{authenticated && (
+					<div onClick={() => supabase.auth.signOut() && fetchUser()}>
+						<Link to="/settings" className="button stealth-button">
+							<LogOut /> Logout
+						</Link>
+					</div>
+				)}
+				{!authenticated && (
+					<Link to="/login" className="button stealth-button">
+						<LogIn /> Login
+					</Link>
+				)}
+				{!authenticated && (
+					<Link to="/register" className="button stealth-button">
+						<SignUp /> Register
+					</Link>
+				)}
+                <h3 className="subtle">... more to come here soon!</h3>
+				<Link
+					className="button"
+					to={`/`}
+				>
+					<ArrowLeft />
+					{" Go Back"}
+				</Link>
 			</div>
 		</div>
 	);
