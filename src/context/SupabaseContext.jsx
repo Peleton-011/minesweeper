@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode, useState } from 'react'
 import { createClient, SupabaseClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
@@ -13,6 +13,6 @@ const SupabaseContext = createContext<SupabaseClient>(supabase)
 //     {children}
 //   </SupabaseContext.Provider>
 // )
-export const useUser = () => supabase.auth.getUser()
+export const useUser = () => supabase.auth.getUser().then((res) => res.data.user)
 
 export const useSupabase = () => supabase;
