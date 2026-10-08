@@ -26,20 +26,6 @@ const SignUpPage = () => {
 		return { data, error };
 	}
 
-	async function checkUsername(username) {
-        let error = "";
-		const { data, error: errorObj } = await supabase
-			.from("profiles")
-			.select("user_name")
-			.eq("user_name", username);
-        error = errorObj.message;
-		if (!username.length) {
-			error = "Please enter a username";
-		}
-
-		return { data, error };
-	}
-
 	async function checkEmail(email) {
         let error = "";
 		const { data, error: errorObj } = await supabase
@@ -68,12 +54,10 @@ const SignUpPage = () => {
 		return "";
 	}
 
-	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 
-	const [usernameError, setUsernameError] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [confirmPasswordError, setConfirmPasswordError] = useState("");
@@ -90,33 +74,6 @@ const SignUpPage = () => {
 		<form className="auth-form" onSubmit={handleSubmit}>
 			<fieldset>
 				<legend>Sign Up</legend>
-				<label htmlFor="username">
-					<span>Username </span>
-					<input
-						type="text"
-						id="username"
-						name="username"
-						onChange={(e) => {
-							setUsername(e.target.value);
-						}}
-						onBlur={(e) => {
-							checkUsername(e.target.value).then(
-								({ data, error }) => {
-									if (data && data.length > 0) {
-										setUsernameError(
-											"Username already taken"
-										);
-									} else if (error) {
-										setUsernameError(error);
-									} else {
-										setUsernameError("");
-									}
-								}
-							);
-						}}
-					/>                                
-				</label>
-                {usernameError ? (<span className="error">Error: {usernameError}</span>) : ""}
 				<label htmlFor="email">
 					<span>Email </span>
 					<input
