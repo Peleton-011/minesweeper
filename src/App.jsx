@@ -4,6 +4,8 @@ import TestPage from "@/components/TestPage.tsx";
 import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
 import SignUpPage from "@/components/Auth/SignUpPage.jsx";
 import SignInPage from "@/components/Auth/SignInPage.jsx";
+import SettingsPage from "@/components/Settings/SettingsPage";
+import ProfilePage from "@/components/Profile/ProfilePage";
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,
@@ -15,6 +17,7 @@ import {
 import { bigSizeDifficulty } from "./utils/difficulties.ts";
 import { getCellSize } from "./utils/scaling";
 import useDeviceType from "@/hooks/useDeviceType";
+import { useUser } from "./context/SupabaseContext.jsx";
 
 const router = createHashRouter(
 	createRoutesFromElements(
@@ -32,16 +35,12 @@ const router = createHashRouter(
 				path="/scores/:width?/:height?/:mines?/:lives?"
 				element={<LeaderBoardPage />}
 			/>
-            <Route
-                path="/signup"
-                element={<SignUpPage />}
-            />
-            <Route 
-                path="/login"
-                element={<SignInPage />}
-            />
-		</>,
-	),
+			<Route path="/signup" element={<SignUpPage />} />
+			<Route path="/login" element={<SignInPage />} />
+			<Route path="/settings" element={<SettingsPage />} />
+			<Route path="/profile" element={<ProfilePage />} />
+		</>
+	)
 );
 
 function App({ routes }) {
@@ -52,16 +51,20 @@ function App({ routes }) {
 	// 	});
 	// }, []);
 
-    const deviceType = useDeviceType();
-    
-    if (deviceType === "mobile") {
-        // Calculate right size for the board
-        const cellSize = getCellSize(bigSizeDifficulty.width, bigSizeDifficulty.height);
-        
-        root.style.setProperty("--cell-size", `${cellSize}px`);
-        root.style.setProperty("--cell-text-size", `${cellSize * 0.8}px`);
-    }
-    
+	const deviceType = useDeviceType();
+
+	useUser().then((user) => console.log(user));
+
+	if (deviceType === "mobile") {
+		// Calculate right size for the board
+		const cellSize = getCellSize(
+			bigSizeDifficulty.width,
+			bigSizeDifficulty.height
+		);
+
+		root.style.setProperty("--cell-size", `${cellSize}px`);
+		root.style.setProperty("--cell-text-size", `${cellSize * 0.8}px`);
+	}
 
 	return (
 		<>
