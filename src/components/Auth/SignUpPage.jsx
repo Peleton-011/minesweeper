@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "@/components/LeaderBoard/LeaderBoardPage.css";
 import { LuArrowLeft as ArrowLeft } from "@react-icons/lucide";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSupabase } from "../../context/SupabaseContext.jsx";
 
 const SignUpPage = () => {
@@ -17,6 +17,7 @@ const SignUpPage = () => {
     */
 
 	const supabase = useSupabase();
+    const navigate = useNavigate();
 
 	async function signUpNewUser({ email, password }) {
 		const { data, error } = await supabase.auth.signUp({
@@ -61,12 +62,16 @@ const SignUpPage = () => {
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
 	const [confirmPasswordError, setConfirmPasswordError] = useState("");
+    const [signUpError, setSignUpError] = useState("");
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		signUpNewUser({ email, password }).then(({ data, error }) => {
-			console.log(data);
-			console.log(error);
+			if (error) {
+                setSignUpError(error.message);
+            } else {
+                navigate("/profile");
+            }
 		});
 	}
 
@@ -98,6 +103,7 @@ const SignUpPage = () => {
 						}}
 					/>
 				</label>
+                {emailError && <p className="error">Error: {emailError}</p>}
 				<label htmlFor="password">
 					<span>Password </span>
 					<input
@@ -114,6 +120,7 @@ const SignUpPage = () => {
 						}}
 					/>
 				</label>
+                {passwordError && <p className="error">Error: {passwordError}</p>}
 				<label htmlFor="confirmPassword">
 					<span>Confirm Password </span>
 					<input
@@ -133,12 +140,14 @@ const SignUpPage = () => {
                         }}
 					/>
 				</label>
+                {confirmPasswordError && <p className="error">Error: {confirmPasswordError}</p>}
 				<div className="buttons">
 					<button type="submit">Sign Up</button>
 					<Link className="button small" to="/">
 						<ArrowLeft /> Cancel
 					</Link>
 				</div>
+                {signUpError && <p className="error">Error: {signUpError}</p>}
 				<span className="subtle">
 					Already have an account?<Link to="/login"> Log In</Link>
 				</span>
