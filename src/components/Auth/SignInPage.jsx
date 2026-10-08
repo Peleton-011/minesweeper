@@ -4,20 +4,79 @@ import "@/components/LeaderBoard/LeaderBoardPage.css";
 import { LuArrowLeft as ArrowLeft} from "@react-icons/lucide";
 
 import { Link } from "react-router-dom";
+import { useSupabase } from "../../context/SupabaseContext.jsx";
 
 const SignInPage = () => {
+    const supabase = useSupabase();
+
+    async function signIn({ email, password }) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password,
+        });
+        return { data, error };
+    }
+
+    async function checkEmail(email) {
+        let error = "";
+
+        if (!email.length) {
+            error = "Please enter an email";
+        }
+        return { error };
+    }
+
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        signIn({ email, password }).then(({ data, error }) => {
+            console.log(data);
+            console.log(error);
+        });
+    }
 
 	return (
-		<form className="auth-form">
+		<form className="auth-form" onSubmit={handleSubmit}>
 			<fieldset>
 				<legend>Sign In</legend>
 				<label htmlFor="email">
 					<span>Email </span>
-					<input type="text" id="email" name="email" />
+					<input
+						type="text"
+						id="email"
+						name="email"
+						onChange={(e) => {
+							setEmail(e.target.value);
+						}}
+						onBlur={(e) => {
+							checkEmail(e.target.value).then(
+								({ data, error }) => {
+									if (error) {
+										setEmailError(error);
+									} else {
+										setEmailError("");
+									}
+								}
+							);
+						}}
+					/>
 				</label>
 				<label htmlFor="password">
 					<span>Password </span>
-					<input type="password" id="password" name="password" />
+					<input
+						type="password"
+						id="password"
+						name="password"
+						onChange={(e) => {
+							setPassword(e.target.value);
+						}}
+					/>
 				</label>
 				<div className="buttons">
 					<button type="submit">Sign In</button>
