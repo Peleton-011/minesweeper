@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "@/components/LeaderBoard/LeaderBoardPage.css";
-import { LuArrowLeft as ArrowLeft} from "@react-icons/lucide";
+import { LuArrowLeft as ArrowLeft, LuGlobe as Globe } from "@react-icons/lucide";
 
 import { useParams } from "react-router-dom";
 import {
@@ -24,6 +24,7 @@ const LeaderBoardPage = () => {
 		lives: Number(lives),
 	};
 	const [scores, setScores] = useState([]);
+    const [scoresOnline, setScoresOnline] = useState([]);
 
 	const title = getDifficultyName({ ...config });
 
@@ -34,6 +35,9 @@ const LeaderBoardPage = () => {
 		fetchScoresByDifficulty(config).then((scs) => {
 			setScores(scs);
 		});
+        // fetchOnlineScoresByDifficulty(config).then((scs) => {
+        //     setScoresOnline(scs);
+        // });
 	};
 
 	useEffect(() => {
@@ -70,6 +74,8 @@ const LeaderBoardPage = () => {
 				></Link>
 			</div>
 			<div onClick={() => fetchScores()}>
+				<LeaderBoard scoreList={scores} />
+                <h3>On the cloud <Globe /> </h3>
 				<LeaderBoard scoreList={scores} />
 			</div>
 			<Link className="button" to={`/${width}/${height}/${mines}/${lives}`}><ArrowLeft />{" Go Back"}</Link>
