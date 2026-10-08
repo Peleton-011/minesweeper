@@ -20,7 +20,7 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty } from "@/utils/leaderboard";
 import { useSupabase } from "../../context/SupabaseContext.jsx";
 
-const LeaderBoardPage = () => {
+const ShopPage = () => {
 	const [user, setUser] = useState({});
 	const [authenticated, setAuthenticated] = useState(false);
 
@@ -46,45 +46,40 @@ const LeaderBoardPage = () => {
 
 	return (
 		<div className="leaderboard-wrapper">
-			<div className="leaderboard-wrapper">
-				<div className="leaderboard-heading">
-					<div className="leaderboard-title">
-						<h2>Settings</h2>
-					</div>
+			<div className="leaderboard-heading">
+				<div className="leaderboard-title">
+					<h2>Settings</h2>
 				</div>
-				{authenticated && (
-					<Link to="/profile" className="button stealth-button">
-						<EditUser /> Profile
-					</Link>
-				)}
-				{authenticated && (
-					<div onClick={() => supabase.auth.signOut() && fetchUser()}>
-						<Link to="/settings" className="button stealth-button">
-							<LogOut /> Logout
-						</Link>
-					</div>
-				)}
-				{!authenticated && (
-					<Link to="/login" className="button stealth-button">
-						<LogIn /> Login
-					</Link>
-				)}
-				{!authenticated && (
-					<Link to="/register" className="button stealth-button">
-						<SignUp /> Register
-					</Link>
-				)}
-                <h3 className="subtle">... more to come here soon!</h3>
-				<Link
-					className="button"
-					to={`/`}
-				>
-					<ArrowLeft />
-					{" Go Back"}
-				</Link>
 			</div>
+			{authenticated && (
+				<Link to="/profile" className="button stealth-button">
+					<EditUser /> Profile
+				</Link>
+			)}
+			{authenticated && (
+				<div onClick={() => supabase.auth.signOut() && fetchUser()}>
+					<Link to="/settings" className="button stealth-button">
+						<LogOut /> Logout
+					</Link>
+				</div>
+			)}
+			{!authenticated && (
+				<Link to="/login" className="button stealth-button">
+					<LogIn /> Login
+				</Link>
+			)}
+			{!authenticated && (
+				<Link to="/register" className="button stealth-button">
+					<SignUp /> Register
+				</Link>
+			)}
+			<h3 className="subtle">... more to come here soon!</h3>
+			<Link className="button" to={`/`}>
+				<ArrowLeft />
+				{" Go Back"}
+			</Link>
 		</div>
 	);
 };
 
-export default LeaderBoardPage;
+export default ShopPage;
