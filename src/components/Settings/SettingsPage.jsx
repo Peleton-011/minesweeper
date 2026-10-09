@@ -9,7 +9,7 @@ import {
 	LuUserPlus as SignUp,
 } from "@react-icons/lucide";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
 	getDifficultyName,
 	getNextDifficultyFromConfig,
@@ -25,6 +25,7 @@ const ShopPage = () => {
 	const [authenticated, setAuthenticated] = useState(false);
 
 	const supabase = useSupabase();
+	const navigate = useNavigate();
 
 	function fetchUser() {
 		supabase.auth.getSession().then(({ data, error }) => {
@@ -52,24 +53,29 @@ const ShopPage = () => {
 				</div>
 			</div>
 			{authenticated && (
-				<Link to="/profile" className="button stealth-button">
+				<Link to="/profile" className="button stealth-button play">
 					<EditUser /> Profile
 				</Link>
 			)}
 			{authenticated && (
-				<div onClick={() => supabase.auth.signOut() && fetchUser()}>
-					<Link to="/settings" className="button stealth-button">
-						<LogOut /> Logout
-					</Link>
+				<div
+					className="button stealth-button play"
+					onClick={async () => {
+						await supabase.auth.signOut();
+                        fetchUser();
+						navigate("/settings");
+					}}
+				>
+					<LogOut /> Logout
 				</div>
 			)}
 			{!authenticated && (
-				<Link to="/login" className="button stealth-button">
+				<Link to="/login" className="button stealth-button play">
 					<LogIn /> Login
 				</Link>
 			)}
 			{!authenticated && (
-				<Link to="/register" className="button stealth-button">
+				<Link to="/register" className="button stealth-button play">
 					<SignUp /> Register
 				</Link>
 			)}
