@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import "@/components/Game.css";
 import { getPlayTimeString } from "@/utils/timeutils";
 import { addScore, fetchScores } from "@/utils/leaderboard";
+import useLeaderBoards from "../hooks/useLeaderBoards.jsx";
 import { TransformWrapper} from "react-zoom-pan-pinch";
 import { useParams, Link } from "react-router-dom";
 import {
@@ -20,6 +21,8 @@ function Game() {
 	const [didWin, setDidWin] = useState(false);
 	const [key, setKey] = useState(0);
 	const [lastTime, setLastTime] = useState(0);
+
+    const {addScore: addOnlineScore} = useLeaderBoards()
 
 	const {
 		width,
@@ -44,6 +47,7 @@ function Game() {
 		setLastTime(t);
 		gameOverInterstitial();
 		addScore(t, config);
+        addOnlineScore(t, config)
 	};
 
 	const config = {
