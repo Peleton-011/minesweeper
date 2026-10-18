@@ -2,6 +2,12 @@ import SelectorPage from "@/components/SelectorPage";
 import GamePage from "@/components/GamePage";
 import TestPage from "@/components/TestPage.tsx";
 import LeaderBoardPage from "@/components/LeaderBoard/LeaderBoardPage";
+import SignUpPage from "@/components/Auth/SignUpPage.jsx";
+import SignInPage from "@/components/Auth/SignInPage.jsx";
+import SettingsPage from "@/components/Settings/SettingsPage";
+import ProfilePage from "@/components/Profile/ProfilePage";
+import ShopPage from "@/components/Shop/ShopPage";
+import StylesPage from "@/components/Styles/StylesPage.jsx";
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,
@@ -30,8 +36,14 @@ const router = createHashRouter(
 				path="/scores/:width?/:height?/:mines?/:lives?"
 				element={<LeaderBoardPage />}
 			/>
-		</>,
-	),
+			<Route path="/signup" element={<SignUpPage />} />
+			<Route path="/login" element={<SignInPage />} />
+			<Route path="/settings" element={<SettingsPage />} />
+			<Route path="/profile" element={<ProfilePage />} />
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/styles" element={<StylesPage />} />
+		</>
+	)
 );
 
 function App({ routes }) {
@@ -42,16 +54,18 @@ function App({ routes }) {
 	// 	});
 	// }, []);
 
-    const deviceType = useDeviceType();
-    
-    if (deviceType === "mobile") {
-        // Calculate right size for the board
-        const cellSize = getCellSize(bigSizeDifficulty.width, bigSizeDifficulty.height);
-        
-        root.style.setProperty("--cell-size", `${cellSize}px`);
-        root.style.setProperty("--cell-text-size", `${cellSize * 0.8}px`);
-    }
-    
+	const deviceType = useDeviceType();
+
+	if (deviceType === "mobile") {
+		// Calculate right size for the board
+		const cellSize = getCellSize(
+			bigSizeDifficulty.width,
+			bigSizeDifficulty.height
+		);
+
+		root.style.setProperty("--cell-size", `${cellSize}px`);
+		root.style.setProperty("--cell-text-size", `${cellSize * 0.8}px`);
+	}
 
 	return (
 		<>
