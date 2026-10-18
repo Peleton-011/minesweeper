@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import "@/components/LeaderBoard/LeaderBoardPage.css";
 import { LuArrowLeft as ArrowLeft } from "@react-icons/lucide";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSupabase } from "../../context/SupabaseContext.jsx";
+import useProfile from "../../hooks/useProfile.jsx";
 
 const ProfilePage = () => {
 	/*
@@ -16,31 +17,53 @@ const ProfilePage = () => {
     - Add profiles (for username and such)
     */
 
+	const {
+		updateProfile,
+		user,
+		updateUserError,
+		updateUsernameError,
+		profile,
+		fetchProfile,
+	} = useProfile();
+
 	const supabase = useSupabase();
-	const [session, setSession] = useState(null);
+    const navigate = useNavigate();
+
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const [usernameError, setUsernameError] = useState("");
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setPasswordError] = useState("");
+	const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
 	useEffect(() => {
-		supabase.auth
-			.getSession()
-			.then(({ data: { session } }) => {
-				setSession(session);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, []);
+        function handleProfileChange() {
+            if (!profile) return fetchProfile();
+            
+            profile.username && setUsername(profile.username);
+            document.querySelector("#username").value = profile.username;
+            
+            setEmail(profile.email);
+            document.querySelector("#email").value = profile.email;
+        }
+
+        handleProfileChange()
+	}, [profile, user]);
 
 	async function checkUsername(username, userId) {
 		let error = "";
 		const { data, error: errorObj } = await supabase
 			.from("profiles")
-			.select("user_name", "user_id")
+			.select("user_name", "id")
 			.eq("user_name", username);
-		error = errorObj.message;
+		error = errorObj?.message || "";
 		if (!username.length) {
 			error = "Please enter a username";
 		}
-		if (data.length > 0 && data[0].user_id !== userId) {
+		if (data.length > 0 && data[0].id !== userId) {
 			error = "Username already taken";
 		}
 
@@ -51,14 +74,14 @@ const ProfilePage = () => {
 		let error = "";
 		const { data, error: errorObj } = await supabase
 			.from("profiles")
-			.select("email", "user_id")
+			.select("email", "id")
 			.eq("email", email);
 		error = errorObj.message;
 
 		if (!email.length) {
 			error = "Please enter an email";
 		}
-		if (data.length > 0 && userId !== data[0].user_id) {
+		if (data.length > 0 && userId !== data[0].id) {
 			error = "Email already taken";
 		}
 
@@ -79,30 +102,17 @@ const ProfilePage = () => {
 		return "";
 	}
 
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-
-	const [usernameError, setUsernameError] = useState("");
-	const [emailError, setEmailError] = useState("");
-	const [passwordError, setPasswordError] = useState("");
-	const [confirmPasswordError, setConfirmPasswordError] = useState("");
-
 	function handleSubmit(e) {
 		e.preventDefault();
-		signUpNewUser({ email, password }).then(({ data, error }) => {
-			console.log(data);
-			console.log(error);
-		});
+		updateProfile({ email, password, username }).then(() => {
+            navigate("/settings")
+        })
 	}
-
-
 
 	return (
 		<form className="auth-form" onSubmit={handleSubmit}>
 			<fieldset>
-				<legend>Sign Up</legend>
+				<legend>Edit Profile</legend>
 				<label htmlFor="username">
 					<span>Username </span>
 					<input
@@ -113,10 +123,10 @@ const ProfilePage = () => {
 							setUsername(e.target.value);
 						}}
 						onBlur={(e) => {
-							checkUsername(e.target.value, session.user.id).then(
+							checkUsername(e.target.value, user.id).then(
 								(error) => {
 									setUsernameError(error);
-								}
+								},
 							);
 						}}
 					/>
@@ -136,10 +146,10 @@ const ProfilePage = () => {
 							setEmail(e.target.value);
 						}}
 						onBlur={(e) => {
-							checkEmail(e.target.value, session.user.id).then(
+							checkEmail(e.target.value, user.id).then(
 								(error) => {
 									setEmailError(error);
-								}
+								},
 							);
 						}}
 					/>
@@ -169,20 +179,17 @@ const ProfilePage = () => {
 						}}
 						onBlur={(e) => {
 							setConfirmPasswordError(
-								checkConfirmPassword(password, e.target.value)
+								checkConfirmPassword(password, e.target.value),
 							);
 						}}
 					/>
 				</label>
 				<div className="buttons">
-					<button type="submit">Sign Up</button>
-					<Link className="button small" to="/">
+					<button type="submit">Save changes</button>
+					<Link className="button small" to="/settings">
 						<ArrowLeft /> Cancel
 					</Link>
 				</div>
-				<span className="subtle">
-					Already have an account?<Link to="/login"> Log In</Link>
-				</span>
 			</fieldset>
 		</form>
 	);
