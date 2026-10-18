@@ -23,12 +23,12 @@ function useLeaderBoards() {
 		if (!user) return;
 		// Normalize data
 		const newScore = {
-			date_ms: Date.now().getTime(),
+			date_ms: Date.now(),
 			time_ms: time,
 			user_id: user.id,
 
 			size: difficulty.width * difficulty.height,
-			mineCount: difficulty.mineCount,
+			mine_count: difficulty.mineCount,
 			lives: difficulty.lives,
 		};
 
@@ -42,7 +42,7 @@ function useLeaderBoards() {
 	const fetchScores = async (difficulty) => {
 		const { data, error } = await supabase
 			.from("highscores")
-			.select("time_ms", "user_id", "date_ms")
+			.select("time_ms, user_id, date_ms, id")
 			.eq(
 				"size",
 				difficulty.size
