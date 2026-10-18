@@ -56,7 +56,6 @@ const LeaderBoardPage = () => {
 	}, [width, height, mines, lives]);
 
 	useEffect(() => {
-        console.log(onlineScores)
 		setScoresOnline(
 			onlineScores.map((s) => {
 				return {
