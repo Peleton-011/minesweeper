@@ -13,6 +13,5 @@ const SupabaseContext = createContext<SupabaseClient>(supabase)
 //     {children}
 //   </SupabaseContext.Provider>
 // )
-export const useUser = () => supabase.auth.getUser().then((res) => res.data.user)
 
 export const useSupabase = () => supabase;

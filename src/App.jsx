@@ -19,7 +19,6 @@ import {
 import { bigSizeDifficulty } from "./utils/difficulties.ts";
 import { getCellSize } from "./utils/scaling";
 import useDeviceType from "@/hooks/useDeviceType";
-import { useUser } from "./context/SupabaseContext.jsx";
 
 const router = createHashRouter(
 	createRoutesFromElements(
@@ -56,8 +55,6 @@ function App({ routes }) {
 	// }, []);
 
 	const deviceType = useDeviceType();
-
-	useUser().then((user) => console.log(user));
 
 	if (deviceType === "mobile") {
 		// Calculate right size for the board
