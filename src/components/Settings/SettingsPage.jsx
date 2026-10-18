@@ -75,7 +75,7 @@ const ShopPage = () => {
 				</Link>
 			)}
 			{!authenticated && (
-				<Link to="/register" className="button stealth-button play">
+				<Link to="/signup" className="button stealth-button play">
 					<SignUp /> Register
 				</Link>
 			)}
