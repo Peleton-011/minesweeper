@@ -236,13 +236,13 @@ body {
 	margin: 0;
 	display: flex;
 	place-items: center;
-	width: 110vw;
-	height: 110vh;
-	position: fixed;
-	top: -5vh;
-	left: -5vw;
-	padding: 5vh 5vw;
-	background-color: var(--background);
+	width: 90vw;
+	height: 90vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 5vh 5vw;
+    background-color: var(--background);
 }
 
 h1 {
