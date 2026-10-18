@@ -1,7 +1,7 @@
 import { Preferences } from "@capacitor/preferences";
 import { useSupabase } from "../context/SupabaseContext.jsx";
 import { useEffect, useState } from "react";
-import { useProfile } from "./useProfile.jsx";
+import useProfile from "./useProfile.jsx";
 
 /*
 export type Score = {
@@ -14,7 +14,7 @@ export type Score = {
 }
     */
 
-function useLeaderboards() {
+function useLeaderBoards() {
 	const supabase = useSupabase();
 	const [scores, setScores] = useState([]);
 	const { user } = useProfile();
@@ -90,3 +90,5 @@ function useLeaderboards() {
 		deleteScore,
 	};
 }
+
+export default useLeaderBoards
