@@ -1,8 +1,8 @@
-import { deleteScore } from "@/utils/leaderboard";
 import { getDateString, getTimeString } from "@/utils/timeutils";
 import { getDifficultyName } from "@/utils/difficulties";
 
-const Score = ({ score }) => {
+const Score = ({ score, deleteScore }) => {
+    console.log(score)
 	return (
 		<div className="score">
 			<div className="left">

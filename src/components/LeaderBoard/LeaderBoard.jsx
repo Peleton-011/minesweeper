@@ -1,6 +1,6 @@
 import Score from "@/components/LeaderBoard/Score";
 
-const LeaderBoard = ({ scoreList }) => {
+const LeaderBoard = ({ scoreList, deleteScore }) => {
 	return (
 		<>
         {scoreList.length ? (<ol>
@@ -8,7 +8,7 @@ const LeaderBoard = ({ scoreList }) => {
 					scoreList.map &&
 					scoreList.map((score) => (
 						<li key={score.id}>
-							<Score score={score} />
+							<Score score={score} deleteScore={deleteScore} />
 						</li>
 					))}
 			</ol>) : (
