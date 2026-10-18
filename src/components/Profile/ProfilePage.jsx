@@ -28,7 +28,7 @@ const ProfilePage = () => {
 			.catch((error) => {
 				console.error(error);
 			});
-	});
+	}, []);
 
 	async function checkUsername(username, userId) {
 		let error = "";
@@ -96,6 +96,8 @@ const ProfilePage = () => {
 			console.log(error);
 		});
 	}
+
+
 
 	return (
 		<form className="auth-form" onSubmit={handleSubmit}>
