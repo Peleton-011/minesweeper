@@ -51,7 +51,7 @@ function useLeaderBoards() {
 			)
 			.eq("mine_count", difficulty.mineCount)
 			.eq("lives", difficulty.lives)
-			.order(time_ms, { ascending: true });
+			.order("time_ms", { ascending: true });
 		if (error) throw error;
 
 		setScores(data || []);
