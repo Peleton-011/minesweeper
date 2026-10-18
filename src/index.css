@@ -303,6 +303,10 @@ form > * {
 
 form.auth-form {
 	width: min(100vw, 30rem);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 form.auth-form > fieldset > * {
