@@ -39,7 +39,7 @@ function useLeaderboards() {
 		if (error) throw error;
 	};
 
-	export const fetchScores = async (difficulty) => {
+	const fetchScores = async (difficulty) => {
 		const { data, error } = await supabase
 			.from("highscores")
 			.select("time_ms", "user_id", "date_ms")
@@ -76,7 +76,7 @@ function useLeaderboards() {
         */
 	};
 
-	export const deleteScore = async (id) => {
+	const deleteScore = async (id) => {
 		const { error } = await supabase
 			.from("highscores")
 			.delete()
