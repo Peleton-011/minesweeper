@@ -21,6 +21,7 @@
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a;
 	--transparent-background: #1a1a1aa0;
+    --error: #ffa500c0;
 
 	/* Game Over Title and Carousel title */
 
@@ -187,6 +188,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .bevel {
 	border-top: var(--bevel-top);
 	border-left: var(--bevel-left);
@@ -320,6 +325,10 @@ form.auth-form .buttons {
 
 .subtle {
 	color: var(--suggest-color);
+}
+
+.error {
+    color: var(--error)
 }
 /* button:hover {
   border-color: #646cff;
