@@ -209,7 +209,7 @@ const ProfilePage = () => {
 						<ArrowLeft /> Cancel
 					</Link>
 				</div>
-				{profileEditErrors && (
+				{profileEditError && (
 					<p className="error">Error: {profileEditError}</p>
 				)}
 			</fieldset>
