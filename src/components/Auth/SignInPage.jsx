@@ -58,6 +58,7 @@ const SignInPage = () => {
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
+                        placeholder="your@email.com"
 						onBlur={(e) => {
 							checkEmail(e.target.value).then(
 								({ data, error }) => {
@@ -78,6 +79,7 @@ const SignInPage = () => {
 						type="password"
 						id="password"
 						name="password"
+                        placeholder="******"
 						onChange={(e) => {
 							setPassword(e.target.value);
 						}}

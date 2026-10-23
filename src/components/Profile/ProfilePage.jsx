@@ -127,6 +127,7 @@ const ProfilePage = () => {
 						type="text"
 						id="username"
 						name="username"
+                        placeholder="Your new username"
 						onChange={(e) => {
 							setUsername(e.target.value);
 						}}
@@ -150,6 +151,7 @@ const ProfilePage = () => {
 						type="text"
 						id="email"
 						name="email"
+                        placeholder="Your new email"
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
@@ -169,6 +171,7 @@ const ProfilePage = () => {
 						type="password"
 						id="password"
 						name="password"
+                        placeholder="******"
 						onChange={(e) => {
 							setPassword(e.target.value);
 						}}
@@ -186,6 +189,7 @@ const ProfilePage = () => {
 						type="password"
 						id="confirmPassword"
 						name="confirmPassword"
+                        placeholder="******"
 						onChange={(e) => {
 							setConfirmPassword(e.target.value);
 						}}
