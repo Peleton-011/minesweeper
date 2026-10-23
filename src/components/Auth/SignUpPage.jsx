@@ -85,6 +85,7 @@ const SignUpPage = () => {
 						type="text"
 						id="email"
 						name="email"
+                        placeholder="your@email.com"
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
@@ -110,6 +111,7 @@ const SignUpPage = () => {
 						type="password"
 						id="password"
 						name="password"
+                        placeholder="******"
 						onChange={(e) => {
 							setPassword(e.target.value);
 						}}
@@ -127,6 +129,7 @@ const SignUpPage = () => {
 						type="password"
 						id="confirmPassword"
 						name="confirmPassword"
+                        placeholder="******"
 						onChange={(e) => {
 							setConfirmPassword(e.target.value);
 						}}

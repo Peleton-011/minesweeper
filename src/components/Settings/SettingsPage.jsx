@@ -46,9 +46,9 @@ const ShopPage = () => {
 	}, []);
 
 	return (
-		<div className="leaderboard-wrapper">
-			<div className="leaderboard-heading">
-				<div className="leaderboard-title">
+		<div className="menu-wrapper">
+			<div className="menu-heading">
+				<div className="menu-title">
 					<h2>Settings</h2>
 				</div>
 			</div>

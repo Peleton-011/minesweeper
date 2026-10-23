@@ -21,6 +21,7 @@
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a;
 	--transparent-background: #1a1a1aa0;
+    --error: #ffa500c0;
 
 	/* Game Over Title and Carousel title */
 
@@ -187,6 +188,10 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .bevel {
 	border-top: var(--bevel-top);
 	border-left: var(--bevel-left);
@@ -320,6 +325,38 @@ form.auth-form .buttons {
 
 .subtle {
 	color: var(--suggest-color);
+}
+
+.menu-wrapper {
+	--vertical-padding: 10%;
+	display: flex;
+	position: fixed;
+	top: 0%;
+	left: 50%;
+    transform: translateX(-50%);
+	padding-top: var(--vertical-padding);
+	padding-bottom: var(--vertical-padding);
+	max-height: calc(100% - calc(var(--vertical-padding) * 2));
+	flex-direction: column;
+	align-items: center;
+    overflow-y: auto;
+}
+
+.menu-heading {
+	display: flex;
+	gap: 1rem;
+	width: min-content;
+}
+
+.menu-title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: min(20rem, 100vw);
+}
+
+.error {
+    color: var(--error)
 }
 /* button:hover {
   border-color: #646cff;

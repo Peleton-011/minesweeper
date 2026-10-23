@@ -27,7 +27,7 @@ const ProfilePage = () => {
 	} = useProfile();
 
 	const supabase = useSupabase();
-    const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -39,18 +39,20 @@ const ProfilePage = () => {
 	const [passwordError, setPasswordError] = useState("");
 	const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-	useEffect(() => {
-        function handleProfileChange() {
-            if (!profile) return fetchProfile();
-            
-            profile.username && setUsername(profile.username);
-            document.querySelector("#username").value = profile.username;
-            
-            setEmail(profile.email);
-            document.querySelector("#email").value = profile.email;
-        }
+	const [profileEditError, setProfileEditError] = useState("");
 
-        handleProfileChange()
+	useEffect(() => {
+		function handleProfileChange() {
+			if (!profile) return fetchProfile();
+
+			profile.username && setUsername(profile.username);
+			document.querySelector("#username").value = profile.username;
+
+			setEmail(profile.email);
+			document.querySelector("#email").value = profile.email;
+		}
+
+		handleProfileChange();
 	}, [profile, user]);
 
 	async function checkUsername(username, userId) {
@@ -105,8 +107,14 @@ const ProfilePage = () => {
 	function handleSubmit(e) {
 		e.preventDefault();
 		updateProfile({ email, password, username }).then(() => {
-            navigate("/settings")
-        })
+			if (updateUserError) {
+				setProfileEditError(updateUserError.message);
+			} else if (updateUsernameError) {
+				setProfileEditError(updateUsernameError.message);
+			} else {
+				navigate("/settings");
+			}
+		});
 	}
 
 	return (
@@ -119,6 +127,7 @@ const ProfilePage = () => {
 						type="text"
 						id="username"
 						name="username"
+                        placeholder="Your new username"
 						onChange={(e) => {
 							setUsername(e.target.value);
 						}}
@@ -142,6 +151,7 @@ const ProfilePage = () => {
 						type="text"
 						id="email"
 						name="email"
+                        placeholder="Your new email"
 						onChange={(e) => {
 							setEmail(e.target.value);
 						}}
@@ -154,12 +164,14 @@ const ProfilePage = () => {
 						}}
 					/>
 				</label>
+				{emailError && <p className="error">Error: {emailError}</p>}
 				<label htmlFor="password">
 					<span>New Password (optional)</span>
 					<input
 						type="password"
 						id="password"
 						name="password"
+                        placeholder="******"
 						onChange={(e) => {
 							setPassword(e.target.value);
 						}}
@@ -168,12 +180,16 @@ const ProfilePage = () => {
 						}}
 					/>
 				</label>
+				{passwordError && (
+					<p className="error">Error: {passwordError}</p>
+				)}
 				<label htmlFor="confirmPassword">
 					<span>Confirm Password </span>
 					<input
 						type="password"
 						id="confirmPassword"
 						name="confirmPassword"
+                        placeholder="******"
 						onChange={(e) => {
 							setConfirmPassword(e.target.value);
 						}}
@@ -184,12 +200,18 @@ const ProfilePage = () => {
 						}}
 					/>
 				</label>
+				{confirmPasswordError && (
+					<p className="error">Error: {confirmPasswordError}</p>
+				)}
 				<div className="buttons">
 					<button type="submit">Save changes</button>
 					<Link className="button small" to="/settings">
 						<ArrowLeft /> Cancel
 					</Link>
 				</div>
+				{profileEditError && (
+					<p className="error">Error: {profileEditError}</p>
+				)}
 			</fieldset>
 		</form>
 	);

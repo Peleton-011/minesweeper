@@ -277,12 +277,12 @@ const DifficultyForm = ({
 				<Link className="settings-btn button stealth-button" to={`/settings`}>
 					<Settings />
 				</Link>
-				<Link className="shop-btn button stealth-button" to={`/shop`}>
+				{/* <Link className="shop-btn button stealth-button" to={`/shop`}>
 					<ShoppingCart />
-				</Link>
-				<Link className="styles-btn button stealth-button" to={`/styles`}>
+				</Link> */}
+				{/* <Link className="styles-btn button stealth-button" to={`/styles`}>
 					<Paintbrush />
-				</Link>
+				</Link> */}
 			</div>
 		</form>
 	);
