@@ -97,13 +97,13 @@ const LeaderBoardPage = () => {
 				></Link>
 			</div>
 			<div onClick={() => fetchScores()}>
-				<LeaderBoard scoreList={scores} deleteScore={deleteScore} />
+				<LeaderBoard scoreList={scores} deleteScore={() => deleteScore() && fetchScores()} />
 				<h3>
 					On the cloud <Globe />{" "}
 				</h3>
 				<LeaderBoard
 					scoreList={scoresOnline}
-					deleteScore={deleteOnlineScore}
+					deleteScore={() => deleteOnlineScore() && fetchOnlineScores()}
 				/>
 			</div>
 			<Link
