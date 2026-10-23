@@ -1,11 +1,16 @@
 .leaderboard-wrapper {
+	--vertical-padding: 10%;
 	display: flex;
 	position: fixed;
-	top: 10%;
-	left: 50%;
-	transform: translateX(-50%);
+	width: 100%;
+	top: 0%;
+	left: 0%;
+	padding-top: var(--vertical-padding);
+	padding-bottom: var(--vertical-padding);
+	max-height: calc(100% - calc(var(--vertical-padding) * 2));
 	flex-direction: column;
 	align-items: center;
+    overflow-y: auto;
 }
 
 .leaderboard-heading {
@@ -45,22 +50,21 @@
 }
 
 .score {
-    width: min(25rem, 80vw);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+	width: min(25rem, 80vw);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .time {
-    font-style: italic;
-    font-weight: bold;
+	font-style: italic;
+	font-weight: bold;
 }
 
 .left {
-    margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 .right {
-    margin-right: 1rem;
-
+	margin-right: 1rem;
 }
