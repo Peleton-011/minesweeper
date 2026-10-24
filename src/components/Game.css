@@ -297,6 +297,10 @@ button:active {
 		/* text-shadow: var(--light-shadow); */
 	}
 
+    .cell.revealed:hover {
+	    background-color: var(--alt-cell-background);
+    }
+
 	.game-over-buttons {
 		bottom: 10vh;
 		width: 75vw;
