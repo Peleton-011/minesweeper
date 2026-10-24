@@ -173,14 +173,14 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			if (newBoard[x][y].isFlagged) {
-				setMineCount(mineCount);
+				setMineCount((mineCount) => mineCount + 1);
 				newBoard[x][y].isFlagged = false;
 			}
 			newBoard[x][y].isRevealed = true;
 
 			if (board[x][y].isMine === true) {
-				setMineCount(mineCount - 1);
-				setLives(lives - 1);
+				setMineCount((mineCount) => mineCount - 1);
+				setLives((lives) => lives - 1);
 			}
 		});
 		return newBoard;
