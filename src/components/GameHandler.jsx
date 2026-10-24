@@ -15,6 +15,8 @@ import {
 
 import { solveBoard } from "../utils/solver";
 
+import useSettings from "../hooks/useSettings";
+
 const Game = ({
 	config: {
 		height,
@@ -30,10 +32,12 @@ const Game = ({
 	},
 	isGameOver,
 }) => {
-	const [lives, setLives] = useState(argLives || 3);
+	const { settings, setSettings } = useSettings();
+
+    const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
-	const [isFlaggingMode, setIsFlaggingMode] = useState(false);
+	const [isFlaggingMode, setIsFlaggingMode] = useState(settings.defaultFlaggingMode);
 	const flaggingModeRef = React.useRef(isFlaggingMode);
 
 	const [hoveredCell, setHoveredCell] = useState(null);
@@ -184,9 +188,11 @@ const Game = ({
 		// console.log("First click");
 		setFirstClick(false);
 
-		if (deviceType === "mobile") {
-			// 1 is a magic number but it works
-			zppControls.zoomIn(1);
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomIn(settings.zoomOnStart);
 		}
 
 		const newBoard = fillBoard(x, y, startZone, board, mineCount);
