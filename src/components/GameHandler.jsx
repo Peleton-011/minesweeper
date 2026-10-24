@@ -64,10 +64,24 @@ const Game = ({
 	}, [isGameOver]);
 
 	const onWin = () => {
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomOut(settings.zoomOnStart);
+		}
+
 		argOnWin(getPlayTime());
 	};
 
 	const onLose = () => {
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomOut(settings.zoomOnStart);
+		}
+
 		argOnLose(getPlayTime());
 	};
 
