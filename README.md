@@ -79,7 +79,9 @@ Welcome to the **Minesweeper Game**, a sleek, high-performance, and customizable
 
 4. **Generate APK**: `build > generate bundles or apks > generate apks`, It will appear inside `android > app > build > outputs > apk > debug > app-debug.apk`
 
-5. **Change version**: `android/build.gradle (:app)` -> Update `versionCode` and `versionName`
+5. **Generate AAB**: `build > generate bundles or apks > generate signed app bundle or apk`, It will appear inside `android > app > release app-release.aab`
+
+6. **Change version**: `android/build.gradle (:app)` -> Update `versionCode` and `versionName`
 
 ## Icon and splash
 
