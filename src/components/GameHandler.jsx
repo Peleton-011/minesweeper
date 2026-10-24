@@ -34,10 +34,12 @@ const Game = ({
 }) => {
 	const { settings, setSettings } = useSettings();
 
-    const [lives, setLives] = useState(argLives || 3);
+	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
-	const [isFlaggingMode, setIsFlaggingMode] = useState(settings.defaultFlaggingMode);
+	const [isFlaggingMode, setIsFlaggingMode] = useState(
+		settings.defaultFlaggingMode
+	);
 	const flaggingModeRef = React.useRef(isFlaggingMode);
 
 	const [hoveredCell, setHoveredCell] = useState(null);
@@ -364,18 +366,36 @@ const Game = ({
 
 			{!isGameOver && (
 				<div className="bottom-buttons">
+					{settings.bottomButtonsFlipped ? (
+						<button
+							className={
+								"flag " + (isFlaggingMode ? "active" : "")
+							}
+							onClick={() => setIsFlaggingMode(true)}
+						>
+							{" "}
+						</button>
+					) : (
+						""
+					)}
 					<button
 						className={"bomb " + (isFlaggingMode ? "" : "active")}
 						onClick={() => setIsFlaggingMode(false)}
 					>
 						{" "}
 					</button>
-					<button
-						className={"flag " + (isFlaggingMode ? "active" : "")}
-						onClick={() => setIsFlaggingMode(true)}
-					>
-						{" "}
-					</button>
+					{!settings.bottomButtonsFlipped ? (
+						<button
+							className={
+								"flag " + (isFlaggingMode ? "active" : "")
+							}
+							onClick={() => setIsFlaggingMode(true)}
+						>
+							{" "}
+						</button>
+					) : (
+						""
+					)}
 				</div>
 			)}
 		</>
