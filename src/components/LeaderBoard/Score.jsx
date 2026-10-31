@@ -7,12 +7,18 @@ const Score = ({ score, deleteScore }) => {
 			<div className="left">
 				<span className="time">{getTimeString(score.time)}</span>
 			</div>
-			{/* <div className="middle">
-                {getDifficultyName(score)}
-                </div> */}
+			{score.userName ? (
+				<div className="middle">{score.userName}</div>
+			) : (
+				""
+			)}
 			<div className>
 				<span className="date right">{getDateString(score.date)}</span>
-				<button onClick={() => deleteScore(score.id)}>X</button>
+				{deleteScore ? (
+					<button onClick={() => deleteScore(score.id)}>X</button>
+				) : (
+					""
+				)}
 			</div>
 		</div>
 	);
