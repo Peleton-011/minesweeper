@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty, deleteScore } from "@/utils/leaderboard";
 import useLeaderBoards from "../../hooks/useLeaderBoards.jsx";
+import useProfile from "../../hooks/useProfile.jsx";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -27,6 +28,9 @@ const LeaderBoardPage = () => {
 		mineCount: Number(mines),
 		lives: Number(lives),
 	};
+
+	const { user } = useProfile();
+	// console.log(users)
 	const {
 		scores: onlineScores,
 		fetchScores: fetchOnlineScores,
@@ -34,7 +38,6 @@ const LeaderBoardPage = () => {
 		deleteScore: deleteOnlineScore,
 	} = useLeaderBoards();
 	const [scores, setScores] = useState([]);
-	const [scoresOnline, setScoresOnline] = useState([]);
 
 	const title = getDifficultyName({ ...config });
 
@@ -42,9 +45,11 @@ const LeaderBoardPage = () => {
 	const prevDifficulty = getPreviousDifficultyFromConfig({ ...config });
 
 	const fetchScores = () => {
+		console.log(config);
 		fetchScoresByDifficulty(config).then((scs) => {
 			setScores(scs);
 		});
+		fetchOnlineScores(config);
 		// fetchOnlineScoresByDifficulty(config).then((scs) => {
 		//     setScoresOnline(scs);
 		// });
@@ -52,21 +57,18 @@ const LeaderBoardPage = () => {
 
 	useEffect(() => {
 		fetchScores();
-		fetchOnlineScores(config);
 	}, [width, height, mines, lives]);
 
-	useEffect(() => {
-		setScoresOnline(
-			onlineScores.map((s) => {
-				return {
-					id: s.id,
-					time: s.time_ms,
-					date: s.date_ms,
-					user: s.user_id,
-				};
-			}),
-		);
-	}, [onlineScores]);
+	const scoresOnline = onlineScores.map((s) => {
+		return {
+			id: s.id,
+			time: s.time_ms,
+			date: s.date_ms,
+			user: s.user_id,
+            userName: s.profiles.user_name
+		};
+	});
+
 	return (
 		<div className="leaderboard-wrapper">
 			<div className="leaderboard-heading">
@@ -97,13 +99,24 @@ const LeaderBoardPage = () => {
 				></Link>
 			</div>
 			<div onClick={() => fetchScores()}>
-				<LeaderBoard scoreList={scores} deleteScore={() => deleteScore() && fetchScores()} />
+				<LeaderBoard
+					scoreList={scores}
+					deleteScore={(id) =>
+						deleteScore(id).then(() => fetchScores())
+					}
+                    isOffline={true}
+				/>
 				<h3>
 					On the cloud <Globe />{" "}
 				</h3>
 				<LeaderBoard
 					scoreList={scoresOnline}
-					deleteScore={() => deleteOnlineScore() && fetchOnlineScores()}
+					deleteScore={(id) =>
+						deleteOnlineScore(id).then(() =>
+							fetchOnlineScores(config),
+						)
+					}
+                    isOffline={false}
 				/>
 			</div>
 			<Link
