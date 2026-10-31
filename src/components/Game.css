@@ -88,7 +88,7 @@ button:active {
 	/* box-shadow: var(--light-shadow); */
 }
 
-.bottom-buttons {
+.pill-buttons {
 	position: fixed;
 	bottom: 10%;
 	z-index: 10;
@@ -100,22 +100,22 @@ button:active {
 	overflow: hidden; /* Prevent content overflow */
 }
 
-.bottom-buttons > button {
+.pill-buttons > button {
 	position: relative;
 	transition: none;
 	border: none;
-	background-color: var(--bottom-button-background);
+	background-color: var(--pill-button-background);
 }
 
-.bottom-buttons > .active {
+.pill-buttons > .active {
 	/* text-shadow: var(--light-shadow); */
 }
 
-.bottom-buttons > .active:hover {
+.pill-buttons > .active:hover {
 	/* text-shadow: var(--highlight-shadow); */
 }
 
-.bottom-buttons > button::after {
+.pill-buttons > button::after {
 	content: "";
 	position: fixed;
 	top: 0;
@@ -123,21 +123,21 @@ button:active {
 	width: 100%;
 	height: 100%;
 	border-radius: inherit;
-	background-color: var(--bottom-button-inactive-overlay);
+	background-color: var(--pill-button-inactive-overlay);
 	opacity: 40%;
 }
 
-.bottom-buttons > .active::after {
-	background-color: var(--bottom-button-active-overlay);
+.pill-buttons > .active::after {
+	background-color: var(--pill-button-active-overlay);
 }
 
-.bottom-buttons > button:first-child {
-	border-radius: var(--bottom-button-first-border-radius);
+.pill-buttons > button:first-child {
+	border-radius: var(--pill-button-first-border-radius);
 	border-right: none;
 }
 
-.bottom-buttons > button:last-child {
-	border-radius: var(--bottom-button-last-border-radius);
+.pill-buttons > button:last-child {
+	border-radius: var(--pill-button-last-border-radius);
 	border-left: none;
 }
 
