@@ -52,7 +52,6 @@ const LeaderBoardPage = () => {
 	const [mode, setMode] = useState("own"); //own, friends, world
 
 	const fetchScores = () => {
-		console.log(config);
 		fetchScoresByDifficulty(config).then((scs) => {
 			setScores(scs);
 		});
