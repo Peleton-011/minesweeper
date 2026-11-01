@@ -116,13 +116,13 @@ const LeaderBoardPage = () => {
 					}
 					onClick={() => setMode("friends")}
 				>
-					<Friends /><User />{mode === "friends" ? " Friends" : ""}
+					<Friends />{mode === "friends" ? " Friends" : ""}
 				</button>  */}
 				<button
 					className={"world " + (mode === "world" ? "active" : "")}
 					onClick={() => setMode("world")}
 				>
-					<World /><User />{mode === "world" ? " Hall of Fame" : ""}
+					<World />{mode === "world" ? " Hall of Fame" : ""}
 				</button>
 			</div>
 			<div className="leaderboard-heading">
