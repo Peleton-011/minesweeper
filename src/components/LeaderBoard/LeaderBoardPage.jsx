@@ -75,6 +75,32 @@ const LeaderBoardPage = () => {
 		};
 	});
 
+	const getSelectedLeaderboard = (mode) => {
+		if (mode === "own") {
+			return (
+				<LeaderBoard
+					scoreList={scores}
+					deleteScore={(id) =>
+						deleteScore(id).then(() => fetchScores())
+					}
+					isOffline={true}
+				/>
+			);
+		} else if (mode === "world") {
+			return (
+				<LeaderBoard
+					scoreList={scoresOnline}
+					deleteScore={(id) =>
+						deleteOnlineScore(id).then(() =>
+							fetchOnlineScores(config),
+						)
+					}
+					isOffline={false}
+				/>
+			);
+		}
+	};
+
 	return (
 		<div className="leaderboard-wrapper">
 			<div className="pill-buttons top">
@@ -126,15 +152,9 @@ const LeaderBoardPage = () => {
 					}
 				></Link>
 			</div>
-			<div onClick={() => fetchScores()}>
-				<LeaderBoard
-					scoreList={scores}
-					deleteScore={(id) =>
-						deleteScore(id).then(() => fetchScores())
-					}
-					isOffline={true}
-				/>
-				<h3>
+			<div>
+                {getSelectedLeaderboard(mode)}
+				{/* <h3>
 					On the cloud <Globe />{" "}
 				</h3>
 				<LeaderBoard
@@ -145,7 +165,7 @@ const LeaderBoardPage = () => {
 						)
 					}
 					isOffline={false}
-				/>
+				/> */}
 			</div>
 			<Link
 				className="button"
