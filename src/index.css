@@ -21,7 +21,7 @@
 	--text: rgba(255, 255, 255, 0.87);
 	--highlight: #1a1a1a;
 	--transparent-background: #1a1a1aa0;
-    --error: #ffa500c0;
+	--error: #ffa500c0;
 
 	/* Game Over Title and Carousel title */
 
@@ -189,7 +189,7 @@
 }
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .bevel {
@@ -230,8 +230,9 @@ a {
 	justify-content: center;
 }
 
-span > a, p > a {
-    display: inline;
+span > a,
+p > a {
+	display: inline;
 }
 /* a:hover {
   color: #535bf2;
@@ -243,11 +244,11 @@ body {
 	place-items: center;
 	width: 90vw;
 	height: 90vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 5vh 5vw;
-    background-color: var(--background);
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding: 5vh 5vw;
+	background-color: var(--background);
 }
 
 h1 {
@@ -308,16 +309,16 @@ form > * {
 
 form.auth-form {
 	width: min(100vw, 30rem);
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 form.auth-form > fieldset > * {
 	margin: 1rem;
 	margin-top: 0;
-    padding-right: 2rem;
+	padding-right: 2rem;
 }
 
 form.auth-form .buttons {
@@ -334,13 +335,13 @@ form.auth-form .buttons {
 	position: fixed;
 	top: 0%;
 	left: 50%;
-    transform: translateX(-50%);
+	transform: translateX(-50%);
 	padding-top: var(--vertical-padding);
 	padding-bottom: var(--vertical-padding);
 	max-height: calc(100% - calc(var(--vertical-padding) * 2));
 	flex-direction: column;
 	align-items: center;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
 .menu-heading {
@@ -357,7 +358,13 @@ form.auth-form .buttons {
 }
 
 .error {
-    color: var(--error)
+	color: var(--error);
+}
+
+@media only screen and (max-width: 767px) {
+	.react-transform-component {
+		will-change: transform;
+	}
 }
 /* button:hover {
   border-color: #646cff;
