@@ -105,24 +105,24 @@ const LeaderBoardPage = () => {
 		<div className="leaderboard-wrapper">
 			<div className="pill-buttons top">
 				<button
-					className={"own " + (mode === "own" ? "" : "active")}
+					className={"own " + (mode === "own" ? "active" : "")}
 					onClick={() => setMode("own")}
 				>
-					<User />{" "}
+					<User />{mode === "own" ? " My Times" : ""}
 				</button>
-				{/* <button
+				 {/* <button
 					className={
-						"friends " + (mode === "friends" ? "" : "active")
+						"friends " + (mode === "friends" ? "active" : "")
 					}
 					onClick={() => setMode("friends")}
 				>
-					<Friends />{" "}
-				</button> */}
+					<Friends /><User />{mode === "friends" ? " Friends" : ""}
+				</button>  */}
 				<button
-					className={"world " + (mode === "world" ? "" : "active")}
+					className={"world " + (mode === "world" ? "active" : "")}
 					onClick={() => setMode("world")}
 				>
-					<World />{" "}
+					<World /><User />{mode === "world" ? " Hall of Fame" : ""}
 				</button>
 			</div>
 			<div className="leaderboard-heading">
