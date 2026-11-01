@@ -38,7 +38,7 @@ const Game = ({
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
 	const [isFlaggingMode, setIsFlaggingMode] = useState(
-		settings.defaultFlaggingMode
+		settings.defaultFlaggingMode,
 	);
 	const flaggingModeRef = React.useRef(isFlaggingMode);
 
@@ -94,7 +94,7 @@ const Game = ({
 		document.documentElement.style.setProperty("--full-heart-count", lives);
 		document.documentElement.style.setProperty(
 			"--empty-heart-count",
-			argLives - lives
+			argLives - lives,
 		);
 	}, [lives]);
 
@@ -135,8 +135,8 @@ const Game = ({
 							};
 						}
 						return cell;
-					})
-				)
+					}),
+				),
 			);
 		}
 	}, [lives]);
@@ -233,7 +233,7 @@ const Game = ({
 					return { ...c, isFlagged: true };
 				}
 				return c;
-			})
+			}),
 		);
 	};
 
@@ -245,7 +245,7 @@ const Game = ({
 					return { ...c, isFlagged: false };
 				}
 				return c;
-			})
+			}),
 		);
 	};
 
@@ -380,6 +380,18 @@ const Game = ({
 
 			{!isGameOver && (
 				<div className="pill-buttons bottom">
+					{settings.bottomButtonsFlipped ? (
+						<button
+							className={
+								"flag " + (isFlaggingMode ? "active" : "")
+							}
+							onClick={() => setIsFlaggingMode(true)}
+						>
+							{" "}
+						</button>
+					) : (
+						""
+					)}
 					<button
 						className={"bomb " + (isFlaggingMode ? "" : "active")}
 						onClick={() => setIsFlaggingMode(false)}
