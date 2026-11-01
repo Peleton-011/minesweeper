@@ -99,6 +99,7 @@ button:active {
 
 .pill-buttons {
 	position: fixed;
+    display: flex;
 	z-index: 10;
 	left: 50%; /* Center horizontally */
 	transform: translateX(-50%); /* Adjust horizontal alignment */
@@ -114,7 +115,13 @@ button:active {
 	border: none;
 	border-radius: 0;
 	background-color: var(--pill-button-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.2rem;
 }
+
 
 .pill-buttons > .active {
 	/* text-shadow: var(--light-shadow); */

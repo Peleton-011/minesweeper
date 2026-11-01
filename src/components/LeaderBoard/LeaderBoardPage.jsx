@@ -108,21 +108,23 @@ const LeaderBoardPage = () => {
 					className={"own " + (mode === "own" ? "active" : "")}
 					onClick={() => setMode("own")}
 				>
-					<User />{mode === "own" ? " My Times" : ""}
+					<User />
+					{mode === "own" ? <span>My Times</span> : ""}
 				</button>
-				 {/* <button
+				{/* <button
 					className={
 						"friends " + (mode === "friends" ? "active" : "")
 					}
 					onClick={() => setMode("friends")}
 				>
-					<Friends />{mode === "friends" ? " Friends" : ""}
+					<Friends />{mode === "friends" ? (<span>Friends</span>) : ""}
 				</button>  */}
 				<button
 					className={"world " + (mode === "world" ? "active" : "")}
 					onClick={() => setMode("world")}
 				>
-					<World />{mode === "world" ? " Hall of Fame" : ""}
+					<World />
+					{mode === "world" ? <span>Hall of Fame</span> : ""}
 				</button>
 			</div>
 			<div className="leaderboard-heading">
@@ -153,7 +155,7 @@ const LeaderBoardPage = () => {
 				></Link>
 			</div>
 			<div>
-                {getSelectedLeaderboard(mode)}
+				{getSelectedLeaderboard(mode)}
 				{/* <h3>
 					On the cloud <Globe />{" "}
 				</h3>
