@@ -15,6 +15,8 @@ import {
 
 import { solveBoard } from "../utils/solver";
 
+import useSettings from "../hooks/useSettings";
+
 const Game = ({
 	config: {
 		height,
@@ -30,10 +32,14 @@ const Game = ({
 	},
 	isGameOver,
 }) => {
+	const { settings, setSettings } = useSettings();
+
 	const [lives, setLives] = useState(argLives || 3);
 	const [mineCount, setMineCount] = useState(argMineCount || 10);
 
-	const [isFlaggingMode, setIsFlaggingMode] = useState(false);
+	const [isFlaggingMode, setIsFlaggingMode] = useState(
+		settings.defaultFlaggingMode
+	);
 	const flaggingModeRef = React.useRef(isFlaggingMode);
 
 	const [hoveredCell, setHoveredCell] = useState(null);
@@ -58,10 +64,24 @@ const Game = ({
 	}, [isGameOver]);
 
 	const onWin = () => {
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomOut(settings.zoomOnStart);
+		}
+
 		argOnWin(getPlayTime());
 	};
 
 	const onLose = () => {
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomOut(settings.zoomOnStart);
+		}
+
 		argOnLose(getPlayTime());
 	};
 
@@ -167,14 +187,14 @@ const Game = ({
 
 		list.forEach(([x, y]) => {
 			if (newBoard[x][y].isFlagged) {
-				setMineCount(mineCount);
+				setMineCount((mineCount) => mineCount + 1);
 				newBoard[x][y].isFlagged = false;
 			}
 			newBoard[x][y].isRevealed = true;
 
 			if (board[x][y].isMine === true) {
-				setMineCount(mineCount - 1);
-				setLives(lives - 1);
+				setMineCount((mineCount) => mineCount - 1);
+				setLives((lives) => lives - 1);
 			}
 		});
 		return newBoard;
@@ -184,9 +204,11 @@ const Game = ({
 		// console.log("First click");
 		setFirstClick(false);
 
-		if (deviceType === "mobile") {
-			// 1 is a magic number but it works
-			zppControls.zoomIn(1);
+		if (
+			(deviceType === "mobile" && settings.zoomOnStartMobile) ||
+			(deviceType !== "mobile" && settings.zoomOnStartPC)
+		) {
+			zppControls.zoomIn(settings.zoomOnStart);
 		}
 
 		const newBoard = fillBoard(x, y, startZone, board, mineCount);
@@ -364,12 +386,18 @@ const Game = ({
 					>
 						{" "}
 					</button>
-					<button
-						className={"flag " + (isFlaggingMode ? "active" : "")}
-						onClick={() => setIsFlaggingMode(true)}
-					>
-						{" "}
-					</button>
+					{!settings.bottomButtonsFlipped ? (
+						<button
+							className={
+								"flag " + (isFlaggingMode ? "active" : "")
+							}
+							onClick={() => setIsFlaggingMode(true)}
+						>
+							{" "}
+						</button>
+					) : (
+						""
+					)}
 				</div>
 			)}
 		</>

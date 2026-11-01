@@ -317,6 +317,7 @@ form.auth-form {
 form.auth-form > fieldset > * {
 	margin: 1rem;
 	margin-top: 0;
+    padding-right: 2rem;
 }
 
 form.auth-form .buttons {
