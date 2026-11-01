@@ -49,11 +49,13 @@
 	color: var(--no-score-color);
 }
 
-.score {
+.leaderboard-wrapper table {
 	width: min(25rem, 80vw);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+    margin-top: 1rem;
+}
+
+.leaderboard-wrapper table tr {
+    height: 3rem;
 }
 
 .time {
