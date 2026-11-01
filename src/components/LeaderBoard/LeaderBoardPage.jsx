@@ -5,6 +5,11 @@ import {
 	LuArrowLeft as ArrowLeft,
 	LuGlobe as Globe,
 } from "@react-icons/lucide";
+import {
+	User as User,
+	UserGroup as Friends,
+	Landmark as World, //Crown, Award, Globe, Earth
+} from "lucide-react";
 
 import { useParams } from "react-router-dom";
 import {
@@ -16,6 +21,7 @@ import { Link } from "react-router-dom";
 import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty, deleteScore } from "@/utils/leaderboard";
 import useLeaderBoards from "../../hooks/useLeaderBoards.jsx";
+import useProfile from "../../hooks/useProfile.jsx";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -27,6 +33,9 @@ const LeaderBoardPage = () => {
 		mineCount: Number(mines),
 		lives: Number(lives),
 	};
+
+	const { user } = useProfile();
+	// console.log(users)
 	const {
 		scores: onlineScores,
 		fetchScores: fetchOnlineScores,
@@ -34,17 +43,19 @@ const LeaderBoardPage = () => {
 		deleteScore: deleteOnlineScore,
 	} = useLeaderBoards();
 	const [scores, setScores] = useState([]);
-	const [scoresOnline, setScoresOnline] = useState([]);
 
 	const title = getDifficultyName({ ...config });
 
 	const nextDifficulty = getNextDifficultyFromConfig({ ...config });
 	const prevDifficulty = getPreviousDifficultyFromConfig({ ...config });
 
+	const [mode, setMode] = useState("own"); //own, friends, world
+
 	const fetchScores = () => {
 		fetchScoresByDifficulty(config).then((scs) => {
 			setScores(scs);
 		});
+		fetchOnlineScores(config);
 		// fetchOnlineScoresByDifficulty(config).then((scs) => {
 		//     setScoresOnline(scs);
 		// });
@@ -52,23 +63,70 @@ const LeaderBoardPage = () => {
 
 	useEffect(() => {
 		fetchScores();
-		fetchOnlineScores(config);
 	}, [width, height, mines, lives]);
 
-	useEffect(() => {
-		setScoresOnline(
-			onlineScores.map((s) => {
-				return {
-					id: s.id,
-					time: s.time_ms,
-					date: s.date_ms,
-					user: s.user_id,
-				};
-			}),
-		);
-	}, [onlineScores]);
+	const scoresOnline = onlineScores.map((s) => {
+		return {
+			id: s.id,
+			time: s.time_ms,
+			date: s.date_ms,
+			user: s.user_id,
+			userName: s.profiles.user_name,
+		};
+	});
+
+	const getSelectedLeaderboard = (mode) => {
+		if (mode === "own") {
+			return (
+				<LeaderBoard
+					scoreList={scores}
+					deleteScore={(id) =>
+						deleteScore(id).then(() => fetchScores())
+					}
+					isOffline={true}
+				/>
+			);
+		} else if (mode === "world") {
+			return (
+				<LeaderBoard
+					scoreList={scoresOnline}
+					deleteScore={(id) =>
+						deleteOnlineScore(id).then(() =>
+							fetchOnlineScores(config),
+						)
+					}
+					isOffline={false}
+				/>
+			);
+		}
+	};
+
 	return (
 		<div className="leaderboard-wrapper">
+			<div className="pill-buttons top">
+				<button
+					className={"own " + (mode === "own" ? "active" : "")}
+					onClick={() => setMode("own")}
+				>
+					<User />
+					{mode === "own" ? <span>My Times</span> : ""}
+				</button>
+				{/* <button
+					className={
+						"friends " + (mode === "friends" ? "active" : "")
+					}
+					onClick={() => setMode("friends")}
+				>
+					<Friends />{mode === "friends" ? (<span>Friends</span>) : ""}
+				</button>  */}
+				<button
+					className={"world " + (mode === "world" ? "active" : "")}
+					onClick={() => setMode("world")}
+				>
+					<World />
+					{mode === "world" ? <span>Hall of Fame</span> : ""}
+				</button>
+			</div>
 			<div className="leaderboard-heading">
 				<Link
 					to={`/scores/${prevDifficulty.width}/${prevDifficulty.height}/${prevDifficulty.mineCount}/${prevDifficulty.lives}`}
@@ -96,15 +154,20 @@ const LeaderBoardPage = () => {
 					}
 				></Link>
 			</div>
-			<div onClick={() => fetchScores()}>
-				<LeaderBoard scoreList={scores} deleteScore={() => deleteScore() && fetchScores()} />
-				<h3>
+			<div>
+				{getSelectedLeaderboard(mode)}
+				{/* <h3>
 					On the cloud <Globe />{" "}
 				</h3>
 				<LeaderBoard
 					scoreList={scoresOnline}
-					deleteScore={() => deleteOnlineScore() && fetchOnlineScores()}
-				/>
+					deleteScore={(id) =>
+						deleteOnlineScore(id).then(() =>
+							fetchOnlineScores(config),
+						)
+					}
+					isOffline={false}
+				/> */}
 			</div>
 			<Link
 				className="button"

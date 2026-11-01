@@ -379,19 +379,7 @@ const Game = ({
 			/>
 
 			{!isGameOver && (
-				<div className="bottom-buttons">
-					{settings.bottomButtonsFlipped ? (
-						<button
-							className={
-								"flag " + (isFlaggingMode ? "active" : "")
-							}
-							onClick={() => setIsFlaggingMode(true)}
-						>
-							{" "}
-						</button>
-					) : (
-						""
-					)}
+				<div className="pill-buttons bottom">
 					<button
 						className={"bomb " + (isFlaggingMode ? "" : "active")}
 						onClick={() => setIsFlaggingMode(false)}

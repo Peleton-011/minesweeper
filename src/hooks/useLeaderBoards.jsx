@@ -37,12 +37,18 @@ function useLeaderBoards() {
 			.from("highscores")
 			.insert(newScore);
 		if (error) throw error;
+
+		if (data.length) {
+			setScores([...scores, newScore]);
+		}
+
+		return data;
 	};
 
 	const fetchScores = async (difficulty) => {
 		const { data, error } = await supabase
 			.from("highscores")
-			.select("time_ms, user_id, date_ms, id")
+			.select("time_ms, user_id, profiles(user_name), date_ms, id")
 			.eq(
 				"size",
 				difficulty.size
@@ -55,6 +61,8 @@ function useLeaderBoards() {
 		if (error) throw error;
 
 		setScores(data || []);
+
+        return data
 
 		/*TODO: Implement a pattern like this for weekly, yearly, daily etc
 
@@ -77,10 +85,21 @@ function useLeaderBoards() {
 	};
 
 	const deleteScore = async (id) => {
-		const { error } = await supabase
+		const { data, error } = await supabase
 			.from("highscores")
 			.delete()
-			.eq("id", id);
+			.eq("id", id)
+			.select("id");
+
+		if (error) throw error;
+
+		if (data?.length) {
+			setScores((current) =>
+				current.filter((score) => String(score.id) !== String(id)),
+			);
+		}
+
+		return data;
 	};
 
 	return {
@@ -91,4 +110,4 @@ function useLeaderBoards() {
 	};
 }
 
-export default useLeaderBoards
+export default useLeaderBoards;

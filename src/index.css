@@ -35,13 +35,13 @@
 	--button-padding: 0.6em 1.2em;
 
 	/* Bottom Buttons */
-	--bottom-button-background: #555;
-	--bottom-button-inactive-overlay: #181a1b;
-	--bottom-button-active-overlay: transparent;
+	--pill-button-background: #555;
+	--pill-button-inactive-overlay: #181a1b;
+	--pill-button-active-overlay: transparent;
 
-	--bottom-button-first-border-radius: var(--button-radius) 0 0
+	--pill-button-first-border-radius: var(--button-radius) 0 0
 		var(--button-radius);
-	--bottom-button-last-border-radius: 0 var(--button-radius)
+	--pill-button-last-border-radius: 0 var(--button-radius)
 		var(--button-radius) 0;
 
 	/* Board */
