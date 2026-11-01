@@ -357,7 +357,7 @@ const Game = ({
 			/>
 
 			{!isGameOver && (
-				<div className="pill-buttons">
+				<div className="pill-buttons bottom">
 					<button
 						className={"bomb " + (isFlaggingMode ? "" : "active")}
 						onClick={() => setIsFlaggingMode(false)}

@@ -5,6 +5,11 @@ import {
 	LuArrowLeft as ArrowLeft,
 	LuGlobe as Globe,
 } from "@react-icons/lucide";
+import {
+	User as User,
+	UserGroup as Friends,
+	Landmark as World, //Crown, Award, Globe, Earth
+} from "lucide-react";
 
 import { useParams } from "react-router-dom";
 import {
@@ -44,6 +49,8 @@ const LeaderBoardPage = () => {
 	const nextDifficulty = getNextDifficultyFromConfig({ ...config });
 	const prevDifficulty = getPreviousDifficultyFromConfig({ ...config });
 
+	const [mode, setMode] = useState("own"); //own, friends, world
+
 	const fetchScores = () => {
 		console.log(config);
 		fetchScoresByDifficulty(config).then((scs) => {
@@ -65,12 +72,34 @@ const LeaderBoardPage = () => {
 			time: s.time_ms,
 			date: s.date_ms,
 			user: s.user_id,
-            userName: s.profiles.user_name
+			userName: s.profiles.user_name,
 		};
 	});
 
 	return (
 		<div className="leaderboard-wrapper">
+			<div className="pill-buttons top">
+				<button
+					className={"own " + (mode === "own" ? "" : "active")}
+					onClick={() => setMode("own")}
+				>
+					<User />{" "}
+				</button>
+				{/* <button
+					className={
+						"friends " + (mode === "friends" ? "" : "active")
+					}
+					onClick={() => setMode("friends")}
+				>
+					<Friends />{" "}
+				</button> */}
+				<button
+					className={"world " + (mode === "world" ? "" : "active")}
+					onClick={() => setMode("world")}
+				>
+					<World />{" "}
+				</button>
+			</div>
 			<div className="leaderboard-heading">
 				<Link
 					to={`/scores/${prevDifficulty.width}/${prevDifficulty.height}/${prevDifficulty.mineCount}/${prevDifficulty.lives}`}
@@ -104,7 +133,7 @@ const LeaderBoardPage = () => {
 					deleteScore={(id) =>
 						deleteScore(id).then(() => fetchScores())
 					}
-                    isOffline={true}
+					isOffline={true}
 				/>
 				<h3>
 					On the cloud <Globe />{" "}
@@ -116,7 +145,7 @@ const LeaderBoardPage = () => {
 							fetchOnlineScores(config),
 						)
 					}
-                    isOffline={false}
+					isOffline={false}
 				/>
 			</div>
 			<Link

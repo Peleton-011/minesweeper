@@ -88,9 +88,17 @@ button:active {
 	/* box-shadow: var(--light-shadow); */
 }
 
+.pill-buttons.bottom {
+	bottom: 10%;
+}
+
+.pill-buttons.top {
+	top: 10%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
 .pill-buttons {
 	position: fixed;
-	bottom: 10%;
 	z-index: 10;
 	left: 50%; /* Center horizontally */
 	transform: translateX(-50%); /* Adjust horizontal alignment */
@@ -104,6 +112,7 @@ button:active {
 	position: relative;
 	transition: none;
 	border: none;
+	border-radius: 0;
 	background-color: var(--pill-button-background);
 }
 
