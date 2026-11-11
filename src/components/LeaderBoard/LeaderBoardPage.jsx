@@ -86,7 +86,7 @@ const LeaderBoardPage = () => {
 		if (mode === "own") {
 			return (
 				<LeaderBoard
-					scoreList={scores}
+					scoreList={filterTimesByPivot(scores)}
 					deleteScore={(id) =>
 						deleteScore(id).then(() => fetchScores())
 					}
@@ -96,7 +96,7 @@ const LeaderBoardPage = () => {
 		} else if (mode === "world") {
 			return (
 				<LeaderBoard
-					scoreList={scoresOnline}
+					scoreList={filterTimesByPivot(scoresOnline)}
 					deleteScore={(id) =>
 						deleteOnlineScore(id).then(() =>
 							fetchOnlineScores(config),
@@ -108,31 +108,36 @@ const LeaderBoardPage = () => {
 		}
 	};
 
+	const [pivot, setPivot] = useState(0);
+	const filterTimesByPivot = (scores) => {
+		return scores.filter((s) => s.date > pivot || s.date_ms > pivot);
+	};
+
 	const timeSelectOptions = [
 		{
 			component: Calendar1,
 			value: "day",
-			onSelect: () => console.log("day"),
+			onSelect: () => setPivot(Date.now() - 24*3600*1000),
 		},
 		{
 			component: Calendar7,
 			value: "week",
-			onSelect: () => console.log("week"),
+			onSelect: () => setPivot(Date.now() - 24*3600*1000 *7),
 		},
 		{
 			component: CalendarMonth,
 			value: "month",
-			onSelect: () => console.log("month"),
+			onSelect: () => setPivot(Date.now() - 24*3600*1000 *30),
 		},
 		{
 			component: CalendarYear,
 			value: "year",
-			onSelect: () => console.log("year"),
+			onSelect: () => setPivot(Date.now() - 24*3600*1000 *365),
 		},
 		{
 			component: CalendarEver,
 			value: "ever",
-			onSelect: () => console.log("ever"),
+			onSelect: () => setPivot(0),
 		},
 	];
 
