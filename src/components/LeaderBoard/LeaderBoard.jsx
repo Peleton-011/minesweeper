@@ -34,38 +34,47 @@ const LeaderBoard = ({ scoreList, deleteScore, isOffline }) => {
 						scoreList.map &&
 						scoreList.map((score, i) => {
 							return (
-								<tr key={score.id} className="score">
-									<td>{i + 1}.</td>
-									<td className="time">
-										{getTimeString(score.time)}
-									</td>
-									<td className="date">
-										{getDateString(score.date)}
-									</td>
-									<td>
-										{score.userName ? (
-											<div className={"middle" + (score.user === user?.id ? " time" : "")}>
-												{score.userName}
-											</div>
-										) : (
-											<>&nbsp;</>
-										)}
-									</td>
-									<td>
-										{score.user === user?.id ||
-										isOffline ? (
-											<button
-												onClick={() =>
-													deleteScore(score.id)
-												}
-											>
-												X
-											</button>
-										) : (
-											<>&nbsp;</>
-										)}
-									</td>
-								</tr>
+								<tbody>
+									<tr key={score.id} className="score">
+										<td>{i + 1}.</td>
+										<td className="time">
+											{getTimeString(score.time)}
+										</td>
+										<td className="date">
+											{getDateString(score.date)}
+										</td>
+										<td>
+											{score.userName ? (
+												<div
+													className={
+														"middle" +
+														(score.user === user?.id
+															? " time"
+															: "")
+													}
+												>
+													{score.userName}
+												</div>
+											) : (
+												<>&nbsp;</>
+											)}
+										</td>
+										<td>
+											{score.user === user?.id ||
+											isOffline ? (
+												<button
+													onClick={() =>
+														deleteScore(score.id)
+													}
+												>
+													X
+												</button>
+											) : (
+												<>&nbsp;</>
+											)}
+										</td>
+									</tr>
+								</tbody>
 							);
 						})}
 				</table>
