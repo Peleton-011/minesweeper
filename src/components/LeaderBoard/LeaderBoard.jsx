@@ -30,11 +30,11 @@ const LeaderBoard = ({ scoreList, deleteScore, isOffline }) => {
 				// 		})}
 				// </ol>
 				<table>
-					{scoreList &&
-						scoreList.map &&
-						scoreList.map((score, i) => {
-							return (
-								<tbody>
+					<tbody>
+						{scoreList &&
+							scoreList.map &&
+							scoreList.map((score, i) => {
+								return (
 									<tr key={score.id} className="score">
 										<td>{i + 1}.</td>
 										<td className="time">
@@ -74,9 +74,9 @@ const LeaderBoard = ({ scoreList, deleteScore, isOffline }) => {
 											)}
 										</td>
 									</tr>
-								</tbody>
-							);
-						})}
+								);
+							})}
+					</tbody>
 				</table>
 			) : (
 				<h3 className="no-score">no scores here! Yet...</h3>
