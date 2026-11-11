@@ -1,5 +1,5 @@
 .leaderboard-wrapper {
-	--vertical-padding: 10%;
+	--vertical-padding: 12vh;
 	display: flex;
 	position: fixed;
 	width: 100%;
@@ -10,7 +10,7 @@
 	height: 100vh;
 	flex-direction: column;
 	align-items: center;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
 .leaderboard-heading {
@@ -39,7 +39,7 @@
 .next.btn.leaderboard::after,
 .prev.btn.leaderboard::after {
 	display: inline-block;
-	transform: translateY(150%) rotate(45deg);
+	transform: translateY(15%) rotate(45deg);
 	content: "";
 	width: 15px;
 	height: 15px;
@@ -51,11 +51,11 @@
 
 .leaderboard-wrapper table {
 	width: min(25rem, 80vw);
-    margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 .leaderboard-wrapper table tr {
-    height: 3rem;
+	height: 3rem;
 }
 
 .time {
@@ -69,4 +69,41 @@
 
 .right {
 	margin-right: 1rem;
+}
+
+.popover-position {
+	position: relative;
+}
+
+.popover-wrapper {
+	position: absolute;
+	top: -6vh;
+	right: max(-20rem, -50vw);
+
+	display: flex;
+	align-items: flex-start;
+    gap: 0.2rem;
+}
+
+.popover-wrapper .selector {
+}
+
+.popover-wrapper .options {
+	display: flex;
+	flex-direction: column;
+    gap: 0.2rem;
+	opacity: 0%;
+	pointer-events: none;
+}
+
+.popover-wrapper .options.active {
+	opacity: 100%;
+	pointer-events: all;
+}
+
+.popover-wrapper .options .option {
+	opacity: 60%;
+}
+.popover-wrapper .options .option:hover {
+	opacity: 100%;
 }
