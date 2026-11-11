@@ -9,7 +9,13 @@ import {
 	User as User,
 	UserGroup as Friends,
 	Landmark as World, //Crown, Award, Globe, Earth
+	Calendar1,
+	CalendarDays as CalendarMonth,
+	Calendars as CalendarYear,
+	Crown as CalendarEver,
 } from "lucide-react";
+
+import Calendar7 from "../Icons/Calendar7.jsx";
 
 import { useParams } from "react-router-dom";
 import {
@@ -22,6 +28,7 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty, deleteScore } from "@/utils/leaderboard";
 import useLeaderBoards from "../../hooks/useLeaderBoards.jsx";
 import useProfile from "../../hooks/useProfile.jsx";
+import Popover from "./Popover.jsx";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -101,6 +108,34 @@ const LeaderBoardPage = () => {
 		}
 	};
 
+	const timeSelectOptions = [
+		{
+			component: Calendar1,
+			value: "day",
+			onSelect: () => console.log("day"),
+		},
+		{
+			component: Calendar7,
+			value: "week",
+			onSelect: () => console.log("week"),
+		},
+		{
+			component: CalendarMonth,
+			value: "month",
+			onSelect: () => console.log("month"),
+		},
+		{
+			component: CalendarYear,
+			value: "year",
+			onSelect: () => console.log("year"),
+		},
+		{
+			component: CalendarEver,
+			value: "ever",
+			onSelect: () => console.log("ever"),
+		},
+	];
+
 	return (
 		<div className="leaderboard-wrapper">
 			<div className="pill-buttons top">
@@ -126,6 +161,9 @@ const LeaderBoardPage = () => {
 					<World />
 					{mode === "world" ? <span>Hall of Fame</span> : ""}
 				</button>
+			</div>
+			<div className="popover-position">
+				<Popover elems={timeSelectOptions} />
 			</div>
 			<div className="leaderboard-heading">
 				<Link
