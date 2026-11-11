@@ -109,11 +109,10 @@ button:active {
 	overflow: hidden; /* Prevent content overflow */
 }
 
-.pill-buttons > button {
+.pill-buttons > button, .pill-button {
 	position: relative;
 	transition: none;
 	border: none;
-	border-radius: 0;
 	background-color: var(--pill-button-background);
     display: flex;
     justify-content: center;
@@ -121,6 +120,11 @@ button:active {
     flex-wrap: nowrap;
     gap: 0.2rem;
 }
+
+.pill-buttons > button {
+	border-radius: 0;
+}
+
 
 
 .pill-buttons > .active {
@@ -131,7 +135,7 @@ button:active {
 	/* text-shadow: var(--highlight-shadow); */
 }
 
-.pill-buttons > button::after {
+.pill-buttons > button::after, .pill-button::after {
 	content: "";
 	position: fixed;
 	top: 0;
@@ -143,7 +147,7 @@ button:active {
 	opacity: 40%;
 }
 
-.pill-buttons > .active::after {
+.pill-buttons > .active::after, .pill-button.active::after {
 	background-color: var(--pill-button-active-overlay);
 }
 

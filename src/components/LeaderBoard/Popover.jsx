@@ -25,7 +25,7 @@ const Popover = ({ elems }) => {
 	return (
 		<div className="popover-wrapper">
 			<button
-				className="selector"
+				className="selector pill-button active"
 				onClick={() => setSelectorOpen(!selectorOpen)}
 			>
 				<Icon name={selected} />
@@ -36,7 +36,7 @@ const Popover = ({ elems }) => {
 					.map((e, i) => {
 						return (
 							<button
-								className="option"
+								className="option pill-button"
 								key={i}
 								onClick={() => select(e.value)}
 							>
