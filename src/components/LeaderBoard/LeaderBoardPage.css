@@ -1,5 +1,5 @@
 .leaderboard-wrapper {
-	--vertical-padding: 10%;
+	--vertical-padding: 12vh;
 	display: flex;
 	position: fixed;
 	width: 100%;
@@ -39,7 +39,7 @@
 .next.btn.leaderboard::after,
 .prev.btn.leaderboard::after {
 	display: inline-block;
-	transform: translateY(150%) rotate(45deg);
+	transform: translateY(15%) rotate(45deg);
 	content: "";
 	width: 15px;
 	height: 15px;

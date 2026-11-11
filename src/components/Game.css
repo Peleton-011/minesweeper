@@ -93,7 +93,7 @@ button:active {
 }
 
 .pill-buttons.top {
-	top: 10%;
+	top: 8%;
     transform: translateY(-50%) translateX(-50%);
 }
 
