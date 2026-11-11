@@ -8,9 +8,9 @@ const Calendar7 = () => {
 			viewBox="0 0 24 24"
 			fill="none"
 			stroke="currentColor"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
 		>
 			<path d="M11 13h3.5L12 17" />
 			<path d="M16 2v3" />
