@@ -72,35 +72,36 @@
 }
 
 .popover-position {
-	position: fixed;
-	top: 5vh;
-	right: 5vh;
+	position: relative;
 }
 
 .popover-wrapper {
-    display: flex;
-    align-items: flex-start;
+	position: absolute;
+	top: -6vh;
+	right: max(-20rem, -50vw);
+
+	display: flex;
+	align-items: flex-start;
 }
 
 .popover-wrapper .selector {
-    
 }
 
 .popover-wrapper .options {
-    display: flex;
-    flex-direction: column;
-    opacity: 0%;
-    pointer-events: none;
+	display: flex;
+	flex-direction: column;
+	opacity: 0%;
+	pointer-events: none;
 }
 
 .popover-wrapper .options.active {
-    opacity: 100%;
-    pointer-events: all; 
+	opacity: 100%;
+	pointer-events: all;
 }
 
 .popover-wrapper .options .option {
-    opacity: 60%;
+	opacity: 60%;
 }
 .popover-wrapper .options .option:hover {
-    opacity: 100%;
+	opacity: 100%;
 }
