@@ -379,7 +379,7 @@ const Game = ({
 			/>
 
 			{!isGameOver && (
-				<div className="pill-buttons bottom">
+				<div className="pill-buttons fixed bottom">
 					{settings.bottomButtonsFlipped ? (
 						<button
 							className={

@@ -88,25 +88,29 @@ button:active {
 	/* box-shadow: var(--light-shadow); */
 }
 
-.pill-buttons.bottom {
+.bottom {
 	bottom: 10%;
 }
 
-.pill-buttons.top {
+.top {
 	top: 8%;
     transform: translateY(-50%) translateX(-50%);
 }
 
 .pill-buttons {
-	position: fixed;
+	
     display: flex;
 	z-index: 10;
 	left: 50%; /* Center horizontally */
-	transform: translateX(-50%); /* Adjust horizontal alignment */
-	max-width: 95%; /* Prevent overflowing the viewport horizontally */
+	max-width: 95vw; /* Prevent overflowing the viewport horizontally */
 	box-sizing: border-box; /* Ensure padding is included in the size */
 	text-align: center; /* Center-align text */
 	overflow: hidden; /* Prevent content overflow */
+}
+
+.fixed {
+    position: fixed;
+	transform: translateX(-50%); /* Adjust horizontal alignment */
 }
 
 .pill-buttons > button, .pill-button {
