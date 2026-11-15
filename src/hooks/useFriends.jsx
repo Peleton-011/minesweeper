@@ -73,6 +73,18 @@ function useFriends() {
 		return data;
 	};
 
+	const acceptFriendRequest = async (sender) => {
+		const { data, error } = await supabase
+			.from("friendships")
+			.update({created_at: Date.now()})
+			.eq("from_id", sender)
+			.eq("to_id", user.id);
+
+		if (error) throw error;
+
+        return data;
+	};
+
 	// const deleteScore = async (id) => {
 	// 	const { data, error } = await supabase
 	// 		.from("highscores")
