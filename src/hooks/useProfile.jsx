@@ -58,10 +58,11 @@ function useProfile() {
 		const { data, error } = await supabase
 			.from("profiles")
 			.select("user_name, id")
-			.eq("id", user.id);
+			.eq("id", user.id)
+            .single();
 		setProfile({
 			id: user.id,
-			username: data[0].user_name,
+			username: data.user_name,
 			email: user.email,
 		});
 	}
