@@ -14,6 +14,10 @@ form.difficulty-form > * {
 	margin: 0;
 }
 
+.difficulty-display {
+    overflow: hidden;
+}
+
 label,
 fieldset {
 	width: 100%;
