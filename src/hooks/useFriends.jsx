@@ -16,12 +16,14 @@ function useFriends() {
 	const supabase = useSupabase();
 	const [rawFriendships, setRawFriendships] = useState([]);
 	const [acceptedFriendships, setAcceptedFriendships] = useState([]);
-	const [friendRequests, setFriendRequests] = useState([]);
+	const [sentFriendRequests, setSentFriendRequests] = useState([]);
+	const [recievedFriendRequests, setRecievedFriendRequests] = useState([]);
 
 	const { user } = useProfile();
 
 	useEffect(() => {
-		fetchFriends().then(() => console.log(rawFriendships));
+		fetchFriends()
+        // .then(() => console.log(rawFriendships));
 	}, [user]);
 
 	const fetchFriends = async () => {
@@ -37,14 +39,14 @@ function useFriends() {
 		return data;
 	};
 
-	const addFriendRequest = async (username) => {
-		if (!user || !username) return;
+	const addFriendRequest = async (friend) => {
+		if (!user || !friend) return;
 		// Get recipient id
 
 		const { data: friendData, error: friendError } = await supabase
 			.from("profiles")
-			.select("user_name, id")
-			.eq("user_name", username)
+			.select(" id")
+			.eq("id", friend)
 			.single();
 
 		if (friendError) throw friendError;
@@ -110,10 +112,11 @@ function useFriends() {
 
 	return {
 		acceptedFriendships,
-		friendRequests,
+		sentFriendRequests,
+		recievedFriendRequests,
 		fetchFriends,
 		addFriendRequest,
-        acceptFriendRequest,
+		acceptFriendRequest,
 		deleteFriendship,
 	};
 }
