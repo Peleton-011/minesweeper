@@ -22,16 +22,38 @@ function useFriends() {
 	const { user } = useProfile();
 
 	useEffect(() => {
-		fetchFriends()
-        // .then(() => console.log(rawFriendships));
+		fetchFriends();
+		// .then(() => console.log(rawFriendships));
 	}, [user]);
+
+	useEffect(() => {
+		setAcceptedFriendships(
+			rawFriendships.filter(
+				(friendship) => friendship.accepted_at !== null,
+			),
+		);
+		setSentFriendRequests(
+			rawFriendships.filter(
+				(friendship) =>
+					String(friendship.from_id) === String(user.id) &&
+					friendship.accepted_at === null,
+			),
+		);
+		setRecievedFriendRequests(
+			rawFriendships.filter(
+				(friendship) =>
+					String(friendship.to_id) === String(user.id) &&
+					friendship.accepted_at === null,
+			),
+		);
+	}, [rawFriendships]);
 
 	const fetchFriends = async () => {
 		if (!user) return;
 		const { data, error } = await supabase
 			.from("friendships")
 			.select("from_id, to_id, created_at, accepted_at")
-			.or("to_id.eq." + user.id, "from_id.eq." + user.id);
+			.or("to_id.eq." + user.id + ", from_id.eq." + user.id);
 		if (error) throw error;
 
 		setRawFriendships(data || []);
@@ -94,7 +116,7 @@ function useFriends() {
 		const { data, error } = await supabase
 			.from("friendships")
 			.delete()
-			.or("to_id.eq." + user.id, "from_id.eq." + user.id);
+			.or("to_id.eq." + user.id + ", from_id.eq." + user.id);
 		if (error) throw error;
 
 		setRawFriendships(
