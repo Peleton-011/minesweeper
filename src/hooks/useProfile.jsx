@@ -57,7 +57,7 @@ function useProfile() {
 		if (!user) return fetchUser();
 		const { data, error } = await supabase
 			.from("profiles")
-			.select("user_name", "id")
+			.select("user_name, id")
 			.eq("id", user.id);
 		setProfile({
 			id: user.id,
