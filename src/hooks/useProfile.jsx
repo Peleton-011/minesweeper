@@ -10,6 +10,8 @@ function useProfile() {
 	const [updateUserError, setUpdateUserError] = useState(null);
 	const [updateUsernameError, setUpdateUsernameError] = useState(null);
 
+	const [fetchProfileError, setFetchProfileError] = useState(null);
+
 	const fetchSession = () => {
 		supabase.auth
 			.getSession()
@@ -59,12 +61,27 @@ function useProfile() {
 			.from("profiles")
 			.select("user_name, id")
 			.eq("id", user.id)
-            .single();
+			.single();
 		setProfile({
 			id: user.id,
 			username: data.user_name,
 			email: user.email,
 		});
+	}
+
+	async function fetchProfileFromUsername(username) {
+		setFetchProfileError(null);
+		const { data, error } = await supabase
+			.from("profiles")
+			.select("user_name, id")
+			.eq("user_name", username)
+			.single();
+
+		if (error) {
+			setFetchProfileError(error);
+		}
+		if (!data) setFetchProfileError(new Error("User not found"));
+		return data;
 	}
 
 	useEffect(() => {
@@ -77,6 +94,8 @@ function useProfile() {
 		updateUsernameError,
 		profile,
 		fetchProfile,
+		fetchProfileFromUsername,
+		fetchProfileError,
 	};
 }
 
