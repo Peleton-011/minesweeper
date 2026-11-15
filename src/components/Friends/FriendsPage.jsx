@@ -21,6 +21,8 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty } from "@/utils/leaderboard";
 import { useSupabase } from "../../context/SupabaseContext.jsx";
 
+import useFriends from "../../hooks/useFriends.jsx";
+
 const ShopPage = () => {
 	const [user, setUser] = useState({});
 	const [authenticated, setAuthenticated] = useState(false);
@@ -42,7 +44,11 @@ const ShopPage = () => {
 		});
 	}
 
+    const { fetchFriends } = useFriends();
+
+    
 	useEffect(() => {
+        fetchFriends();
 		fetchUser();
 	}, []);
 
