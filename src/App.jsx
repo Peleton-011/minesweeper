@@ -8,6 +8,7 @@ import SettingsPage from "@/components/Settings/SettingsPage";
 import ProfilePage from "@/components/Profile/ProfilePage";
 import ShopPage from "@/components/Shop/ShopPage";
 import StylesPage from "@/components/Styles/StylesPage.jsx";
+import FriendsPage from "@/components/Friends/FriendsPage.jsx"
 // import { enable as enableDarkMode } from "darkreader";
 import {
 	Route,
@@ -42,6 +43,7 @@ const router = createHashRouter(
 			<Route path="/profile" element={<ProfilePage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/styles" element={<StylesPage />} />
+            <Route path="/friends" element={<FriendsPage />} />
 		</>
 	)
 );
