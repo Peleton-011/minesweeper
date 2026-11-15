@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 
 import "@/components/LeaderBoard/LeaderBoardPage.css";
 import {
-	LuArrowLeft as ArrowLeft,
-	LuUserPen as EditUser,
-	LuLogOut as LogOut,
-	LuLogIn as LogIn,
-	LuUserPlus as SignUp,
-} from "@react-icons/lucide";
+	ArrowLeft as ArrowLeft,
+	UserPen as EditUser,
+	LogOut as LogOut,
+	LogIn as LogIn,
+	UserPlus as SignUp,
+	UserGroup as Friends,
+} from "lucide-react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -53,31 +54,37 @@ const ShopPage = () => {
 				</div>
 			</div>
 			{authenticated && (
-				<Link to="/profile" className="button stealth-button play">
-					<EditUser /> Profile
-				</Link>
-			)}
-			{authenticated && (
-				<div
-					className="button stealth-button play"
-					onClick={async () => {
-						await supabase.auth.signOut();
-                        fetchUser();
-						navigate("/settings");
-					}}
-				>
-					<LogOut /> Logout
-				</div>
+				<>
+					<Link to="/profile" className="button stealth-button play">
+						<EditUser /> Profile
+					</Link>
+
+					<Link to="/friends" className="button stealth-button play">
+						<Friends /> Friends
+					</Link>
+
+					<div
+						className="button stealth-button play"
+						onClick={async () => {
+							await supabase.auth.signOut();
+							fetchUser();
+							navigate("/settings");
+						}}
+					>
+						<LogOut /> Logout
+					</div>
+				</>
 			)}
 			{!authenticated && (
-				<Link to="/login" className="button stealth-button play">
-					<LogIn /> Login
-				</Link>
-			)}
-			{!authenticated && (
-				<Link to="/signup" className="button stealth-button play">
-					<SignUp /> Register
-				</Link>
+				<>
+					<Link to="/login" className="button stealth-button play">
+						<LogIn /> Login
+					</Link>
+
+					<Link to="/signup" className="button stealth-button play">
+						<SignUp /> Register
+					</Link>
+				</>
 			)}
 			<h3 className="subtle">... more to come here soon!</h3>
 			<Link className="button" to={`/`}>
