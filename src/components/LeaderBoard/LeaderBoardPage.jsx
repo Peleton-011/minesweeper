@@ -28,7 +28,7 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty, deleteScore } from "@/utils/leaderboard";
 import useLeaderBoards from "../../hooks/useLeaderBoards.jsx";
 import useProfile from "../../hooks/useProfile.jsx";
-import Popover from "./Popover.jsx";
+import Popover from "./LeaderBoardTopButtons.jsx";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -117,22 +117,22 @@ const LeaderBoardPage = () => {
 		{
 			component: Calendar1,
 			value: "day",
-			onSelect: () => setPivot(Date.now() - 24*3600*1000),
+			onSelect: () => setPivot(Date.now() - 24 * 3600 * 1000),
 		},
 		{
 			component: Calendar7,
 			value: "week",
-			onSelect: () => setPivot(Date.now() - 24*3600*1000 *7),
+			onSelect: () => setPivot(Date.now() - 24 * 3600 * 1000 * 7),
 		},
 		{
 			component: CalendarMonth,
 			value: "month",
-			onSelect: () => setPivot(Date.now() - 24*3600*1000 *30),
+			onSelect: () => setPivot(Date.now() - 24 * 3600 * 1000 * 30),
 		},
 		{
 			component: CalendarYear,
 			value: "year",
-			onSelect: () => setPivot(Date.now() - 24*3600*1000 *365),
+			onSelect: () => setPivot(Date.now() - 24 * 3600 * 1000 * 365),
 		},
 		{
 			component: CalendarEver,
@@ -141,34 +141,36 @@ const LeaderBoardPage = () => {
 		},
 	];
 
+	const participantSelectOptions = [
+		{
+			component: User,
+			value: "own",
+			onSelect: () => setMode("own"),
+			description: "My times",
+		},
+		/*
+                {
+            component: Friends,
+            value: "friends",
+            onSelect: () => setMode("friends"),
+            description: "Friends"
+        }
+        */
+		{
+			component: World,
+			value: "world",
+			onSelect: () => setMode("world"),
+			description: "Hall of Fame",
+		},
+	];
+
 	return (
 		<div className="leaderboard-wrapper">
-			<div className="pill-buttons top">
-				<button
-					className={"own " + (mode === "own" ? "active" : "")}
-					onClick={() => setMode("own")}
-				>
-					<User />
-					{mode === "own" ? <span>My Times</span> : ""}
-				</button>
-				{/* <button
-					className={
-						"friends " + (mode === "friends" ? "active" : "")
-					}
-					onClick={() => setMode("friends")}
-				>
-					<Friends />{mode === "friends" ? (<span>Friends</span>) : ""}
-				</button>  */}
-				<button
-					className={"world " + (mode === "world" ? "active" : "")}
-					onClick={() => setMode("world")}
-				>
-					<World />
-					{mode === "world" ? <span>Hall of Fame</span> : ""}
-				</button>
-			</div>
-			<div className="popover-position">
-				<Popover elems={timeSelectOptions} />
+			<div className="lb-top-buttons-position">
+				<Popover
+					participantOptions={participantSelectOptions}
+					timeOptions={timeSelectOptions}
+				/>
 			</div>
 			<div className="leaderboard-heading">
 				<Link
