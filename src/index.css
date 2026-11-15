@@ -22,6 +22,7 @@
 	--highlight: #1a1a1a;
 	--transparent-background: #1a1a1aa0;
 	--error: #ffa500c0;
+    --success: #00ff00c0;
 
 	/* Game Over Title and Carousel title */
 
@@ -329,7 +330,8 @@ form.auth-form .buttons {
 	color: var(--suggest-color);
 }
 
-.menu-wrapper {
+.menu-wrapper,
+.friendships-wrapper {
 	--vertical-padding: 10%;
 	display: flex;
 	position: fixed;
@@ -341,7 +343,23 @@ form.auth-form .buttons {
 	max-height: calc(100% - calc(var(--vertical-padding) * 2));
 	flex-direction: column;
 	align-items: center;
-    /* overflow-y: auto; */
+	/* overflow-y: auto; */
+}
+
+.friendships-wrapper {
+	position: static;
+	transform: none;
+	width: 100%;
+}
+
+.friendships-wrapper hr {
+	margin: 0;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+
+.empty-text {
+	opacity: 75%;
 }
 
 .menu-heading {
@@ -355,10 +373,22 @@ form.auth-form .buttons {
 	align-items: center;
 	justify-content: center;
 	width: min(20rem, 100vw);
+	gap: 1rem;
+}
+
+.searchbar-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .error {
 	color: var(--error);
+}
+
+.success {
+    color: var(--success);
 }
 
 @media only screen and (max-width: 767px) {
