@@ -44,7 +44,7 @@ const ShopPage = () => {
 		});
 	}
 
-    const { fetchFriends } = useFriends();
+    const { fetchFriends, addFriendRequest } = useFriends();
 
     
 	useEffect(() => {

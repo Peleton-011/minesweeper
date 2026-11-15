@@ -20,12 +20,12 @@ function useFriends() {
 
 	const { user } = useProfile();
 
-    useEffect(() => {
-        fetchFriends().then(() => console.log(rawFriendships));
-    }, [user]);
+	useEffect(() => {
+		fetchFriends().then(() => console.log(rawFriendships));
+	}, [user]);
 
 	const fetchFriends = async () => {
-        if (!user) return;
+		if (!user) return;
 		const { data, error } = await supabase
 			.from("friendships")
 			.select("from_id, to_id, created_at, accepted_at")
@@ -38,55 +38,83 @@ function useFriends() {
 	};
 
 	const addFriendRequest = async (username) => {
-		if (!user) return;
-		// Normalize data
-		const newScore = {
-			date_ms: Date.now(),
-			time_ms: time,
-			user_id: user.id,
+		if (!user || !username) return;
+		// Get recipient id
 
-			size: difficulty.width * difficulty.height,
-			mine_count: difficulty.mineCount,
-			lives: difficulty.lives,
+		const { data: friendData, error: friendError } = await supabase
+			.from("profiles")
+			.select("user_name, id")
+			.eq("user_name", username)
+			.single();
+
+		if (friendError) throw friendError;
+		if (friendData.length === 0) throw new Error("User not found");
+
+		const recipientId = friendData.id;
+
+		const newFriendship = {
+			from_id: user.id,
+			to_id: recipientId,
 		};
 
 		// Push new one
 		const { data, error } = await supabase
-			.from("highscores")
-			.insert(newScore);
+			.from("friendships")
+			.insert(newFriendship);
 		if (error) throw error;
 
 		if (data.length) {
-			setScores([...scores, newScore]);
+			setRawFriendships([
+				...rawFriendships,
+				{ ...newFriendship, createdAt: Date.now(), acceptedAt: null },
+			]);
 		}
 
 		return data;
 	};
 
-	// const deleteScore = async (id) => {
-	// 	const { data, error } = await supabase
-	// 		.from("highscores")
-	// 		.delete()
-	// 		.eq("id", id)
-	// 		.select("id");
+	const acceptFriendRequest = async (sender) => {
+		const { data, error } = await supabase
+			.from("friendships")
+			.update({ created_at: Date.now() })
+			.eq("from_id", sender)
+			.eq("to_id", user.id);
 
-	// 	if (error) throw error;
+		if (error) throw error;
 
-	// 	if (data?.length) {
-	// 		setScores((current) =>
-	// 			current.filter((score) => String(score.id) !== String(id)),
-	// 		);
-	// 	}
+		fetchFriends();
 
-	// 	return data;
-	// };
+		return data;
+	};
+
+	const deleteFriendship = async (id) => {
+		if (!user) return;
+		const { data, error } = await supabase
+			.from("friendships")
+			.delete()
+			.or("to_id.eq." + user.id, "from_id.eq." + user.id);
+		if (error) throw error;
+
+		setRawFriendships(
+			rawFriendships.filter(
+				(friendship) =>
+					(String(friendship.from_id) === String(id) &&
+						String(friendship.to_id) === String(user.id)) ||
+					(String(friendship.from_id) === String(user.id) &&
+						String(friendship.to_id) === String(id)),
+			),
+		);
+
+		return data;
+	};
 
 	return {
 		acceptedFriendships,
 		friendRequests,
 		fetchFriends,
-		// addScore,
-		// deleteScore,
+		addFriendRequest,
+        acceptFriendRequest,
+		deleteFriendship,
 	};
 }
 
