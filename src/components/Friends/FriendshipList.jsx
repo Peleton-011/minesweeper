@@ -21,7 +21,7 @@ import LeaderBoard from "@/components/LeaderBoard/LeaderBoard";
 import { fetchScoresByDifficulty } from "@/utils/leaderboard";
 import { useSupabase } from "../../context/SupabaseContext.jsx";
 import useProfile from "../../hooks/useProfile.jsx";
-
+import FriendshipItem from "./FriendshipItem.jsx";
 
 const FriendshipList = ({ elems, title, emptyText }) => {
 	const [user, setUser] = useState({});
@@ -30,7 +30,8 @@ const FriendshipList = ({ elems, title, emptyText }) => {
 	const supabase = useSupabase();
 	const navigate = useNavigate();
 
-	const { fetchProfileFromUsername, fetchProfileError } = useProfile();
+	const { fetchProfileFromUsername, fetchProfileError } =
+		useProfile();
 
 	function fetchUser() {
 		supabase.auth.getSession().then(({ data, error }) => {
@@ -59,17 +60,7 @@ const FriendshipList = ({ elems, title, emptyText }) => {
 			</div>
 			<hr />
 			{elems.length > 0 ? (
-				elems.map((e, i) => {
-					const isSent = e.from_id === user.id;
-					const isRecieved = e.to_id === user.id;
-					const isAccepted = e.accepted_at !== null;
-
-					return (
-						<div className="friendship-item" key={i}>
-							{JSON.stringify(e, null, 2)}
-						</div>
-					);
-				})
+				elems.map((e, i) => <FriendshipItem key={i} friendship={e} />)
 			) : (
 				<h4 className="empty-text">{emptyText}</h4>
 			)}
