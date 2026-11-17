@@ -85,9 +85,9 @@ function useFriends() {
 		const { data, error } = await supabase
 			.from("friendships")
 			.insert(newFriendship);
-		if (error) throw error;
-
-		if (data.length) {
+		if (error) {
+			throw error;
+		} else {
 			setRawFriendships([
 				...rawFriendships,
 				{ ...newFriendship, createdAt: Date.now(), acceptedAt: null },
