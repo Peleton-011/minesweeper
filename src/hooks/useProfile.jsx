@@ -84,19 +84,19 @@ function useProfile() {
 		return data;
 	}
 
-    async function fetchUsernameFromId(id) {
-        const { data, error } = await supabase
-            .from("profiles")
-            .select("user_name")
-            .eq("id", id)
-            .single();
+	async function fetchUsernameFromId(id) {
+		const { data, error } = await supabase
+			.from("profiles")
+			.select("user_name")
+			.eq("id", id)
+			.single();
 
-        if (error) {
-            setFetchProfileError(error);
-        }
-        if (!data) setFetchProfileError(new Error("Username not found"));
-        return data;
-    }
+		if (error) {
+			setFetchProfileError(error);
+		}
+		if (!data) setFetchProfileError(new Error("Username not found"));
+		return data.user_name;
+	}
 
 	useEffect(() => {
 		fetchUser().then(fetchProfile);
@@ -109,7 +109,7 @@ function useProfile() {
 		profile,
 		fetchProfile,
 		fetchProfileFromUsername,
-        fetchUsernameFromId,
+		fetchUsernameFromId,
 		fetchProfileError,
 	};
 }
