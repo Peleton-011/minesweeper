@@ -403,10 +403,32 @@ form.auth-form .buttons {
 }
 
 .friendship-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
 	border-radius: var(--button-radius);
 	background-color: var(--pill-button-background);
     width: 100%;
-    height: 5rem;
+    height: 7rem;
+}
+
+.friendship-item .heading  {
+    text-align: left;
+    display: flex;
+    align-items: end;
+    gap: 0.5rem
+}
+
+.friendship-name {
+    margin: 0.5rem 0 0 1rem;
+    width: min-content;
+}
+
+.friendship-item .footer {
+    align-self: end;
+    margin: 0 1rem 0.5rem 0;
+    opacity: 75%;
 }
 
 @media only screen and (max-width: 767px) {

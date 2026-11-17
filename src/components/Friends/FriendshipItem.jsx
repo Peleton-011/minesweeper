@@ -79,7 +79,7 @@ const FriendshipItem = ({ friendship }) => {
 	return (
 		<div className="friendship-item">
 			<div className="heading">
-				<span>{username} </span>
+				<h3 className="friendship-name">{username} </h3>
 				<span>
 					{isAccepted
 						? ""
@@ -91,6 +91,7 @@ const FriendshipItem = ({ friendship }) => {
 			<div className="footer">
 				{!isAccepted && !isSent && (
 					<button
+						// className="stealth-button"
 						onClick={() => acceptFriendRequest(friendship.from_id)}
 					>
 						V
@@ -98,6 +99,7 @@ const FriendshipItem = ({ friendship }) => {
 				)}
 
 				<button
+                // className="stealth-button"
 					onClick={() =>
 						deleteFriendship(
 							isSent ? friendship.to_id : friendship.from_id,
