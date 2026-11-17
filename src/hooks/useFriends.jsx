@@ -18,6 +18,7 @@ function useFriends() {
 	const [acceptedFriendships, setAcceptedFriendships] = useState([]);
 	const [sentFriendRequests, setSentFriendRequests] = useState([]);
 	const [recievedFriendRequests, setRecievedFriendRequests] = useState([]);
+	const [friendsIdList, setFriendsIdList] = useState([]);
 
 	const { user } = useProfile();
 
@@ -47,6 +48,16 @@ function useFriends() {
 			),
 		);
 	}, [rawFriendships]);
+
+	useEffect(() => {
+		setFriendsIdList(
+			acceptedFriendships.map((friendship) =>
+				String(friendship.from_id) === String(user.id)
+					? String(friendship.to_id)
+					: String(friendship.from_id),
+			),
+		);
+	}, [acceptedFriendships]);
 
 	const fetchFriends = async () => {
 		if (!user) return;
@@ -133,6 +144,7 @@ function useFriends() {
 	};
 
 	return {
+        friendsIdList,
 		acceptedFriendships,
 		sentFriendRequests,
 		recievedFriendRequests,
