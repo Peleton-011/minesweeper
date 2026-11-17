@@ -29,6 +29,7 @@ import { fetchScoresByDifficulty, deleteScore } from "@/utils/leaderboard";
 import useLeaderBoards from "../../hooks/useLeaderBoards.jsx";
 import useProfile from "../../hooks/useProfile.jsx";
 import Popover from "./LeaderBoardTopButtons.jsx";
+import useFriends from "../../hooks/useFriends.jsx";
 
 const LeaderBoardPage = () => {
 	const { width, height, mines, lives } = useParams();
@@ -49,7 +50,12 @@ const LeaderBoardPage = () => {
 		addScore: addOnlineScore,
 		deleteScore: deleteOnlineScore,
 	} = useLeaderBoards();
+
 	const [scores, setScores] = useState([]);
+	const [scoresOnline, setScoresOnline] = useState([]);
+	const [friendsScores, setFriendsScores] = useState([]);
+
+	const { friendsIdList } = useFriends();
 
 	const title = getDifficultyName({ ...config });
 
@@ -72,15 +78,30 @@ const LeaderBoardPage = () => {
 		fetchScores();
 	}, [width, height, mines, lives]);
 
-	const scoresOnline = onlineScores.map((s) => {
-		return {
-			id: s.id,
-			time: s.time_ms,
-			date: s.date_ms,
-			user: s.user_id,
-			userName: s.profiles.user_name,
-		};
-	});
+	useEffect(() => {
+		setScoresOnline(onlineScores.map((s) => {
+			return {
+				id: s.id,
+				time: s.time_ms,
+				date: s.date_ms,
+				user: s.user_id,
+				userName: s.profiles.user_name,
+			};
+		}));
+	}, [onlineScores]);
+
+	useEffect(() => {
+		const fScores = scoresOnline.filter((s) => {
+			// console.log(
+			// 	s,
+			// 	[...friendsIdList, user.id],
+			// 	[...friendsIdList, user.id].includes(s.user_id),
+			// );
+			return [...friendsIdList, user?.id].includes(s.user);
+		});
+		// console.log(fScores)
+		setFriendsScores(fScores);
+	}, [scoresOnline, friendsIdList, user]);
 
 	const getSelectedLeaderboard = (mode) => {
 		if (mode === "own") {
@@ -91,6 +112,18 @@ const LeaderBoardPage = () => {
 						deleteScore(id).then(() => fetchScores())
 					}
 					isOffline={true}
+				/>
+			);
+		} else if (mode === "friends") {
+			return (
+				<LeaderBoard
+					scoreList={filterTimesByPivot(friendsScores)}
+					deleteScore={(id) =>
+						deleteOnlineScore(id).then(() =>
+							fetchOnlineScores(config),
+						)
+					}
+					isOffline={false}
 				/>
 			);
 		} else if (mode === "world") {
@@ -148,14 +181,12 @@ const LeaderBoardPage = () => {
 			onSelect: () => setMode("own"),
 			description: "My times",
 		},
-		/*
-                {
-            component: Friends,
-            value: "friends",
-            onSelect: () => setMode("friends"),
-            description: "Friends"
-        }
-        */
+		{
+			component: Friends,
+			value: "friends",
+			onSelect: () => setMode("friends"),
+			description: "Friends",
+		},
 		{
 			component: World,
 			value: "world",
