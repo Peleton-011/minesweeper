@@ -16,20 +16,55 @@ function useFriends() {
 	const supabase = useSupabase();
 	const [rawFriendships, setRawFriendships] = useState([]);
 	const [acceptedFriendships, setAcceptedFriendships] = useState([]);
-	const [friendRequests, setFriendRequests] = useState([]);
+	const [sentFriendRequests, setSentFriendRequests] = useState([]);
+	const [recievedFriendRequests, setRecievedFriendRequests] = useState([]);
+	const [friendsIdList, setFriendsIdList] = useState([]);
 
 	const { user } = useProfile();
 
 	useEffect(() => {
-		fetchFriends().then(() => console.log(rawFriendships));
+		fetchFriends();
+		// .then(() => console.log(rawFriendships));
 	}, [user]);
+
+	useEffect(() => {
+		setAcceptedFriendships(
+			rawFriendships.filter(
+				(friendship) => friendship.accepted_at !== null,
+			),
+		);
+		setSentFriendRequests(
+			rawFriendships.filter(
+				(friendship) =>
+					String(friendship.from_id) === String(user.id) &&
+					friendship.accepted_at === null,
+			),
+		);
+		setRecievedFriendRequests(
+			rawFriendships.filter(
+				(friendship) =>
+					String(friendship.to_id) === String(user.id) &&
+					friendship.accepted_at === null,
+			),
+		);
+	}, [rawFriendships]);
+
+	useEffect(() => {
+		setFriendsIdList(
+			acceptedFriendships.map((friendship) =>
+				String(friendship.from_id) === String(user.id)
+					? String(friendship.to_id)
+					: String(friendship.from_id),
+			),
+		);
+	}, [acceptedFriendships]);
 
 	const fetchFriends = async () => {
 		if (!user) return;
 		const { data, error } = await supabase
 			.from("friendships")
 			.select("from_id, to_id, created_at, accepted_at")
-			.or("to_id.eq." + user.id, "from_id.eq." + user.id);
+			.or("to_id.eq." + user.id + ", from_id.eq." + user.id);
 		if (error) throw error;
 
 		setRawFriendships(data || []);
@@ -37,14 +72,14 @@ function useFriends() {
 		return data;
 	};
 
-	const addFriendRequest = async (username) => {
-		if (!user || !username) return;
+	const addFriendRequest = async (friend) => {
+		if (!user || !friend) return;
 		// Get recipient id
 
 		const { data: friendData, error: friendError } = await supabase
 			.from("profiles")
-			.select("user_name, id")
-			.eq("user_name", username)
+			.select(" id")
+			.eq("id", friend)
 			.single();
 
 		if (friendError) throw friendError;
@@ -61,9 +96,9 @@ function useFriends() {
 		const { data, error } = await supabase
 			.from("friendships")
 			.insert(newFriendship);
-		if (error) throw error;
-
-		if (data.length) {
+		if (error) {
+			throw error;
+		} else {
 			setRawFriendships([
 				...rawFriendships,
 				{ ...newFriendship, createdAt: Date.now(), acceptedAt: null },
@@ -76,7 +111,7 @@ function useFriends() {
 	const acceptFriendRequest = async (sender) => {
 		const { data, error } = await supabase
 			.from("friendships")
-			.update({ created_at: Date.now() })
+			.update({ accepted_at: new Date().toISOString() })
 			.eq("from_id", sender)
 			.eq("to_id", user.id);
 
@@ -92,7 +127,7 @@ function useFriends() {
 		const { data, error } = await supabase
 			.from("friendships")
 			.delete()
-			.or("to_id.eq." + user.id, "from_id.eq." + user.id);
+			.or("to_id.eq." + user.id + ", from_id.eq." + user.id);
 		if (error) throw error;
 
 		setRawFriendships(
@@ -109,11 +144,13 @@ function useFriends() {
 	};
 
 	return {
+        friendsIdList,
 		acceptedFriendships,
-		friendRequests,
+		sentFriendRequests,
+		recievedFriendRequests,
 		fetchFriends,
 		addFriendRequest,
-        acceptFriendRequest,
+		acceptFriendRequest,
 		deleteFriendship,
 	};
 }
