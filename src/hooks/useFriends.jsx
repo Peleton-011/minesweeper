@@ -100,7 +100,7 @@ function useFriends() {
 	const acceptFriendRequest = async (sender) => {
 		const { data, error } = await supabase
 			.from("friendships")
-			.update({ accepted_at: Date.now() })
+			.update({ accepted_at: new Date().toISOString() })
 			.eq("from_id", sender)
 			.eq("to_id", user.id);
 
