@@ -359,7 +359,6 @@ form.auth-form .buttons {
 .friendships-wrapper hr {
 	margin: 0;
 	width: 100%;
-	margin-bottom: 1rem;
 }
 
 .empty-text {
@@ -400,6 +399,10 @@ form.auth-form .buttons {
     flex-direction: column;
     gap: 1rem;
     width: min(90vw, 35rem);
+}
+
+.friendships-wrapper  * {
+    margin: 0;
 }
 
 .friendship-item {
