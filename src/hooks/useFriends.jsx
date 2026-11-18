@@ -115,9 +115,11 @@ function useFriends() {
 			.eq("from_id", sender)
 			.eq("to_id", user.id);
 
-		if (error) throw error;
+		if (error) {throw error;} else {
 
-		fetchFriends();
+            
+            fetchFriends();
+        }
 
 		return data;
 	};
@@ -127,7 +129,7 @@ function useFriends() {
 		const { data, error } = await supabase
 			.from("friendships")
 			.delete()
-			.or("to_id.eq." + user.id + ", from_id.eq." + user.id);
+			.or("to_id.eq." + user.id + ", from_id.eq." + user.id + ", to_id.eq." + id + ", from_id.eq." + id);
 		if (error) throw error;
 
 		setRawFriendships(
